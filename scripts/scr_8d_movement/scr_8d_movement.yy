@@ -6,7 +6,7 @@
   "name":"scr_8d_movement",
   "parent":{
     "name":"Scripts",
-    "path":"folders/Assets/Scripts.yy",
+    "path":"folders/Assets/Shared Assets/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

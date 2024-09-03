@@ -26,7 +26,7 @@
   "origin":9,
   "parent":{
     "name":"Placeholders",
-    "path":"folders/Assets/Sprites/Placeholders.yy",
+    "path":"folders/Assets/Shared Assets/Sprites/Placeholders.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

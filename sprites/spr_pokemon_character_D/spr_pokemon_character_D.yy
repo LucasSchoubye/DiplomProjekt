@@ -45,7 +45,7 @@
   "origin":9,
   "parent":{
     "name":"Stolen",
-    "path":"folders/Assets/Sprites/Placeholders/Stolen.yy",
+    "path":"folders/Assets/Shared Assets/Sprites/Placeholders/Stolen.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

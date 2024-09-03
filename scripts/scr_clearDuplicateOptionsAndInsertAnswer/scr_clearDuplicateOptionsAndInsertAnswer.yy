@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_anim_player_look",
+  "%Name":"scr_clearDuplicateOptionsAndInsertAnswer",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_anim_player_look",
+  "name":"scr_clearDuplicateOptionsAndInsertAnswer",
   "parent":{
     "name":"Scripts",
     "path":"folders/Assets/Shared Assets/Scripts.yy",

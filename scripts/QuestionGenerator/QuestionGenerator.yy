@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"STRUCT_TEMPLATE",
+  "%Name":"QuestionGenerator",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"STRUCT_TEMPLATE",
+  "name":"QuestionGenerator",
   "parent":{
     "name":"Structs",
-    "path":"folders/Assets/Structs.yy",
+    "path":"folders/Assets/Shared Assets/Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
