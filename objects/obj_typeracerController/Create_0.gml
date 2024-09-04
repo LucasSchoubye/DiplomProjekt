@@ -3,6 +3,8 @@
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
 
+chosenAnwer = undefined
+
 function OptionsMenu() constructor
 {
 	top = 300
