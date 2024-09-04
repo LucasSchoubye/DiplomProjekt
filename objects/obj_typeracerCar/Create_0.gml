@@ -8,7 +8,7 @@ endPos = 15
 targetStartPos = room_width*0.1
 targetEndPos = room_width
 
-animCycle = 0
+animCycle = random_range(0,40)
 animTarget = targetStartPos
 animPos = targetStartPos
 alarm[0] = 1
