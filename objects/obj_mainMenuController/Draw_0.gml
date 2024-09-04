@@ -50,6 +50,7 @@ if (keyboard_check_pressed(vk_space))
 	{
 		case "Play Typeracer":
 			room_goto(rm_typeracer)
+			
 		break
 		case "Quit":
 			game_end()
