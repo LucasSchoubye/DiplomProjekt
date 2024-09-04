@@ -10,8 +10,8 @@
   "name":"obj_typeracerCar",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Typeracer/Objects.yy",
+    "name":"Game Objects",
+    "path":"folders/Assets/Typeracer/Objects/Game Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
