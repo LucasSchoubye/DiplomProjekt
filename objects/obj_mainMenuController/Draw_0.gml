@@ -49,6 +49,7 @@ if (keyboard_check_pressed(vk_space))
 	switch(ds_list_find_value(options, selectedOption))
 	{
 		case "Play Typeracer":
+			obj_firestore_controller.StartSession("/games/typeracer")
 			room_goto(rm_typeracer)
 			
 		break

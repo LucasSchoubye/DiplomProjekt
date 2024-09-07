@@ -22,3 +22,17 @@ function AnsweredCorrect()
 		speed = 20
 	}
 }
+
+function AnsweredIncorrect() 
+{
+	audio_play_sound(sou_breakCar,1,false, 0.3, 0.4, 0.9)
+	pos--
+	if (pos < 0)
+	{
+		pos = 0
+	}
+	with (obj_typeracerRoadLines) {
+		alarm[0] = 20
+		speed = 8
+	}
+}

@@ -5,7 +5,8 @@ if (keyboard_check_pressed(vk_enter))
 	var listenerId = FirebaseFirestore("users/sUfBI3gM4qMOGGFAS5Xq").Read()
 }
 
-if (keyboard_check_pressed(vk_delete))
+if (keyboard_check_pressed(vk_left))
 {
-	StartSession()
+	//show_message("StartSession()")
+	StartSession("games/typeracer")
 }
