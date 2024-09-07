@@ -17,7 +17,7 @@ function StartSession(game)
 	var json = json_encode(sessionMap)
 	
 	randomize()
-	sessionId = playerId+"test student"+"-"+string(random_get_seed())
+	sessionId = playerId+"-"+string(random_get_seed())
 
 	FirebaseFirestore("sessions/"+sessionId).Set(json)
 }
