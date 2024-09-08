@@ -68,6 +68,12 @@ if (mouse_check_button_pressed(mb_left) && mouse_x > boxRight && mouse_x < boxLe
 function charIsValid() {
     var key_pressed = keyboard_lastchar;
 
+	if(keyboard_check_pressed(vk_shift) or 
+		keyboard_check_pressed(vk_up) or
+		keyboard_check_pressed(vk_down) or
+		keyboard_check_pressed(vk_tab))
+		return false
+
     // Check if the key pressed is a letter or a number
     if ((key_pressed >= "0" && key_pressed <= "9") || (key_pressed >= "A" && key_pressed <= "Z") || (key_pressed >= "a" && key_pressed <= "z")) {
         return true;
