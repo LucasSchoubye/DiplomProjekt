@@ -31,10 +31,12 @@
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"obj_cam_controller","order":1,"path":"objects/obj_cam_controller/obj_cam_controller.yy",},
+    {"name":"obj_loginController","order":4,"path":"objects/obj_loginController/obj_loginController.yy",},
     {"name":"obj_mainMenuController","order":2,"path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},
     {"name":"obj_questionGenerator","order":3,"path":"objects/obj_questionGenerator/obj_questionGenerator.yy",},
     {"name":"obj_typeracerCarNpc","order":1,"path":"objects/obj_typeracerCarNpc/obj_typeracerCarNpc.yy",},
     {"name":"obj_typeracerParticle","order":1,"path":"objects/obj_typeracerParticle/obj_typeracerParticle.yy",},
+    {"name":"rm_login","order":3,"path":"rooms/rm_login/rm_login.yy",},
     {"name":"rm_menu","order":2,"path":"rooms/rm_menu/rm_menu.yy",},
     {"name":"rm_start","order":1,"path":"rooms/rm_start/rm_start.yy",},
     {"name":"QuestionGenerator","order":1,"path":"scripts/QuestionGenerator/QuestionGenerator.yy",},
