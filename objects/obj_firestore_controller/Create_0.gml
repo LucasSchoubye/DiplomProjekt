@@ -28,7 +28,7 @@ function StartSession(game)
 
 function EndSession()
 {		
-	if (sessionMap != undefined)
+	if (sessionId != undefined)
 	{
 		sessionMap[?"endtime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 		var json = json_encode(sessionMap)
@@ -64,7 +64,7 @@ function ValidateLogin(map)
 	    var ID = idArray[i];
 	    var value = json_decode(decodedMap[? ID]);
 		
-		if (value[?"username"] = username && value[?"password"] = password)
+		if (value[?"username"] = username && value[?"password"] = sha1_string_utf8(password))
 		{
 			playerId = value[?"ref"]
 			

@@ -42,7 +42,7 @@ else
 			password = string_delete(password, string_length(password), 1)
 	}
 }
-if (keyboard_check_pressed(vk_enter))
+if (keyboard_check_pressed(vk_enter) or keyboard_check_pressed(vk_tab) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_down))
 {
 	selectedUsername = !selectedUsername
 }
@@ -58,6 +58,7 @@ if (mouse_check_button_pressed(mb_left) && mouse_x > boxRight && mouse_x < boxLe
 {
 	if (instance_exists(obj_firestore_controller))
 	{
+		show_debug_message(sha1_string_utf8(password))
 		obj_firestore_controller.RequestLogin(username,password)
 	}
 }
