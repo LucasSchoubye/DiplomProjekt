@@ -29,6 +29,7 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 	mouseWithinAnswerBox = true
 }
 
+
 var optionSelected = undefined
 
 	if (question != undefined)
@@ -314,6 +315,17 @@ var optionSelected = undefined
 
 if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
 {
-	show_message("Mousebutton: "+string(optionSelected))
+	//show_message("Mousebutton: "+string(optionSelected))
+	//show_message("AnswerIndex: "+string(question.answerIndex))
+	obj_firestore_controller.SendAnswer(optionSelected,question.answerIndex)
+	if(optionSelected == question.answerIndex)
+	{
+		obj_typeracerCar.AnsweredCorrect()
+		question = questionGenerator.GetQuestion(Subject.Maths, DanishMathSubtopic.SmallMultiplication, QuestionType.MultipleChoice)
+	}
+	else
+	{
+		obj_typeracerCar.AnsweredIncorrect()
+	}
 }
 }

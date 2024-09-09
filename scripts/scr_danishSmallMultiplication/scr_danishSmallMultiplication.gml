@@ -26,7 +26,7 @@ function scr_danishSmallMultiplication(questionType)
 			ds_list_add(optionToList, a*b-1)
 			ds_list_add(optionToList, a*b+1)
 			
-			var optionsArray = scr_clearDuplicateOptionsAndInsertAnswer(optionToList, answer, 3)
+			var optionsArray = scr_clearDuplicateOptionsAndInsertAnswer(optionToList, answer, round(random_range(1,5)))
 			
 			for (var i = 0; i < array_length(optionsArray); ++i) {
 			    if (optionsArray[i] == answer)
