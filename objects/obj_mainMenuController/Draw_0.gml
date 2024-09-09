@@ -10,6 +10,7 @@ var selectionBuffer = 80
 
 // Draw Text
 draw_text(screenMidX,screenTop,"Main Menu")
+draw_text(300,screenTop,"Welcome back, "+obj_firestore_controller.username)
 
 for (var i = 0; i < ds_list_size(options); ++i) {
     
@@ -31,8 +32,6 @@ for (var i = 0; i < ds_list_size(options); ++i) {
 if (keyboard_check_pressed(vk_up)){selectedOption--}
 if (keyboard_check_pressed(vk_down)){selectedOption++}
 
-draw_text(100,100,selectedOption)
-
 // Keep selected option within the list size
 if (selectedOption > ds_list_size(options)-1)
 {
@@ -49,7 +48,9 @@ if (keyboard_check_pressed(vk_space))
 	switch(ds_list_find_value(options, selectedOption))
 	{
 		case "Play Typeracer":
+			obj_firestore_controller.StartSession("/games/typeracer")
 			room_goto(rm_typeracer)
+			
 		break
 		case "Quit":
 			game_end()

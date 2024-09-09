@@ -9,8 +9,8 @@
   "name":"obj_typeracerParticle",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Typeracer/Objects.yy",
+    "name":"Particle Effects",
+    "path":"folders/Assets/Typeracer/Objects/Particle Effects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
