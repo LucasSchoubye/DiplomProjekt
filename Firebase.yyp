@@ -33,6 +33,7 @@
     {"$GMFolder":"","%Name":"Particle Effects","folderPath":"folders/Assets/Typeracer/Objects/Particle Effects.yy","name":"Particle Effects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Assets/Typeracer/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Scripts","folderPath":"folders/Assets/Typeracer/Scripts.yy","name":"Scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Sounds","folderPath":"folders/Assets/Typeracer/Sounds.yy","name":"Sounds","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Assets/Typeracer/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Integration","folderPath":"folders/Firebase Integration.yy","name":"Firebase Integration","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Firestore","folderPath":"folders/Firebase Integration/Firebase Firestore.yy","name":"Firebase Firestore","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -161,6 +162,11 @@
     {"id":{"name":"scr_danishSmallMultiplication","path":"scripts/scr_danishSmallMultiplication/scr_danishSmallMultiplication.yy",},},
     {"id":{"name":"scr_drawMultipleChoice","path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},},
     {"id":{"name":"scr_getDanishMathQuestion","path":"scripts/scr_getDanishMathQuestion/scr_getDanishMathQuestion.yy",},},
+<<<<<<< HEAD
+=======
+    {"id":{"name":"sou_breakCar","path":"sounds/sou_breakCar/sou_breakCar.yy",},},
+    {"id":{"name":"sou_fastCar","path":"sounds/sou_fastCar/sou_fastCar.yy",},},
+>>>>>>> 9d6ca8bf52273a86a983ce69ca9966d40c839986
     {"id":{"name":"spr_basicParticle","path":"sprites/spr_basicParticle/spr_basicParticle.yy",},},
     {"id":{"name":"spr_placeholder_rectangle","path":"sprites/spr_placeholder_rectangle/spr_placeholder_rectangle.yy",},},
     {"id":{"name":"spr_placeholder_tiles","path":"sprites/spr_placeholder_tiles/spr_placeholder_tiles.yy",},},
