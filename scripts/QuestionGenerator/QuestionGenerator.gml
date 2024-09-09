@@ -25,9 +25,10 @@ function Question(questionType, choiceAmount = 0) constructor {
 }
 
 function QuestionGenerator(Curriculum) constructor {
-
-	curriculum = Curriculum
-	
+		
+	curriculum = Curriculum;
+	subtopicMap = undefined;
+		
 	function GetQuestion(subject, subtopic, questionType)
 	{
 		switch (curriculum)
@@ -36,7 +37,7 @@ function QuestionGenerator(Curriculum) constructor {
 				switch(subject)
 				{
 					case Subject.Maths:
-						return scr_getDanishMathQuestion(subtopic, questionType)
+						return scr_getDanishMathQuestion(GetRandomSubtopicFromList(subject), questionType)
 					
 					default:
 						show_debug_message("This subject is not currently supported")
@@ -52,4 +53,70 @@ function QuestionGenerator(Curriculum) constructor {
 			break;
 		}
 	}
+	
+	function SetupSubtopicMap(curriculum)
+	{
+		if (subtopicMap == undefined)
+			subtopicMap = ds_map_create()
+		
+		subtopicMap[?"Maths"] = ds_list_create()
+		subtopicMap[?"Physics"] = ds_list_create()
+		subtopicMap[?"Geography"] = ds_list_create()
+	}
+	
+	function UpdateSubtopicsList(subject)
+	{
+		switch(subject)
+		{
+			case Subject.Maths:
+				// Clear original list
+				var targetList = subtopicMap[?"Maths"]
+				
+				if (!ds_list_empty(targetList))
+					ds_list_clear(subtopicMap[?"Maths"])
+				obj_firestore_controller.RequestClassSubtopics("9RWenJGRJ0CTk6p0OlnO","Dog8bTzbTQ0jkX6qFNqj","Math")
+				
+			break;
+			case Subject.Physics:
+				show_message("UpdateSubtopicsList(Physics) is not yet implemented")
+			break;
+			case Subject.Geography:
+				show_message("UpdateSubtopicsList(Geography) is not yet implemented")
+			break;
+			
+			default:
+				show_message(string(subject)+" is not recognized as a subject")
+		}
+	}
+	
+	function SetSubtopicListFromFirebase(subject, subtopicMapFromFirebase)
+	{
+		decodedMap = json_decode(subtopicMapFromFirebase)
+		idArray = []
+		ds_map_keys_to_array(decodedMap, idArray)
+		
+		for (var i = 0; i < array_length(idArray); i++) 
+		{
+			var ID = idArray[i];
+			var value = json_decode(decodedMap[? ID]);
+			
+			if (value[?"active"] == true)
+			{
+				ds_list_add(subtopicMap[?"Maths"], ID)
+			}
+		}
+	}
+	
+	function GetRandomSubtopicFromList(subject)
+	{		
+		var subtopicListSize = ds_list_size(subtopicMap[?"Maths"])
+		var randomIndex = round(random_range(0, subtopicListSize-1))
+		var subtopicFound = ds_list_find_value(subtopicMap[?"Maths"], randomIndex)
+		show_message("found this subtopic: "+string(subtopicFound))
+		
+		return subtopicFound
+	}
+
+	SetupSubtopicMap(Curriculum)
+	UpdateSubtopicsList(Subject.Maths)
 }

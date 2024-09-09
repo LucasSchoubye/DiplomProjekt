@@ -4,19 +4,35 @@ enum DanishMathSubtopic {
 	LargeMultiplication,
 }
 
+function convertStringToEnum(subtopicMap)
+{
+	switch(subtopicMap)
+	{
+		case "smallMultiplication":
+			return DanishMathSubtopic.SmallMultiplication
+		break;
+		case "mediumMultiplication":
+			return DanishMathSubtopic.MediumMultiplication
+		break;
+		case "largeMultiplication":
+			return DanishMathSubtopic.LargeMultiplication
+		break;
+	}
+}
+
 
 function scr_getDanishMathQuestion(subtopic, questionType)
-{
-	switch(subtopic)
+{	
+	switch(convertStringToEnum(subtopic))
 	{
 		case DanishMathSubtopic.SmallMultiplication:
 			return scr_danishSmallMultiplication(questionType);
 		
 		case DanishMathSubtopic.MediumMultiplication:
-		break;
+			return scr_danishMediumMultiplication(questionType);
 		
 		case DanishMathSubtopic.LargeMultiplication:
-		break;
+			return scr_danishLargeMultiplication(questionType);
 		
 		default:
 			show_debug_message("This "+string(subtopic)+" subtopic is not currently supported")

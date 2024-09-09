@@ -89,6 +89,29 @@ function ValidateLogin(map)
 		show_message("Wrong password or username")
 }
 
+
+function RequestClassSubtopics(schoolId, classId, subject)
+{
+	FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
+}
+
+function RespondClassSubtopics(subject, value)
+{
+	var subjectString = ""
+	
+	switch(subject)
+	{
+		case Subject.Maths:
+			subjectString = "Maths"
+		break;
+		case Subject.Physics:
+			subjectString = "Physics"
+		break;
+	}
+	
+	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
+ }
+
 function SendAnswer(optionChosen, correctAnswer)
 {
 	answerMap = ds_map_create()
@@ -99,5 +122,4 @@ function SendAnswer(optionChosen, correctAnswer)
 	ds_map_destroy(answerMap)
 
 	FirebaseFirestore("answers/").Set(json)
-	
 }

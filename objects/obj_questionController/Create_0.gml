@@ -1,0 +1,1 @@
+questionGenerator = new QuestionGenerator(Curriculum.Danish)

@@ -12,7 +12,17 @@ if (async_load[? "status"] == 200)
 		case "FirebaseFirestore_Collection_Read":
 			if (async_load[? "path"] == "/users/")
 			{
+				show_debug_message("ValidateLogin()")
 				ValidateLogin(async_load[? "value"])
+			}
+			else if (string_pos("subtopics",async_load[? "path"]) > 0)
+			{
+				show_debug_message("RespondClassSubtopics()")
+				RespondClassSubtopics(Subject.Maths, async_load[? "value"])
+			}
+			else
+			{
+				show_message("Path was "+string(async_load[? "path"]))	
 			}
 		break;
 	
