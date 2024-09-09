@@ -22,9 +22,7 @@ function convertStringToEnum(subtopicMap)
 
 
 function scr_getDanishMathQuestion(subtopic, questionType)
-{
-	show_message("getDanishMethQuestion(): "+string(subtopic))
-	
+{	
 	switch(convertStringToEnum(subtopic))
 	{
 		case DanishMathSubtopic.SmallMultiplication:
