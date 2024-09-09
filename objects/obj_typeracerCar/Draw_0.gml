@@ -13,8 +13,7 @@ image_angle = sin(animCycle)*4
 
 if (pos = endPos)
 {
-	show_message("YOU WON")
-	room_goto(rm_menu)
+	win()
 }
 
 if (keyboard_check_pressed(vk_space))

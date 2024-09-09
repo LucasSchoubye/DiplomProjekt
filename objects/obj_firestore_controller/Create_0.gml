@@ -89,6 +89,7 @@ function ValidateLogin(map)
 		show_message("Wrong password or username")
 }
 
+
 function RequestClassSubtopics(schoolId, classId, subject)
 {
 	FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
@@ -109,4 +110,16 @@ function RespondClassSubtopics(subject, value)
 	}
 	
 	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
+ }
+
+function SendAnswer(optionChosen, correctAnswer)
+{
+	answerMap = ds_map_create()
+	answerMap[?"optionChosen"] = string(optionChosen)
+	answerMap[?"sessionRef"] = string(sessionId)
+	answerMap[?"correct"] = bool(optionChosen == correctAnswer)
+	var json = json_encode(answerMap)
+	ds_map_destroy(answerMap)
+
+	FirebaseFirestore("answers/").Set(json)
 }

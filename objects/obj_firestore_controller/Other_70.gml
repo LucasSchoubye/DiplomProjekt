@@ -27,7 +27,7 @@ if (async_load[? "status"] == 200)
 		break;
 	
 		case "FirebaseFirestore_Collection_Add":	
-			show_message(variable_instance_get(async_load[? "listener"], "url"))
+			show_debug_message(variable_instance_get(async_load[? "listener"], "url"))
 		break;
 	
 		default:

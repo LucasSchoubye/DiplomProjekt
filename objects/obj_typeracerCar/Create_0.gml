@@ -13,6 +13,12 @@ animTarget = targetStartPos
 animPos = targetStartPos
 alarm[0] = 1
 
+function win()
+{
+	show_message("YOU WON")
+	room_goto(rm_menu)
+}
+
 function AnsweredCorrect() 
 {
 	audio_play_sound(sou_fastCar,1,false, 1, 0.3, random_range(1.25,0.75))
