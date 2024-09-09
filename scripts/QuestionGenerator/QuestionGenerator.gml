@@ -78,10 +78,10 @@ function QuestionGenerator(Curriculum) constructor {
 				
 			break;
 			case Subject.Physics:
-				show_message("UpdateSubtopicsList(Physics) is not yet implemented")
+				show_debug_message("UpdateSubtopicsList(Physics) is not yet implemented")
 			break;
 			case Subject.Geography:
-				show_message("UpdateSubtopicsList(Geography) is not yet implemented")
+				show_debug_message("UpdateSubtopicsList(Geography) is not yet implemented")
 			break;
 			
 			default:
@@ -112,7 +112,7 @@ function QuestionGenerator(Curriculum) constructor {
 		var subtopicListSize = ds_list_size(subtopicMap[?"Maths"])
 		var randomIndex = round(random_range(0, subtopicListSize-1))
 		var subtopicFound = ds_list_find_value(subtopicMap[?"Maths"], randomIndex)
-		show_message("found this subtopic: "+string(subtopicFound))
+		show_debug_message("found this subtopic: "+string(subtopicFound))
 		
 		return subtopicFound
 	}
