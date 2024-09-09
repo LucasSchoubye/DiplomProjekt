@@ -15,6 +15,7 @@ alarm[0] = 1
 
 function AnsweredCorrect() 
 {
+	audio_play_sound(sou_fastCar,1,false, 1, 0.3, random_range(1.25,0.75))
 	pos++
 	with (obj_typeracerRoadLines) {
 		alarm[0] = 20
