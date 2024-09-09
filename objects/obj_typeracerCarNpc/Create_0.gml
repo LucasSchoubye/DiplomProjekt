@@ -14,5 +14,9 @@ function AnsweredCorrect()
 {
 	
 }
+function AnsweredIncorrect()
+{
+	
+}
 
 alarm[1] = random_range(60*4,60*11)
