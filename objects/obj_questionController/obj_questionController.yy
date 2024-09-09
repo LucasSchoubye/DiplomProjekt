@@ -1,18 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_questionGenerator",
+  "%Name":"obj_questionController",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_questionGenerator",
+  "name":"obj_questionController",
   "overriddenProperties":[],
   "parent":{
     "name":"Controllers",
     "path":"folders/Assets/Shared Assets/Objects/Controllers.yy",
   },
   "parentObjectId":null,
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
