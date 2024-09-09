@@ -69,12 +69,11 @@ function QuestionGenerator(Curriculum) constructor {
 		switch(subject)
 		{
 			case Subject.Maths:
-				// Clear original list
 				var targetList = subtopicMap[?"Maths"]
 				
 				if (!ds_list_empty(targetList))
 					ds_list_clear(subtopicMap[?"Maths"])
-				obj_firestore_controller.RequestClassSubtopics("9RWenJGRJ0CTk6p0OlnO","Dog8bTzbTQ0jkX6qFNqj","Math")
+				obj_firestore_controller.RequestClassSubtopics(obj_firestore_controller.schoolId,obj_firestore_controller.classId,"Maths")
 				
 			break;
 			case Subject.Physics:
@@ -94,6 +93,8 @@ function QuestionGenerator(Curriculum) constructor {
 		decodedMap = json_decode(subtopicMapFromFirebase)
 		idArray = []
 		ds_map_keys_to_array(decodedMap, idArray)
+		
+		show_debug_message("SetSubtopicListFromFirebase: "+subtopicMapFromFirebase)
 		
 		for (var i = 0; i < array_length(idArray); i++) 
 		{

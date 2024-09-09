@@ -9,6 +9,8 @@ sessionMap = undefined
 // Login 
 username = undefined
 password = undefined
+schoolId = "9RWenJGRJ0CTk6p0OlnO"
+classId = "Dog8bTzbTQ0jkX6qFNqj"
 
 // Functions
 function StartSession(game)
@@ -48,6 +50,7 @@ function RequestLogin(loginUsername, loginPassword)
 {
 	username = loginUsername
 	password = loginPassword
+	
 	FirebaseFirestore("/users/").Read()
 }
 
@@ -68,7 +71,6 @@ function ValidateLogin(map)
 		{
 			playerId = value[?"ref"]
 			
-			
 			// Find the position of the last dash ("/")
 		    var last_dash_pos = string_last_pos("/", playerId);
     
@@ -80,6 +82,8 @@ function ValidateLogin(map)
 			
 			username = value[?"username"]
 			room_goto(rm_menu)
+			
+			RequestStudent()
 		}
 		else
 			show_debug_message("No Match found")
@@ -89,9 +93,45 @@ function ValidateLogin(map)
 		show_message("Wrong password or username")
 }
 
+function RequestStudent()
+{
+	FirebaseFirestore("/students/"+playerId).Read()
+}
+
+function RepondStudent(map)
+{
+	map = json_decode(map)
+	var fullPath = map[?"classRef"]
+	
+	// Find the positions
+	var classDash = string_last_pos("/", fullPath);
+	var schoolPath = fullPath//string_replace(fullPath,"/schools/", "");
+	show_message("schoolPath: "+schoolPath)
+	
+	var schoolDash = string_pos("/schools/", schoolPath);
+	var schoolDashEnd = string_last_pos("/classes/", schoolPath);
+    
+	// Check if there is a dash in the string
+	if (classDash != -1) {
+		// Extract the substring after the last dash
+		classId = string_copy(fullPath, classDash + 1, string_length(fullPath) - classDash);
+	}
+		// Check if there is a dash in the string
+	if (classDash != -1) {
+		// Extract the substring after the last dash
+		var schoolPrefixLength = 8
+		var shortenedSchoolId = string_copy(schoolPath, schoolDash + 1 + schoolPrefixLength, string_length(schoolPath) - schoolDash);
+		schoolId = string_copy(shortenedSchoolId, schoolDashEnd + 1, string_length(shortenedSchoolId) - schoolDashEnd);
+	}
+	
+	show_message("ClassId: "+classId+". SchoolId: "+schoolId)
+}
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {
+	show_debug_message("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics")
+	show_debug_message("schools/9RWenJGRJ0CTk6p0OlnO/classes/Dog8bTzbTQ0jkX6qFNqj/topics/Math/subtopics")
+	
 	FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
 }
 
@@ -108,6 +148,8 @@ function RespondClassSubtopics(subject, value)
 			subjectString = "Physics"
 		break;
 	}
+	
+	show_debug_message("RespondClassSubtopics: Value = "+value+", subjectString = "+subjectString)
 	
 	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
  }
