@@ -1,4 +1,4 @@
-/// Setup variables
+/// Setup variables for typeracer
 
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
