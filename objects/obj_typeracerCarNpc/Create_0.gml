@@ -8,7 +8,11 @@ event_inherited();
 
 image_blend = c_aqua
 
-
+function win()
+{
+	show_message("YOU SUCK LOSER!!!")
+	room_goto(rm_menu)
+}
 
 function AnsweredCorrect()
 {

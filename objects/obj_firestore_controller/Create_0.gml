@@ -88,3 +88,16 @@ function ValidateLogin(map)
 	if (playerId = undefined)
 		show_message("Wrong password or username")
 }
+
+function SendAnswer(optionChosen, correctAnswer)
+{
+	answerMap = ds_map_create()
+	answerMap[?"optionChosen"] = string(optionChosen)
+	answerMap[?"sessionRef"] = string(sessionId)
+	answerMap[?"correct"] = bool(optionChosen == correctAnswer)
+	var json = json_encode(answerMap)
+	ds_map_destroy(answerMap)
+
+	FirebaseFirestore("answers/").Set(json)
+	
+}
