@@ -1,6 +1,6 @@
 import { db } from "../config/firebase";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import {addDoc, getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {addDoc, getDocs, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import Box from '@mui/material/Box';
 import CorrectAnswersList from './answerComponents/CorrectAnswersList';
 import IncorrectAnswersList from './answerComponents/IncorrectAnswersList';
@@ -18,10 +18,10 @@ export const Database = () => {
 
     const answerCollectionRef = useMemo(() => collection(db,"answers"),[db]);
 
-    const getAnswerList = useCallback(async () => {
-        try {
-            const dataAnswers = await getDocs(answerCollectionRef);
-            const filteredDataAnswers = dataAnswers.docs.map((doc) => ({
+    // Set up a real-time listener using onSnapshot
+    useEffect(() => {
+        const unsubscribe = onSnapshot(answerCollectionRef, (snapshot) => {
+            const filteredDataAnswers = snapshot.docs.map((doc) => ({
                 ...doc.data(), id: doc.id
             }));
 
@@ -33,10 +33,12 @@ export const Database = () => {
 
             setCorrectAnswers(correctAnswer);
             setIncorrectAnswers(incorrectAnswer);
+        }, (error) => {
+            console.error("Error fetching answers: ", error);
+        });
 
-        } catch (err) {
-            console.error(err);
-        }
+        // Clean up the listener when the component unmounts
+        return () => unsubscribe();
     }, [answerCollectionRef]);
 
     const onSubmitAnswer = async () => {
@@ -46,7 +48,9 @@ export const Database = () => {
                 correct: isAnswerCorrect
             });
 
-            getAnswerList();
+            setAnswer(""); // Clear input after submission
+            setIsAnswerCorrect(false); // Reset answer correctness
+
         } catch (err) {
             console.error(err);
         }
@@ -56,15 +60,10 @@ export const Database = () => {
         try {
             const answerDoc = doc(db, "answers", id);
             await deleteDoc(answerDoc);
-            getAnswerList(); // Refresh the list after deletion
         } catch (err) {
             console.error(err);
         }
     };
-
-    useEffect(() => {
-        getAnswerList();
-    }, [getAnswerList]);
 
     return (
         <div>
@@ -96,28 +95,4 @@ export const Database = () => {
         
         </div>
     );
-    // return (
-    //     <div>
-    //         <div>
-    //         <AnswersTable
-    //             correctAnswers={correctAnswers}
-    //             incorrectAnswers={incorrectAnswers}
-    //             onDelete={deleteAnswer}
-    //         />
-    //         </div>
-            
-    //         {/* <CorrectAnswersList correctAnswers={correctAnswers} onDelete={deleteAnswer} /> */}
-    //         {/* <IncorrectAnswersList incorrectAnswers={incorrectAnswers} onDelete={deleteAnswer} /> */}
-    //         <AnswerTotals correctAnswers={correctAnswers} incorrectAnswers={incorrectAnswers} />
-    //         <div>
-    //             <AnswerForm 
-    //             onSubmit={onSubmitAnswer} 
-    //             newAnswer={newAnswer} 
-    //             setAnswer={setAnswer} 
-    //             isAnswerCorrect={isAnswerCorrect} 
-    //             setIsAnswerCorrect={setIsAnswerCorrect} 
-    //         /></div>
-            
-    //     </div>
-    // );
 };

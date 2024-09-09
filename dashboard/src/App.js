@@ -1,15 +1,22 @@
 import './App.css';
+import { useState } from 'react';
 import { Auth } from "./components/auth";
 import { Database } from "./components/db";
 
 function App() {
-  return (
-    <div className="App">
-      {/* <Auth/> */}
-      <div>
-      <Database/>
-      </div>
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
+  return (
+    <div  className="App">
+      {!isAuthenticated ? (
+        <Auth onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <Database />
+      )}
     </div>
   );
 }

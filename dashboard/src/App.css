@@ -1,8 +1,12 @@
 .App {
-  border: 1px dotted black;
   display: flex;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh; /* Ensures the div takes up the entire height of the viewport */
+  text-align: center; /* Centers text if necessary */
+  flex-direction: column; /* Ensures the content is stacked vertically */
 }
+
 
 .App-logo {
   height: 40vmin;
