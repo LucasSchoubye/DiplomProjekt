@@ -6,7 +6,7 @@ var screenMidX = room_width/2
 var screenMidY = room_width/2
 var titleBuffer = 50
 var optionBuffer = 20
-var selectionBuffer = 80
+var selectionBuffer = 180
 
 // Draw Text
 draw_text(screenMidX,screenTop,"Main Menu")

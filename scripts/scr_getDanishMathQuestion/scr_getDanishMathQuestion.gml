@@ -23,18 +23,25 @@ function convertStringToEnum(subtopicMap)
 
 function scr_getDanishMathQuestion(subtopic, questionType)
 {	
+	var question = undefined
 	switch(convertStringToEnum(subtopic))
 	{
 		case DanishMathSubtopic.SmallMultiplication:
-			return scr_danishSmallMultiplication(questionType);
+			question = scr_danishSmallMultiplication(questionType);
+			break;
 		
 		case DanishMathSubtopic.MediumMultiplication:
-			return scr_danishMediumMultiplication(questionType);
+			question = scr_danishMediumMultiplication(questionType);
+			break;
 		
 		case DanishMathSubtopic.LargeMultiplication:
-			return scr_danishLargeMultiplication(questionType);
+			question = scr_danishLargeMultiplication(questionType);
+			break;
 		
 		default:
 			show_debug_message("This "+string(subtopic)+" subtopic is not currently supported")
 	}
+	
+	question.subtopic = subtopic
+	return question;
 }

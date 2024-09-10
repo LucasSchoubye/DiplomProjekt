@@ -23,6 +23,11 @@ if (async_load[? "status"] == 200)
 				show_debug_message("RespondClassSubtopics()")
 				RespondClassSubtopics(Subject.Maths, async_load[? "value"])
 			}
+			else if (string_pos("allowedGames",async_load[? "path"]) > 0)
+			{
+				show_message("RespondAllowedGames: "+string(async_load[? "value"]))
+				RespondAllowedGames(async_load[? "value"])
+			}
 			else
 			{
 				show_message("Path was "+string(async_load[? "path"]))	
