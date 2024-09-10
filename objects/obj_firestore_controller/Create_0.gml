@@ -5,19 +5,42 @@ randomize()
 playerId = undefined
 sessionId = undefined
 sessionMap = undefined
+answerTimer = 0
 
 // Login 
 username = undefined
 password = undefined
+schoolId = undefined
+classId = undefined
 
 // Functions
+function RequestAllowedGames()
+{
+	FirebaseFirestore("/schools/"+schoolId+"/classes/"+classId+"/allowedGames/").Read()
+}
+
+function RespondAllowedGames(gamesList)
+{
+	var gamesMap = json_decode(gamesList)
+	var idArray = []
+	ds_map_keys_to_array(gamesMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(gamesMap[? ID]);
+		obj_mainMenuController.AddAllowedGames(value[?"name"])
+	}
+}
+
 function StartSession(game)
 {		
 	sessionMap = ds_map_create()
 	sessionMap[?"starttime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 	sessionMap[?"endtime"] = ""
 	sessionMap[?"gameref"] = string(game)
-	sessionMap[?"student"] = "/students/test student"
+	sessionMap[?"student"] = "/students/"+string(playerId)
 	var json = json_encode(sessionMap)
 	
 	randomize()
@@ -48,6 +71,7 @@ function RequestLogin(loginUsername, loginPassword)
 {
 	username = loginUsername
 	password = loginPassword
+	
 	FirebaseFirestore("/users/").Read()
 }
 
@@ -68,7 +92,6 @@ function ValidateLogin(map)
 		{
 			playerId = value[?"ref"]
 			
-			
 			// Find the position of the last dash ("/")
 		    var last_dash_pos = string_last_pos("/", playerId);
     
@@ -80,6 +103,8 @@ function ValidateLogin(map)
 			
 			username = value[?"username"]
 			room_goto(rm_menu)
+			
+			RequestStudent()
 		}
 		else
 			show_debug_message("No Match found")
@@ -89,14 +114,61 @@ function ValidateLogin(map)
 		show_message("Wrong password or username")
 }
 
+function RequestStudent()
+{
+	FirebaseFirestore("/students/"+playerId).Read()
+}
+
+function RepondStudent(map)
+{
+	map = json_decode(map)
+	
+	#region SchoolID & ClassId
+	var fullPath = map[?"classRef"]
+	
+	var classDash = string_last_pos("/", fullPath);
+	var schoolPath = fullPath//string_replace(fullPath,"/schools/", "");
+	
+	var schoolDash = string_pos("/schools/", schoolPath);
+	var schoolDashEnd = string_last_pos("/classes/", schoolPath);
+    
+	// Check if there is a dash in the string
+	if (classDash != -1) {
+		// Extract the substring after the last dash
+		classId = string_copy(fullPath, classDash + 1, string_length(fullPath) - classDash);
+	}
+		// Check if there is a dash in the string
+	if (classDash != -1) {
+		// Extract the substring after the last dash
+		var schoolPrefixLength = 8
+		var shortenedSchoolId = string_copy(schoolPath, schoolDash + 1 + schoolPrefixLength, string_length(schoolPath) - schoolDash);
+		
+		var slash_pos = string_pos("/", shortenedSchoolId); // Find position of the first slash
+		schoolId = string_copy(shortenedSchoolId, 1, slash_pos - 1); // Copy substring until first slash
+	}
+	
+	#endregion SchoolID & ClassId
+	
+	// After student data is fetched, create question generator
+	instance_create_depth(0,0,0,obj_questionController)
+	RequestAllowedGames()
+	
+}
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {
-	FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
+	if (schoolId != undefined && schoolId != undefined)
+	{
+		FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
+	}
+	else
+	{
+		show_message("SchoolId or classId are undefined")
+	}
 }
 
 function RespondClassSubtopics(subject, value)
-{
+{	
 	var subjectString = ""
 	
 	switch(subject)
@@ -109,15 +181,23 @@ function RespondClassSubtopics(subject, value)
 		break;
 	}
 	
+	show_debug_message("RespondClassSubtopics: Value = "+value+", subjectString = "+subjectString)
+	
 	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
  }
 
-function SendAnswer(optionChosen, correctAnswer)
+function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType, answerTime)
 {
 	answerMap = ds_map_create()
-	answerMap[?"optionChosen"] = string(optionChosen)
 	answerMap[?"sessionRef"] = string(sessionId)
-	answerMap[?"correct"] = bool(optionChosen == correctAnswer)
+	answerMap[?"answerTime"] = answerTime
+	answerMap[?"prompt"] = prompt
+	answerMap[?"optionChosen"] = optionChosen
+	answerMap[?"answer"] = correctAnswer
+	answerMap[?"correct"] = optionChosen == correctAnswer
+	answerMap[?"subject"] = subject
+	answerMap[?"subtopic"] = subtopic
+	answerMap[?"answerType"] = answerType
 	var json = json_encode(answerMap)
 	ds_map_destroy(answerMap)
 

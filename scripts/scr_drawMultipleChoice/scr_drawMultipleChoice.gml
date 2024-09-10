@@ -313,19 +313,23 @@ var optionSelected = undefined
 		}
 	}
 
-if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
-{
-	//show_message("Mousebutton: "+string(optionSelected))
-	//show_message("AnswerIndex: "+string(question.answerIndex))
-	obj_firestore_controller.SendAnswer(optionSelected,question.answerIndex)
-	if(optionSelected == question.answerIndex)
+
+	// Answer and send to firebase
+	obj_firestore_controller.answerTimer++
+	if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
 	{
-		obj_typeracerCar.AnsweredCorrect()
-		question = questionGenerator.GetQuestion(Subject.Maths, DanishMathSubtopic.SmallMultiplication, QuestionType.MultipleChoice)
+		
+		obj_firestore_controller.SendAnswer(question.prompt, question.options[optionSelected], question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
+		obj_firestore_controller.answerTimer = 0
+
+		if(optionSelected == question.answerIndex)
+		{
+			obj_typeracerCar.AnsweredCorrect()
+			question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
+		}
+		else
+		{
+			obj_typeracerCar.AnsweredIncorrect()
+		}
 	}
-	else
-	{
-		obj_typeracerCar.AnsweredIncorrect()
-	}
-}
 }

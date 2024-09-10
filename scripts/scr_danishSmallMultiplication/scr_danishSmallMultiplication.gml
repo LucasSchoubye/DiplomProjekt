@@ -50,10 +50,6 @@ function scr_danishSmallMultiplication(questionType)
 		break;
 	}
 
-		
-	// Generate question
-	
-	
 	// Return
 	return question;
 }

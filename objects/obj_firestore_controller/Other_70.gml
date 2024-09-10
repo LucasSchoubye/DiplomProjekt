@@ -6,7 +6,10 @@ if (async_load[? "status"] == 200)
 	switch(async_load[? "type"])
 	{
 		case "FirebaseFirestore_Document_Read":	
-			show_debug_message("Document data is: " + async_load[? "value"]);
+			if (string_pos("students",async_load[? "path"]) > 0)
+			{
+				RepondStudent(async_load[? "value"])
+			}
 		break;
 		
 		case "FirebaseFirestore_Collection_Read":
@@ -19,6 +22,11 @@ if (async_load[? "status"] == 200)
 			{
 				show_debug_message("RespondClassSubtopics()")
 				RespondClassSubtopics(Subject.Maths, async_load[? "value"])
+			}
+			else if (string_pos("allowedGames",async_load[? "path"]) > 0)
+			{
+				show_message("RespondAllowedGames: "+string(async_load[? "value"]))
+				RespondAllowedGames(async_load[? "value"])
 			}
 			else
 			{
