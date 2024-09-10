@@ -19,7 +19,7 @@ function StartSession(game)
 	sessionMap[?"starttime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 	sessionMap[?"endtime"] = ""
 	sessionMap[?"gameref"] = string(game)
-	sessionMap[?"student"] = "/students/test student"
+	sessionMap[?"student"] = "/students/"+string(playerId)
 	var json = json_encode(sessionMap)
 	
 	randomize()
