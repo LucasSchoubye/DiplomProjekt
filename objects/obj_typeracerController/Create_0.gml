@@ -26,4 +26,4 @@ function OptionsMenu() constructor
 
 optionsMenu = new OptionsMenu()
 
-question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, DanishMathSubtopic.SmallMultiplication, QuestionType.MultipleChoice)
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
