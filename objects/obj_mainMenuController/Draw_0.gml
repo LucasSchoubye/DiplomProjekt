@@ -52,11 +52,12 @@ if (room = rm_menu)
 			case "Play Typeracer":
 				obj_firestore_controller.StartSession("/games/typeracer")
 				room_goto(rm_typeracer)
-			
-			break
-			case "Quit":
-				game_end()
-			break
-		}
+		  break
+		  case "Store":
+			  room_goto(rm_store)
+		  break
+		  case "Quit":
+			  game_end()
+		  break
 	}
 }

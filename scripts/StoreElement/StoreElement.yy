@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"StoreElement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"StoreElement",
+  "parent":{
+    "name":"Structs",
+    "path":"folders/Assets/Store/Structs.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
