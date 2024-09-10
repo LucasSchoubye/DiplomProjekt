@@ -1,7 +1,8 @@
 import './App.css';
 import { useState } from 'react';
 import { Auth } from "./components/auth";
-import { Database } from "./components/db";
+import { TeacherDashboard } from "./components/Dashboard/TeacherDashabord"
+import { Database } from "./components/db (unused)";
 
 function App() {
   const [teacherData, setTeacherData] = useState(null);
@@ -17,7 +18,7 @@ function App() {
       {!isAuthenticated ? (
         <Auth onLoginSuccess={handleLoginSuccess} />
       ) : (
-        <Database userData={teacherData}/>
+        <TeacherDashboard userData={teacherData}/>
       )}
     </div>
   );
