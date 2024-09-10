@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_danishSmallEquations(questionType){
+function scr_danishLargeEquations(questionType){
 
 	// Initialize question
 	var question = new Question(questionType)
@@ -10,8 +10,8 @@ function scr_danishSmallEquations(questionType){
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
-			var a = round(random_range(0,9))
-			var b = round(random_range(0,9))
+			var a = round(random_range(0,99))
+			var b = round(random_range(0,99))
 			
 			// Setup list
 			var optionToList = ds_list_create()

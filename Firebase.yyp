@@ -160,6 +160,7 @@
     {"id":{"name":"scr_8d_movement","path":"scripts/scr_8d_movement/scr_8d_movement.yy",},},
     {"id":{"name":"scr_anim_player_look","path":"scripts/scr_anim_player_look/scr_anim_player_look.yy",},},
     {"id":{"name":"scr_clearDuplicateOptionsAndInsertAnswer","path":"scripts/scr_clearDuplicateOptionsAndInsertAnswer/scr_clearDuplicateOptionsAndInsertAnswer.yy",},},
+    {"id":{"name":"scr_danishLargeEquations","path":"scripts/scr_danishLargeEquations/scr_danishLargeEquations.yy",},},
     {"id":{"name":"scr_danishLargeMultiplication","path":"scripts/scr_danishLargeMultiplication/scr_danishLargeMultiplication.yy",},},
     {"id":{"name":"scr_danishMediumMultiplication","path":"scripts/scr_danishMediumMultiplication/scr_danishMediumMultiplication.yy",},},
     {"id":{"name":"scr_danishSmallEquations","path":"scripts/scr_danishSmallEquations/scr_danishSmallEquations.yy",},},

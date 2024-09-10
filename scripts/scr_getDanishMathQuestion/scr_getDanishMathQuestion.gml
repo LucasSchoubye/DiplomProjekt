@@ -7,7 +7,7 @@ enum DanishMathSubtopic {
 	
 	// Equations
 	SmallEquations,
-	MediumEquations,
+	LargeEquations,
 }
 
 function convertStringToEnum(subtopicMap)
@@ -28,6 +28,9 @@ function convertStringToEnum(subtopicMap)
 		// Equations
 		case "smallEquations":	
 			return DanishMathSubtopic.SmallEquations
+		break;
+		case "largeEquations":	
+			return DanishMathSubtopic.LargeEquations
 		break;
 	}
 }
@@ -54,8 +57,8 @@ function scr_getDanishMathQuestion(subtopic, questionType)
 		case DanishMathSubtopic.SmallEquations:
 			question = scr_danishSmallEquations(questionType);
 			break;
-		case DanishMathSubtopic.MediumEquations:
-			//question = scr_danishMediumEquations(questionType);
+		case DanishMathSubtopic.LargeEquations:
+			question = scr_danishLargeEquations(questionType);
 			break;
 		#endregion Equations
 		
