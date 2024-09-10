@@ -5,6 +5,7 @@ randomize()
 playerId = undefined
 sessionId = undefined
 sessionMap = undefined
+answerTimer = 0
 
 // Login 
 username = undefined
@@ -13,6 +14,26 @@ schoolId = undefined
 classId = undefined
 
 // Functions
+function RequestAllowedGames()
+{
+	FirebaseFirestore("/schools/"+schoolId+"/classes/"+classId+"/allowedGames/").Read()
+}
+
+function RespondAllowedGames(gamesList)
+{
+	var gamesMap = json_decode(gamesList)
+	var idArray = []
+	ds_map_keys_to_array(gamesMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(gamesMap[? ID]);
+		obj_mainMenuController.AddAllowedGames(value[?"name"])
+	}
+}
+
 function StartSession(game)
 {		
 	sessionMap = ds_map_create()
@@ -107,7 +128,6 @@ function RepondStudent(map)
 	
 	var classDash = string_last_pos("/", fullPath);
 	var schoolPath = fullPath//string_replace(fullPath,"/schools/", "");
-	show_message("schoolPath: "+schoolPath)
 	
 	var schoolDash = string_pos("/schools/", schoolPath);
 	var schoolDashEnd = string_last_pos("/classes/", schoolPath);
@@ -131,6 +151,7 @@ function RepondStudent(map)
 	
 	// After student data is fetched, create question generator
 	instance_create_depth(0,0,0,obj_questionController)
+	RequestAllowedGames()
 	
 }
 
@@ -165,10 +186,11 @@ function RespondClassSubtopics(subject, value)
 	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
  }
 
-function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType)
+function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType, answerTime)
 {
 	answerMap = ds_map_create()
 	answerMap[?"sessionRef"] = string(sessionId)
+	answerMap[?"answerTime"] = answerTime
 	answerMap[?"prompt"] = prompt
 	answerMap[?"optionChosen"] = optionChosen
 	answerMap[?"answer"] = correctAnswer
