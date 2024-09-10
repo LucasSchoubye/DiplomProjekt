@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { getDoc, doc, getDocs, collection } from "firebase/firestore";
-import { db } from "../../config/firebase"; // Import Firestore
-import DrawerLayout from './DrawerLayout.js';
-import ClassList from './ClassList';
-import StudentList from './StudentList';
+import { db } from "../../config/firebase.js"; // Import Firestore
+import DrawerLayout from './drawerLayout.js';
+import ClassList from './classList.js';
+import StudentList from './studentList.js';
+import StudentStats from "./studentStats.js";
 
-export const TeacherDashboard = ({ userData }) => {
+export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
+    const [answerMap, setAnswerMap] = useState({});
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -67,6 +69,11 @@ export const TeacherDashboard = ({ userData }) => {
         }
     };
 
+    const handleReceiveAnswerMapFromStudentList = (newAnswerMap) => {
+        setAnswerMap(newAnswerMap);  // Store locally
+        handleReceiveAnswerMap(newAnswerMap);  // Pass up to App.js
+    };
+
     const handleBackClick = () => {
         setIsViewingStudents(false);
         setSelectedClass(null);
@@ -74,6 +81,7 @@ export const TeacherDashboard = ({ userData }) => {
     };
 
     return (
+        <div style={{ display: 'flex' }}>
         <DrawerLayout>
             {!isViewingStudents ? (
                 <ClassList 
@@ -87,8 +95,13 @@ export const TeacherDashboard = ({ userData }) => {
                     selectedClass={selectedClass} 
                     handleBackClick={handleBackClick} 
                     isLoading={isLoadingStudents}
+                    handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
                 />
             )}
         </DrawerLayout>
+        {Object.keys(answerMap).length > 0 && (
+                <StudentStats answerMap={answerMap} />
+            )}
+        </div>
     );
 };
