@@ -9,8 +9,8 @@ sessionMap = undefined
 // Login 
 username = undefined
 password = undefined
-schoolId = "9RWenJGRJ0CTk6p0OlnO"
-classId = "Dog8bTzbTQ0jkX6qFNqj"
+schoolId = undefined
+classId = undefined
 
 // Functions
 function StartSession(game)
@@ -101,9 +101,10 @@ function RequestStudent()
 function RepondStudent(map)
 {
 	map = json_decode(map)
+	
+	#region SchoolID & ClassId
 	var fullPath = map[?"classRef"]
 	
-	// Find the positions
 	var classDash = string_last_pos("/", fullPath);
 	var schoolPath = fullPath//string_replace(fullPath,"/schools/", "");
 	show_message("schoolPath: "+schoolPath)
@@ -121,22 +122,32 @@ function RepondStudent(map)
 		// Extract the substring after the last dash
 		var schoolPrefixLength = 8
 		var shortenedSchoolId = string_copy(schoolPath, schoolDash + 1 + schoolPrefixLength, string_length(schoolPath) - schoolDash);
-		schoolId = string_copy(shortenedSchoolId, schoolDashEnd + 1, string_length(shortenedSchoolId) - schoolDashEnd);
+		
+		var slash_pos = string_pos("/", shortenedSchoolId); // Find position of the first slash
+		schoolId = string_copy(shortenedSchoolId, 1, slash_pos - 1); // Copy substring until first slash
 	}
 	
-	show_message("ClassId: "+classId+". SchoolId: "+schoolId)
+	#endregion SchoolID & ClassId
+	
+	// After student data is fetched, create question generator
+	instance_create_depth(0,0,0,obj_questionController)
+	
 }
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {
-	show_debug_message("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics")
-	show_debug_message("schools/9RWenJGRJ0CTk6p0OlnO/classes/Dog8bTzbTQ0jkX6qFNqj/topics/Math/subtopics")
-	
-	FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
+	if (schoolId != undefined && schoolId != undefined)
+	{
+		FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
+	}
+	else
+	{
+		show_message("SchoolId or classId are undefined")
+	}
 }
 
 function RespondClassSubtopics(subject, value)
-{
+{	
 	var subjectString = ""
 	
 	switch(subject)
