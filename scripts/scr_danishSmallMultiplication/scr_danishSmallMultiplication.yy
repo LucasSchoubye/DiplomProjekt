@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_danishSmallMultiplication",
   "parent":{
-    "name":"mellemtrin",
-    "path":"folders/Assets/Shared Assets/Scripts/Danish Math Questions/mellemtrin.yy",
+    "name":"Multiplication",
+    "path":"folders/Assets/Shared Assets/Scripts/Danish Math Questions/Multiplication.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
