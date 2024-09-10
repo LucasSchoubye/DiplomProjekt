@@ -26,19 +26,39 @@ export const Auth = ({ onLoginSuccess }) => {
                 where("password", "==", hashedPassword)
             );
             const querySnapshot = await getDocs(q);
+            console.log(querySnapshot);
 
             if (querySnapshot.empty) {
                 setSnackbarMessage("Username or password is incorrect");
                 setSnackbarSeverity("error");
                 setOpenSnackbar(true);
             } else {
-                setSnackbarMessage("User signed in successfully");
-                setSnackbarSeverity("success");
-                setOpenSnackbar(true);
-                onLoginSuccess();
+                let isTeacher = false;
+                let teacherData = null;
+
                 querySnapshot.forEach((doc) => {
-                    console.log(doc.id, " => ", doc.data());
+                    const userData = doc.data();
+                    console.log(doc.id, " => ", userData);
+                    // Check if the "ref" field contains "teachers"
+                    if (userData.ref && userData.ref.path.includes("teachers")) {
+                        isTeacher = true;
+                        teacherData = userData;
+                    }
                 });
+    
+                if (isTeacher) {
+                    setSnackbarMessage("User signed in successfully");
+                    setSnackbarSeverity("success");
+                    setOpenSnackbar(true);
+                    // Introduce a delay before calling onLoginSuccess
+                setTimeout(() => {
+                    onLoginSuccess(teacherData);
+                }, 1000); // Delay of 1 second (1000 milliseconds)
+                } else {
+                    setSnackbarMessage("User is not a teacher");
+                    setSnackbarSeverity("error");
+                    setOpenSnackbar(true);
+                }
             }
         } catch (err) {
             setSnackbarMessage("Error during sign in: " + err.message);
