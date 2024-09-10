@@ -52,6 +52,9 @@ if (keyboard_check_pressed(vk_space))
 			room_goto(rm_typeracer)
 			
 		break
+		case "Store":
+			room_goto(rm_store)
+		break
 		case "Quit":
 			game_end()
 		break

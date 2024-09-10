@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_storeSetup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_storeSetup",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Assets/Store/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
