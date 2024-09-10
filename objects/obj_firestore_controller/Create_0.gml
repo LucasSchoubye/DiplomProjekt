@@ -165,12 +165,17 @@ function RespondClassSubtopics(subject, value)
 	obj_questionController.questionGenerator.SetSubtopicListFromFirebase(subjectString, value)
  }
 
-function SendAnswer(optionChosen, correctAnswer)
+function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType)
 {
 	answerMap = ds_map_create()
-	answerMap[?"optionChosen"] = string(optionChosen)
 	answerMap[?"sessionRef"] = string(sessionId)
-	answerMap[?"correct"] = bool(optionChosen == correctAnswer)
+	answerMap[?"prompt"] = prompt
+	answerMap[?"optionChosen"] = optionChosen
+	answerMap[?"answer"] = correctAnswer
+	answerMap[?"correct"] = optionChosen == correctAnswer
+	answerMap[?"subject"] = subject
+	answerMap[?"subtopic"] = subtopic
+	answerMap[?"answerType"] = answerType
 	var json = json_encode(answerMap)
 	ds_map_destroy(answerMap)
 

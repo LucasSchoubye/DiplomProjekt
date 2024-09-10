@@ -16,12 +16,29 @@ enum QuestionType {
 	Simple
 }
 
+function QuestionTypeToString(questionType)
+{
+	switch(questionType)
+	{
+		case QuestionType.MultipleChoice:
+			return "MultipleChoice" 
+		case QuestionType.Typing:
+			return "Typing" 
+		case QuestionType.Sequence:
+			return "Sequence" 
+		default:
+			return "Not Recognized" 
+	}
+}
+
 function Question(questionType, choiceAmount = 0) constructor {
 	
 	prompt = "";
 	options = array_create(choiceAmount);
 	answerIndex = undefined;
-	
+	subject = undefined
+	subtopic = undefined
+	questionType = undefined
 }
 
 function QuestionGenerator(Curriculum) constructor {
@@ -29,15 +46,19 @@ function QuestionGenerator(Curriculum) constructor {
 	curriculum = Curriculum;
 	subtopicMap = undefined;
 		
-	function GetQuestion(subject, subtopic, questionType)
+	function GetQuestion(subject, questionType)
 	{
+		var question = undefined
 		switch (curriculum)
 		{
 			case Curriculum.Danish:
 				switch(subject)
 				{
 					case Subject.Maths:
-						return scr_getDanishMathQuestion(GetRandomSubtopicFromList(subject), questionType)
+						question = scr_getDanishMathQuestion(GetRandomSubtopicFromList(subject), questionType)
+						question.subject = "Maths"
+						question.questionType = QuestionTypeToString(questionType)
+						return question
 					
 					default:
 						show_debug_message("This subject is not currently supported")
