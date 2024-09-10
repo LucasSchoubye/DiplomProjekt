@@ -59,5 +59,6 @@ if (room = rm_menu)
 		  case "Quit":
 			  game_end()
 		  break
+		}
 	}
 }
