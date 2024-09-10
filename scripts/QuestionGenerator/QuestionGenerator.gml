@@ -69,19 +69,18 @@ function QuestionGenerator(Curriculum) constructor {
 		switch(subject)
 		{
 			case Subject.Maths:
-				// Clear original list
 				var targetList = subtopicMap[?"Maths"]
 				
 				if (!ds_list_empty(targetList))
 					ds_list_clear(subtopicMap[?"Maths"])
-				obj_firestore_controller.RequestClassSubtopics("9RWenJGRJ0CTk6p0OlnO","Dog8bTzbTQ0jkX6qFNqj","Math")
+				obj_firestore_controller.RequestClassSubtopics(obj_firestore_controller.schoolId,obj_firestore_controller.classId,"Maths")
 				
 			break;
 			case Subject.Physics:
-				show_message("UpdateSubtopicsList(Physics) is not yet implemented")
+				show_debug_message("UpdateSubtopicsList(Physics) is not yet implemented")
 			break;
 			case Subject.Geography:
-				show_message("UpdateSubtopicsList(Geography) is not yet implemented")
+				show_debug_message("UpdateSubtopicsList(Geography) is not yet implemented")
 			break;
 			
 			default:
@@ -94,6 +93,8 @@ function QuestionGenerator(Curriculum) constructor {
 		decodedMap = json_decode(subtopicMapFromFirebase)
 		idArray = []
 		ds_map_keys_to_array(decodedMap, idArray)
+		
+		show_debug_message("SetSubtopicListFromFirebase: "+subtopicMapFromFirebase)
 		
 		for (var i = 0; i < array_length(idArray); i++) 
 		{
@@ -112,7 +113,7 @@ function QuestionGenerator(Curriculum) constructor {
 		var subtopicListSize = ds_list_size(subtopicMap[?"Maths"])
 		var randomIndex = round(random_range(0, subtopicListSize-1))
 		var subtopicFound = ds_list_find_value(subtopicMap[?"Maths"], randomIndex)
-		show_message("found this subtopic: "+string(subtopicFound))
+		show_debug_message("found this subtopic: "+string(subtopicFound))
 		
 		return subtopicFound
 	}

@@ -321,7 +321,7 @@ if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
 	if(optionSelected == question.answerIndex)
 	{
 		obj_typeracerCar.AnsweredCorrect()
-		question = questionGenerator.GetQuestion(Subject.Maths, DanishMathSubtopic.SmallMultiplication, QuestionType.MultipleChoice)
+		question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, DanishMathSubtopic.SmallMultiplication, QuestionType.MultipleChoice)
 	}
 	else
 	{
