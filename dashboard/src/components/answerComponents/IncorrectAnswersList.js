@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerItem from './AnswerItem';
+import AnswerItem from './answerItem';
 
 const IncorrectAnswersList = ({ incorrectAnswers, onDelete }) => {
     return (

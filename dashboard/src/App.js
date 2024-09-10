@@ -4,9 +4,11 @@ import { Auth } from "./components/auth";
 import { Database } from "./components/db";
 
 function App() {
+  const [teacherData, setTeacherData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (user) => {
+    setTeacherData(user)
     setIsAuthenticated(true);
   };
 
@@ -15,7 +17,7 @@ function App() {
       {!isAuthenticated ? (
         <Auth onLoginSuccess={handleLoginSuccess} />
       ) : (
-        <Database />
+        <Database userData={teacherData}/>
       )}
     </div>
   );

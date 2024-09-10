@@ -34,13 +34,15 @@ export const Auth = ({ onLoginSuccess }) => {
                 setOpenSnackbar(true);
             } else {
                 let isTeacher = false;
+                let teacherData = null;
 
                 querySnapshot.forEach((doc) => {
                     const userData = doc.data();
-                    // console.log(doc.id, " => ", userData);
+                    console.log(doc.id, " => ", userData);
                     // Check if the "ref" field contains "teachers"
                     if (userData.ref && userData.ref.path.includes("teachers")) {
                         isTeacher = true;
+                        teacherData = userData;
                     }
                 });
     
@@ -50,7 +52,7 @@ export const Auth = ({ onLoginSuccess }) => {
                     setOpenSnackbar(true);
                     // Introduce a delay before calling onLoginSuccess
                 setTimeout(() => {
-                    onLoginSuccess();
+                    onLoginSuccess(teacherData);
                 }, 1000); // Delay of 1 second (1000 milliseconds)
                 } else {
                     setSnackbarMessage("User is not a teacher");
