@@ -8,6 +8,9 @@ enum DanishMathSubtopic {
 	// Equations
 	SmallEquations,
 	LargeEquations,
+	
+	// Operations
+	OrderOfOperations,
 }
 
 function convertStringToEnum(subtopicMap)
@@ -31,6 +34,10 @@ function convertStringToEnum(subtopicMap)
 		break;
 		case "largeEquations":	
 			return DanishMathSubtopic.LargeEquations
+		break;
+		
+		case "orderOfOperations":
+			return DanishMathSubtopic.OrderOfOperations
 		break;
 	}
 }
@@ -61,6 +68,12 @@ function scr_getDanishMathQuestion(subtopic, questionType)
 			question = scr_danishLargeEquations(questionType);
 			break;
 		#endregion Equations
+		
+		#region Order of Operations
+		case DanishMathSubtopic.OrderOfOperations:
+			question = scr_danishOrderOfOperations(questionType);
+		break;
+		#endregion 
 		
 		default:
 			show_debug_message("This "+string(subtopic)+" subtopic is not currently supported")
