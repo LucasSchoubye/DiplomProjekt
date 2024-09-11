@@ -2,6 +2,7 @@
 
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
+typingString = ""
 
 function OptionsMenu() constructor
 {
@@ -26,4 +27,4 @@ function OptionsMenu() constructor
 
 optionsMenu = new OptionsMenu()
 
-question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)

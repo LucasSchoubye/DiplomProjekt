@@ -7,6 +7,7 @@ function scr_danishLargeEquations(questionType){
 	
 	switch(questionType)
 	{
+		case QuestionType.Typing:
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
@@ -33,6 +34,9 @@ function scr_danishLargeEquations(questionType){
 					ds_list_add(optionToList, "X = "+ string(a-b-1))
 					ds_list_add(optionToList, "X = "+ string(b-a+1))
 					ds_list_add(optionToList, "X = "+ string(b-a-1))
+					
+					if (questionType = QuestionType.Typing)
+						answer = string(b - a)
 				break;
 				
 				// Basic subtraction
@@ -49,6 +53,9 @@ function scr_danishLargeEquations(questionType){
 					ds_list_add(optionToList, "X = "+ string(b + a*2))
 					ds_list_add(optionToList, "X = "+ string(b*2 + a))
 					ds_list_add(optionToList, "X = "+ string(b + a-1))
+					
+					if (questionType = QuestionType.Typing)
+						answer = string(b + a)
 				break;
 				
 				// Basic Multiplication
@@ -65,6 +72,9 @@ function scr_danishLargeEquations(questionType){
 					ds_list_add(optionToList, "X = "+ string((a+1)*b))
 					ds_list_add(optionToList, "X = "+ string((a-1)*b))
 					ds_list_add(optionToList, "X = "+ string(b/a))
+					
+					if (questionType = QuestionType.Typing)
+						answer = string(b * a)
 				break;
 			}
 			
@@ -81,10 +91,6 @@ function scr_danishLargeEquations(questionType){
 			
 		return question;
 
-		
-		case QuestionType.Typing:
-			show_debug_message("Typing questions are not yet implemented for small multiplication")
-		break;
 		case QuestionType.Simple:
 		break;
 		case QuestionType.Sequence:

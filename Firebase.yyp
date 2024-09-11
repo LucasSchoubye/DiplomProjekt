@@ -190,6 +190,7 @@
     {"id":{"name":"scr_danishSmallEquations","path":"scripts/scr_danishSmallEquations/scr_danishSmallEquations.yy",},},
     {"id":{"name":"scr_danishSmallMultiplication","path":"scripts/scr_danishSmallMultiplication/scr_danishSmallMultiplication.yy",},},
     {"id":{"name":"scr_drawMultipleChoice","path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},},
+    {"id":{"name":"scr_drawTyping","path":"scripts/scr_drawTyping/scr_drawTyping.yy",},},
     {"id":{"name":"scr_getDanishMathQuestion","path":"scripts/scr_getDanishMathQuestion/scr_getDanishMathQuestion.yy",},},
     {"id":{"name":"scr_idleAnimation","path":"scripts/scr_idleAnimation/scr_idleAnimation.yy",},},
     {"id":{"name":"scr_storeSetup","path":"scripts/scr_storeSetup/scr_storeSetup.yy",},},
