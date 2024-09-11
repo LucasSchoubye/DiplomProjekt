@@ -7,13 +7,13 @@ scr_UltManDrawLine()
 controlledPlayer = instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer)
 ballcarrier = obj_UltManBall.owner
 
-var len = controlledPlayer.targetSpd
-var dir = point_direction(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)
-var lenX = lengthdir_x(len, dir)
-var lenY = lengthdir_y(len, dir)
-var targetX = controlledPlayer.x+lenX
-var targetY = controlledPlayer.y+lenY
-var playAllowed = true
+len = controlledPlayer.targetSpd
+dir = point_direction(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)
+lenX = lengthdir_x(len, dir)
+lenY = lengthdir_y(len, dir)
+targetX = controlledPlayer.x+lenX
+targetY = controlledPlayer.y+lenY
+playAllowed = true
 	
 // Action type selected
 if (keyboard_check(vk_shift))
@@ -25,46 +25,12 @@ else
 	selectedAction = ActionType.Run
 }
 	
-switch(selectedAction)
-{
-	case ActionType.Run:
-		// is line blocked
-		if (collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManCone, true, true))
-		{
-			draw_set_color(c_maroon)
-			playAllowed = false
-		}	
-		draw_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY)
-		draw_set_color(c_white)
-	break;
-	case ActionType.Shoot:
-		targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
-		targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
-		if (instance_exists(ballcarrier))
-		{
-			if (ballcarrier.id != controlledPlayer.id)
-				playAllowed = false
-		}
-		else
-		{
-			playAllowed = false
-		}
-		
-		if (playAllowed = true)	
-			draw_line(obj_UltManBall.x, obj_UltManBall.y, targetX, targetY)
-	break;
-}
+scr_UltManActiontypes()
 
-if (mouse_check_button(mb_left) && playAllowed)
+// Command other player
+var commandClickedPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, true, true)
+if (mouse_check_button_pressed(mb_right))
 {
-	switch(selectedAction)
-	{
-		case ActionType.Run:
-			controlledPlayer.MoveToPos(targetX, targetY)
-		break;
-		case ActionType.Shoot:
-			controlledPlayer.ShootToPos(targetX, targetY)
-		break;
-	}
+	commandedPlayer = commandClickedPlayer
 }
 

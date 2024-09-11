@@ -10,4 +10,6 @@ enum ActionType{
 }
 
 ballcarrier = undefined
+commandedPlayer = undefined
+controlledPlayer = undefined
 selectedAction = ActionType.Run
