@@ -6,7 +6,7 @@ import ClassList from './classList.js';
 import StudentList from './studentList.js';
 import StudentStats from "./studentStats.js";
 
-export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
+export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
@@ -14,6 +14,7 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
     const [isViewingStudents, setIsViewingStudents] = useState(false);
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
     const [answerMap, setAnswerMap] = useState({});
+    const [answerContextType, setAnswerContextType] = useState('');
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -69,15 +70,21 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
         }
     };
 
-    const handleReceiveAnswerMapFromStudentList = (newAnswerMap) => {
-        setAnswerMap(newAnswerMap);
-        handleReceiveAnswerMap(newAnswerMap);
+    const handleReceiveAnswerMapFromStudentList = (answers, answerContextType) => {
+        setAnswerMap(answers);
+        setAnswerContextType(answerContextType);
+        handleReceiveAnswerMap(answers, answerContextType); // Pass contextType to the parent handler
     };
 
     const handleBackClick = () => {
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
+    };
+
+    const clearAnswerMap = () => {
+        setAnswerMap({});
+        setAnswerContextType('');
     };
 
     return (
@@ -91,18 +98,19 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
                     />
                 ) : (
                     <StudentList 
-                        students={students} 
-                        selectedClass={selectedClass} 
-                        handleBackClick={handleBackClick} 
-                        isLoading={isLoadingStudents}
-                        handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                    students={students} 
+                    selectedClass={selectedClass} 
+                    handleBackClick={handleBackClick} 
+                    isLoading={isLoadingStudents}
+                    handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                    clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
                     />
                 )}
             </DrawerLayout>
             
             {Object.keys(answerMap).length > 0 && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto' }}>
-                    <StudentStats answerMap={answerMap} />
+                    <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
                 </div>
             )}
         </div>

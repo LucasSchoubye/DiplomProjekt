@@ -67,6 +67,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         return Array.from(subjectsSet);
     };
 
+    const getSubjectAnswers = (subject) => {
+        return Object.values(sessionAnswers).flat().filter(answer => answer.subject === subject);
+    };
+
     const getSubtopicsForSubject = (subject) => {
         const subtopicsSet = new Set();
         Object.values(sessionAnswers).forEach((answers) => {
@@ -79,6 +83,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         return Array.from(subtopicsSet);
     };
 
+    const getSubtopicAnswers = (subtopic) => {
+        return Object.values(sessionAnswers).flat().filter(answer => answer.subtopic === subtopic);
+    };
+
     const getSessionsForSubtopic = (subtopic) => {
         return sessions.filter(session => 
             sessionAnswers[session.id].some(answer => answer.subtopic === subtopic)
@@ -88,43 +96,73 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleSubjectClick = (subject) => {
         setSelectedSubject(subject);
         const subjectAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subject === subject);
-        handleReceiveAnswerMap(subjectAnswers);
+        handleReceiveAnswerMap(subjectAnswers, 'subject');
     };
 
+    const handleBackToSubjects = () => {
+        setSelectedSubject(null);
+        if (selectedStudent) {
+            const subjectAnswers = getSubjectAnswers(selectedStudent);
+            handleReceiveAnswerMap(subjectAnswers, 'subject');
+        }
+    };
+    
     const handleSubtopicClick = (subtopic) => {
         setSelectedSubtopic(subtopic);
         setSelectedSession(null);
         const subtopicAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subtopic === subtopic);
-        handleReceiveAnswerMap(subtopicAnswers);
+        handleReceiveAnswerMap(subtopicAnswers, 'subtopic');
     };
 
+    const handleBackToSubtopics = () => {
+        setSelectedSubtopic(null);
+        if (selectedSubject) {
+            const subjectAnswers = getSubjectAnswers(selectedSubject);
+            handleReceiveAnswerMap(subjectAnswers, 'subject');
+        }
+    };
+    
     const handleSessionClick = (sessionId) => {
         setSelectedSession(sessionId);
-
+    
         if (sessionAnswers && sessionAnswers[sessionId]) {
             const sessionAnswersData = sessionAnswers[sessionId];
-            handleReceiveAnswerMap(sessionAnswersData);
+            handleReceiveAnswerMap(sessionAnswersData, 'session');
         } else {
             console.error(`No answers found for session ID: ${sessionId}`);
         }
     };
 
+    const handleBackToSessions = () => {
+        setSelectedSession(null);
+        if (selectedSubtopic) {
+            const subtopicAnswers = getSubtopicAnswers(selectedSubtopic);
+            handleReceiveAnswerMap(subtopicAnswers, 'subtopic');
+        }
+    };
+
+    // const handleBackToStudents = () => {
+    //     setSelectedSubject(null);
+    //     setSelectedStudent(null);
+    //     clearAnswerMap(); // Call this function to hide the answers in StudentStats
+    // };
+
     const renderBackButton = () => {
         if (selectedSession) {
             return (
-                <Button variant="outlined" onClick={() => setSelectedSession(null)} fullWidth sx={{ mb: 2 }}>
+                <Button variant="outlined" onClick={handleBackToSessions} fullWidth sx={{ mb: 2 }}>
                     Back to Sessions
                 </Button>
             );
         } else if (selectedSubtopic) {
             return (
-                <Button variant="outlined" onClick={() => setSelectedSubtopic(null)} fullWidth sx={{ mb: 2 }}>
+                <Button variant="outlined" onClick={handleBackToSubtopics} fullWidth sx={{ mb: 2 }}>
                     Back to Subtopics
                 </Button>
             );
         } else if (selectedSubject) {
             return (
-                <Button variant="outlined" onClick={() => setSelectedSubject(null)} fullWidth sx={{ mb: 2 }}>
+                <Button variant="outlined" onClick={handleBackToSubjects} fullWidth sx={{ mb: 2 }}>
                     Back to Subjects
                 </Button>
             );
@@ -267,20 +305,20 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 };
 
 
-    return (
-        <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
-            {renderBackButton()}
-            <Typography variant="h6" mb={2}>
-                {selectedSession ? `Session Details` :
-                 selectedSubtopic ? `Sessions for ${selectedSubtopic}` :
-                 selectedSubject ? `Subtopics for ${selectedSubject}` :
-                 selectedStudent ? `${selectedStudent.fullName}` :
-                 `Students in ${selectedClass.className}`}
-            </Typography>
-            <Divider />
-            {renderContent()}
-        </Box>
-    );
+return (
+    <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
+        {renderBackButton()}
+        <Typography variant="h6" mb={2}>
+            {selectedSession ? `Session Details` :
+             selectedSubtopic ? `Sessions for ${selectedSubtopic}` :
+             selectedSubject ? `Subtopics for ${selectedSubject}` :
+             selectedStudent ? `${selectedStudent.fullName}` :
+             `Students in ${selectedClass.className}`}
+        </Typography>
+        <Divider />
+        {renderContent()}
+    </Box>
+);
 };
 
 export default StudentList;
