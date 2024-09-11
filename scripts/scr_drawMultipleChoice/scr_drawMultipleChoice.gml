@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_drawMultipleChoice(optionsMenu)
+function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
 var top = optionsMenu.top
@@ -34,8 +34,6 @@ var optionSelected = undefined
 
 	if (question != undefined)
 	{
-		
-		
 		draw_rectangle(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
 		draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
 	
@@ -318,18 +316,20 @@ var optionSelected = undefined
 	obj_firestore_controller.answerTimer++
 	if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
 	{
-		
-		obj_firestore_controller.SendAnswer(question.prompt, question.options[optionSelected], question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
-		obj_firestore_controller.answerTimer = 0
+		if (optionSelected < array_length(question.options))
+		{
+			obj_firestore_controller.SendAnswer(question.prompt, question.options[optionSelected], question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
+			obj_firestore_controller.answerTimer = 0
 
-		if(optionSelected == question.answerIndex)
-		{
-			obj_typeracerCar.AnsweredCorrect()
-			question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
-		}
-		else
-		{
-			obj_typeracerCar.AnsweredIncorrect()
+			if(optionSelected == question.answerIndex)
+			{
+				obj_typeracerCar.AnsweredCorrect()
+				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
+			}
+			else
+			{
+				obj_typeracerCar.AnsweredIncorrect()
+			}
 		}
 	}
 }

@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_drawMultipleChoice",
+  "%Name":"scr_drawTyping",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_drawMultipleChoice",
+  "name":"scr_drawTyping",
   "parent":{
     "name":"Scripts",
     "path":"folders/Assets/Shared Assets/Scripts.yy",

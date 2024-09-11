@@ -7,6 +7,7 @@ function scr_danishOrderOfOperations(questionType)
 	
 	switch(questionType)
 	{
+		case QuestionType.Typing:
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
@@ -17,7 +18,6 @@ function scr_danishOrderOfOperations(questionType)
 			question.prompt = string(a)+" * "+string(b)
 			var optionToList = ds_list_create()
 			var answer = undefined
-			
 			
 			switch(round(random_range(1,2)))
 			{
@@ -60,10 +60,6 @@ function scr_danishOrderOfOperations(questionType)
 			
 		return question;
 
-		
-		case QuestionType.Typing:
-			show_debug_message("Typing questions are not yet implemented for small multiplication")
-		break;
 		case QuestionType.Simple:
 		break;
 		case QuestionType.Sequence:
