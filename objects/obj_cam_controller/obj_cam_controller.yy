@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Controllers",
-    "path":"folders/Assets/Objects/Controllers.yy",
+    "path":"folders/Assets/Shared Assets/Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

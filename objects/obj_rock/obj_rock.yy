@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Environment",
-    "path":"folders/Assets/Objects/Environment.yy",
+    "path":"folders/Assets/Shared Assets/Objects/Environment.yy",
   },
   "parentObjectId":null,
   "persistent":false,
