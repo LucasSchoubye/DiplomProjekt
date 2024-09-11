@@ -1,19 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_UltManBall",
+  "%Name":"obj_UltManOpponent",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_UltManBall",
+  "name":"obj_UltManOpponent",
   "overriddenProperties":[],
   "parent":{
     "name":"Game Objects",
     "path":"folders/Assets/Ultimate Manager/Objects/Game Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_UltManPlayer",
+    "path":"objects/obj_UltManPlayer/obj_UltManPlayer.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_UltManBall",
-    "path":"sprites/spr_UltManBall/spr_UltManBall.yy",
+    "name":"spr_UltManPlayer",
+    "path":"sprites/spr_UltManPlayer/spr_UltManPlayer.yy",
   },
   "spriteMaskId":null,
   "visible":true,

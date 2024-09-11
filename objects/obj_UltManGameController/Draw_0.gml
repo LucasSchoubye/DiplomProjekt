@@ -4,7 +4,7 @@
 scr_UltManDrawLine()
 
 // Player control
-controlledPlayer = instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer)
+controlledPlayer = scr_assignClosestControlledPlayer()
 ballcarrier = obj_UltManBall.owner
 
 len = controlledPlayer.targetSpd
@@ -25,7 +25,6 @@ else
 	selectedAction = ActionType.Run
 }
 	
-scr_UltManActiontypes()
 
 // Command other player
 var commandClickedPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, true, true)
@@ -33,4 +32,10 @@ if (mouse_check_button_pressed(mb_right))
 {
 	commandedPlayer = commandClickedPlayer
 }
+if (instance_exists(commandedPlayer) && mouse_check_button(mb_right))
+{
+	commandTargetX = commandedPlayer.x + lengthdir_x(commandedPlayer.targetSpd, point_direction(commandedPlayer.x,commandedPlayer.y,mouse_x,mouse_y))
+	commandTargetY = commandedPlayer.y + lengthdir_y(commandedPlayer.targetSpd, point_direction(commandedPlayer.x,commandedPlayer.y,mouse_x,mouse_y))
+}
 
+scr_UltManActiontypes()

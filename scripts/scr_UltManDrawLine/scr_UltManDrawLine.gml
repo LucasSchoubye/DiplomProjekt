@@ -12,10 +12,11 @@ if (instance_exists(ballcarrier))
 }
 
 // Draw commanded player
-if (instance_exists(commandedPlayer))
+if (instance_exists(commandedPlayer) and commandTargetX != undefined and commandTargetY != undefined)
 {
 	draw_set_color(c_lime)
 	draw_ellipse(commandedPlayer.x - ellipseWidth, commandedPlayer.y - ellipseHeight, commandedPlayer.x + ellipseWidth, commandedPlayer.y + ellipseHeight, false)
+	draw_line(commandedPlayer.x, commandedPlayer.y, commandTargetX, commandTargetY)
 	draw_set_color(c_white)
 }
 
