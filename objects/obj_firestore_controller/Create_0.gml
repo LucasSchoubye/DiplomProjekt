@@ -31,6 +31,7 @@ function RespondAllowedGames(gamesList)
 	    var ID = idArray[i];
 	    var value = json_decode(gamesMap[? ID]);
 		obj_mainMenuController.AddAllowedGames(value[?"name"])
+		obj_menuGridController.GetGameData(value)
 	}
 }
 
