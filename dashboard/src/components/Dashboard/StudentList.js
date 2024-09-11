@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from "../../config/firebase"; // Make sure this path is correct
+import { db } from "../../config/firebase";
 
 const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap }) => {
     const theme = useTheme();
