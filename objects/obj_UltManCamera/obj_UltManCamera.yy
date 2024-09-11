@@ -9,8 +9,8 @@
   "name":"obj_UltManCamera",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Ultimate Manager/Objects.yy",
+    "name":"Controllers",
+    "path":"folders/Assets/Ultimate Manager/Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

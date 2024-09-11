@@ -9,8 +9,8 @@
   "name":"obj_UltManBall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Ultimate Manager/Objects.yy",
+    "name":"Game Objects",
+    "path":"folders/Assets/Ultimate Manager/Objects/Game Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
