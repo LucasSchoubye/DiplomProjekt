@@ -53,6 +53,9 @@ if (room = rm_menu)
 				obj_firestore_controller.StartSession("/games/typeracer")
 				room_goto(rm_typeracer)
 		  break
+		  case "Play Ultimate Manager":
+			room_goto(rm_UltManMatch)
+		  break
 		  case "Store":
 			  room_goto(rm_store)
 		  break

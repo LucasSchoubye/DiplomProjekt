@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_UltManActiontypes",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_UltManActiontypes",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Assets/Ultimate Manager/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
