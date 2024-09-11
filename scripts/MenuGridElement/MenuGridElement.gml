@@ -11,7 +11,7 @@ function MenuGridElement() constructor {
 	itemCenterY = itemHeight/2
 	itemPriceY = itemHeight-20
 	itemTitleY = itemHeight-40
-	itemImgStartY = itemCenterY-20
+	itemImgStartY = itemCenterY-10
 	textHeight = 10
 	categorySprite = spr_theOneAndOnlySmall
 	categoryWidth = room_width*0.2
@@ -23,17 +23,24 @@ function MenuGridElement() constructor {
 	
 	function DrawItem(xValue,yValue) {
 		if(yValue >= 100) {
-			draw_sprite(itemSprite,0,xValue+itemCenterX,yValue+itemImgStartY)
+			switch(itemName){
+				case "Typeracer":
+					draw_sprite(spr_typeracerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+				case "Ultimate Manager":
+					draw_sprite(spr_managerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		else if(yValue+itemHeight >= 100) {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		if(yValue+itemPriceY-textHeight >= 100) {
-			//draw_text(xValue+itemCenterX,yValue+itemPriceY,"5000$")
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
 		}
 		if(yValue+itemTitleY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
+			//draw_text(xValue+itemCenterX,yValue+itemTitleY,"5000$")
 		}
 		
 		
