@@ -1,28 +1,36 @@
 import React from 'react';
 
-const StudentStats = ({ answerMap }) => {
+const StudentStats = ({ answerMap, contextType }) => {
     // Flatten the answerMap into a single array of answers
     const answers = Object.values(answerMap).flat();
 
+    // Calculate the number of correct and incorrect answers
+    const totalAnswers = answers.length;
+    const correctAnswers = answers.filter(answer => answer.correct === 1).length;
+    const incorrectAnswers = totalAnswers - correctAnswers;
+    const percentageCorrect = totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
+
     return (
-        <div style={{ marginLeft: '20px', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-            <h3>Answers</h3>
-            <ul>
-                {answers.map((answer, index) => (
-                    <li
-                        key={index}
-                        style={{
-                            color: answer.correct === 1 ? 'green' : 'red',
-                            marginBottom: '10px',
-                        }}
-                    >
-                        <p><strong>Prompt:</strong> {answer.prompt}</p>
-                        <p><strong>Answer:</strong> {answer.answer}</p>
-                        <p><strong>Option Chosen:</strong> {answer.optionChosen}</p>
-                        <p><strong>Time:</strong> {answer.answerTime}</p>
-                    </li>
-                ))}
-            </ul>
+        <div style={{ flexGrow: 1}}>
+            <h3>Student Statistics</h3>
+            <div style={{ marginBottom: '10px' }}>
+                <p><strong>Context Type:</strong> {contextType}</p>
+                <p><strong>Total Answers:</strong> {totalAnswers}</p>
+                <p>
+                    <span style={{ color: 'green' }}>
+                        Correct Answers: {correctAnswers}
+                    </span>
+                </p>
+                <p>
+                    <span style={{ color: 'red' }}>
+                        Incorrect Answers: {incorrectAnswers}
+                    </span>
+                </p>
+                <p>
+                    <strong>Percentage of Correct Answers:</strong> 
+                    <span style={{ color: 'black' }}> {percentageCorrect.toFixed(2)}%</span>
+                </p>
+            </div>
         </div>
     );
 };
