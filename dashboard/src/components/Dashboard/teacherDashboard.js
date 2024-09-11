@@ -99,6 +99,7 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
                 />
             )}
         </DrawerLayout>
+        
         {Object.keys(answerMap).length > 0 && (
                 <StudentStats answerMap={answerMap} />
             )}
