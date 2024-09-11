@@ -3,7 +3,7 @@ import { getDoc, doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase.js"; // Import Firestore
 import DrawerLayout from './drawerLayout.js';
 import ClassList from './classList.js';
-import StudentList from './studentList.js';
+import StudentList from './StudentList.js';
 import StudentStats from "./studentStats.js";
 
 export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
