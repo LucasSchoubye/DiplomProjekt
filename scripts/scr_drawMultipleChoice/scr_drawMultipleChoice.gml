@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_drawMultipleChoice(optionsMenu)
+function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
 var top = optionsMenu.top
@@ -326,7 +326,7 @@ var optionSelected = undefined
 			if(optionSelected == question.answerIndex)
 			{
 				obj_typeracerCar.AnsweredCorrect()
-				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
+				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
 			}
 			else
 			{

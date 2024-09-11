@@ -3,6 +3,7 @@
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
 typingString = ""
+questionType = QuestionType.Typing
 
 function OptionsMenu() constructor
 {

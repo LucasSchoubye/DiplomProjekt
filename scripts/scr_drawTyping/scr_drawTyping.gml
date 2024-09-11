@@ -71,7 +71,7 @@ var threeOptionsY = optionsMenu.threeOptionsY
 		{
 			obj_typeracerCar.AnsweredIncorrect()
 		}
-		question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
+		question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
 		typingString = ""
 	}
 	
