@@ -14,7 +14,7 @@ if (instance_exists(owner))
 	targetX = owner.x + lengthdir_x(owner.lastMoveLen, owner.lastMoveDir)*0.5
 	targetY = owner.y + lengthdir_y(owner.lastMoveLen, owner.lastMoveDir)*0.5
 }
-else
+else if (readyForPickup = true)
 {
 	var nearPlayer = instance_nearest(x,y,obj_UltManPlayer)
 	if (point_distance(x,y,nearPlayer.x,nearPlayer.y) < pickupDist)

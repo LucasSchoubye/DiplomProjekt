@@ -6,7 +6,8 @@ switch(selectedAction)
 {
 	case ActionType.Run:
 		// is line blocked
-		if (collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManCone, true, true))
+		if (collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManCone, true, true) or
+			collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true))
 		{
 			draw_set_color(c_maroon)
 			playAllowed = false
@@ -32,7 +33,7 @@ switch(selectedAction)
 	break;
 }
 
-if (mouse_check_button(mb_left) && playAllowed)
+if (mouse_check_button_pressed(mb_left) && playAllowed)
 {
 	switch(selectedAction)
 	{
@@ -42,6 +43,21 @@ if (mouse_check_button(mb_left) && playAllowed)
 		case ActionType.Shoot:
 			controlledPlayer.ShootToPos(targetX, targetY)
 		break;
+	}
+	
+	// Perform command move
+	if (instance_exists(obj_UltManGameController.commandedPlayer))
+	{		
+		obj_UltManGameController.commandedPlayer.MoveToPos(obj_UltManGameController.commandTargetX, obj_UltManGameController.commandTargetY)
+		obj_UltManGameController.commandTargetX = undefined
+		obj_UltManGameController.commandTargetY = undefined
+		obj_UltManGameController.commandedPlayer = undefined
+	}
+	
+	// All opponents perform their move
+	with(obj_UltManOpponent)
+	{
+		PerformAction()
 	}
 }
 
