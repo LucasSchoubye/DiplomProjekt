@@ -71,7 +71,7 @@ const StudentStats = ({ answerMap }) => {
                 </div>
             ) : (
                 // If a subject is selected, show subtopics
-                <div style={{ marginLeft: '20px' }}>
+                <div >
                     <h4>{selectedSubject}</h4>
 
                     {/* Render subtopic buttons */}
@@ -81,10 +81,11 @@ const StudentStats = ({ answerMap }) => {
                                 onClick={() => handleSubtopicClick(subtopic)}
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '5px',
+                                    padding: '10px',
                                     marginBottom: '5px',
                                     backgroundColor: selectedSubtopic === subtopic ? '#d3d3d3' : '#f0f0f0',
-                                    borderRadius: '3px',
+                                    borderRadius: '5px',
+                                    fontWeight: 'bold',
                                 }}
                             >
                                 {subtopic}
@@ -98,7 +99,7 @@ const StudentStats = ({ answerMap }) => {
                                             key={answerIndex}
                                             style={{
                                                 color: answer.correct === 1 ? 'green' : 'red',
-                                                marginBottom: '10px',
+                                                marginBottom: '20px',
                                             }}
                                         >
                                             <p><strong>Prompt:</strong> {answer.prompt}</p>

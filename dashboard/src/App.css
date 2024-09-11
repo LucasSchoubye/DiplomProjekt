@@ -1,10 +1,14 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Ensures the div takes up the entire height of the viewport */
-  text-align: center; /* Centers text if necessary */
-  flex-direction: column; /* Ensures the content is stacked vertically */
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
 
 

@@ -70,8 +70,8 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
     };
 
     const handleReceiveAnswerMapFromStudentList = (newAnswerMap) => {
-        setAnswerMap(newAnswerMap);  // Store locally
-        handleReceiveAnswerMap(newAnswerMap);  // Pass up to App.js
+        setAnswerMap(newAnswerMap);
+        handleReceiveAnswerMap(newAnswerMap);
     };
 
     const handleBackClick = () => {
@@ -81,27 +81,29 @@ export const TeacherDashboard = ({ userData ,handleReceiveAnswerMap }) => {
     };
 
     return (
-        <div style={{ display: 'flex' }}>
-        <DrawerLayout>
-            {!isViewingStudents ? (
-                <ClassList 
-                    classes={classes} 
-                    teacherName={teacherName} 
-                    handleClassClick={handleClassClick} 
-                />
-            ) : (
-                <StudentList 
-                    students={students} 
-                    selectedClass={selectedClass} 
-                    handleBackClick={handleBackClick} 
-                    isLoading={isLoadingStudents}
-                    handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
-                />
-            )}
-        </DrawerLayout>
-        
-        {Object.keys(answerMap).length > 0 && (
-                <StudentStats answerMap={answerMap} />
+        <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
+            <DrawerLayout>
+                {!isViewingStudents ? (
+                    <ClassList 
+                        classes={classes} 
+                        teacherName={teacherName} 
+                        handleClassClick={handleClassClick} 
+                    />
+                ) : (
+                    <StudentList 
+                        students={students} 
+                        selectedClass={selectedClass} 
+                        handleBackClick={handleBackClick} 
+                        isLoading={isLoadingStudents}
+                        handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                    />
+                )}
+            </DrawerLayout>
+            
+            {Object.keys(answerMap).length > 0 && (
+                <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto' }}>
+                    <StudentStats answerMap={answerMap} />
+                </div>
             )}
         </div>
     );

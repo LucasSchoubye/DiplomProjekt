@@ -3,7 +3,7 @@ import { Box, Typography, List, ListItem, ListItemText, Divider, Button, Circula
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../../config/firebase"; // Make sure this path is correct
 
-const StudentList = ({ students, selectedClass, handleBackClick, isLoading ,handleReceiveAnswerMap }) => {
+const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap }) => {
     const theme = useTheme();
     const isXsScreen = useMediaQuery(theme.breakpoints.only('xs'));
     const isSmScreen = useMediaQuery(theme.breakpoints.only('sm'));
@@ -13,6 +13,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading ,hand
     const [sessions, setSessions] = useState([]);
     const [sessionAnswers, setSessionAnswers] = useState({});
     const [isLoadingSessions, setIsLoadingSessions] = useState(false);
+
+    const [selectedSubject, setSelectedSubject] = useState(null);
+    const [selectedSubtopic, setSelectedSubtopic] = useState(null);
+    const [selectedSession, setSelectedSession] = useState(null);
 
     const getWidth = () => {
         if (isXsScreen) return '100%';
@@ -46,8 +50,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading ,hand
                 answersMap[session.id] = allAnswers[index];
             });
             setSessionAnswers(answersMap);
-
-            handleReceiveAnswerMap(answersMap);
         } catch (error) {
             console.error("Error fetching sessions and answers: ", error);
         } finally {
@@ -55,64 +57,228 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading ,hand
         }
     };
 
+    const getSubjects = () => {
+        const subjectsSet = new Set();
+        Object.values(sessionAnswers).forEach((answers) => {
+            answers.forEach((answer) => {
+                subjectsSet.add(answer.subject);
+            });
+        });
+        return Array.from(subjectsSet);
+    };
+
+    const getSubtopicsForSubject = (subject) => {
+        const subtopicsSet = new Set();
+        Object.values(sessionAnswers).forEach((answers) => {
+            answers.forEach((answer) => {
+                if (answer.subject === subject) {
+                    subtopicsSet.add(answer.subtopic);
+                }
+            });
+        });
+        return Array.from(subtopicsSet);
+    };
+
+    const getSessionsForSubtopic = (subtopic) => {
+        return sessions.filter(session => 
+            sessionAnswers[session.id].some(answer => answer.subtopic === subtopic)
+        );
+    };
+
+    const handleSubjectClick = (subject) => {
+        setSelectedSubject(subject);
+        const subjectAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subject === subject);
+        handleReceiveAnswerMap(subjectAnswers);
+    };
+
+    const handleSubtopicClick = (subtopic) => {
+        setSelectedSubtopic(subtopic);
+        setSelectedSession(null);
+        const subtopicAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subtopic === subtopic);
+        handleReceiveAnswerMap(subtopicAnswers);
+    };
+
+    const handleSessionClick = (sessionId) => {
+        setSelectedSession(sessionId);
+
+        if (sessionAnswers && sessionAnswers[sessionId]) {
+            const sessionAnswersData = sessionAnswers[sessionId];
+            handleReceiveAnswerMap(sessionAnswersData);
+        } else {
+            console.error(`No answers found for session ID: ${sessionId}`);
+        }
+    };
+
+    const renderBackButton = () => {
+        if (selectedSession) {
+            return (
+                <Button variant="outlined" onClick={() => setSelectedSession(null)} fullWidth sx={{ mb: 2 }}>
+                    Back to Sessions
+                </Button>
+            );
+        } else if (selectedSubtopic) {
+            return (
+                <Button variant="outlined" onClick={() => setSelectedSubtopic(null)} fullWidth sx={{ mb: 2 }}>
+                    Back to Subtopics
+                </Button>
+            );
+        } else if (selectedSubject) {
+            return (
+                <Button variant="outlined" onClick={() => setSelectedSubject(null)} fullWidth sx={{ mb: 2 }}>
+                    Back to Subjects
+                </Button>
+            );
+        } else if (selectedStudent) {
+            return (
+                <Button variant="outlined" onClick={() => setSelectedStudent(null)} fullWidth sx={{ mb: 2 }}>
+                    Back to Student List
+                </Button>
+            );
+        } else {
+            return (
+                <Button variant="outlined" onClick={handleBackClick} fullWidth sx={{ mb: 2 }}>
+                    Back to Classes
+                </Button>
+            );
+        }
+    };
+
+    const renderContent = () => {
+    if (isLoading || isLoadingSessions) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
+    if (selectedSession) {
+        const sessionAnswersData = sessionAnswers[selectedSession];
+        if (!sessionAnswersData || sessionAnswersData.length === 0) {
+            return (
+                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                    No answers found for this session.
+                </Typography>
+            );
+        }
+
+        return (
+            <List>
+                {sessionAnswersData.map((answer, index) => (
+                    <ListItem key={index}>
+                        <ListItemText
+                            primary={answer.prompt}
+                            secondary={`Answer: ${answer.answer} | Correct: ${answer.correct ? 1 : 0}`}
+                        />
+                    </ListItem>
+                ))}
+            </List>
+        );
+    }
+
+    if (selectedSubtopic) {
+        const sessionsForSubtopic = getSessionsForSubtopic(selectedSubtopic);
+        if (sessionsForSubtopic.length === 0) {
+            return (
+                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                    No sessions found for this subtopic.
+                </Typography>
+            );
+        }
+
+        return (
+            <List>
+                {sessionsForSubtopic.map((session, index) => (
+                    <React.Fragment key={session.id}>
+                        <ListItem button onClick={() => handleSessionClick(session.id)}>
+                            <ListItemText primary={`Session ${index + 1}`} secondary={session.student} />
+                        </ListItem>
+                        {index < sessionsForSubtopic.length - 1 && <Divider />}
+                    </React.Fragment>
+                ))}
+            </List>
+        );
+    }
+
+    if (selectedSubject) {
+        const subtopicsForSubject = getSubtopicsForSubject(selectedSubject);
+        if (subtopicsForSubject.length === 0) {
+            return (
+                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                    No subtopics found for this subject.
+                </Typography>
+            );
+        }
+
+        return (
+            <List>
+                {subtopicsForSubject.map((subtopic, index) => (
+                    <React.Fragment key={index}>
+                        <ListItem button onClick={() => handleSubtopicClick(subtopic)}>
+                            <ListItemText primary={subtopic} />
+                        </ListItem>
+                        {index < subtopicsForSubject.length - 1 && <Divider />}
+                    </React.Fragment>
+                ))}
+            </List>
+        );
+    }
+
+    if (selectedStudent) {
+        const subjects = getSubjects();
+        if (subjects.length === 0) {
+            return (
+                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                    No subjects found for this student.
+                </Typography>
+            );
+        }
+
+        return (
+            <List>
+                {subjects.map((subject, index) => (
+                    <React.Fragment key={index}>
+                        <ListItem button onClick={() => handleSubjectClick(subject)}>
+                            <ListItemText primary={subject} />
+                        </ListItem>
+                        {index < subjects.length - 1 && <Divider />}
+                    </React.Fragment>
+                ))}
+            </List>
+        );
+    }
+
+    return (
+        <List>
+            {students.length > 0 ? (
+                students.map((studentData, index) => (
+                    <React.Fragment key={studentData.id}>
+                        <ListItem button onClick={() => handleStudentClick(studentData)}>
+                            <ListItemText primary={studentData.fullName} />
+                        </ListItem>
+                        {index < students.length - 1 && <Divider />}
+                    </React.Fragment>
+                ))
+            ) : (
+                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
+            )}
+        </List>
+    );
+};
+
+
     return (
         <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
-            <Button variant="outlined" onClick={handleBackClick} fullWidth sx={{ mb: 2 }}>Back to Classes</Button>
+            {renderBackButton()}
             <Typography variant="h6" mb={2}>
-                {selectedStudent ? `${selectedStudent.fullName}` : `Students in ${selectedClass.className}`}
+                {selectedSession ? `Session Details` :
+                 selectedSubtopic ? `Sessions for ${selectedSubtopic}` :
+                 selectedSubject ? `Subtopics for ${selectedSubject}` :
+                 selectedStudent ? `${selectedStudent.fullName}` :
+                 `Students in ${selectedClass.className}`}
             </Typography>
             <Divider />
-            {isLoading || isLoadingSessions ? (
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
-                    <CircularProgress />
-                </Box>
-            ) : selectedStudent ? (
-                <List>
-                    {sessions.length > 0 ? (
-                        sessions.map((session, index) => (
-                            <React.Fragment key={session.id}>
-                                <ListItem>
-                                    <ListItemText 
-                                        primary={`Session ${index + 1}`} 
-                                        secondary={
-                                            <>
-                                                <Typography variant="body2">
-                                                    Startime: {session.starttime}
-                                                </Typography>
-                                                <Typography variant="body2">
-                                                    Endtime: {session.endtime}
-                                                </Typography>
-                                                <Typography variant="body2">
-                                                    Answers: {sessionAnswers[session.id] ? sessionAnswers[session.id].length : 0}
-                                                </Typography>
-                                            </>
-                                        }
-                                    />
-                                </ListItem>
-                                {index < sessions.length - 1 && <Divider />}
-                            </React.Fragment>
-                        ))
-                    ) : (
-                        <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No sessions found for this student</Typography>
-                    )}
-                    <Button variant="outlined" onClick={() => setSelectedStudent(null)} fullWidth sx={{ mt: 2 }}>Back to Student List</Button>
-                </List>
-            ) : (
-                <List>
-                    {students.length > 0 ? (
-                        students.map((studentData, index) => (
-                            <React.Fragment key={studentData.id}>
-                                <ListItem button="true" onClick={() => handleStudentClick(studentData)}>
-                                    <ListItemText primary={studentData.fullName} />
-                                </ListItem>
-                                {index < students.length - 1 && <Divider />}
-                            </React.Fragment>
-                        ))
-                    ) : (
-                        <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
-                    )}
-                </List>
-            )}
+            {renderContent()}
         </Box>
     );
 };
