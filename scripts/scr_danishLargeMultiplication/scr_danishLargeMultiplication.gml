@@ -7,6 +7,7 @@ function scr_danishLargeMultiplication(questionType){
 	
 	switch(questionType)
 	{
+		case QuestionType.Typing:
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
@@ -39,10 +40,6 @@ function scr_danishLargeMultiplication(questionType){
 			
 		return question;
 
-		
-		case QuestionType.Typing:
-			show_debug_message("Typing questions are not yet implemented for small multiplication")
-		break;
 		case QuestionType.Simple:
 		break;
 		case QuestionType.Sequence:
