@@ -26,7 +26,10 @@ if (async_load[? "status"] == 200)
 			else if (string_pos("allowedGames",async_load[? "path"]) > 0)
 			{
 				RespondAllowedGames(async_load[? "value"])
-				
+			}
+			else if (string_pos("shop items",async_load[? "path"]) > 0)
+			{
+				RespondStoreItems(async_load[? "value"])	
 			}
 			else
 			{

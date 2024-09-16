@@ -12,6 +12,7 @@ username = undefined
 password = undefined
 schoolId = undefined
 classId = undefined
+itemID = undefined
 
 // Functions
 function RequestAllowedGames()
@@ -31,6 +32,24 @@ function RespondAllowedGames(gamesList)
 	    var ID = idArray[i];
 	    var value = json_decode(gamesMap[? ID]);
 		obj_menuGridController.GetGameData(value)
+	}
+}
+
+function RequestStoreItems() {
+		FirebaseFirestore("/shop items/").Read()
+}
+
+function RespondStoreItems(storeList) {
+	var storeMap = json_decode(storeList)
+	var idArray = []
+	ds_map_keys_to_array(storeMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(storeMap[? ID]);
+		obj_storeController.GetStoreData(value)
 	}
 }
 

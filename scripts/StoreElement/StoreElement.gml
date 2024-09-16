@@ -2,8 +2,8 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 function StoreElement() constructor {
-	name = ""
-	price = 0
+	itemName = ""
+	price = undefined
 	itemSprite = spr_theOneAndOnly
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
@@ -31,10 +31,10 @@ function StoreElement() constructor {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		if(yValue+itemPriceY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,"5000$")
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,price)
 		}
 		if(yValue+itemTitleY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemTitleY,"YOYOYO TITLE BRO")
+			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
 		
 		
