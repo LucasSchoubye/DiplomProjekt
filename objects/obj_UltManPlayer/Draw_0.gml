@@ -19,5 +19,5 @@ if (targetShootSpd > topShootSpd){targetShootSpd = topShootSpd}
 // animation
 depth = -y
 animCycle++
-draw_sprite_ext(sprite_index, 0, x, y + sin(animCycle/5)*10, image_xscale, 1, 0 + sin(animCycle/10)*3, image_blend, 1)
-
+draw_sprite_ext(sprite_index, 0, x, y + sin(animCycle/5)*10, image_xscale, 1, image_angle + sin(animCycle/10)*3, image_blend, 1)
+image_angle = image_angle/1.08

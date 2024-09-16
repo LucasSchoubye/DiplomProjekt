@@ -22,6 +22,11 @@ formationPosY = y
 topSpd = 400
 topShootSpd = 2000
 
+// Game stats
+strength = 200
+defence = 200
+dribbling = 200
+
 
 // Methods
 function MoveToPos(X,Y)
@@ -39,6 +44,7 @@ function MoveToPos(X,Y)
 	targetX = X
 	targetY = Y
 	
+	// Tackle
 	if (instance_exists(obj_UltManBall.owner))
 	{
 		if (obj_UltManBall.owner.playerTeam = false)
@@ -49,6 +55,16 @@ function MoveToPos(X,Y)
 				obj_UltManBall.owner = id
 			}
 		}
+		else
+		{
+			audio_play_sound(sou_UltManKickLight, 1, false)
+		}
+	}
+	
+	if (instance_nearest(x,y,obj_UltManOpponent) < 100)
+	{
+		targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
 	}
 	
 }
