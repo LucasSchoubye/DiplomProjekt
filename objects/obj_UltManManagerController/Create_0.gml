@@ -1,7 +1,7 @@
 /// @description Setup Menu and variables
 
 // Variables
-clubName = "Arseanal FC"
+clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 

@@ -19,14 +19,38 @@ if (room = rm_menu)
 		// dr
 		draw_set_halign(fa_middle)
 		draw_set_valign(fa_middle)
-	
+		var optionY = screenTop + optionBuffer * i + titleBuffer;
 		// draw a list of all options in list
 		draw_text(screenMidX,screenTop + optionBuffer*i + titleBuffer,ds_list_find_value(options, i))
 	
 		// If selected, draw pointer
 		if (selectedOption = i)
 		{
-			draw_circle(screenMidX - selectionBuffer,screenTop + optionBuffer*i + titleBuffer,5,true)
+			draw_circle(screenMidX - selectionBuffer,optionY,5,true)
+		}
+		
+		// Check if the mouse is hovering over hte option
+		if (mouse_x >= screenMidX - 500 & mouse_x <= screenMidX + 50 
+		&& mouse_y >= optionY - 10 && mouse_y <= optionY + 10){
+			selectedOption = i;
+			
+			// If mouse clicked, choose option
+			if (mouse_check_button_pressed(mb_left))
+			{
+				switch(ds_list_find_value(options, selectedOption))
+				{
+					case "Mini Games":
+						room_goto(rm_minigameMenu)
+					break 
+					case "Store":
+						room_goto(rm_store)
+					break
+					case "Quit":
+						game_end()
+					break
+				}
+			}
+		
 		}
 	}
 
