@@ -12,6 +12,8 @@ targetSpd = 400
 targetShootSpd = 400
 lastMoveDir = 0
 lastMoveLen = 0
+accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.5
+accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.5
 
 // Team variables
 playerTeam = true
@@ -19,8 +21,13 @@ formationPosX = x
 formationPosY = y
 
 //stats
-topSpd = 400
+topSpd = 300
 topShootSpd = 2000
+
+// Game stats
+strength = 200
+defence = 200
+dribbling = 200
 
 
 // Methods
@@ -36,9 +43,10 @@ function MoveToPos(X,Y)
 	lastMoveLen = point_distance(x, y, X, Y)
 	
 	// Set new target dist
-	targetX = X
-	targetY = Y
+	targetX = X + accX
+	targetY = Y + accY
 	
+	// Tackle
 	if (instance_exists(obj_UltManBall.owner))
 	{
 		if (obj_UltManBall.owner.playerTeam = false)
@@ -49,6 +57,16 @@ function MoveToPos(X,Y)
 				obj_UltManBall.owner = id
 			}
 		}
+		else
+		{
+			audio_play_sound(sou_UltManKickLight, 1, false)
+		}
+	}
+	
+	if (instance_nearest(x,y,obj_UltManOpponent) < 100)
+	{
+		targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
 	}
 	
 }

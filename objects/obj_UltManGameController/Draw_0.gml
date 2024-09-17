@@ -2,6 +2,7 @@
 // 
 
 scr_UltManDrawLine()
+scr_UltManDrawField()
 
 // Player control
 controlledPlayer = scr_assignClosestControlledPlayer()
