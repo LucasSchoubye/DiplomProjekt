@@ -16,6 +16,7 @@
     {"name":"Stolen","order":2,"path":"folders/Assets/Shared Assets/Sprites/Placeholders/Stolen.yy",},
     {"name":"Structs","order":4,"path":"folders/Assets/Shared Assets/Structs.yy",},
     {"name":"Store","order":1,"path":"folders/Assets/Store.yy",},
+    {"name":"Sounds","order":6,"path":"folders/Assets/Store/Sounds.yy",},
     {"name":"Objects","order":1,"path":"folders/Assets/Store/Objects.yy",},
     {"name":"Controllers","order":1,"path":"folders/Assets/Store/Objects/Controllers.yy",},
     {"name":"Rooms","order":3,"path":"folders/Assets/Store/Rooms.yy",},

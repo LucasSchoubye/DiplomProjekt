@@ -53,6 +53,33 @@ function RespondStoreItems(storeList) {
 	}
 }
 
+function RequestStudentInventory() {
+		FirebaseFirestore("/students/"+playerId+"/inventory/").Read()
+}
+
+function RespondStudentInventory(inventoryList) {
+	var inventoryMap = json_decode(inventoryList)
+	var idArray = []
+	ds_map_keys_to_array(inventoryMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(inventoryMap[? ID]);
+	
+		obj_storeController.GetInventoryData(value)
+	}	
+}
+
+function UpdateStudentInventory() {
+	var bankMap = ds_map_create()
+	bankMap[?"balance"] = obj_storeController.balance
+	var json = json_encode(bankMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
+}
+
+
 function StartSession(game)
 {		
 	sessionMap = ds_map_create()
@@ -173,6 +200,7 @@ function RepondStudent(map)
 	RequestAllowedGames()
 	
 }
+
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {

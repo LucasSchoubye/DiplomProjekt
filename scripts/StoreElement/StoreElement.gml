@@ -3,6 +3,7 @@
 
 function StoreElement() constructor {
 	itemName = ""
+	balance = ""
 	price = undefined
 	itemSprite = spr_theOneAndOnly
 	itemWidth = room_width*0.15
@@ -21,6 +22,9 @@ function StoreElement() constructor {
 	categoryImgStartX = categoryWidth-30
 	mouseWithinAnswerBox = false
 	
+	function DrawBalance(xValue,yValue) {
+		draw_text(xValue,yValue,balance)
+	}
 	
 	function DrawItem(xValue,yValue) {
 		if(yValue >= 100) {
@@ -31,12 +35,11 @@ function StoreElement() constructor {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		if(yValue+itemPriceY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,price)
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,price+"$")
 		}
 		if(yValue+itemTitleY-textHeight >= 100) {
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
-		
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
@@ -48,6 +51,7 @@ function StoreElement() constructor {
 				else if(yValue+itemHeight >= 100) {
 					draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,false)
 				}
+				obj_storeController.selectedPrice = price
 				draw_set_alpha(1)
 			}
 		}
@@ -69,3 +73,5 @@ function StoreElement() constructor {
 		}
 	}
 }
+
+

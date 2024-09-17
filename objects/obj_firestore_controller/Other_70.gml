@@ -31,6 +31,10 @@ if (async_load[? "status"] == 200)
 			{
 				RespondStoreItems(async_load[? "value"])	
 			}
+			else if (string_pos("inventory",async_load[? "path"]) > 0)
+			{
+				RespondStudentInventory(async_load[? "value"])	
+			}
 			else
 			{
 				show_message("Path was "+string(async_load[? "path"]))	
