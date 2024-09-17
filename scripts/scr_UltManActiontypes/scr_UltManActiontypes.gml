@@ -11,7 +11,8 @@ function scr_UltManActiontypes(){
 				draw_set_color(c_maroon)
 				playAllowed = false
 			}	
-			draw_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY)
+			//draw_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY)
+			draw_line(controlledPlayer.x, controlledPlayer.y, targetX + controlledPlayer.accX, targetY   + controlledPlayer.accY)
 			draw_set_color(c_white)
 		break;
 		case ActionType.Shoot:

@@ -12,6 +12,8 @@ targetSpd = 400
 targetShootSpd = 400
 lastMoveDir = 0
 lastMoveLen = 0
+accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.5
+accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.5
 
 // Team variables
 playerTeam = true
@@ -19,7 +21,7 @@ formationPosX = x
 formationPosY = y
 
 //stats
-topSpd = 400
+topSpd = 300
 topShootSpd = 2000
 
 // Game stats
@@ -41,8 +43,8 @@ function MoveToPos(X,Y)
 	lastMoveLen = point_distance(x, y, X, Y)
 	
 	// Set new target dist
-	targetX = X
-	targetY = Y
+	targetX = X + accX
+	targetY = Y + accY
 	
 	// Tackle
 	if (instance_exists(obj_UltManBall.owner))

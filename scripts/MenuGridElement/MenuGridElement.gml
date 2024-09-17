@@ -64,7 +64,7 @@ function MenuGridElement() constructor {
 					room_goto(rm_typeracer)
 				break
 				case "Ultimate Manager":
-					room_goto(rm_UltManMatch)
+					room_goto(rm_UltManOverview)
 				break
 			}
 			}

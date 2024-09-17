@@ -21,3 +21,11 @@ depth = -y
 animCycle++
 draw_sprite_ext(sprite_index, 0, x, y + sin(animCycle/5)*10, image_xscale, 1, image_angle + sin(animCycle/10)*3, image_blend, 1)
 image_angle = image_angle/1.08
+
+// Draw acceleration
+accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.4
+accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
+if (obj_UltManBall.owner = id)
+{
+	draw_circle(x + accX,y + accY,topSpd,true)
+}
