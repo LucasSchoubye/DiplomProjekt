@@ -20,7 +20,6 @@ function StoreElement() constructor {
 	categoryTextStartX =  room_width*0.01
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
-	mouseWithinAnswerBox = false
 	
 	function DrawBalance(xValue,yValue) {
 		draw_text(xValue,yValue,balance)
@@ -43,7 +42,6 @@ function StoreElement() constructor {
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
-				mouseWithinAnswerBox = true
 				draw_set_alpha(0.3)
 				if(yValue >= 100) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
@@ -65,7 +63,6 @@ function StoreElement() constructor {
 		draw_set_halign(fa_center)
 		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
-				mouseWithinAnswerBox = true
 				draw_set_alpha(0.3)
 				draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
 				draw_set_alpha(1)
