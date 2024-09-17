@@ -12,6 +12,7 @@ username = undefined
 password = undefined
 schoolId = undefined
 classId = undefined
+itemID = undefined
 
 // Functions
 function RequestAllowedGames()
@@ -33,6 +34,51 @@ function RespondAllowedGames(gamesList)
 		obj_menuGridController.GetGameData(value)
 	}
 }
+
+function RequestStoreItems() {
+		FirebaseFirestore("/shop items/").Read()
+}
+
+function RespondStoreItems(storeList) {
+	var storeMap = json_decode(storeList)
+	var idArray = []
+	ds_map_keys_to_array(storeMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(storeMap[? ID]);
+		obj_storeController.GetStoreData(value)
+	}
+}
+
+function RequestStudentInventory() {
+		FirebaseFirestore("/students/"+playerId+"/inventory/").Read()
+}
+
+function RespondStudentInventory(inventoryList) {
+	var inventoryMap = json_decode(inventoryList)
+	var idArray = []
+	ds_map_keys_to_array(inventoryMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(inventoryMap[? ID]);
+	
+		obj_storeController.GetInventoryData(value)
+	}	
+}
+
+function UpdateStudentInventory() {
+	var bankMap = ds_map_create()
+	bankMap[?"balance"] = obj_storeController.balance
+	var json = json_encode(bankMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
+}
+
 
 function StartSession(game)
 {		
@@ -154,6 +200,7 @@ function RepondStudent(map)
 	RequestAllowedGames()
 	
 }
+
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {

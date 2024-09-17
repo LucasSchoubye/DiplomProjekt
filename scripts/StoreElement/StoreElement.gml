@@ -2,8 +2,9 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 function StoreElement() constructor {
-	name = ""
-	price = 0
+	itemName = ""
+	balance = ""
+	price = undefined
 	itemSprite = spr_theOneAndOnly
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
@@ -19,8 +20,10 @@ function StoreElement() constructor {
 	categoryTextStartX =  room_width*0.01
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
-	mouseWithinAnswerBox = false
 	
+	function DrawBalance(xValue,yValue) {
+		draw_text(xValue,yValue,balance)
+	}
 	
 	function DrawItem(xValue,yValue) {
 		if(yValue >= 100) {
@@ -31,16 +34,14 @@ function StoreElement() constructor {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		if(yValue+itemPriceY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,"5000$")
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,price+"$")
 		}
 		if(yValue+itemTitleY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemTitleY,"YOYOYO TITLE BRO")
+			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
-		
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
-				mouseWithinAnswerBox = true
 				draw_set_alpha(0.3)
 				if(yValue >= 100) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
@@ -48,6 +49,7 @@ function StoreElement() constructor {
 				else if(yValue+itemHeight >= 100) {
 					draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,false)
 				}
+				obj_storeController.selectedPrice = price
 				draw_set_alpha(1)
 			}
 		}
@@ -61,7 +63,6 @@ function StoreElement() constructor {
 		draw_set_halign(fa_center)
 		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
-				mouseWithinAnswerBox = true
 				draw_set_alpha(0.3)
 				draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
 				draw_set_alpha(1)
@@ -69,3 +70,5 @@ function StoreElement() constructor {
 		}
 	}
 }
+
+
