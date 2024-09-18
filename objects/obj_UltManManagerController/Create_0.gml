@@ -10,7 +10,7 @@ enum ultManMenus{
 
 
 // Variables
-clubName = "FC Schoubye forbliver i Næstved hele sit liv"
+clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
