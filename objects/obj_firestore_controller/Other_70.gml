@@ -6,9 +6,17 @@ if (async_load[? "status"] == 200)
 	switch(async_load[? "type"])
 	{
 		case "FirebaseFirestore_Document_Read":	
-			if (string_pos("students",async_load[? "path"]) > 0)
+			if (string_pos("students",async_load[? "path"]) > 0 && 
+			string_count("bank",async_load[? "path"]) = 0)
 			{
 				RepondStudent(async_load[? "value"])
+			}
+			else if (string_pos("bank",async_load[? "path"]) > 0)
+			{
+				RespondBalance(async_load[? "value"])	
+			}
+			else{
+				show_message(async_load[? "value"])
 			}
 		break;
 		
@@ -31,7 +39,8 @@ if (async_load[? "status"] == 200)
 			{
 				RespondStoreItems(async_load[? "value"])	
 			}
-			else if (string_pos("inventory",async_load[? "path"]) > 0)
+			else if (string_pos("inventory",async_load[? "path"]) > 0 && 
+			string_count("bank",async_load[? "path"]) = 0)
 			{
 				RespondStudentInventory(async_load[? "value"])	
 			}

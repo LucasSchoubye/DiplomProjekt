@@ -8,7 +8,7 @@ balance = undefined
 selectedPrice = 0
 
 obj_firestore_controller.RequestStoreItems()
-obj_firestore_controller.RequestStudentInventory()
+obj_firestore_controller.RequestBalance()
 
 
 
@@ -17,20 +17,19 @@ for (var i = 0; i < 5; ++i) {
 }
 
 
-function GetStoreData(storeData) {
+function GetStoreData(storeData,itemID) {
 	var currentElement = new StoreElement()
 	currentElement.itemName = storeData[?"name"]
 	currentElement.price = storeData[?"price"]
-	
-	
+	currentElement.itemID = itemID
 	ds_list_add(storeElements, currentElement)
 }
 
-function GetInventoryData(inventoryData) {
-	var currentInventory = new StoreElement()
-	currentInventory.balance = inventoryData[?"balance"]
+function GetBalanceData(balanceData) {
+	var currentBalance = new StoreElement()
+	currentBalance.balance = balanceData[?"balance"]
 	
-	balance = currentInventory.balance
+	balance = currentBalance.balance
 }
 
 

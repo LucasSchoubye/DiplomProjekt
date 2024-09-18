@@ -6,6 +6,8 @@ playerId = undefined
 sessionId = undefined
 sessionMap = undefined
 answerTimer = 0
+categories = undefined
+inventoryID = undefined
 
 // Login 
 username = undefined
@@ -49,8 +51,19 @@ function RespondStoreItems(storeList) {
 		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(storeMap[? ID]);
-		obj_storeController.GetStoreData(value)
+		obj_storeController.GetStoreData(value,ID)
 	}
+}
+
+function RequestBalance() {
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Read()
+}
+
+function RespondBalance(bankJSON) {
+	var balanceMap = json_decode(bankJSON)
+	
+	obj_storeController.GetBalanceData(balanceMap)
+	obj_inventoryController.GetBalanceData(balanceMap)
 }
 
 function RequestStudentInventory() {
@@ -68,15 +81,22 @@ function RespondStudentInventory(inventoryList) {
 	    var ID = idArray[i];
 	    var value = json_decode(inventoryMap[? ID]);
 	
-		obj_storeController.GetInventoryData(value)
+		obj_inventoryController.GetInventoryData(value)
 	}	
+}
+
+function UpdateBalance() {
+	var bankMap = ds_map_create()
+	bankMap[?"balance"] = obj_storeController.balance
+	var json = json_encode(bankMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
 }
 
 function UpdateStudentInventory() {
 	var bankMap = ds_map_create()
 	bankMap[?"balance"] = obj_storeController.balance
 	var json = json_encode(bankMap)
-	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
+	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
 }
 
 
