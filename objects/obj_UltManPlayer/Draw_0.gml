@@ -10,6 +10,9 @@ x -= (x-targetX)/10
 y -= (y-targetY)/10
 image_xscale -= (image_xscale-facing)/3
 
+// Role coordinates
+scr_UltManSetPositionCoordinates(position,playerTeam)
+
 // Calculation
 targetSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/2
 if (targetSpd > topSpd){targetSpd = topSpd}
@@ -25,7 +28,3 @@ image_angle = image_angle/1.08
 // Draw acceleration
 accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.4
 accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
-if (obj_UltManBall.owner = id)
-{
-	draw_circle(x + accX,y + accY,topSpd,true)
-}

@@ -52,6 +52,17 @@ function scr_UltManActiontypes(){
 		{
 			PerformAction(targetX, targetY)
 		}
+		
+		// Team perform their move
+		with(obj_UltManPlayer)
+		{
+			if (obj_UltManGameController.commandedPlayer != id &&
+				obj_UltManGameController.controlledPlayer != id &&
+				playerTeam = true)
+			{
+				PerformAction(targetX, targetY)
+			}
+		}
 	
 		// Perform command move
 		if (instance_exists(obj_UltManGameController.commandedPlayer))

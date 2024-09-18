@@ -42,7 +42,7 @@ function PerformAction(X,Y)
 			var PosX = x + lengthdir_x(spd,point_direction(x,y,player.x,player.y))
 			var PosY = y + lengthdir_y(spd,point_direction(x,y,player.x,player.y))
 			
-			// Superior tackle
+			// Superior tackle tracking
 			if (instance_exists(obj_UltManBall.owner))
 			{
 				if (defence > obj_UltManBall.owner.dribbling &&
@@ -56,20 +56,23 @@ function PerformAction(X,Y)
 				}
 			}
 			
-			MoveToPos(PosX,PosY)
-			
-			if (point_distance(x,y,obj_UltManBall.x, obj_UltManBall.y) < tackleDist or 
-				point_distance(x,y,player.x, player.y) < tackleDist/3)
+			// Tackle
+			if ((point_distance(x,y,obj_UltManBall.x, obj_UltManBall.y) < tackleDist or 
+				point_distance(x,y,player.x, player.y) < tackleDist/3) && tackleCooldown = false)
 			{
 				var angle = random_range(0,360)
 				player.targetX += lengthdir_x(-strength,angle)
 				player.targetY += lengthdir_y(-strength,angle)
 				player.image_angle -= 30*player.facing
+				player.tackleCooldown = true
 				obj_UltManBall.owner = id
 				state = UltManNpcState.HoldPosition
 				obj_UltManBall.readyForPickup = false
 				obj_UltManBall.alarm[0] = 30
+				tackleCooldown = true
 			}
+			
+			MoveToPos(PosX,PosY)
 		break
 	}
 }
