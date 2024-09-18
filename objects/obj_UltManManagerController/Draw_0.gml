@@ -4,7 +4,7 @@
 var menuX = room_width * 0.0225
 var menuY = room_height * 0.15
 var menuClubNameX = room_width * 0.0225
-var menuClubNameY = room_height * 0.075
+var menuClubNameY = room_height * 0.0225
 var menuTitlePaddingY = 40
 var menuPaddingY = 50
 var menuDividerPadding = (menuPaddingY - string_height("I")) / 2
@@ -13,16 +13,23 @@ var menuDividerRight = room_width * 0.1875
 var menuWidthMax = 50
 var clickAbleMenuPaddingY = 50
 
+// Button position and size
+var buttonX = room_width * 0.85
+var buttonY = room_height * 0.035
+var buttonWidth = room_width * 0.9925
+var buttonHeight = room_height * 0.0965
+var buttonText = "Play Match"
+var titleHeight = (string_height(clubName) / 2)
 
 draw_set_font(fn_titleLato);
 
-
-// Draw title
-draw_set_valign(fa_bottom)
+// Draw clubname
+draw_set_valign(fa_top)
 draw_set_halign(fa_left)
 draw_text(menuClubNameX, menuClubNameY, clubName)
 
 draw_set_font(fn_sideBarOptionsRoboto);
+draw_set_valign(fa_bottom)
 
 // Draw menu elements
 for (var i = 0; i < ds_list_size(menuOptions); ++i) {
@@ -60,15 +67,14 @@ for (var i = 0; i < ds_list_size(menuOptions); ++i) {
 }
 
 
-if (mouse_check_button_pressed(mb_left) && selectedMenuOption != undefined)
+// Sets button colour and draws button
+draw_set_color(#3B95FF)
+if (scr_drawButton(buttonX, buttonY - titleHeight,buttonWidth, buttonHeight - titleHeight, buttonText ))
 {
-	switch(ds_list_find_value(menuOptions, selectedMenuOption))
-	{
-		case "Play Match":
-			room_goto(rm_UltManMatch)
-		break;
-	}	
+	room_goto(rm_UltManMatch)
 }
+
+draw_set_color(#ffffff)
 
 // draw submenu
 switch(currentMenu){

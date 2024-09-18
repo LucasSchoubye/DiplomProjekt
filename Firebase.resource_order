@@ -11,6 +11,7 @@
     {"name":"Equations","order":5,"path":"folders/Assets/Shared Assets/Scripts/Danish Math Questions/Equations.yy",},
     {"name":"Multiplication","order":4,"path":"folders/Assets/Shared Assets/Scripts/Danish Math Questions/Multiplication.yy",},
     {"name":"Order of Operations","order":6,"path":"folders/Assets/Shared Assets/Scripts/Danish Math Questions/Order of Operations.yy",},
+    {"name":"UI","order":7,"path":"folders/Assets/Shared Assets/Scripts/UI.yy",},
     {"name":"Sprites","order":3,"path":"folders/Assets/Shared Assets/Sprites.yy",},
     {"name":"Enviroment","order":2,"path":"folders/Assets/Shared Assets/Sprites/Enviroment.yy",},
     {"name":"MinigameIcons","order":3,"path":"folders/Assets/Shared Assets/Sprites/MinigameIcons.yy",},
@@ -35,6 +36,7 @@
     {"name":"Objects","order":3,"path":"folders/Assets/Ultimate Manager/Objects.yy",},
     {"name":"Controllers","order":5,"path":"folders/Assets/Ultimate Manager/Objects/Controllers.yy",},
     {"name":"Game Objects","order":6,"path":"folders/Assets/Ultimate Manager/Objects/Game Objects.yy",},
+    {"name":"Manager Objects","order":7,"path":"folders/Assets/Ultimate Manager/Objects/Manager Objects.yy",},
     {"name":"Rooms","order":1,"path":"folders/Assets/Ultimate Manager/Rooms.yy",},
     {"name":"Scripts","order":4,"path":"folders/Assets/Ultimate Manager/Scripts.yy",},
     {"name":"ultManMenus","order":5,"path":"folders/Assets/Ultimate Manager/Scripts/ultManMenus.yy",},
@@ -48,6 +50,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
+    {"name":"fn_buttonOpenSans","order":3,"path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},
     {"name":"fn_sideBarOptionsRoboto","order":2,"path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},
     {"name":"fn_titleLato","order":1,"path":"fonts/fn_titleLato/fn_titleLato.yy",},
     {"name":"obj_cam_controller","order":1,"path":"objects/obj_cam_controller/obj_cam_controller.yy",},
