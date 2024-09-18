@@ -66,6 +66,13 @@ function RespondBalance(bankJSON) {
 	obj_inventoryController.GetBalanceData(balanceMap)
 }
 
+function UpdateBalance() {
+	var balanceMap = ds_map_create()
+	balanceMap[?"balance"] = obj_storeController.balance
+	var json = json_encode(balanceMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
+}
+
 function RequestStudentInventory() {
 		FirebaseFirestore("/students/"+playerId+"/inventory/").Read()
 }
@@ -85,17 +92,10 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-function UpdateBalance() {
-	var bankMap = ds_map_create()
-	bankMap[?"balance"] = obj_storeController.balance
-	var json = json_encode(bankMap)
-	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
-}
-
 function UpdateStudentInventory() {
-	var bankMap = ds_map_create()
-	bankMap[?"balance"] = obj_storeController.balance
-	var json = json_encode(bankMap)
+	var inventoryMap = ds_map_create()
+	inventoryMap[?"shopItemRef"] = obj_inventoryController.inventoryElements
+	var json = json_encode(inventoryMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
 }
 

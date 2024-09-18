@@ -3,9 +3,7 @@
 verticalScroll = 0
 inventoryElements = ds_list_create()
 categoryElements = ds_list_create()
-
 balance = undefined
-
 
 obj_firestore_controller.RequestBalance()
 obj_firestore_controller.RequestStudentInventory()
@@ -31,7 +29,7 @@ function GetInventoryData(inventoryData) {
 	if (last_dash_pos != -1) {
 		// Extract the substring after the last dash
 		substring = string_copy(substring, last_dash_pos + 1, string_length(substring) - last_dash_pos);
-		}
+	}
 	
 	for (var i = 0; i < ds_list_size(obj_storeController.storeElements); ++i) {
 			var currentStoreElement = ds_list_find_value(obj_storeController.storeElements,i)

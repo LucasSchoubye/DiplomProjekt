@@ -6,6 +6,7 @@ categoryElements = ds_list_create()
 inventoryElements = ds_list_create()
 balance = undefined
 selectedPrice = 0
+isOwned = false
 
 obj_firestore_controller.RequestStoreItems()
 obj_firestore_controller.RequestBalance()
@@ -22,6 +23,7 @@ function GetStoreData(storeData,itemID) {
 	currentElement.itemName = storeData[?"name"]
 	currentElement.price = storeData[?"price"]
 	currentElement.itemID = itemID
+	currentElement.isOwned = false
 	ds_list_add(storeElements, currentElement)
 }
 

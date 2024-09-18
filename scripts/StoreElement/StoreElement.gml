@@ -6,6 +6,7 @@ function StoreElement() constructor {
 	balance = ""
 	price = undefined
 	itemID = ""
+	isOwned = false
 	itemSprite = spr_theOneAndOnly
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
@@ -32,7 +33,10 @@ function StoreElement() constructor {
 		else if(yValue+itemHeight >= 100) {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		if(yValue+itemPriceY-textHeight >= 100) {
+		if(yValue+itemPriceY-textHeight >= 100 && isOwned == true) {
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,"Owned")
+		}
+		else if(yValue+itemPriceY-textHeight >= 100) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,price+"$")
 		}
 		if(yValue+itemTitleY-textHeight >= 100) {
