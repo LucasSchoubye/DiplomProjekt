@@ -22,6 +22,7 @@ playerTeam = true
 formationStartY = y
 formationPosX = x
 formationPosY = y
+kickoffPos = [x,y]
 
 //stats
 topSpd = 300
@@ -55,7 +56,8 @@ function MoveToPos(X,Y)
 		if (obj_UltManBall.owner.playerTeam = false)
 		{
 			var opponent = obj_UltManBall.owner
-			if (point_distance(targetX,targetY,obj_UltManBall.x,obj_UltManBall.y) < 250)
+			if (point_distance(targetX,targetY,obj_UltManBall.x,obj_UltManBall.y) < 250 or
+				point_distance(x,y,obj_UltManBall.x,obj_UltManBall.y) < 100)
 			{
 				var dir = point_distance(opponent.x, opponent.y, obj_UltManBall.x, obj_UltManBall.y)
 				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir)

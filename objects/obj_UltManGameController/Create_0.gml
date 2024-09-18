@@ -18,9 +18,12 @@ selectedAction = ActionType.Run
 commandTargetX = undefined
 commandTargetY = undefined
 
-// Goals
-instance_create_depth(300, room_height/2, -100, obj_UltManGoal)
-instance_create_depth(room_width-300, room_height/2, -100, obj_UltManGoal)
+// Goals & timer
+goals[0] = instance_create_depth(300, room_height/2, -100, obj_UltManGoal) // Left
+goals[1] = instance_create_depth(room_width-300, room_height/2, -100, obj_UltManGoal) // Right
+scoreline[0] = 0
+scoreline[1] = 0
+timer = 0
 
 // Create teams
 scr_UltManCreateTeam()

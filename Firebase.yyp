@@ -210,6 +210,8 @@
     {"id":{"name":"scr_UltManCreateTeam","path":"scripts/scr_UltManCreateTeam/scr_UltManCreateTeam.yy",},},
     {"id":{"name":"scr_UltManDrawField","path":"scripts/scr_UltManDrawField/scr_UltManDrawField.yy",},},
     {"id":{"name":"scr_UltManDrawLine","path":"scripts/scr_UltManDrawLine/scr_UltManDrawLine.yy",},},
+    {"id":{"name":"scr_UltManDrawScoreline","path":"scripts/scr_UltManDrawScoreline/scr_UltManDrawScoreline.yy",},},
+    {"id":{"name":"scr_UltManKickoffSetup","path":"scripts/scr_UltManKickoffSetup/scr_UltManKickoffSetup.yy",},},
     {"id":{"name":"scr_UltManSetPositionCoordinates","path":"scripts/scr_UltManSetPositionCoordinates/scr_UltManSetPositionCoordinates.yy",},},
     {"id":{"name":"StoreElement","path":"scripts/StoreElement/StoreElement.yy",},},
     {"id":{"name":"sou_breakCar","path":"sounds/sou_breakCar/sou_breakCar.yy",},},

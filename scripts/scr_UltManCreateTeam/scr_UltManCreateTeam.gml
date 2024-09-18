@@ -17,29 +17,29 @@ enum TeamFormations
 			player.position = FootballPositions.GK
 			
 			// Defehders
-			var player = instance_create_depth(room_width*0.3,room_height*0.4,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.2,room_height*0.4,0,obj_UltManPlayer)
 			player.position = FootballPositions.CB
-			var player = instance_create_depth(room_width*0.3,room_height*0.6,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.2,room_height*0.6,0,obj_UltManPlayer)
 			player.position = FootballPositions.CB
-			var player = instance_create_depth(room_width*0.3,room_height*0.2,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.2,room_height*0.2,0,obj_UltManPlayer)
 			player.position = FootballPositions.LB
-			var player = instance_create_depth(room_width*0.3,room_height*0.8,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.2,room_height*0.8,0,obj_UltManPlayer)
 			player.position = FootballPositions.RB
 			
 			// Midfielders
-			var player = instance_create_depth(room_width*0.5,room_height*0.4,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.3,room_height*0.4,0,obj_UltManPlayer)
 			player.position = FootballPositions.CM
-			var player = instance_create_depth(room_width*0.5,room_height*0.6,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.3,room_height*0.6,0,obj_UltManPlayer)
 			player.position = FootballPositions.CM
-			var player = instance_create_depth(room_width*0.5,room_height*0.2,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.3,room_height*0.2,0,obj_UltManPlayer)
 			player.position = FootballPositions.LM
-			var player = instance_create_depth(room_width*0.5,room_height*0.8,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.3,room_height*0.8,0,obj_UltManPlayer)
 			player.position = FootballPositions.RM
 			
 			// Strikers
-			var player = instance_create_depth(room_width*0.6,room_height*0.4,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.4,room_height*0.4,0,obj_UltManPlayer)
 			player.position = FootballPositions.ST
-			var player = instance_create_depth(room_width*0.6,room_height*0.6,0,obj_UltManPlayer)
+			var player = instance_create_depth(room_width*0.4,room_height*0.6,0,obj_UltManPlayer)
 			player.position = FootballPositions.ST
 		break;
 	}

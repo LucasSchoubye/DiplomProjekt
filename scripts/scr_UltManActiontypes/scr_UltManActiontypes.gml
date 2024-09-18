@@ -35,6 +35,8 @@ function scr_UltManActiontypes(){
 
 	if (mouse_check_button_pressed(mb_left) && playAllowed)
 	{
+		// Increase timer
+		obj_UltManGameController.timer += 0.33
 	
 		// Player Performs their move
 		switch(selectedAction)
