@@ -22,3 +22,5 @@ ds_list_add(menuOptions, "Tactics")
 ds_list_add(menuOptions, "Players")
 ds_list_add(menuOptions, "Fixtures")
 ds_list_add(menuOptions, "Transfermarket")
+
+// Logos

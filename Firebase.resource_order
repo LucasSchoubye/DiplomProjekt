@@ -48,6 +48,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
+    {"name":"fn_sideBarOptionsRoboto","order":2,"path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},
     {"name":"fn_titleLato","order":1,"path":"fonts/fn_titleLato/fn_titleLato.yy",},
     {"name":"obj_cam_controller","order":1,"path":"objects/obj_cam_controller/obj_cam_controller.yy",},
     {"name":"obj_loginController","order":4,"path":"objects/obj_loginController/obj_loginController.yy",},

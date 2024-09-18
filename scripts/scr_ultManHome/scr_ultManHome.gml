@@ -7,28 +7,24 @@ function scr_ultManHome(){
 	var matchBoxLeft = room_width * 0.2;
 	var matchBoxRight = room_width * 0.7;
 	
-	var logoHomeBoxTop = room_height * 0.17;
-	var logoHomeBoxBottom = room_height * 0.332;
+	var logoHomeBoxTop = room_height * 0.175;
 	var logoHomeBoxLeft = room_width * 0.275;
-	var logoHomeBoxRight = room_width * 0.312;
 	
-	var logoAwayBoxTop = room_height * 0.17;
-	var logoAwayBoxBottom = room_height * 0.332;
+	var logoAwayBoxTop = room_height * 0.175;
 	var logoAwayBoxLeft = room_width * 0.625;
-	var logoAwayBoxRight = room_width * 0.312;
 	
-	var matchDetailsBoxTop = room_height * 0.17;
-	var matchDetailsBoxBottom = room_height * 0.37;
+	var matchDetailsBoxTop = room_height * 0.15;
+	var matchDetailsBoxBottom = room_height * 0.35;
 	var matchDetailsBoxLeft = room_width * 0.35;
 	var matchDetailsBoxRight = room_width * 0.55;
 	
-	var teamStatsBoxTop = room_height * 0.37;
-	var teamStatsBoxBottom = room_height * 0.57;
+	var teamStatsBoxTop = room_height * 0.4;
+	var teamStatsBoxBottom = room_height * 0.8;
 	var teamStatsBoxLeft = room_width * 0.2;
 	var teamStatsBoxRight = room_width * 0.45;
 	
-	var playerStatsBoxTop = room_height * 0.37;
-	var playerStatsBoxBottom = room_height * 0.57;
+	var playerStatsBoxTop = room_height * 0.4;
+	var playerStatsBoxBottom = room_height * 0.8;
 	var playerStatsBoxLeft = room_width * 0.45;
 	var playerStatsBoxRight = room_width * 0.7;
 	

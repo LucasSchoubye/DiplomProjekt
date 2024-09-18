@@ -94,6 +94,7 @@
   "resources":[
     {"id":{"name":"FirebaseSetup","path":"extensions/FirebaseSetup/FirebaseSetup.yy",},},
     {"id":{"name":"YYFirebaseFirestore","path":"extensions/YYFirebaseFirestore/YYFirebaseFirestore.yy",},},
+    {"id":{"name":"fn_sideBarOptionsRoboto","path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},},
     {"id":{"name":"fn_textLato","path":"fonts/fn_textLato/fn_textLato.yy",},},
     {"id":{"name":"fn_titleLato","path":"fonts/fn_titleLato/fn_titleLato.yy",},},
     {"id":{"name":"Font_YoYo_15","path":"fonts/Font_YoYo_15/Font_YoYo_15.yy",},},
