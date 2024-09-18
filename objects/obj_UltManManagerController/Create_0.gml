@@ -9,6 +9,24 @@ enum ultManMenus{
 
 
 
+enum FootballPositions 
+{
+	GK,
+	CB,
+	LB,
+	RB,
+	LWB,
+	RWB,
+	CM,
+	CDM,
+	CAM,
+	LM,
+	RM,
+	LW,
+	RW,
+	ST
+}
+
 // Variables
 clubName = "Arsenal FC"
 menuOptions = ds_list_create()

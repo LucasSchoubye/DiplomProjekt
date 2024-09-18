@@ -25,3 +25,5 @@ else if (readyForPickup = true)
 
 x -= (x - targetX)/6
 y -= (y - targetY)/5
+
+// Score goals

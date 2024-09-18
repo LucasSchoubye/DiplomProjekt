@@ -39,4 +39,28 @@ if (instance_exists(commandedPlayer) && mouse_check_button(mb_right))
 	commandTargetY = commandedPlayer.y + lengthdir_y(commandedPlayer.targetSpd, point_direction(commandedPlayer.x,commandedPlayer.y,mouse_x,mouse_y))
 }
 
+// Check goal 
+for (var i = 0; i < 2; ++i) {
+	if (goals[i].CheckBallHasScored())
+	{
+		if (i = 0)
+		{
+			scoreline[1]++
+		}
+		else
+		{
+			scoreline[0]++
+		}
+		
+		show_message("GOOOOAAAAALLLLLL")
+		scr_UltManKickoffSetup()
+	}
+}
+
+// End Match
+if (timer > 90)
+{
+	room_goto(rm_UltManOverview)
+}
+
 scr_UltManActiontypes()

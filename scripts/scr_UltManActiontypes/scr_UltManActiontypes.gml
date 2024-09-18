@@ -35,6 +35,8 @@ function scr_UltManActiontypes(){
 
 	if (mouse_check_button_pressed(mb_left) && playAllowed)
 	{
+		// Increase timer
+		obj_UltManGameController.timer += 0.33
 	
 		// Player Performs their move
 		switch(selectedAction)
@@ -51,6 +53,17 @@ function scr_UltManActiontypes(){
 		with(obj_UltManOpponent)
 		{
 			PerformAction(targetX, targetY)
+		}
+		
+		// Team perform their move
+		with(obj_UltManPlayer)
+		{
+			if (obj_UltManGameController.commandedPlayer != id &&
+				obj_UltManGameController.controlledPlayer != id &&
+				playerTeam = true)
+			{
+				PerformAction(targetX, targetY)
+			}
 		}
 	
 		// Perform command move
