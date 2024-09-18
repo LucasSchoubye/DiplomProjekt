@@ -1,4 +1,13 @@
 /// @description Setup Menu and variables
+enum ultManMenus{
+	Home,
+	Tactics,
+	Players,
+	Fixtures,
+	Transfermarket
+}
+
+
 
 enum FootballPositions 
 {
@@ -19,9 +28,10 @@ enum FootballPositions
 }
 
 // Variables
-clubName = "Arseanal FC"
+clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
+currentMenu = ultManMenus.Home
 
 // Populate menu options
 ds_list_add(menuOptions, "Play Match")

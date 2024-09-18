@@ -1,4 +1,6 @@
-/// Set variables
+/// Set variablesbalance = obj_storeController.inventoryElements
+
+prize = 1000
 
 // Logical pos
 pos = 0
@@ -15,7 +17,10 @@ alarm[0] = 1
 
 function win()
 {
+	obj_storeController.balance = real(obj_storeController.balance)+prize
+	obj_firestore_controller.UpdateStudentInventory()
 	show_message("YOU WON")
+	show_message("You won a "+string(prize)+"$ prize!!!")
 	room_goto(rm_menu)
 }
 
