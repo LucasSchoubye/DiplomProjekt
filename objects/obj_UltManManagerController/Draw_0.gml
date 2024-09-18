@@ -34,7 +34,11 @@ draw_set_valign(fa_bottom)
 // Draw menu elements
 for (var i = 0; i < ds_list_size(menuOptions); ++i) {
     
+	if(i = currentMenu){
+		draw_set_color(#5666F9)
+	}
 	draw_text(menuX, menuY + i*menuPaddingY, ds_list_find_value(menuOptions, i))
+	draw_set_color(c_white)
 	var stringWidth = string_width(ds_list_find_value(menuOptions, i))
 	if (menuWidthMax < stringWidth){menuWidthMax = stringWidth}
 	
@@ -54,11 +58,15 @@ for (var i = 0; i < ds_list_size(menuOptions); ++i) {
 		if (i == selectedMenuOption)
 		{
 			draw_line(menuX, menuY + i*menuPaddingY, menuX + stringWidth, menuY + i*menuPaddingY)
+			if (mouse_check_button_pressed(mb_left)){
+				currentMenu = i;
+			}
 		}
 		if (mouse_y > menuY + (i-1)*menuPaddingY && mouse_y < menuY + (i)*menuPaddingY)
 		{
 			selectedMenuOption = i
 		}
+
 	}
 	else
 	{

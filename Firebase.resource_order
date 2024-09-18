@@ -51,7 +51,9 @@
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"fn_buttonOpenSans","order":3,"path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},
+    {"name":"fn_RobotoBlack14","order":8,"path":"fonts/fn_RobotoBlack14/fn_RobotoBlack14.yy",},
     {"name":"fn_RobotoBlack16","order":6,"path":"fonts/fn_RobotoBlack16/fn_RobotoBlack16.yy",},
+    {"name":"fn_RobotoBlack8","order":7,"path":"fonts/fn_RobotoBlack8/fn_RobotoBlack8.yy",},
     {"name":"fn_RobotoMedium14","order":5,"path":"fonts/fn_RobotoMedium14/fn_RobotoMedium14.yy",},
     {"name":"fn_RobotoRegular12","order":4,"path":"fonts/fn_RobotoRegular12/fn_RobotoRegular12.yy",},
     {"name":"fn_sideBarOptionsRoboto","order":2,"path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},
