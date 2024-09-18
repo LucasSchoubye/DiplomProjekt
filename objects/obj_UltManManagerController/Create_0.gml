@@ -34,7 +34,7 @@ selectedMenuOption = 0
 currentMenu = ultManMenus.Home
 
 // Populate menu options
-ds_list_add(menuOptions, "Play Match")
+
 ds_list_add(menuOptions, "Home")
 ds_list_add(menuOptions, "Tactics")
 ds_list_add(menuOptions, "Players")
