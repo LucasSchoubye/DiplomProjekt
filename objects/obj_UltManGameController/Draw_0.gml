@@ -52,7 +52,6 @@ for (var i = 0; i < 2; ++i) {
 			scoreline[0]++
 		}
 		
-		show_message("GOOOOAAAAALLLLLL")
 		scr_UltManKickoffSetup()
 	}
 }
