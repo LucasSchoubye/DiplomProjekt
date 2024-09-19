@@ -115,7 +115,7 @@ function MoveIntoPosition()
 	{
 		targetX = formationPosX
 		targetY = formationPosY
-	}
+	}	
 }
 
 function PerformAction(X,Y)
