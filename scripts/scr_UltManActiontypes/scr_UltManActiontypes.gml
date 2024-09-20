@@ -20,8 +20,12 @@ function scr_UltManActiontypes(){
 			targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
 			if (instance_exists(ballcarrier))
 			{
-				if (ballcarrier.id != controlledPlayer.id)
-					playAllowed = false
+				if (ballcarrier.id != controlledPlayer.id or 
+					collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true))
+					{
+						playAllowed = false
+						draw_line_color(obj_UltManBall.x, obj_UltManBall.y, targetX, targetY, c_maroon, c_maroon)
+					}
 			}
 			else
 			{
@@ -49,12 +53,6 @@ function scr_UltManActiontypes(){
 			break;
 		}
 		
-		// All opponents perform their move
-		with(obj_UltManOpponent)
-		{
-			PerformAction(targetX, targetY)
-		}
-		
 		// Team perform their move
 		with(obj_UltManPlayer)
 		{
@@ -73,6 +71,12 @@ function scr_UltManActiontypes(){
 			obj_UltManGameController.commandTargetX = undefined
 			obj_UltManGameController.commandTargetY = undefined
 			obj_UltManGameController.commandedPlayer = undefined
+		}
+		
+		// All opponents perform their move
+		with(obj_UltManOpponent)
+		{
+			PerformAction(targetX, targetY)
 		}
 
 	}
