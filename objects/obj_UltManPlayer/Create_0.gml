@@ -2,7 +2,7 @@
 state = UltManNpcState.HoldPosition
 
 // animation
-animCycle = 0
+animCycle = random_range(0,360)
 facing = 1
 targetX = x
 targetY = y

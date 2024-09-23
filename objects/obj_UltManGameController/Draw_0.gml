@@ -46,12 +46,12 @@ for (var i = 0; i < 2; ++i) {
 		if (i = 0)
 		{
 			scoreline[1]++
-			scr_UltManKickoffSetup(false)
+			scr_UltManKickoffSetup(true)
 		}
 		else
 		{
 			scoreline[0]++
-			scr_UltManKickoffSetup(true)
+			scr_UltManKickoffSetup(false)
 		}
 	}
 }

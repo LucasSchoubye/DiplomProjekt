@@ -115,6 +115,7 @@
     {"name":"spr_typeracerRoadLines","order":4,"path":"sprites/spr_typeracerRoadLines/spr_typeracerRoadLines.yy",},
     {"name":"spr_UltManBall","order":1,"path":"sprites/spr_UltManBall/spr_UltManBall.yy",},
     {"name":"spr_UltManCone","order":2,"path":"sprites/spr_UltManCone/spr_UltManCone.yy",},
+    {"name":"spr_UltManOpponent","order":4,"path":"sprites/spr_UltManOpponent/spr_UltManOpponent.yy",},
     {"name":"spr_UltManRain","order":5,"path":"sprites/spr_UltManRain/spr_UltManRain.yy",},
     {"name":"spr_UltManStadiumWhite","order":4,"path":"sprites/spr_UltManStadiumWhite/spr_UltManStadiumWhite.yy",},
   ],

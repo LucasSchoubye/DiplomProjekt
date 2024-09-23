@@ -16,6 +16,7 @@ image_blend = c_ltgray
 playerTeam = false
 defence = 1000
 pressingDistance = 900
+topSpd = topSpd*1.2
 
 
 
@@ -98,7 +99,7 @@ function PerformAction(X,Y)
 					instance_nearest(obj_UltManBall.owner.x, obj_UltManBall.owner.y, obj_UltManOpponent) = id)
 				{
 					state = UltManNpcState.PressPlayer
-					PerformAction(X,Y)
+					scr_UltManPressOffense()
 					break;
 				}
 			}
