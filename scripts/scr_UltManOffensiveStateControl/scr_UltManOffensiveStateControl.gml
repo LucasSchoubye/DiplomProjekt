@@ -19,7 +19,7 @@ function scr_UltManOffensiveStateControl(X,Y){
 		if (point_distance(targetX, targetY, oppGoal.x, oppGoal.y) < goalShootDist)
 		{
 			obj_UltManBall.owner = undefined
-			obj_UltManBall.targetX = oppGoal.x + oppGoal.goalDepth/2*facing
+			obj_UltManBall.targetX = oppGoal.x - oppGoal.goalDepth/2*oppGoal.facing
 			obj_UltManBall.targetY = oppGoal.y
 		}
 		else
