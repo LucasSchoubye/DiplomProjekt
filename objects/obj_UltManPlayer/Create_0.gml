@@ -30,12 +30,9 @@ topSpd = 300
 topShootSpd = 2000
 
 // Game stats
-strength = 200
+strength = 300
 defence = 200
 dribbling = 200
-
-
-
 
 // Methods
 function MoveToPos(X,Y)
@@ -66,6 +63,7 @@ function MoveToPos(X,Y)
 				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir)
 				obj_UltManBall.owner.targetY += lengthdir_y(strength, dir)
 				obj_UltManBall.owner.tackleCooldown = true
+				obj_UltManBall.owner.image_angle -= (strength/10)*obj_UltManBall.owner.facing
 				obj_UltManBall.owner = id
 				tackleCooldown = true
 			}

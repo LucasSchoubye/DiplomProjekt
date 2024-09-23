@@ -51,6 +51,7 @@ for (var i = 0; i < 2; ++i) {
 		else
 		{
 			scoreline[0]++
+			show_message("SCORED GOAL")
 			scr_UltManKickoffSetup(false)
 		}
 	}

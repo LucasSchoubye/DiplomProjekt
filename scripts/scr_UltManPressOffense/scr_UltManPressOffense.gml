@@ -23,8 +23,8 @@ function scr_UltManPressOffense(){
 					if (spd > point_distance(x,y,player.targetX,player.targetY))
 						spd = point_distance(x,y,player.targetX,player.targetY)
 					
-					PosX = x + lengthdir_x(spd,point_direction(x,y,player.targetX,player.targetY))*1.2
-					PosY = y + lengthdir_y(spd,point_direction(x,y,player.targetX,player.targetY))*1.2
+					PosX = targetX + lengthdir_x(spd,point_direction(x,y,player.targetX,player.targetY))*1.2
+					PosY = targetY + lengthdir_y(spd,point_direction(x,y,player.targetX,player.targetY))*1.2
 				}
 			}
 			
@@ -35,7 +35,7 @@ function scr_UltManPressOffense(){
 				var angle = random_range(0,360)
 				player.targetX += lengthdir_x(-strength,angle)
 				player.targetY += lengthdir_y(-strength,angle)
-				player.image_angle -= 30*player.facing
+				player.image_angle -= (strength/10)*player.facing
 				player.tackleCooldown = true
 				obj_UltManBall.owner = id
 				state = UltManNpcState.HoldPosition
