@@ -5,12 +5,14 @@ function InventoryElement() constructor {
 	itemName = ""
 	balance = ""
 	itemID = ""
+	isEquipped = false
+	txtEquip = ""
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
 	itemCenterX = itemWidth/2
 	itemCenterY = itemHeight/2
-	itemPriceY = itemHeight-20
-	itemTitleY = itemHeight-40
+	itemTitleY = itemHeight-20
+	itemEquipY = itemHeight-40
 	itemImgStartY = itemCenterY-10
 	textHeight = 10
 	categorySprite = spr_theOneAndOnlySmall
@@ -25,10 +27,13 @@ function InventoryElement() constructor {
 		if(yValue >= 100) {
 			switch(itemName){
 				case "Cat":
-					draw_sprite(spr_typeracerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 				case "Hat":
-					draw_sprite(spr_managerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+					draw_sprite(spr_hat,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+				case "Scat":
+					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
@@ -36,8 +41,16 @@ function InventoryElement() constructor {
 		else if(yValue+itemHeight >= 100) {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		if(yValue+itemPriceY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
+		if(yValue+itemEquipY-textHeight >= 100) {
+			if (isEquipped == true) {
+				txtEquip = "EQUIPPED"
+			} else {
+				txtEquip = ""
+			}
+			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
+		}
+		if(yValue+itemTitleY-textHeight >= 100) {
+			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
 		
 		
