@@ -27,7 +27,17 @@ function StoreElement() constructor {
 	
 	function DrawItem(xValue,yValue) {
 		if(yValue >= 100) {
-			draw_sprite(itemSprite,0,xValue+itemCenterX,yValue+itemImgStartY)
+			switch(itemName){
+				case "Cat":
+					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+				case "Hat":
+					draw_sprite(spr_hat,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+				case "Scat":
+					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		else if(yValue+itemHeight >= 100) {

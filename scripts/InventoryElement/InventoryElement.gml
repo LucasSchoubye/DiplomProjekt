@@ -25,10 +25,13 @@ function InventoryElement() constructor {
 		if(yValue >= 100) {
 			switch(itemName){
 				case "Cat":
-					draw_sprite(spr_typeracerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 				case "Hat":
-					draw_sprite(spr_managerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+					draw_sprite(spr_hat,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
+				case "Scat":
+					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
