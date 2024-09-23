@@ -10,6 +10,14 @@ enum ActionType{
 	Tackle
 }
 
+// Question specfic
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
+typingString = ""
+optionsMenu = new OptionsMenu()
+questionMenuActive = false
+questionType = QuestionType.MultipleChoice
+
+// 
 ballcarrier = undefined
 commandedPlayer = undefined
 controlledPlayer = undefined

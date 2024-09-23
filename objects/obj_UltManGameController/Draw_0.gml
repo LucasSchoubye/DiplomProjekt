@@ -63,4 +63,11 @@ if (timer > 90)
 	room_goto(rm_UltManOverview)
 }
 
+// DEBUG
+if (keyboard_check_pressed(vk_backspace))
+{
+	questionMenuActive = !questionMenuActive
+}
+
 scr_UltManActiontypes()
+scr_drawMultipleChoice(optionsMenu, id)

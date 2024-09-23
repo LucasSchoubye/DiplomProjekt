@@ -3,24 +3,32 @@
 function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
-var top = optionsMenu.top
-var screenMidX = optionsMenu.screenMidX
-var screenMidY = optionsMenu.screenMidY
+var resolutionSizeRatio = 1
 
-var answerBoxTop = optionsMenu.answerBoxTop
-var answerBoxBot = optionsMenu.answerBoxBot
-var answerBoxLeft = optionsMenu.answerBoxLeft
-var answerBoxRight = optionsMenu.answerBoxRight
-var answerBoxMidY = optionsMenu.answerBoxMidY
-var answerBoxMidThirdY = optionsMenu.answerBoxMidThirdY
-var answerBoxQuarterX = optionsMenu.answerBoxQuarterX
-var promptBoxHeight = optionsMenu.promptBoxHeight
-var promptBoxMid = optionsMenu.promptBoxMid
-var twoOptionsX = optionsMenu.twoOptionsX
-var twoOptionsY = optionsMenu.twoOptionsY
-var fourOptionsX = optionsMenu.fourOptionsX
-var threeOptionsY = optionsMenu.threeOptionsY
+var screenMidX = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2
+var screenMidY = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])/2
 
+var answerBoxTop = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.7
+var answerBoxBot = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.95
+var answerBoxLeft = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.1
+var answerBoxRight = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.9
+var answerBoxMidY = (answerBoxTop+answerBoxBot)/2
+var answerBoxMidThirdY = (answerBoxTop-answerBoxBot)/3
+var answerBoxQuarterX = camera_get_view_x(view_camera[0]) + (answerBoxRight-answerBoxLeft)/4
+
+var promptBoxHeight = camera_get_view_height(view_camera[0])*0.15
+var promptBoxMid = answerBoxTop-promptBoxHeight/2
+var twoOptionsX = (answerBoxRight-answerBoxLeft)/4
+var twoOptionsY = (answerBoxTop-answerBoxBot)/4
+var fourOptionsX = (answerBoxRight-answerBoxLeft)/8
+var threeOptionsY = (answerBoxTop-answerBoxBot)/6
+
+/*
+
+	(answerBoxRight-answerBoxLeft)/4
+	twoOptionsY = (answerBoxTop-answerBoxBot)/4
+
+*/
 
 var mouseWithinAnswerBox = false
 if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
@@ -323,12 +331,12 @@ var optionSelected = undefined
 
 			if(optionSelected == question.answerIndex)
 			{
-				obj_typeracerCar.AnsweredCorrect()
+				//obj_typeracerCar.AnsweredCorrect()
 				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
 			}
 			else
 			{
-				obj_typeracerCar.AnsweredIncorrect()
+				//obj_typeracerCar.AnsweredIncorrect()
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManActiontypes(){
 
-var goalAttempt = false
+	var goalAttempt = false
 
 	switch(selectedAction)
 	{
@@ -25,15 +25,15 @@ var goalAttempt = false
 				//Pass
 				scr_UltManPassing()
 			}
-			
-			
 		break;
 		
 		
 	}
 
-	if (mouse_check_button_pressed(mb_left) && playAllowed)
+	if (mouse_check_button_pressed(mb_left) && playAllowed && questionMenuActive = false)
 	{
+		// Give Question
+		
 		// Increase timer
 		obj_UltManGameController.timer += 0.33
 	
