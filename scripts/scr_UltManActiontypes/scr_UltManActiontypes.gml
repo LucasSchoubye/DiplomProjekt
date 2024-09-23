@@ -76,6 +76,11 @@ var goalAttempt = false
 		{
 			PerformAction(targetX, targetY)
 		}
+		
+		with(obj_UltManOpponent)
+		{
+			PerformBallcarrierAction(targetX,targetY)
+		}
 
 	}
 

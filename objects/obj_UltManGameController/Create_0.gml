@@ -27,6 +27,7 @@ goals[1] = instance_create_depth(room_width-300, room_height/2, -100, obj_UltMan
 scoreline[0] = 0
 scoreline[1] = 0
 timer = 0
+instance_create_depth(room_width/2, room_height/2, 0, obj_UltManBall)
 
 // Create teams
 scr_UltManCreateTeam()

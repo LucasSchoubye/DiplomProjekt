@@ -1,5 +1,5 @@
 
-var player = obj_UltManGameController.controlledPlayer
+var player = obj_UltManBall
 
 if (obj_UltManGameController.selectedAction = ActionType.Run)
 {
