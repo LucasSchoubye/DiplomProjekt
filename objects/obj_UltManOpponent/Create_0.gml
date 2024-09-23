@@ -50,7 +50,7 @@ function PerformBallcarrierAction(X,Y)
 	{
 		if (obj_UltManBall.owner.playerTeam = playerTeam)
 		{
-			if (obj_UltManBall.owner = id)
+			if (obj_UltManBall.owner = id and obj_UltManBall.readyForPickup = true)
 			{
 				scr_UltManOffensiveStateControl(X,Y)
 			}
