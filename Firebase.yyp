@@ -253,6 +253,7 @@
     {"id":{"name":"spr_typeracerRoadLines","path":"sprites/spr_typeracerRoadLines/spr_typeracerRoadLines.yy",},},
     {"id":{"name":"spr_UltManBall","path":"sprites/spr_UltManBall/spr_UltManBall.yy",},},
     {"id":{"name":"spr_UltManCone","path":"sprites/spr_UltManCone/spr_UltManCone.yy",},},
+    {"id":{"name":"spr_UltManOpponent","path":"sprites/spr_UltManOpponent/spr_UltManOpponent.yy",},},
     {"id":{"name":"spr_UltManPlayer","path":"sprites/spr_UltManPlayer/spr_UltManPlayer.yy",},},
     {"id":{"name":"Spr_YoYo_Background","path":"sprites/Spr_YoYo_Background/Spr_YoYo_Background.yy",},},
     {"id":{"name":"Spr_YoYo_button","path":"sprites/Spr_YoYo_button/Spr_YoYo_button.yy",},},
