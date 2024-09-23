@@ -37,8 +37,27 @@ function RespondAllowedGames(gamesList)
 	}
 }
 
+function RequestCategories() {
+	FirebaseFirestore("shop items/categories/")
+}
+
+function RespondCategories(categoryList) {
+	var storeMap = json_decode(storeList)
+	var idArray = []
+	ds_map_keys_to_array(storeMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(storeMap[? ID]);
+		obj_storeController.GetStoreData(value,ID)
+		obj_inventoryController.GetInventoryData(value)
+	}
+}
+
 function RequestStoreItems() {
-		FirebaseFirestore("/shop items/").Read()
+	FirebaseFirestore("/shop items/categories/clothes/").Read()
 }
 
 function RespondStoreItems(storeList) {
@@ -94,7 +113,7 @@ function RespondStudentInventory(inventoryList) {
 
 function UpdateStudentInventory() {
 	var inventoryMap = ds_map_create()
-	inventoryMap[?"shopItemRef"] = "/shop items/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
+	inventoryMap[?"shopItemRef"] = "/shop items/categories/clothes/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
 	var json = json_encode(inventoryMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
 }
