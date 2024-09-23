@@ -5,7 +5,7 @@ scr_UltManDrawLine()
 scr_UltManDrawField()
 
 // Player control
-controlledPlayer = scr_assignClosestControlledPlayer()
+controlledPlayer = scr_assignClosestControlledPlayer(obj_UltManBall.x, obj_UltManBall.y)
 ballcarrier = obj_UltManBall.owner
 
 len = controlledPlayer.targetSpd
@@ -46,13 +46,13 @@ for (var i = 0; i < 2; ++i) {
 		if (i = 0)
 		{
 			scoreline[1]++
+			scr_UltManKickoffSetup(false)
 		}
 		else
 		{
 			scoreline[0]++
+			scr_UltManKickoffSetup(true)
 		}
-		
-		scr_UltManKickoffSetup()
 	}
 }
 

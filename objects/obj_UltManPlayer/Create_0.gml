@@ -15,6 +15,7 @@ lastMoveLen = 0
 accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.5
 accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.5
 tackleCooldown = false
+manMarkDist = 1400
 
 // Team variables
 position = FootballPositions.CB
@@ -32,6 +33,8 @@ topShootSpd = 2000
 strength = 200
 defence = 200
 dribbling = 200
+
+
 
 
 // Methods
@@ -101,20 +104,55 @@ function ShootToPos(X,Y)
 	ball.readyForPickup = false
 }
 
-function MoveIntoPosition()
+function MoveIntoPosition(X,Y)
 {
-	scr_UltManSetPositionCoordinates(position, playerTeam)
-	
-	if (point_distance(x,y,formationPosX,formationPosY) > topSpd)
+	scr_UltManSetPositionCoordinates(position, playerTeam)	
+
+	// Man-marking
+	var nearOpp = scr_assignClosestControlledPlayer(x,y)
+	if (id.object_index = obj_UltManPlayer)
+		nearOpp = instance_nearest(x,y,obj_UltManOpponent)
+		
+	if (instance_exists(obj_UltManBall.owner))
 	{
-		var dir = point_direction(x,y,formationPosX,formationPosY)
-		targetX = x + lengthdir_x(topSpd, dir)
-		targetY = y + lengthdir_y(topSpd, dir)
+		if (point_distance(x, y, nearOpp.x, nearOpp.y) < manMarkDist and 
+			obj_UltManBall.owner.playerTeam != playerTeam and
+			instance_nearest(nearOpp.x, nearOpp.y,obj_UltManOpponent) = id and
+			position != FootballPositions.GK)
+		{
+			state = UltManNpcState.MarkMan
+			PerformAction(X,Y)
+		}
+		else
+		{
+			// Move towards position
+			if (point_distance(x,y,formationPosX,formationPosY) > topSpd)
+			{
+				var dir = point_direction(x,y,formationPosX,formationPosY)
+				targetX = x + lengthdir_x(topSpd, dir)
+				targetY = y + lengthdir_y(topSpd, dir)
+			}
+			else
+			{
+				targetX = formationPosX
+				targetY = formationPosY
+			}
+		}
 	}
 	else
 	{
-		targetX = formationPosX
-		targetY = formationPosY
+		// Move towards position
+		if (point_distance(x,y,formationPosX,formationPosY) > topSpd)
+		{
+			var dir = point_direction(x,y,formationPosX,formationPosY)
+			targetX = x + lengthdir_x(topSpd, dir)
+			targetY = y + lengthdir_y(topSpd, dir)
+		}
+		else
+		{
+			targetX = formationPosX
+			targetY = formationPosY
+		}
 	}
 }
 
@@ -130,7 +168,7 @@ function PerformAction(X,Y)
 		else
 		// Team does NOT have the ball
 		{
-		
+			MoveIntoPosition()
 		}
 	}
 }

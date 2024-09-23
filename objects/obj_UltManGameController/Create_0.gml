@@ -28,4 +28,4 @@ timer = 0
 // Create teams
 scr_UltManCreateTeam()
 scr_UltManCreateEnemyTeam()
-scr_UltManKickoffSetup()
+scr_UltManKickoffSetup(false)
