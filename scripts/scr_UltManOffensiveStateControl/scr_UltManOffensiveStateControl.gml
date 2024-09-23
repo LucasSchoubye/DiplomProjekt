@@ -10,29 +10,42 @@ function scr_UltManOffensiveStateControl(X,Y){
 	var goalMoveY = lengthdir_y(topSpd, point_direction(x,y,oppGoal.x,oppGoal.y))
 	var safeDist = topSpd*2//topSpd*2
 	var pullbackDist = topSpd*3//topSpd*2
+	var goalShootDist = 2000
 	
 	
 	if (obj_UltManBall.owner = id)
 	{
-		if (point_distance(targetX, targetY, nearOpp.x, nearOpp.y) > safeDist)
+		// 
+		if (point_distance(targetX, targetY, oppGoal.x, oppGoal.y) < goalShootDist)
 		{
-			MoveToPos(targetX  + goalMoveX, targetY  + goalMoveY)
+			obj_UltManBall.owner = undefined
+			obj_UltManBall.targetX = oppGoal.x + oppGoal.goalDepth/2*facing
+			obj_UltManBall.targetY = oppGoal.y
 		}
 		else
 		{
-			var nearTeammate = scr_UltManFindBestPassOption(oppGoal, topSpd*0.8)
-			
-			if (nearTeammate != id)
+			// Run towards the goal
+			if (point_distance(targetX, targetY, nearOpp.x, nearOpp.y) > safeDist)
 			{
-				audio_play_sound(sou_UltManKickLight, 1, false)
-				ShootToPos(nearTeammate.targetX, nearTeammate.targetY, )
+				MoveToPos(targetX  + goalMoveX, targetY  + goalMoveY)
 			}
 			else
 			{
-				// Pull Back
-				MoveToPos(targetX  - goalMoveX, targetY  - goalMoveY)
-			}
+				// Pass the ball
+				var nearTeammate = scr_UltManFindBestPassOption(oppGoal, topSpd*0.8)
 			
+				if (nearTeammate != id)
+				{
+					audio_play_sound(sou_UltManKickLight, 1, false)
+					ShootToPos(nearTeammate.targetX, nearTeammate.targetY, )
+				}
+				else
+				{
+					// Pull Back
+					MoveToPos(targetX  - goalMoveX, targetY  - goalMoveY)
+				}
+			
+			}
 		}
 	}
 	else

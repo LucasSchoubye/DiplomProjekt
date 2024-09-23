@@ -3,12 +3,16 @@
 goalHeight = room_height*0.15
 goalDepth = 300
 facing = 1
+if (x > room_width/2)
+{
+	facing = -1
+}
 
 function CheckBallHasScored() 
 {
 	if (facing = 1) // Left
 	{
-		if (obj_UltManBall.x < 0 && obj_UltManBall.x > x &&
+		if (obj_UltManBall.x > 0 && obj_UltManBall.x < x &&
 			obj_UltManBall.y > y - goalHeight/2 && obj_UltManBall.y < y + goalHeight/2)
 		{
 			return true

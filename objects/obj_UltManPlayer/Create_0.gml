@@ -30,12 +30,9 @@ topSpd = 300
 topShootSpd = 2000
 
 // Game stats
-strength = 1000
+strength = 300
 defence = 200
 dribbling = 200
-
-
-
 
 // Methods
 function MoveToPos(X,Y)
