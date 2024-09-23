@@ -11,8 +11,8 @@ function InventoryElement() constructor {
 	itemHeight = room_height*0.3
 	itemCenterX = itemWidth/2
 	itemCenterY = itemHeight/2
-	itemPriceY = itemHeight-20
-	itemTitleY = itemHeight-40
+	itemTitleY = itemHeight-20
+	itemEquipY = itemHeight-40
 	itemImgStartY = itemCenterY-10
 	textHeight = 10
 	categorySprite = spr_theOneAndOnlySmall
@@ -41,16 +41,16 @@ function InventoryElement() constructor {
 		else if(yValue+itemHeight >= 100) {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		if(yValue+itemPriceY >= 100) {
+		if(yValue+itemEquipY-textHeight >= 100) {
 			if (isEquipped == true) {
 				txtEquip = "EQUIPPED"
 			} else {
 				txtEquip = ""
 			}
-			draw_text(xValue+itemCenterX,yValue+itemTitleY,txtEquip)
+			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
 		}
-		if(yValue+itemPriceY-textHeight >= 100) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
+		if(yValue+itemTitleY-textHeight >= 100) {
+			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
 		
 		
