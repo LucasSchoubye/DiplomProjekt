@@ -5,6 +5,8 @@ function InventoryElement() constructor {
 	itemName = ""
 	balance = ""
 	itemID = ""
+	isEquipped = false
+	txtEquip = ""
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
 	itemCenterX = itemWidth/2
@@ -38,6 +40,14 @@ function InventoryElement() constructor {
 		}
 		else if(yValue+itemHeight >= 100) {
 			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
+		}
+		if(yValue+itemPriceY >= 100) {
+			if (isEquipped == true) {
+				txtEquip = "EQUIPPED"
+			} else {
+				txtEquip = ""
+			}
+			draw_text(xValue+itemCenterX,yValue+itemTitleY,txtEquip)
 		}
 		if(yValue+itemPriceY-textHeight >= 100) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)

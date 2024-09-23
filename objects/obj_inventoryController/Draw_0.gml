@@ -26,7 +26,21 @@ draw_text(screenMidX,screenTop,"Inventory")
 draw_text(currencyStart,screenTop, string(balance) + "$")
 
 for (var i = 0; i < ds_list_size(inventoryElements); ++i) {
+	var currentElement = ds_list_find_value(inventoryElements,i)
     ds_list_find_value(inventoryElements,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
+	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
+		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
+			if (currentElement.isEquipped == false) {
+				if show_question("Do you want to equip this item?") {
+					currentElement.isEquipped = true
+				}
+			} else {
+				if show_question("Do you want to unequip") {
+					currentElement.isEquipped = false
+				}
+			}
+		}
+	}
 	itemCounter++
 	if (itemCounter == 5)
     {
