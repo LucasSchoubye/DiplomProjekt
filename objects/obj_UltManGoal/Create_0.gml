@@ -26,3 +26,28 @@ function CheckBallHasScored()
 	// No goal
 	return false
 }
+
+function CheckMouseCollision() 
+{
+	if (facing = 1) // Left
+	{
+		if (mouse_x < x && mouse_x > 0 &&
+			mouse_y > y - goalHeight/2 && mouse_y < y + goalHeight/2)
+		{
+			return true
+		}
+	}
+	else // right
+	{
+		if (mouse_x > x && mouse_x < room_width &&
+			mouse_y > y - goalHeight/2 && mouse_y < y + goalHeight/2)
+		{
+			if (!scr_doLinesCross(mouse_x, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y - goalHeight/2, room_width, y - goalHeight/2) &&
+			!scr_doLinesCross(mouse_x, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y - goalHeight/2, room_width, y - goalHeight/2))
+			return true
+		}
+	}
+	
+	// No goal
+	return false
+}

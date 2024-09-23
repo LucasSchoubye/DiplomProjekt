@@ -2,39 +2,34 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManActiontypes(){
 
+var goalAttempt = false
+
 	switch(selectedAction)
 	{
 		case ActionType.Run:
-			// is line blocked
-			if (collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManCone, true, true))
-			{
-				draw_set_color(c_maroon)
-				playAllowed = false
-			}	
-			//draw_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY)
-			draw_line(controlledPlayer.x, controlledPlayer.y, targetX + controlledPlayer.accX, targetY   + controlledPlayer.accY)
-			draw_set_color(c_white)
+			scr_UltManRunning()
 		break;
 		case ActionType.Shoot:
-			targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
-			targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
-			if (instance_exists(ballcarrier))
+			
+			var targetGoal = obj_UltManGameController.goals[obj_UltManGameController.targetGoalIndex]
+			if (targetGoal.CheckMouseCollision())
 			{
-				if (ballcarrier.id != controlledPlayer.id or 
-					collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true))
-					{
-						playAllowed = false
-						draw_line_color(obj_UltManBall.x, obj_UltManBall.y, targetX, targetY, c_maroon, c_maroon)
-					}
+				// Shoot on target
+				draw_text(mouse_x, mouse_y, "SHOT ON GOAL")
+				draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+				
+				goalAttempt = true
 			}
 			else
 			{
-				playAllowed = false
+				//Pass
+				scr_UltManPassing()
 			}
-		
-			if (playAllowed = true)	
-				draw_line(obj_UltManBall.x, obj_UltManBall.y, targetX, targetY)
+			
+			
 		break;
+		
+		
 	}
 
 	if (mouse_check_button_pressed(mb_left) && playAllowed)
@@ -49,7 +44,10 @@ function scr_UltManActiontypes(){
 				controlledPlayer.MoveToPos(targetX, targetY)
 			break;
 			case ActionType.Shoot:
-				controlledPlayer.ShootToPos(targetX, targetY)
+				if (goalAttempt = true)
+					controlledPlayer.ShootToPos(mouse_x, mouse_y)
+				else
+					controlledPlayer.ShootToPos(targetX, targetY)
 			break;
 		}
 		
