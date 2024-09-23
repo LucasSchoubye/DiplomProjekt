@@ -26,18 +26,29 @@ draw_text(currencyStart,screenTop, string(balance) + "$")
 
 
 for (var i = 0; i < ds_list_size(storeElements); ++i) {
+	var currentElement = ds_list_find_value(storeElements,i)
     ds_list_find_value(storeElements,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
+	
 	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
-			if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
-				if(selectedPrice <= balance) {
-					audio_play_sound(sou_purchase,1,false, 1, 0.3, 1)
-					balance = balance-selectedPrice
-					obj_firestore_controller.UpdateStudentInventory()
-				}
-				else {
-					show_message("You need more $$$")
-				}
+		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
+			if(selectedPrice <= balance && currentElement.isOwned == false) {
+				audio_play_sound(sou_purchase,1,false, 1, 0.3, 1)
+				balance = balance-selectedPrice
+				currentElement.isOwned = true
+				var newInventoryElement = new InventoryElement() 
+				newInventoryElement.itemName = currentElement.itemName
+				newInventoryElement.itemID = currentElement.itemID
+				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
+				obj_firestore_controller.UpdateStudentInventory()
+				obj_firestore_controller.UpdateBalance()
 			}
+			else if (currentElement.isOwned == true) {
+				show_message("You already own this item")
+			}
+			else {
+				show_message("You need more $$$")
+			}
+		}
 	}
 	itemCounter++
 	if (itemCounter == 5)

@@ -18,7 +18,7 @@ alarm[0] = 1
 function win()
 {
 	obj_storeController.balance = real(obj_storeController.balance)+prize
-	obj_firestore_controller.UpdateStudentInventory()
+	obj_firestore_controller.UpdateBalance()
 	show_message("YOU WON")
 	show_message("You won a "+string(prize)+"$ prize!!!")
 	room_goto(rm_menu)
