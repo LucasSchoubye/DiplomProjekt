@@ -35,7 +35,7 @@ function GetInventoryData(inventoryData) {
 			var currentStoreElement = ds_list_find_value(obj_storeController.storeElements,i)
 			if (currentStoreElement.itemID == substring) {
 				currentElement.itemName = currentStoreElement.itemName
-			
+				currentStoreElement.isOwned = true
 				ds_list_add(inventoryElements, currentElement)
 			}
 	}

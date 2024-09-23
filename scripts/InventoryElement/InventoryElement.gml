@@ -4,6 +4,7 @@
 function InventoryElement() constructor {
 	itemName = ""
 	balance = ""
+	itemID = ""
 	itemWidth = room_width*0.15
 	itemHeight = room_height*0.3
 	itemCenterX = itemWidth/2

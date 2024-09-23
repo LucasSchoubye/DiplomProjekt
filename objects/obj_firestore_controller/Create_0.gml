@@ -94,7 +94,7 @@ function RespondStudentInventory(inventoryList) {
 
 function UpdateStudentInventory() {
 	var inventoryMap = ds_map_create()
-	inventoryMap[?"shopItemRef"] = obj_inventoryController.inventoryElements
+	inventoryMap[?"shopItemRef"] = "/shop items/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
 	var json = json_encode(inventoryMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
 }
