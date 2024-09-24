@@ -3,13 +3,11 @@
 verticalScroll = 0
 storeElements = ds_list_create()
 categoryElements = ds_list_create()
-inventoryElements = ds_list_create()
 categoryViews = [ds_list_create(),ds_list_create(),ds_list_create()]
 balance = undefined
 selectedPrice = 0
 isOwned = false
 currentCategory = Categories.All
-selectedCategoryOption = 0
 
 obj_firestore_controller.RequestStoreTyperacerItems()
 obj_firestore_controller.RequestStoreClotheItems()
@@ -48,7 +46,6 @@ function GetStoreData(storeData,itemID) {
 function GetBalanceData(balanceData) {
 	var currentBalance = new StoreElement()
 	currentBalance.balance = balanceData[?"balance"]
-	
 	balance = currentBalance.balance
 }
 

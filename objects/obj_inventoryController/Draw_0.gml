@@ -15,6 +15,10 @@ var categoryStartX = room_width*0.01
 var categoryStartY = 100
 var categoryCounter = 0
 var currencyStart = room_width*0.8
+var	categoryTextStartX =  room_width*0.01
+var	categoryCenterY = categoryHeight/2
+var	categoryImgStartX = categoryWidth-30
+
 
 if(room == rm_inventory) {
 	if(balance != obj_storeController.balance){
@@ -25,35 +29,29 @@ if(room == rm_inventory) {
 draw_text(screenMidX,screenTop,"Inventory")
 draw_text(currencyStart,screenTop, string(balance) + "$")
 
-for (var i = 0; i < ds_list_size(inventoryElements); ++i) {
-	var currentElement = ds_list_find_value(inventoryElements,i)
-    ds_list_find_value(inventoryElements,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
-	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
-		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
-			if (currentElement.isEquipped == false) {
-				if show_question("Do you want to equip this item?") {
-					currentElement.isEquipped = true
-				}
-			} else {
-				if show_question("Do you want to unequip") {
-					currentElement.isEquipped = false
-				}
+for (var i = 0; i < ds_list_size(categoryElements); ++i) {
+	draw_rectangle(categoryStartX,categoryStartY + i*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+i*categoryHeight,true)
+	draw_sprite(spr_theOneAndOnlySmall,0,categoryStartX+categoryImgStartX,categoryStartY+categoryCenterY + i*categoryHeight)
+	draw_set_halign(fa_left)
+	draw_text(categoryStartX+categoryTextStartX,categoryStartY+categoryCenterY+i*categoryHeight,ds_list_find_value(categoryElements,i))
+	draw_set_halign(fa_center)
+	if(mouse_x > categoryStartX && mouse_x < categoryStartX+categoryWidth) {
+		if(mouse_y > categoryStartY + i*categoryHeight && mouse_y < categoryStartY+categoryHeight+ i*categoryHeight) {
+			draw_set_alpha(0.3)
+			draw_rectangle(categoryStartX,categoryStartY + i*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+ i*categoryHeight,false)
+			draw_set_alpha(1)
+			if (mouse_check_button_pressed(mb_left)){
+				currentCategory = i;
 			}
 		}
 	}
-	itemCounter++
-	if (itemCounter == 5)
-    {
-        itemCounter = 0
-        itemRow++
-    }
-	
+	// Active Category
+	draw_set_alpha(0.15)
+	draw_rectangle(categoryStartX,categoryStartY + currentCategory*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+ currentCategory*categoryHeight,false)
+	draw_set_alpha(1)
 }
 
-for (var i = 0; i < ds_list_size(categoryElements); ++i) {
-	ds_list_find_value(categoryElements,i).DrawCategory(categoryStartX,categoryStartY+categoryCounter*categoryHeight)
-	categoryCounter++
-}
+scr_inventoryCategories()
 
 
 if(keyboard_check(vk_backspace)) {

@@ -24,9 +24,7 @@ if (room = rm_store)
 {
 draw_text(screenMidX,screenTop,"Store")
 
-
 draw_text(currencyStart,screenTop, string(balance) + "$")
-
 
 
 for (var i = 0; i < ds_list_size(categoryElements); ++i) {

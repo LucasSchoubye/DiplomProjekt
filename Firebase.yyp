@@ -227,6 +227,7 @@
     {"id":{"name":"scr_getCategoryEnumFromString","path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},},
     {"id":{"name":"scr_getDanishMathQuestion","path":"scripts/scr_getDanishMathQuestion/scr_getDanishMathQuestion.yy",},},
     {"id":{"name":"scr_idleAnimation","path":"scripts/scr_idleAnimation/scr_idleAnimation.yy",},},
+    {"id":{"name":"scr_inventoryCategories","path":"scripts/scr_inventoryCategories/scr_inventoryCategories.yy",},},
     {"id":{"name":"scr_UltManActiontypes","path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},},
     {"id":{"name":"scr_UltManCreateEnemyTeam","path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},},
     {"id":{"name":"scr_UltManCreateTeam","path":"scripts/scr_UltManCreateTeam/scr_UltManCreateTeam.yy",},},

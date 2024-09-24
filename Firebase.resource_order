@@ -94,6 +94,7 @@
     {"name":"scr_drawMultipleChoice","order":4,"path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},
     {"name":"scr_drawTyping","order":5,"path":"scripts/scr_drawTyping/scr_drawTyping.yy",},
     {"name":"scr_getCategoryEnumFromString","order":2,"path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},
+    {"name":"scr_inventoryCategories","order":8,"path":"scripts/scr_inventoryCategories/scr_inventoryCategories.yy",},
     {"name":"scr_UltManActiontypes","order":2,"path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},
     {"name":"scr_UltManCreateEnemyTeam","order":1,"path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},
     {"name":"scr_UltManDrawField","order":4,"path":"scripts/scr_UltManDrawField/scr_UltManDrawField.yy",},
