@@ -54,6 +54,10 @@ function scr_UltManActiontypes(){
 	// Freeze Game
 	if (mouse_check_button_pressed(mb_left) && selectedAction != ActionType.Run && playAllowed)
 	{
+		var commandedPlayerMod = 0
+		if (instance_exists(commandedPlayer))
+			commandedPlayerMod = 1
+		
 		questionMenuActive = true
 		frozenTargetX = targetX
 		frozenTargetY = targetY
@@ -66,10 +70,7 @@ function scr_UltManActiontypes(){
 		
 		frozenActionType = selectedAction
 		frozenGoalAttempt = goalAttempt
-		show_message(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
-		show_message(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
-		show_message(round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600))
-		skillCheckAmount = round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
+		skillCheckAmount = round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600) + commandedPlayerMod
 		skillCheckAttemptsCounter = 0
 		skillCheckCorrectCounter = 0
 		frozenShotMissed = false
