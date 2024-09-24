@@ -102,6 +102,7 @@
   "resources":[
     {"id":{"name":"FirebaseSetup","path":"extensions/FirebaseSetup/FirebaseSetup.yy",},},
     {"id":{"name":"YYFirebaseFirestore","path":"extensions/YYFirebaseFirestore/YYFirebaseFirestore.yy",},},
+    {"id":{"name":"fn_ArialBlack48","path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},},
     {"id":{"name":"fn_buttonOpenSans","path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},},
     {"id":{"name":"fn_RobotoBlack14","path":"fonts/fn_RobotoBlack14/fn_RobotoBlack14.yy",},},
     {"id":{"name":"fn_RobotoBlack16","path":"fonts/fn_RobotoBlack16/fn_RobotoBlack16.yy",},},
@@ -211,6 +212,7 @@
     {"id":{"name":"InventoryElement","path":"scripts/InventoryElement/InventoryElement.yy",},},
     {"id":{"name":"json_compare","path":"scripts/json_compare/json_compare.yy",},},
     {"id":{"name":"MenuGridElement","path":"scripts/MenuGridElement/MenuGridElement.yy",},},
+    {"id":{"name":"OptionsMenu","path":"scripts/OptionsMenu/OptionsMenu.yy",},},
     {"id":{"name":"QuestionGenerator","path":"scripts/QuestionGenerator/QuestionGenerator.yy",},},
     {"id":{"name":"scr_8d_movement","path":"scripts/scr_8d_movement/scr_8d_movement.yy",},},
     {"id":{"name":"scr_anim_player_look","path":"scripts/scr_anim_player_look/scr_anim_player_look.yy",},},
@@ -233,6 +235,7 @@
     {"id":{"name":"scr_UltManCreateEnemyTeam","path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},},
     {"id":{"name":"scr_UltManCreateTeam","path":"scripts/scr_UltManCreateTeam/scr_UltManCreateTeam.yy",},},
     {"id":{"name":"scr_UltManDefensiveStateControl","path":"scripts/scr_UltManDefensiveStateControl/scr_UltManDefensiveStateControl.yy",},},
+    {"id":{"name":"scr_UltManDoActionType","path":"scripts/scr_UltManDoActionType/scr_UltManDoActionType.yy",},},
     {"id":{"name":"scr_UltManDrawField","path":"scripts/scr_UltManDrawField/scr_UltManDrawField.yy",},},
     {"id":{"name":"scr_UltManDrawLine","path":"scripts/scr_UltManDrawLine/scr_UltManDrawLine.yy",},},
     {"id":{"name":"scr_UltManDrawScoreline","path":"scripts/scr_UltManDrawScoreline/scr_UltManDrawScoreline.yy",},},

@@ -28,8 +28,7 @@ kickoffPos = [x,y]
 //stats
 topSpd = 300
 topShootSpd = 2000
-
-// Game stats
+topPassSpd = 2000
 strength = 300
 defence = 200
 dribbling = 200

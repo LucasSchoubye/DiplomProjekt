@@ -3,7 +3,7 @@
 function scr_UltManCreateEnemyTeam(){
 
 
-	switch(TeamFormations.FourFourTwo)
+	switch(TeamFormations.DefenseTest)
 	{
 		#region 4-4-2
 		case TeamFormations.FourFourTwo:
