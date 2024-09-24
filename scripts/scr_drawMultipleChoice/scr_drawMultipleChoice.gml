@@ -23,12 +23,6 @@ var twoOptionsY = (answerBoxTop-answerBoxBot)/4
 var fourOptionsX = (answerBoxRight-answerBoxLeft)/8
 var threeOptionsY = (answerBoxTop-answerBoxBot)/6
 
-/*
-
-	(answerBoxRight-answerBoxLeft)/4
-	twoOptionsY = (answerBoxTop-answerBoxBot)/4
-
-*/
 
 var mouseWithinAnswerBox = false
 if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
@@ -332,11 +326,13 @@ var optionSelected = undefined
 			if(optionSelected == question.answerIndex)
 			{
 				//obj_typeracerCar.AnsweredCorrect()
+				controllerId.AnsweredCorrect()
 				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
 			}
 			else
 			{
 				//obj_typeracerCar.AnsweredIncorrect()
+				controllerId.AnsweredIncorrect()
 			}
 		}
 	}
