@@ -56,20 +56,24 @@ function RespondCategories(categoryList) {
 	}
 }
 
-function RequestStoreItems() {
-	FirebaseFirestore("/shop items/categories/clothes/").Read()
+function RequestStoreTyperacerItems() {
+	FirebaseFirestore("/shop items/categories/typeracer").Read()
+}
+function RequestStoreClotheItems() {
+	FirebaseFirestore("/shop items/categories/clothes").Read()
 }
 
-function RespondStoreItems(storeList) {
+
+function RespondStoreItems(storeList,path) {
 	var storeMap = json_decode(storeList)
 	var idArray = []
 	ds_map_keys_to_array(storeMap, idArray)
 	
 	for (var i = 0; i < array_length(idArray); i++) 
 	{
-		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(storeMap[? ID]);
+		value[? "category"] = path
 		obj_storeController.GetStoreData(value,ID)
 	}
 }

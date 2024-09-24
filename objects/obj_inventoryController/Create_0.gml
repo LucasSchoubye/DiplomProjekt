@@ -30,7 +30,7 @@ function GetInventoryData(inventoryData) {
 		// Extract the substring after the last dash
 		substring = string_copy(substring, last_dash_pos + 1, string_length(substring) - last_dash_pos);
 	}
-	
+
 	for (var i = 0; i < ds_list_size(obj_storeController.storeElements); ++i) {
 			var currentStoreElement = ds_list_find_value(obj_storeController.storeElements,i)
 			if (currentStoreElement.itemID == substring) {

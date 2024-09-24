@@ -22,9 +22,9 @@ function StoreElement() constructor {
 	categoryTextStartX =  room_width*0.01
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
+	category = ""
 	
 
-	
 	function DrawItem(xValue,yValue) {
 		if(yValue >= 100) {
 			switch(itemName){
@@ -68,20 +68,6 @@ function StoreElement() constructor {
 		}
 	}
 	
-	function DrawCategory(xValue,yValue) {
-		draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
-		draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
-		draw_set_halign(fa_left)
-		draw_text(xValue+categoryTextStartX,yValue+categoryCenterY,"YOYOYO CATEGORY BRO")
-		draw_set_halign(fa_center)
-		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
-			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
-				draw_set_alpha(0.3)
-				draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
-				draw_set_alpha(1)
-			}
-		}
-	}
 }
 
 

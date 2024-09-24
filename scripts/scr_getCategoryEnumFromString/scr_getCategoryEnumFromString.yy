@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_storeSetup",
+  "%Name":"scr_getCategoryEnumFromString",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_storeSetup",
+  "name":"scr_getCategoryEnumFromString",
   "parent":{
     "name":"Scripts",
     "path":"folders/Assets/Store/Scripts.yy",

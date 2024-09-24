@@ -37,7 +37,7 @@ if (async_load[? "status"] == 200)
 			}
 			else if (string_pos("shop items",async_load[? "path"]) > 0)
 			{
-				RespondStoreItems(async_load[? "value"])	
+				RespondStoreItems(async_load[? "value"],async_load[? "path"])
 			}
 			else if (string_pos("inventory",async_load[? "path"]) > 0 && 
 			string_count("bank",async_load[? "path"]) = 0)
