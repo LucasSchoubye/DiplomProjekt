@@ -3,6 +3,7 @@
 function scr_UltManDrawScoreline(){
 
 	draw_set_halign(fa_center)
+	draw_set_font(fn_RobotoBlack8)
 	draw_text(view_wport[1]/2,50,"ARS: "+string(scoreline[0]) + " - "+"MAN: "+string(scoreline[1]))
 	
 	var timerString = string(obj_UltManGameController.timer)

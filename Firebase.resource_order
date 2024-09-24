@@ -79,7 +79,6 @@
     {"name":"obj_UltManManagerController","order":2,"path":"objects/obj_UltManManagerController/obj_UltManManagerController.yy",},
     {"name":"obj_UltManOpponent","order":2,"path":"objects/obj_UltManOpponent/obj_UltManOpponent.yy",},
     {"name":"obj_UltManPlayer","order":1,"path":"objects/obj_UltManPlayer/obj_UltManPlayer.yy",},
-    {"name":"obj_UltManQuestionController","order":3,"path":"objects/obj_UltManQuestionController/obj_UltManQuestionController.yy",},
     {"name":"rm_inventory","order":5,"path":"rooms/rm_inventory/rm_inventory.yy",},
     {"name":"rm_login","order":3,"path":"rooms/rm_login/rm_login.yy",},
     {"name":"rm_menu","order":2,"path":"rooms/rm_menu/rm_menu.yy",},

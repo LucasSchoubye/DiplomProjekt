@@ -17,7 +17,7 @@ scr_UltManSetPositionCoordinates(position,playerTeam)
 targetSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/2
 if (targetSpd > topSpd){targetSpd = topSpd}
 targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.5
-if (targetShootSpd > topShootSpd){targetShootSpd = topShootSpd}
+if (targetShootSpd > topPassSpd){targetShootSpd = topPassSpd}
 
 // animation
 depth = -y

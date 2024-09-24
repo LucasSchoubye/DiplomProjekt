@@ -17,9 +17,16 @@ function scr_UltManActiontypes(){
 				var targetGoal = obj_UltManGameController.goals[obj_UltManGameController.targetGoalIndex]
 				if (targetGoal.CheckMouseCollision())
 				{
-					// Shoot on target
-					draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
-				
+					if (point_distance(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y) < controlledPlayer.topShootSpd)
+					{
+						// Shoot on target
+						draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+					}
+					else
+					{
+						playAllowed = false
+						draw_line_color(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y, c_maroon, c_maroon)
+					}
 					goalAttempt = true
 				}
 				else
@@ -59,10 +66,14 @@ function scr_UltManActiontypes(){
 		
 		frozenActionType = selectedAction
 		frozenGoalAttempt = goalAttempt
-		skillCheckAmount = 3
+		show_message(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
+		show_message(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
+		show_message(round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600))
+		skillCheckAmount = round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600)
 		skillCheckAttemptsCounter = 0
 		skillCheckCorrectCounter = 0
 		frozenShotMissed = false
+		alarm[0] = 2
 	}
 	
 	if (mouse_check_button_pressed(mb_left) && playAllowed && questionMenuActive = false)

@@ -71,7 +71,7 @@ if (keyboard_check_pressed(vk_backspace))
 
 scr_UltManActiontypes()
 
-if (questionMenuActive)
+if (questionMenuActive and questionMenuClickCooldown = false)
 {
 	// Draw multiple choice
 	draw_set_font(fn_ArialBlack48)
@@ -86,6 +86,8 @@ if (questionMenuActive)
 	{
 		questionMenuActive = false
 		scr_UltManDoActionType(frozenActionType, frozenTargetX, frozenTargetY, frozenGoalAttempt)
-		
 	}
 }
+
+if (keyboard_check_released(mb_left))
+	questionMenuClickCooldown = false
