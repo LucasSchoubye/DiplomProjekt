@@ -229,18 +229,15 @@ function GetPlayerInsertPos()
 	for (var i = 0; i < formationColumns[column]; ++i) {
 	    if (i = 0 && mouse_x < fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+2)*(i+1))
 		{
-			show_message("Leftmost: Inserting 0")
 			return 0
 		}
 		else if (mouse_x > fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+1)*(i) &&
 				mouse_x < fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+1)*(i+1))
 		{
-			show_message("middle: Inserting "+string(i))
 			return i
 		}
 	}
 	
-	show_message("Leftmost: Inserting "+string(ds_list_size(formationColumns[column])))
 			return ds_list_size(formationColumns[column])
 	
 }
