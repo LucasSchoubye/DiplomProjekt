@@ -32,7 +32,7 @@ function scr_UltManTacticPlayerBox(){
 		draw_set_alpha(1)
 		
 		// Draw Swapping
-		if (ds_list_find_value(squad, i) = swappingPlayer)
+		if (ds_list_find_value(squad, i) = fromPlayer)
 			draw_rectangle(playerBoxLeft + 2, playerBoxTop + (i)*30, playerBoxRight - 2, playerBoxTop + (i+1)*30, true)
 		
 		// Draw player details
@@ -58,63 +58,86 @@ function scr_UltManTacticPlayerBox(){
 			
 			if (mouse_check_button_pressed(mb_left))
 			{
-				swappingPlayer = ds_list_find_value(squad, i)
+				fromPlayer = ds_list_find_value(squad, i)
 			}
 		
 			// Swap player
 			if (mouse_check_button_released(mb_left))
 			{
 				
-				if (swappingPlayer != undefined)
+				if (fromPlayer != undefined)
 				{
 					
 					// If player is in starting squad
-					if (i < 11 or ds_list_find_index(squad, swappingPlayer) <= 11)
+					if (i < 11 or ds_list_find_index(squad, fromPlayer) <= 11)
 					{
-						var startingPlayerCoor = [undefined,undefined]
-						var swappingPlayerCoor = [undefined,undefined]
+						var toPlayerCoor = [undefined,undefined]
+						var fromPlayerCoor = [undefined,undefined]
 						
 						// Swapping from bench to starting 11
-						var startingPlayer = ds_list_find_value(squad, i)
+						var toPlayer = ds_list_find_value(squad, i)
 						for (var column = 0; column < array_length(formationColumns); ++column) {
 							
-							if (ds_list_find_index(formationColumns[column], startingPlayer) > -1)
+							if (ds_list_find_index(formationColumns[column], toPlayer) > -1)
 							{
-								show_message("Found starting player ("+startingPlayer.name[1]+") in column: "+string(column)+" Position: "+string(ds_list_find_index(formationColumns[column], startingPlayer)))
-								startingPlayerCoor = [column, ds_list_find_index(formationColumns[column], startingPlayer)]
+								toPlayerCoor = [column, ds_list_find_index(formationColumns[column], toPlayer)]
 								break
 							}
 						}
 							
-						if (ds_list_find_index(squad, swappingPlayer) <= 11)
+						if (ds_list_find_index(squad, fromPlayer) <= 11)
 						{
 							// Swapping two starting players
 							for (var column = 0; column < array_length(formationColumns); ++column) {
 							
-								if (ds_list_find_index(formationColumns[column], swappingPlayer) > -1)// && column != firstColumn)
+								if (ds_list_find_index(formationColumns[column], fromPlayer) > -1)// && column != firstColumn)
 								{									
-									swappingPlayerCoor = [column, ds_list_find_index(formationColumns[column], swappingPlayer)]
+									fromPlayerCoor = [column, ds_list_find_index(formationColumns[column], fromPlayer)]
 									break
 								}
 							}
 						
 							// Switch
-							if (startingPlayerCoor[0] != undefined)
-								ds_list_replace(formationColumns[startingPlayerCoor[0]], startingPlayerCoor[1], swappingPlayer)
-							if (swappingPlayerCoor[0] != undefined)
-								ds_list_replace(formationColumns[swappingPlayerCoor[0]], swappingPlayerCoor[1], startingPlayer)
+							if (toPlayerCoor[0] != undefined)
+							{
+								ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
+								if (fromPlayerCoor[0] != undefined)
+								{
+									toPlayer.UpdatePosition(fromPlayerCoor[0], fromPlayerCoor[1], ds_list_size(formationColumns[fromPlayerCoor[0]]))
+								}
+								else
+								{
+									toPlayer.position = FootballPositions.SUB
+								}
+							}
+							if (fromPlayerCoor[0] != undefined)
+							{
+								ds_list_replace(formationColumns[fromPlayerCoor[0]], fromPlayerCoor[1], toPlayer)
+								if (toPlayerCoor[0] != undefined)
+								{
+									fromPlayer.UpdatePosition(toPlayerCoor[0], toPlayerCoor[1], ds_list_size(formationColumns[toPlayerCoor[0]]))
+								}
+								else
+								{
+									fromPlayer.position = FootballPositions.SUB
+									toPlayer.UpdatePosition(fromPlayerCoor[0], fromPlayerCoor[1], ds_list_size(formationColumns[fromPlayerCoor[0]]))
+								}
+							}
+								
 						
 						}
 						else
 						{
-							ds_list_replace(formationColumns[startingPlayerCoor[0]], startingPlayerCoor[1], swappingPlayer)
+							ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
+							fromPlayer.UpdatePosition(toPlayerCoor[0], toPlayerCoor[1], ds_list_size(formationColumns[toPlayerCoor[0]]))
+							toPlayer.position = FootballPositions.SUB
 						}
 					}
 					
 					// Swap Position in Squad
-					switch_ds_list_values(squad, swappingPlayer, ds_list_find_value(squad, i))
+					switch_ds_list_values(squad, fromPlayer, ds_list_find_value(squad, i))
 				}
-				swappingPlayer = undefined
+				fromPlayer = undefined
 			}
 		}
 	}
@@ -123,7 +146,7 @@ function scr_UltManTacticPlayerBox(){
 	// Release player
 	if (mouse_check_button_released(mb_left))
 	{
-		swappingPlayer = undefined
+		fromPlayer = undefined
 	}
 }
 

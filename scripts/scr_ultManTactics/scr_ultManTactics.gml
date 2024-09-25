@@ -67,5 +67,8 @@ function GetColorFromPos(pos)
 				
 			case FootballPositions.GK:
 				return #1ED001
+				
+			default:
+				return c_ltgray
 		}
 }

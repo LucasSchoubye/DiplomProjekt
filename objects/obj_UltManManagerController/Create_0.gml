@@ -22,7 +22,8 @@ enum FootballPositions
 	RM,
 	LW,
 	RW,
-	ST
+	ST,
+	SUB
 }
 
 enum FormationColumns
@@ -49,7 +50,7 @@ ds_list_add(menuOptions, "Fixtures")
 ds_list_add(menuOptions, "Transfermarket")
 
 // TacticsLogic
-swappingPlayer = undefined
+fromPlayer = undefined
 
 // Gameplay
 teamformation = TeamFormations.FourFourTwo

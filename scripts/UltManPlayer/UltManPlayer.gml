@@ -66,6 +66,89 @@ function UltManPlayer() constructor {
 				return "LWB"
 			case FootballPositions.GK:
 				return "GK"
+			case FootballPositions.SUB:
+				return "SUB"
+				
+		}
+	}
+	
+	function UpdatePosition(column, index, length)
+	{
+		switch(column)
+		{
+			case FormationColumns.Attackers:
+				if (length > 2)
+				{
+					show_message(name[1] + "Column: "+string(column)+" Index: "+string(index)+" Length: "+string(length))
+					if (index = length-1)
+					{
+						position = FootballPositions.RW
+					}
+					else if (index = 0)
+					{
+						position = FootballPositions.LW
+					}
+					else
+					{
+						position = FootballPositions.ST
+					}
+				}
+				else
+				{
+					position = FootballPositions.ST
+				}
+			break;
+			case FormationColumns.OffensiveMidfield:
+				position = FootballPositions.CAM
+			break;
+			case FormationColumns.Midfield:
+				if (length > 3)
+					{
+						if (index = length-1)
+						{
+							position = FootballPositions.RM
+						}
+						else if (index = 0)
+						{
+							position = FootballPositions.LM
+						}
+						else
+						{
+							position = FootballPositions.CM
+						}
+					}
+					else
+					{
+						position = FootballPositions.CM
+					}
+			break;
+			case FormationColumns.DefensiveMidfielder:
+				position = FootballPositions.CDM
+			break;
+			case FormationColumns.Defense:
+				if (length > 3)
+					{
+						if (index = length-1)
+						{
+							position = FootballPositions.RB
+						}
+						else if (index = 0)
+						{
+							position = FootballPositions.LB
+						}
+						else
+						{
+							position = FootballPositions.CB
+						}
+					}
+					else
+					{
+						position = FootballPositions.CB
+					}
+			break;
+			case FormationColumns.Goalkeeper:
+				position = FootballPositions.GK
+			break;
 		}
 	}
 }
