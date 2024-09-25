@@ -64,18 +64,52 @@ function scr_UltManTacticPlayerBox(){
 			// Swap player
 			if (mouse_check_button_released(mb_left))
 			{
+				
 				if (swappingPlayer != undefined)
 				{
+					
 					// If player is in starting squad
-						var startingPlayer = ds_list_find_value(squad, i)
+					if (i < 11 or ds_list_find_index(squad, swappingPlayer) <= 11)
+					{
+						var startingPlayerCoor = [undefined,undefined]
+						var swappingPlayerCoor = [undefined,undefined]
 						
+						// Swapping from bench to starting 11
+						var startingPlayer = ds_list_find_value(squad, i)
 						for (var column = 0; column < array_length(formationColumns); ++column) {
 							
-							if (ds_list_find_index(formationColumns[column], startingPlayer) > 0)
+							if (ds_list_find_index(formationColumns[column], startingPlayer) > -1)
 							{
-								ds_list_replace(formationColumns[column], ds_list_find_index(formationColumns[column], startingPlayer), swappingPlayer)
+								show_message("Found starting player ("+startingPlayer.name[1]+") in column: "+string(column)+" Position: "+string(ds_list_find_index(formationColumns[column], startingPlayer)))
+								startingPlayerCoor = [column, ds_list_find_index(formationColumns[column], startingPlayer)]
+								break
 							}
 						}
+							
+						if (ds_list_find_index(squad, swappingPlayer) <= 11)
+						{
+							// Swapping two starting players
+							for (var column = 0; column < array_length(formationColumns); ++column) {
+							
+								if (ds_list_find_index(formationColumns[column], swappingPlayer) > -1)// && column != firstColumn)
+								{									
+									swappingPlayerCoor = [column, ds_list_find_index(formationColumns[column], swappingPlayer)]
+									break
+								}
+							}
+						
+							// Switch
+							if (startingPlayerCoor[0] != undefined)
+								ds_list_replace(formationColumns[startingPlayerCoor[0]], startingPlayerCoor[1], swappingPlayer)
+							if (swappingPlayerCoor[0] != undefined)
+								ds_list_replace(formationColumns[swappingPlayerCoor[0]], swappingPlayerCoor[1], startingPlayer)
+						
+						}
+						else
+						{
+							ds_list_replace(formationColumns[startingPlayerCoor[0]], startingPlayerCoor[1], swappingPlayer)
+						}
+					}
 					
 					// Swap Position in Squad
 					switch_ds_list_values(squad, swappingPlayer, ds_list_find_value(squad, i))
