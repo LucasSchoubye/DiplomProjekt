@@ -9,7 +9,10 @@ function UltManPlayer() constructor {
 	nationality = Nationality.POR
 
 	// Tactics
-	position = FootballPositions.ST
+	position = FootballPositions.SUB
+	preferredPosition = FootballPositions.ST
+	playableColumns = ds_list_create()
+	ds_list_add(playableColumns, FormationColumns.DefensiveMidfielder, FormationColumns.Midfield, FormationColumns.Goalkeeper)
 	condition = 95
 	
 	// Rating
@@ -32,11 +35,44 @@ function UltManPlayer() constructor {
 		draw_set_valign(fa_middle)
 		draw_text(X,Y+height*1.5,name[1])
 		draw_text(X,Y+height*0.5,PosToString())
+		
+		// Action
+		if (mouse_check_button_pressed(mb_left) && mouse_x > X - width/2 && mouse_x < X + width/2 &&
+			mouse_y > Y && mouse_y < Y + height)
+		{
+			obj_UltManManagerController.fieldViewFromPlayer = self
+		}
+	}
+	
+	function DrawDragAndDrop()
+	{
+		for (var i = 0; i < 6; ++i) {
+		    if (ds_list_find_index(playableColumns, i) = -1)
+			{
+				draw_set_alpha(0.25)
+				draw_rectangle(obj_UltManManagerController.fieldBoxLeft, obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(0.7+i),obj_UltManManagerController.fieldBoxRight, obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(i+1.7), false)
+				draw_set_alpha(1)
+			}
+		
+			// Draw outline
+			if (mouse_y > obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(0.7+i) &&
+				mouse_y < obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(1.7+i))
+			{
+				draw_rectangle(obj_UltManManagerController.fieldBoxLeft + 2, obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(0.7+i),obj_UltManManagerController.fieldBoxRight - 2, obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(i+1.7), true)
+				obj_UltManManagerController.toColumn = i
+			}
+		}
+		
+		
 	}
 	
 	function PosToString()
 	{
-		switch(position)
+		var drawnPosition = position
+		if (position = FootballPositions.SUB)
+			drawnPosition = preferredPosition
+		
+		switch(drawnPosition)
 		{
 			case FootballPositions.ST:
 				return "ST"
@@ -79,7 +115,6 @@ function UltManPlayer() constructor {
 			case FormationColumns.Attackers:
 				if (length > 2)
 				{
-					show_message(name[1] + "Column: "+string(column)+" Index: "+string(index)+" Length: "+string(length))
 					if (index = length-1)
 					{
 						position = FootballPositions.RW
@@ -128,17 +163,35 @@ function UltManPlayer() constructor {
 			case FormationColumns.Defense:
 				if (length > 3)
 					{
-						if (index = length-1)
+						if (length > 4)
 						{
-							position = FootballPositions.RB
-						}
-						else if (index = 0)
-						{
-							position = FootballPositions.LB
+							if (index = length-1)
+							{
+								position = FootballPositions.RWB
+							}
+							else if (index = 0)
+							{
+								position = FootballPositions.LWB
+							}
+							else
+							{
+								position = FootballPositions.CB
+							}
 						}
 						else
 						{
-							position = FootballPositions.CB
+							if (index = length-1)
+							{
+								position = FootballPositions.RB
+							}
+							else if (index = 0)
+							{
+								position = FootballPositions.LB
+							}
+							else
+							{
+								position = FootballPositions.CB
+							}
 						}
 					}
 					else

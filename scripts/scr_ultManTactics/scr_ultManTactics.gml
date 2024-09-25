@@ -3,15 +3,15 @@
 function scr_ultManTactics(){
 	
 	// Draw Field Box
-	var fieldBoxTop = room_height * 0.12;
-	var fieldBoxBottom = room_height * 0.90;
-	var fieldBoxLeft = room_width * 0.22;
-	var fieldBoxRight = room_width * 0.68;
-	var fieldBoxMid = (fieldBoxLeft + fieldBoxRight)/2
+	fieldBoxTop = room_height * 0.12;
+	fieldBoxBottom = room_height * 0.90;
+	fieldBoxLeft = room_width * 0.22;
+	fieldBoxRight = room_width * 0.68;
+	fieldBoxMid = (fieldBoxLeft + fieldBoxRight)/2
 	
-	var fieldBoxHeight = (fieldBoxBottom - fieldBoxTop)
-	var SubBoxHeight = (room_height - fieldBoxBottom)
-	var fieldBoxWidth = (fieldBoxRight - fieldBoxLeft)
+	fieldBoxHeight = (fieldBoxBottom - fieldBoxTop)
+	SubBoxHeight = (room_height - fieldBoxBottom)
+	fieldBoxWidth = (fieldBoxRight - fieldBoxLeft)
 	
 	draw_sprite_ext(spr_UltManField, 0, fieldBoxLeft, fieldBoxTop, (fieldBoxRight-fieldBoxLeft)/sprite_get_width(spr_UltManField), (fieldBoxBottom-fieldBoxTop)/sprite_get_height(spr_UltManField), 0, c_white, 1)
 	draw_rectangle(fieldBoxLeft, fieldBoxTop, fieldBoxRight, fieldBoxBottom, true)
@@ -22,6 +22,29 @@ function scr_ultManTactics(){
 		    // 
 			ds_list_find_value(formationColumns[column], i).DrawPlayer(fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+1)*(i+1), fieldBoxTop+(fieldBoxHeight/7)*(column+1))
 		}
+	}
+	
+	if (mouse_check_button_released(mb_left))
+	{
+		var fromColumn = undefined
+		
+		// Find player
+		for (var column = 0; column < array_length(formationColumns); ++column) {
+			for (var i = 0; i < ds_list_size(formationColumns[column]); ++i) {
+			    
+				if (ds_list_find_index(formationColumns[column], fieldViewFromPlayer) != -1)
+				{
+					fromColumn = column
+				}
+			}
+		}
+		
+		MovePlayerColumn(fromColumn, toColumn)
+	}
+	
+	if (fieldViewFromPlayer != undefined)
+	{
+		fieldViewFromPlayer.DrawDragAndDrop()
 	}
 	
 	// Draw Subs
@@ -48,10 +71,10 @@ function GetColorFromPos(pos)
 			{
 			case FootballPositions.ST:
 			case FootballPositions.RW:
-			case FootballPositions.CAM:
 			case FootballPositions.LW:
 				return #7B00E7
 				
+			case FootballPositions.CAM:
 			case FootballPositions.RM:
 			case FootballPositions.LM:
 			case FootballPositions.CM:
@@ -71,4 +94,20 @@ function GetColorFromPos(pos)
 			default:
 				return c_ltgray
 		}
+}
+
+function ResetStartingSquadOrder()
+{
+	// Remove the starting 11 from squad list
+	for (var i = 0; i < 11; ++i) {
+	    // code here
+		ds_list_delete(squad, 0)
+	}
+	
+	// insert 11 from column data structure
+	for (var column = 0; column < 6; ++column) {
+	    for (var i = 0; i < ds_list_size(formationColumns[column]); ++i) {
+		    ds_list_insert(squad, 0, ds_list_find_value(formationColumns[column], i))
+		}
+	}
 }

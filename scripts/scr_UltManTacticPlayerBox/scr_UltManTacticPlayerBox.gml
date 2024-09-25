@@ -179,3 +179,68 @@ function ds_list_find_index(ds_list_id, value) {
     // Return -1 if the value is not found
     return -1;
 }
+
+function MovePlayerColumn(fromColumn, toColumn)
+{
+	var player = obj_UltManManagerController.fieldViewFromPlayer
+	
+	if (player != undefined && toColumn != undefined)
+	{
+		var insertIndex = GetPlayerInsertPos()
+		
+		ds_list_insert(obj_UltManManagerController.formationColumns[toColumn], insertIndex, player)
+		ds_list_delete(obj_UltManManagerController.formationColumns[fromColumn], ds_list_find_index(obj_UltManManagerController.formationColumns[fromColumn], player))
+		
+		// Update positions from old list
+		for (var i = 0; i < ds_list_size(formationColumns[fromColumn]); ++i) {
+		    // code here
+			ds_list_find_value(formationColumns[fromColumn], i).UpdatePosition(fromColumn, i, ds_list_size(formationColumns[fromColumn]))
+
+		}
+		
+		// Update positions from new list
+		if (ds_list_size(formationColumns[toColumn]) > 0)
+		{
+			for (var i = 0; i < ds_list_size(formationColumns[toColumn]); ++i) {
+				ds_list_find_value(formationColumns[toColumn], i).UpdatePosition(toColumn, i, ds_list_size(formationColumns[toColumn]))
+			}
+		}
+	}
+	
+	// Clean up
+	ResetStartingSquadOrder()
+	obj_UltManManagerController.fieldViewFromPlayer = undefined
+}
+
+function GetPlayerInsertPos()
+{
+	var column = undefined
+	
+	// Find Column
+	for (var i = 0; i < 6; ++i) {
+		if (mouse_y > obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(0.7+i) &&
+			mouse_y < obj_UltManManagerController.fieldBoxTop + obj_UltManManagerController.fieldBoxHeight/7*(1.7+i))
+		{
+			column = i
+		}
+	}
+	
+	// Find index from mouse_x
+	for (var i = 0; i < formationColumns[column]; ++i) {
+	    if (i = 0 && mouse_x < fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+2)*(i+1))
+		{
+			show_message("Leftmost: Inserting 0")
+			return 0
+		}
+		else if (mouse_x > fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+1)*(i) &&
+				mouse_x < fieldBoxLeft + fieldBoxWidth/(ds_list_size(formationColumns[column])+1)*(i+1))
+		{
+			show_message("middle: Inserting "+string(i))
+			return i
+		}
+	}
+	
+	show_message("Leftmost: Inserting "+string(ds_list_size(formationColumns[column])))
+			return ds_list_size(formationColumns[column])
+	
+}

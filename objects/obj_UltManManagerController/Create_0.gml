@@ -51,6 +51,8 @@ ds_list_add(menuOptions, "Transfermarket")
 
 // TacticsLogic
 fromPlayer = undefined
+fieldViewFromPlayer = undefined
+toColumn = undefined
 
 // Gameplay
 teamformation = TeamFormations.FourFourTwo
