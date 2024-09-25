@@ -40,6 +40,7 @@ for (var i = 0; i < ds_list_size(categoryElements); ++i) {
 			draw_set_alpha(1)
 			if (mouse_check_button_pressed(mb_left)){
 				currentCategory = i;
+				verticalScroll = 0
 			}
 		}
 	}

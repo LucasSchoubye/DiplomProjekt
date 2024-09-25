@@ -33,7 +33,6 @@ function GetInventoryData(inventoryData) {
 			currentElement.itemName = currentStoreElement.itemName
 			currentStoreElement.isOwned = true
 			currentElement.category = currentStoreElement.category
-			//show_message(currentElement.category)
 			ds_list_add(inventoryElements, currentElement)
 			ds_list_add(categoryViews[scr_getCategoryEnumFromString(currentElement.category)], currentElement)
 		}
