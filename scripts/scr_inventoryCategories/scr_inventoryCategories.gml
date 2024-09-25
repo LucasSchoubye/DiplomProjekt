@@ -5,7 +5,7 @@ var screenTop = 50
 var screenMidX = room_width/2
 var screenMidY = room_height/2
 var itemStartX = room_width*0.23
-var itemStartY = 100
+var itemStartY = room_height*0.125
 var itemHeight = room_height*0.3
 var itemCounter = 0
 var itemRow = 0
@@ -13,17 +13,17 @@ var itemWidth = room_width*0.15
 var inventoryElements = obj_inventoryController.inventoryElements
 var currentList = inventoryElements
 
-currentList = obj_storeController.categoryViews[Categories.Clothes]
+currentList = obj_inventoryController.inventoryElements
 
 switch(currentCategory) {
 	case Categories.All:
 		currentList = obj_inventoryController.inventoryElements
 		break;
 	case Categories.Clothes:
-		currentList = obj_storeController.categoryViews[Categories.Clothes]
+		currentList = obj_inventoryController.categoryViews[Categories.Clothes]
 		break;
 	case Categories.Typeracer:
-		currentList = obj_storeController.categoryViews[Categories.Typeracer]
+		currentList = obj_inventoryController.categoryViews[Categories.Typeracer]
 		break;
 }
 

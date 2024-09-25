@@ -4,7 +4,7 @@ function scr_categories(){
 var screenMidX = room_width/2
 var screenMidY = room_height/2
 var itemStartX = room_width*0.23
-var itemStartY = 100
+var itemStartY = room_height*0.125
 var itemHeight = room_height*0.3
 var itemCounter = 0
 var itemRow = 0
@@ -12,7 +12,7 @@ var itemWidth = room_width*0.15
 var storeElements = obj_storeController.storeElements
 var currentList = storeElements
 
-currentList = obj_storeController.categoryViews[Categories.Clothes]
+currentList = obj_storeController.storeElements
 
 switch(currentCategory) {
 	case Categories.All:
@@ -39,6 +39,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				var newInventoryElement = new InventoryElement() 
 				newInventoryElement.itemName = currentElement.itemName
 				newInventoryElement.itemID = currentElement.itemID
+				newInventoryElement.category = currentElement.category
 				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
 				obj_firestore_controller.UpdateStudentInventory()
 				obj_firestore_controller.UpdateBalance()
