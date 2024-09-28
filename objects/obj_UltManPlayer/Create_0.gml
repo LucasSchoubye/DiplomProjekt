@@ -6,6 +6,7 @@ animCycle = random_range(0,360)
 facing = 1
 targetX = x
 targetY = y
+name = ["",""]
 
 // gamestate
 targetSpd = 400

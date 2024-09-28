@@ -103,6 +103,7 @@
     {"name":"scr_drawTyping","order":5,"path":"scripts/scr_drawTyping/scr_drawTyping.yy",},
     {"name":"scr_UltManActiontypes","order":2,"path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},
     {"name":"scr_UltManCreateEnemyTeam","order":1,"path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},
+    {"name":"scr_UltManCreateManagerTeam","order":2,"path":"scripts/scr_UltManCreateManagerTeam/scr_UltManCreateManagerTeam.yy",},
     {"name":"scr_UltManDefensiveStateControl","order":5,"path":"scripts/scr_UltManDefensiveStateControl/scr_UltManDefensiveStateControl.yy",},
     {"name":"scr_UltManDoActionType","order":11,"path":"scripts/scr_UltManDoActionType/scr_UltManDoActionType.yy",},
     {"name":"scr_UltManDrawField","order":4,"path":"scripts/scr_UltManDrawField/scr_UltManDrawField.yy",},

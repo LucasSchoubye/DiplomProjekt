@@ -28,3 +28,7 @@ image_angle = image_angle/1.08
 // Draw acceleration
 accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.4
 accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
+
+// Draw name
+draw_set_halign(fa_center)
+draw_text(x,y,name[1])

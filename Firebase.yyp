@@ -238,6 +238,7 @@
     {"id":{"name":"scr_storeSetup","path":"scripts/scr_storeSetup/scr_storeSetup.yy",},},
     {"id":{"name":"scr_UltManActiontypes","path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},},
     {"id":{"name":"scr_UltManCreateEnemyTeam","path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},},
+    {"id":{"name":"scr_UltManCreateManagerTeam","path":"scripts/scr_UltManCreateManagerTeam/scr_UltManCreateManagerTeam.yy",},},
     {"id":{"name":"scr_UltManCreateTeam","path":"scripts/scr_UltManCreateTeam/scr_UltManCreateTeam.yy",},},
     {"id":{"name":"scr_UltManDefensiveStateControl","path":"scripts/scr_UltManDefensiveStateControl/scr_UltManDefensiveStateControl.yy",},},
     {"id":{"name":"scr_UltManDoActionType","path":"scripts/scr_UltManDoActionType/scr_UltManDoActionType.yy",},},

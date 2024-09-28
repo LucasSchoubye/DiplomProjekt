@@ -37,6 +37,15 @@ var teamSideShifting = 0.2
 			posMaxY = formationStartY + room_height*teamSideShifting
 			posMinY = formationStartY - room_height*teamSideShifting
 		break;
+		
+		case FootballPositions.LWB:
+		case FootballPositions.RWB:
+			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.85
+			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.01
+			posMaxY = formationStartY + room_height*teamSideShifting
+			posMinY = formationStartY - room_height*teamSideShifting
+		break;
+		
 		case FootballPositions.CB:
 			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.5
 			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.05
@@ -51,10 +60,25 @@ var teamSideShifting = 0.2
 			posMinY = formationStartY - room_height*teamSideShifting
 		break;
 		
+		case FootballPositions.CDM:
+			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.65
+			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.2
+			posMaxY = formationStartY + room_height*teamSideShifting
+			posMinY = formationStartY - room_height*teamSideShifting
+		break;
+		
 		case FootballPositions.LM:
 		case FootballPositions.RM:
 			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.95
 			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.35
+			posMaxY = formationStartY + room_height*teamSideShifting
+			posMinY = formationStartY - room_height*teamSideShifting
+		break;
+		
+		case FootballPositions.LW:
+		case FootballPositions.RW:
+			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.92
+			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.42
 			posMaxY = formationStartY + room_height*teamSideShifting
 			posMinY = formationStartY - room_height*teamSideShifting
 		break;
