@@ -184,12 +184,21 @@ function MovePlayerColumn(fromColumn, toColumn)
 {
 	var player = obj_UltManManagerController.fieldViewFromPlayer
 	
-	if (player != undefined && toColumn != undefined)
+	if (player != undefined && toColumn != undefined && ds_list_find_index(player.playableColumns, toColumn) != -1)
 	{
 		var insertIndex = GetPlayerInsertPos()
 		
-		ds_list_insert(obj_UltManManagerController.formationColumns[toColumn], insertIndex, player)
-		ds_list_delete(obj_UltManManagerController.formationColumns[fromColumn], ds_list_find_index(obj_UltManManagerController.formationColumns[fromColumn], player))
+		if (toColumn != fromColumn)
+		{
+			ds_list_insert(obj_UltManManagerController.formationColumns[toColumn], insertIndex, player)
+			ds_list_delete(obj_UltManManagerController.formationColumns[fromColumn], ds_list_find_index(obj_UltManManagerController.formationColumns[fromColumn], player))
+		}
+		else
+		{
+			ds_list_delete(obj_UltManManagerController.formationColumns[fromColumn], ds_list_find_index(obj_UltManManagerController.formationColumns[fromColumn], player))
+			insertIndex = GetPlayerInsertPos()
+			ds_list_insert(obj_UltManManagerController.formationColumns[toColumn], insertIndex, player)
+		}
 		
 		// Update positions from old list
 		for (var i = 0; i < ds_list_size(formationColumns[fromColumn]); ++i) {

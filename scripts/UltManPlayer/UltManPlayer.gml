@@ -12,7 +12,6 @@ function UltManPlayer() constructor {
 	position = FootballPositions.SUB
 	preferredPosition = FootballPositions.ST
 	playableColumns = ds_list_create()
-	ds_list_add(playableColumns, FormationColumns.DefensiveMidfielder, FormationColumns.Midfield, FormationColumns.Goalkeeper)
 	condition = 95
 	
 	// Rating
@@ -35,6 +34,7 @@ function UltManPlayer() constructor {
 		draw_set_valign(fa_middle)
 		draw_text(X,Y+height*1.5,name[1])
 		draw_text(X,Y+height*0.5,PosToString())
+		draw_set_color(c_white)
 		
 		// Action
 		if (mouse_check_button_pressed(mb_left) && mouse_x > X - width/2 && mouse_x < X + width/2 &&
