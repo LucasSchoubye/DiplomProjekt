@@ -45,7 +45,8 @@ function UltManPlayer() constructor {
 		
 		// Action
 		if (mouse_check_button_pressed(mb_left) && mouse_x > X - width/2 && mouse_x < X + width/2 &&
-			mouse_y > Y && mouse_y < Y + height)
+			mouse_y > Y && mouse_y < Y + height &&
+			position != FootballPositions.SUB)
 		{
 			obj_UltManManagerController.fieldViewFromPlayer = self
 		}
