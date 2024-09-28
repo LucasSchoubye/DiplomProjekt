@@ -17,23 +17,30 @@ function UltManPlayer() constructor {
 	// Rating
 	overallRating = 84
 	
+	// Drawing animation
+	curX = room_width/2
+	curY = room_height/2
+	
 	function DrawPlayer(X,Y, color = #43C44A)
 	{
 		var width = 90
 		var height = 30
 		
+		curX += (X - curX)/5
+		curY += (Y - curY)/5
+		
 		// Outline
 		draw_set_color(color)
-		draw_roundrect(X-width/2, Y, X+width/2, Y+height, false)
+		draw_roundrect(curX-width/2, curY, curX+width/2, curY+height, false)
 		draw_set_color(c_white)
-		draw_roundrect(X-width/2, Y, X+width/2, Y+height, true)
+		draw_roundrect(curX-width/2, curY, curX+width/2, curY+height, true)
 		
 		// Text
 		draw_set_font(fn_textLato)
 		draw_set_halign(fa_center)
 		draw_set_valign(fa_middle)
-		draw_text(X,Y+height*1.5,name[1])
-		draw_text(X,Y+height*0.5,PosToString())
+		draw_text(curX,curY+height*1.5,name[1])
+		draw_text(curX,curY+height*0.5,PosToString())
 		draw_set_color(c_white)
 		
 		// Action
