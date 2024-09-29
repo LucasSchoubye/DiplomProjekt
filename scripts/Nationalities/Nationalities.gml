@@ -5,9 +5,23 @@ function Nationalities(){
 enum Nationality
 {
 	DK,
+	SWE,
+	NOR,
+	DE,
+	BEL,
 	ENG,
+	CRO,
+	HOL,
+	ITA,
+	FRA,
 	ESP,
-	POR
+	POR,
+	ARG,
+	BRA,
+	USA,
+	NIG,
+	SEN,
+	CAM,
 }
 
 }

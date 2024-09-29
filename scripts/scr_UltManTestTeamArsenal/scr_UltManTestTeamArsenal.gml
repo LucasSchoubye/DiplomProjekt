@@ -96,6 +96,7 @@ var player = new UltManPlayer()
 player.name = ["Bukayo", "Saka"]
 player.position = FootballPositions.RW
 player.preferredPosition = FootballPositions.RW
+player.dribbling = 4000
 ds_list_add(formationColumns[FormationColumns.Attackers], player)
 ds_list_add(player.playableColumns, FormationColumns.Attackers)
 ds_list_add(player.playableColumns, FormationColumns.OffensiveMidfield)

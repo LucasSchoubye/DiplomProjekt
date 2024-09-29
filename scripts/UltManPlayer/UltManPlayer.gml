@@ -3,16 +3,18 @@
 function UltManPlayer() constructor {
 
 	// Generel Information
-	name = ["Cristiano", "Ronaldo"]
+	name = scr_UltManRandomName()
 	number = "7"
-	age = 29
-	nationality = Nationality.POR
+	age = 22
+	nationality = Nationality.DK
+	height = 180
 
 	// Tactics
 	position = FootballPositions.SUB
 	preferredPosition = FootballPositions.ST
 	playableColumns = ds_list_create()
 	condition = 95
+	scr_UltManRandomPosition(self)
 	
 	// Rating
 	overallRating = 84
@@ -45,7 +47,8 @@ function UltManPlayer() constructor {
 		draw_set_font(fn_textLato)
 		draw_set_halign(fa_center)
 		draw_set_valign(fa_middle)
-		draw_text(curX,curY+height*1.5,name[1])
+		scr_drawOutlineText(curX,curY+height*1.5,c_black,c_white,name[1])
+		//draw_text(curX,curY+height*1.5,name[1])
 		draw_text(curX,curY+height*0.5,PosToString())
 		draw_set_color(c_white)
 		
