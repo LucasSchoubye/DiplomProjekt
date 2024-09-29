@@ -16,7 +16,7 @@ scr_UltManSetPositionCoordinates(position,playerTeam)
 // Calculation
 targetSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/2
 if (targetSpd > topSpd){targetSpd = topSpd}
-targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.5
+targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.15
 if (targetShootSpd > topPassSpd){targetShootSpd = topPassSpd}
 
 // animation

@@ -42,12 +42,7 @@ function scr_UltManActiontypes(){
 	else
 	{
 		// Draw frozen action
-		var drawLineObject = controlledPlayer
-		if (selectedAction = ActionType.Shoot)
-		{
-			drawLineObject = obj_UltManBall
-		}
-			
+		var drawLineObject = obj_UltManBall
 		draw_line(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
 	}
 	

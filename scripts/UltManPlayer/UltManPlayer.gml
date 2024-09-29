@@ -16,6 +16,12 @@ function UltManPlayer() constructor {
 	
 	// Rating
 	overallRating = 84
+	topSpd = 300
+	topShootSpd = 2000
+	topPassSpd = 2000
+	strength = 300
+	defence = 200
+	dribbling = 200
 	
 	// Drawing animation
 	curX = room_width/2

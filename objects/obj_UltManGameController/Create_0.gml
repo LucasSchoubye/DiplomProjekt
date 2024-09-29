@@ -46,12 +46,12 @@ timer = 0
 instance_create_depth(room_width/2, room_height/2, 0, obj_UltManBall)
 
 // Create teams
-//scr_UltManCreateTeam()
 scr_UltManCreateEnemyTeam()
 scr_UltManCreateManagerTeam()
 
 scr_UltManKickoffSetup(false)
 
+audio_play_sound(sou_UltManCheer, 1, true, 0.2)
 
 // Functions
 function AnsweredCorrect() 

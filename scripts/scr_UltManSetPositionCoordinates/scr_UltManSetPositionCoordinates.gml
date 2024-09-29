@@ -69,6 +69,7 @@ var teamSideShifting = 0.2
 		
 		case FootballPositions.LM:
 		case FootballPositions.RM:
+		case FootballPositions.CAM:
 			posMaxX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.95
 			posMinX = rightTeamPosMod1 - room_width*rightTeamPosMod2*0.35
 			posMaxY = formationStartY + room_height*teamSideShifting

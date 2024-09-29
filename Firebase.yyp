@@ -268,6 +268,7 @@
     {"id":{"name":"sou_breakCar","path":"sounds/sou_breakCar/sou_breakCar.yy",},},
     {"id":{"name":"sou_fastCar","path":"sounds/sou_fastCar/sou_fastCar.yy",},},
     {"id":{"name":"sou_purchase","path":"sounds/sou_purchase/sou_purchase.yy",},},
+    {"id":{"name":"sou_UltManCheer","path":"sounds/sou_UltManCheer/sou_UltManCheer.yy",},},
     {"id":{"name":"sou_UltManKickLight","path":"sounds/sou_UltManKickLight/sou_UltManKickLight.yy",},},
     {"id":{"name":"spr_arsenalPlaceholder","path":"sprites/spr_arsenalPlaceholder/spr_arsenalPlaceholder.yy",},},
     {"id":{"name":"spr_basicParticle","path":"sprites/spr_basicParticle/spr_basicParticle.yy",},},

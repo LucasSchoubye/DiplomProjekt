@@ -66,6 +66,7 @@ var player = new UltManPlayer()
 player.name = ["Martin", "Odegaard"]
 player.position = FootballPositions.CM
 player.preferredPosition = FootballPositions.CM
+player.topPassSpd = 6000
 ds_list_add(formationColumns[FormationColumns.Midfield], player)
 ds_list_add(player.playableColumns, FormationColumns.OffensiveMidfield)
 ds_list_add(player.playableColumns, FormationColumns.Midfield)
@@ -77,6 +78,7 @@ var player = new UltManPlayer()
 player.name = ["Gabriel", "Martinelli"]
 player.position = FootballPositions.LW
 player.preferredPosition = FootballPositions.LW
+player.topSpd = 450
 ds_list_add(formationColumns[FormationColumns.Attackers], player)
 ds_list_add(player.playableColumns, FormationColumns.Attackers)
 ds_list_add(squad, player)
@@ -111,6 +113,15 @@ var player = new UltManPlayer()
 player.name = ["J.", "Jorginho"]
 player.position = FootballPositions.SUB
 player.preferredPosition = FootballPositions.CDM
+ds_list_add(player.playableColumns, FormationColumns.DefensiveMidfielder)
+ds_list_add(player.playableColumns, FormationColumns.Midfield)
+ds_list_add(squad, player)
+
+var player = new UltManPlayer()
+player.name = ["Mikel", "Merino"]
+player.position = FootballPositions.SUB
+player.preferredPosition = FootballPositions.CM
+ds_list_add(player.playableColumns, FormationColumns.OffensiveMidfield)
 ds_list_add(player.playableColumns, FormationColumns.DefensiveMidfielder)
 ds_list_add(player.playableColumns, FormationColumns.Midfield)
 ds_list_add(squad, player)

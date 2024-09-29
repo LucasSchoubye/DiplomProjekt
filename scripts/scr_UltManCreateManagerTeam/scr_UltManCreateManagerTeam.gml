@@ -11,8 +11,18 @@ function scr_UltManCreateManagerTeam(){
 		for (var i = 0; i < ds_list_size(list); ++i) 
 		{
 		    var player = instance_create_depth(line * room_width*-0.08 + room_width*0.4, room_height/(ds_list_size(list)+1)*(i+1) ,0,obj_UltManPlayer)
-			player.position = ds_list_find_value(list, i).position
-			player.name = ds_list_find_value(list, i).name
+			var manPlayer = ds_list_find_value(list, i)
+			
+			player.position = manPlayer.position
+			player.name = manPlayer.name
+			
+			// Stats
+			player.defence = manPlayer.defence
+			player.dribbling = manPlayer.dribbling
+			player.topSpd = manPlayer.topSpd
+			player.strength = manPlayer.strength
+			player.topPassSpd = manPlayer.topPassSpd
+			player.topShootSpd = manPlayer.topShootSpd
 		}
 	}
 

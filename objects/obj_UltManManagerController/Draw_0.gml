@@ -2,6 +2,7 @@
 // You can write your code in this editor
 
 if (room = rm_UltManOverview){
+	audio_stop_sound(sou_UltManCheer)
 
 	var menuX = room_width * 0.0225
 	var menuY = room_height * 0.15
