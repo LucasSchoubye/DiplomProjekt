@@ -66,7 +66,7 @@ var player = new UltManPlayer()
 player.name = ["Martin", "Odegaard"]
 player.position = FootballPositions.CM
 player.preferredPosition = FootballPositions.CM
-player.topPassSpd = 6000
+player.topPassSpd = 4500
 ds_list_add(formationColumns[FormationColumns.Midfield], player)
 ds_list_add(player.playableColumns, FormationColumns.OffensiveMidfield)
 ds_list_add(player.playableColumns, FormationColumns.Midfield)
