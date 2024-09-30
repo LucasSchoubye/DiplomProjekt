@@ -2,63 +2,78 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManActiontypes(){
 
-switch(selectedAction)
-{
-	case ActionType.Run:
-		// is line blocked
-		if (collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManCone, true, true) or
-			collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true))
+	var goalAttempt = false
+	
+	// Action selection
+	if (!questionMenuActive)
+	{
+		switch(selectedAction)
 		{
-			draw_set_color(c_maroon)
-			playAllowed = false
-		}	
-		draw_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY)
-		draw_set_color(c_white)
-	break;
-	case ActionType.Shoot:
-		targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
-		targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
-		if (instance_exists(ballcarrier))
-		{
-			if (ballcarrier.id != controlledPlayer.id)
-				playAllowed = false
+			case ActionType.Run:
+				scr_UltManRunning()
+			break;
+			case ActionType.Shoot:
+			
+				var targetGoal = obj_UltManGameController.goals[obj_UltManGameController.targetGoalIndex]
+				if (targetGoal.CheckMouseCollision())
+				{
+					if (point_distance(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y) < controlledPlayer.topShootSpd)
+					{
+						// Shoot on target
+						draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+					}
+					else
+					{
+						playAllowed = false
+						draw_line_color(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y, c_maroon, c_maroon)
+					}
+					goalAttempt = true
+				}
+				else
+				{
+					//Pass
+					targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
+					targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
+					scr_UltManPassing()
+				}
+			break;
 		}
-		else
+	}
+	else
+	{
+		// Draw frozen action
+		var drawLineObject = obj_UltManBall
+		draw_line(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
+	}
+	
+	// Freeze Game
+	if (mouse_check_button_pressed(mb_left) && selectedAction != ActionType.Run && playAllowed)
+	{
+		var commandedPlayerMod = 0
+		if (instance_exists(commandedPlayer))
+			commandedPlayerMod = 1
+		
+		questionMenuActive = true
+		frozenTargetX = targetX
+		frozenTargetY = targetY
+		
+		if (goalAttempt)
 		{
-			playAllowed = false
+			frozenTargetX = mouse_x
+			frozenTargetY = mouse_y
 		}
 		
-		if (playAllowed = true)	
-			draw_line(obj_UltManBall.x, obj_UltManBall.y, targetX, targetY)
-	break;
-}
-
-if (mouse_check_button_pressed(mb_left) && playAllowed)
-{
-	switch(selectedAction)
-	{
-		case ActionType.Run:
-			controlledPlayer.MoveToPos(targetX, targetY)
-		break;
-		case ActionType.Shoot:
-			controlledPlayer.ShootToPos(targetX, targetY)
-		break;
+		frozenActionType = selectedAction
+		frozenGoalAttempt = goalAttempt
+		skillCheckAmount = round(point_distance(frozenTargetX, frozenTargetY, controlledPlayer.x, controlledPlayer.y)/600) + commandedPlayerMod
+		skillCheckAttemptsCounter = 0
+		skillCheckCorrectCounter = 0
+		frozenShotMissed = false
+		alarm[0] = 2
 	}
 	
-	// Perform command move
-	if (instance_exists(obj_UltManGameController.commandedPlayer))
-	{		
-		obj_UltManGameController.commandedPlayer.MoveToPos(obj_UltManGameController.commandTargetX, obj_UltManGameController.commandTargetY)
-		obj_UltManGameController.commandTargetX = undefined
-		obj_UltManGameController.commandTargetY = undefined
-		obj_UltManGameController.commandedPlayer = undefined
-	}
-	
-	// All opponents perform their move
-	with(obj_UltManOpponent)
+	if (mouse_check_button_pressed(mb_left) && playAllowed && questionMenuActive = false)
 	{
-		PerformAction()
+		scr_UltManDoActionType(selectedAction, targetX, targetY, goalAttempt)
 	}
-}
-
 }

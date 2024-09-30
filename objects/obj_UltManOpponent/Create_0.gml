@@ -4,37 +4,56 @@ enum UltManNpcState {
 
 	HoldPosition,
 	PressPlayer,
+	MarkMan,
 	
 }
 
 // Inherit the parent event
 event_inherited();
 
-state = UltManNpcState.PressPlayer
+state = UltManNpcState.HoldPosition
 image_blend = c_ltgray
 playerTeam = false
+defence = 1000
+pressingDistance = 900
+topSpd = topSpd*1.2
+
+
 
 // Functions
-function PerformAction()
+function PerformAction(X,Y)
 {
-	switch(state)
+	if (instance_exists(obj_UltManBall.owner))
 	{
-		case UltManNpcState.HoldPosition:
-		break
-		
-		case UltManNpcState.PressPlayer:
-			var player = obj_UltManGameController.controlledPlayer
-			var PosX = x + lengthdir_x(topSpd,point_direction(x,y,player.x,player.y))
-			var PosY = y + lengthdir_y(topSpd,point_direction(x,y,player.x,player.y))
-			MoveToPos(PosX,PosY)
-			
-			if (point_distance(x,y,obj_UltManBall.x, obj_UltManBall.y) < 300)
+		if (obj_UltManBall.owner.playerTeam = playerTeam)
+		{
+			if (obj_UltManBall.owner != id)
 			{
-				obj_UltManBall.owner = id
-				state = UltManNpcState.HoldPosition
-				obj_UltManBall.readyForPickup = false
-				obj_UltManBall.alarm[0] = 30
+				scr_UltManOffensiveStateControl(X,Y)
 			}
-		break
+		}
+		else
+		{
+			scr_UltManDefensiveStateControl(X,Y)
+		}
+	}
+	else
+	{
+		scr_UltManDefensiveStateControl(X,Y)
+	}
+	
+}
+
+function PerformBallcarrierAction(X,Y)
+{
+	if (instance_exists(obj_UltManBall.owner))
+	{
+		if (obj_UltManBall.owner.playerTeam = playerTeam)
+		{
+			if (obj_UltManBall.owner = id and obj_UltManBall.readyForPickup = true)
+			{
+				scr_UltManOffensiveStateControl(X,Y)
+			}
+		}
 	}
 }

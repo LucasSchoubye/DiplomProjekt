@@ -13,6 +13,7 @@ function MenuGridElement() constructor {
 	itemTitleY = itemHeight-40
 	itemImgStartY = itemCenterY-10
 	textHeight = 10
+	itemStartX = room_height*0.125
 	categorySprite = spr_theOneAndOnlySmall
 	categoryWidth = room_width*0.2
 	categoryHeight = room_height*0.07
@@ -22,7 +23,7 @@ function MenuGridElement() constructor {
 
 	
 	function DrawItem(xValue,yValue) {
-		if(yValue >= 100) {
+		if(yValue >= itemStartX) {
 			switch(itemName){
 				case "Typeracer":
 					draw_sprite(spr_typeracerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
@@ -33,13 +34,13 @@ function MenuGridElement() constructor {
 			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		else if(yValue+itemHeight >= 100) {
-			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
+		else if(yValue+itemHeight >= itemStartX) {
+			draw_rectangle(xValue,itemStartX,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		if(yValue+itemPriceY-textHeight >= 100) {
+		if(yValue+itemPriceY-textHeight >= itemStartX) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
 		}
-		if(yValue+itemTitleY-textHeight >= 100) {
+		if(yValue+itemTitleY-textHeight >= itemStartX) {
 			//draw_text(xValue+itemCenterX,yValue+itemTitleY,"5000$")
 		}
 		
@@ -47,11 +48,11 @@ function MenuGridElement() constructor {
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
 				draw_set_alpha(0.3)
-				if(yValue >= 100) {
+				if(yValue >= itemStartX) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
 				}
-				else if(yValue+itemHeight >= 100) {
-					draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,false)
+				else if(yValue+itemHeight >= itemStartX) {
+					draw_rectangle(xValue,itemStartX,xValue+itemWidth,yValue+itemHeight,false)
 				}
 				draw_set_alpha(1)
 			}
@@ -64,7 +65,7 @@ function MenuGridElement() constructor {
 					room_goto(rm_typeracer)
 				break
 				case "Ultimate Manager":
-					room_goto(rm_UltManMatch)
+					room_goto(rm_UltManOverview)
 				break
 			}
 			}

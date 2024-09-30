@@ -23,5 +23,7 @@ else if (readyForPickup = true)
 	}
 }
 
-x -= (x - targetX)/6
-y -= (y - targetY)/5
+x -= (x - targetX)/10
+y -= (y - targetY)/9
+
+// Score goals
