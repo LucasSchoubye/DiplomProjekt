@@ -253,6 +253,7 @@
     {"id":{"name":"scr_UltManDrawScoreline","path":"scripts/scr_UltManDrawScoreline/scr_UltManDrawScoreline.yy",},},
     {"id":{"name":"scr_UltManFindBestPassOption","path":"scripts/scr_UltManFindBestPassOption/scr_UltManFindBestPassOption.yy",},},
     {"id":{"name":"scr_ultManFixtures","path":"scripts/scr_ultManFixtures/scr_ultManFixtures.yy",},},
+    {"id":{"name":"scr_UltManGeneratePlayer","path":"scripts/scr_UltManGeneratePlayer/scr_UltManGeneratePlayer.yy",},},
     {"id":{"name":"scr_ultManHome","path":"scripts/scr_ultManHome/scr_ultManHome.yy",},},
     {"id":{"name":"scr_UltManKeeperPosition","path":"scripts/scr_UltManKeeperPosition/scr_UltManKeeperPosition.yy",},},
     {"id":{"name":"scr_UltManKickoffSetup","path":"scripts/scr_UltManKickoffSetup/scr_UltManKickoffSetup.yy",},},

@@ -10,5 +10,7 @@ function scr_UltManBronzePack(){
 	
 	// Gameplay
 	player.preferredPosition = scr_UltManRandomPosition
+	scr_UltManGenerateStats()
+	
 
 }
