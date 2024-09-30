@@ -4,7 +4,7 @@ var screenTop = 50
 var screenMidX = room_width/2
 var screenMidY = room_height/2
 var itemStartX = room_width*0.23
-var itemStartY = 100
+var itemStartY = room_height*0.125
 var itemHeight = room_height*0.3
 var itemCounter = 0
 var itemRow = 0
@@ -12,8 +12,12 @@ var itemWidth = room_width*0.15
 var categoryWidth = room_width*0.2
 var categoryHeight = room_height*0.07
 var categoryStartX = room_width*0.01
-var categoryStartY = 100
+var categoryStartY = room_height*0.125
 var categoryCounter = 0
+var backButtonStartY = room_height*0.035
+var backButtonHeight = categoryHeight/1.5
+var backButtonWidth = categoryWidth/3
+
 
 if(room == rm_minigameMenu) {
 
@@ -36,7 +40,19 @@ for (var i = 0; i < ds_list_size(categoryElements); ++i) {
 	categoryCounter++
 }
 
-
+// Back button
+draw_rectangle(categoryStartX,backButtonStartY,categoryStartX + backButtonWidth,backButtonStartY + backButtonHeight,true)
+draw_text(categoryStartX + backButtonWidth/2,backButtonStartY+backButtonHeight/2,"Back")
+if(mouse_x > categoryStartX && mouse_x < categoryStartX+backButtonWidth) {
+		if(mouse_y > backButtonStartY && mouse_y < backButtonStartY+backButtonHeight) {
+			draw_set_alpha(0.3)
+			draw_rectangle(categoryStartX,backButtonStartY,categoryStartX + backButtonWidth,backButtonStartY + backButtonHeight,false)
+			draw_set_alpha(1)
+			if (mouse_check_button_pressed(mb_left)){
+				room_goto(rm_menu)
+			}
+		}
+	}
 if(keyboard_check(vk_backspace)) {
 	room_goto(rm_menu)
 }

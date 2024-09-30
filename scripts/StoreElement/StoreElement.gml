@@ -3,7 +3,7 @@
 
 function StoreElement() constructor {
 	itemName = ""
-	balance = ""
+	balance = undefined
 	price = undefined
 	itemID = ""
 	isOwned = false
@@ -16,17 +16,18 @@ function StoreElement() constructor {
 	itemTitleY = itemHeight-40
 	itemImgStartY = itemCenterY-20
 	textHeight = 10
+	categoryStartY = room_height*0.125
 	categorySprite = spr_theOneAndOnlySmall
 	categoryWidth = room_width*0.2
 	categoryHeight = room_height*0.07
 	categoryTextStartX =  room_width*0.01
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
+	category = ""
 	
 
-	
 	function DrawItem(xValue,yValue) {
-		if(yValue >= 100) {
+		if(yValue >= categoryStartY) {
 			switch(itemName){
 				case "Cat":
 					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
@@ -40,27 +41,27 @@ function StoreElement() constructor {
 			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		else if(yValue+itemHeight >= 100) {
-			draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,true)
+		else if(yValue+itemHeight >= categoryStartY) {
+			draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,true)
 		}
-		if(yValue+itemPriceY-textHeight >= 100 && isOwned == true) {
+		if(yValue+itemPriceY-textHeight >= categoryStartY && isOwned == true) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,"Owned")
 		}
-		else if(yValue+itemPriceY-textHeight >= 100) {
+		else if(yValue+itemPriceY-textHeight >= categoryStartY) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,price+"$")
 		}
-		if(yValue+itemTitleY-textHeight >= 100) {
+		if(yValue+itemTitleY-textHeight >= categoryStartY) {
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
 				draw_set_alpha(0.3)
-				if(yValue >= 100) {
+				if(yValue >= categoryStartY) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
 				}
-				else if(yValue+itemHeight >= 100) {
-					draw_rectangle(xValue,100,xValue+itemWidth,yValue+itemHeight,false)
+				else if(yValue+itemHeight >= categoryStartY) {
+					draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,false)
 				}
 				obj_storeController.selectedPrice = price
 				draw_set_alpha(1)
@@ -68,20 +69,6 @@ function StoreElement() constructor {
 		}
 	}
 	
-	function DrawCategory(xValue,yValue) {
-		draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
-		draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
-		draw_set_halign(fa_left)
-		draw_text(xValue+categoryTextStartX,yValue+categoryCenterY,"YOYOYO CATEGORY BRO")
-		draw_set_halign(fa_center)
-		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
-			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
-				draw_set_alpha(0.3)
-				draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
-				draw_set_alpha(1)
-			}
-		}
-	}
 }
 
 
