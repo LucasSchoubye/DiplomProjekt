@@ -6,12 +6,15 @@ playerId = undefined
 sessionId = undefined
 sessionMap = undefined
 answerTimer = 0
+categories = undefined
+inventoryID = undefined
 
 // Login 
 username = undefined
 password = undefined
 schoolId = undefined
 classId = undefined
+itemID = undefined
 
 // Functions
 function RequestAllowedGames()
@@ -33,6 +36,93 @@ function RespondAllowedGames(gamesList)
 		obj_menuGridController.GetGameData(value)
 	}
 }
+
+function RequestCategories() {
+	FirebaseFirestore("shop items/categories/")
+}
+
+function RespondCategories(categoryList) {
+	var storeMap = json_decode(storeList)
+	var idArray = []
+	ds_map_keys_to_array(storeMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(storeMap[? ID]);
+		obj_storeController.GetStoreData(value,ID)
+		obj_inventoryController.GetInventoryData(value)
+	}
+}
+
+function RequestStoreTyperacerItems() {
+	FirebaseFirestore("/shop items/categories/typeracer").Read()
+}
+function RequestStoreClotheItems() {
+	FirebaseFirestore("/shop items/categories/clothes").Read()
+}
+
+
+function RespondStoreItems(storeList,path) {
+	var storeMap = json_decode(storeList)
+	var idArray = []
+	ds_map_keys_to_array(storeMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+	    var ID = idArray[i];
+	    var value = json_decode(storeMap[? ID]);
+		value[? "category"] = path
+		obj_storeController.GetStoreData(value,ID)
+	}
+}
+
+function RequestBalance() {
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Read()
+}
+
+function RespondBalance(bankJSON) {
+	var balanceMap = json_decode(bankJSON)
+	
+	obj_storeController.GetBalanceData(balanceMap)
+	obj_inventoryController.GetBalanceData(balanceMap)
+}
+
+function UpdateBalance() {
+	var balanceMap = ds_map_create()
+	balanceMap[?"balance"] = obj_storeController.balance
+	var json = json_encode(balanceMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/bank/").Set(json)
+}
+
+function RequestStudentInventory() {
+		FirebaseFirestore("/students/"+playerId+"/inventory/").Read()
+}
+
+function RespondStudentInventory(inventoryList) {
+	var inventoryMap = json_decode(inventoryList)
+	var idArray = []
+	ds_map_keys_to_array(inventoryMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+		// Check their username
+	    var ID = idArray[i];
+	    var value = json_decode(inventoryMap[? ID]);
+	
+		obj_inventoryController.GetInventoryData(value)
+	}	
+}
+
+function UpdateStudentInventory() {
+	var inventoryMap = ds_map_create()
+	inventoryMap[?"shopItemRef"] = "/shop items/categories/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).category+"/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
+	
+	var json = json_encode(inventoryMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
+}
+
 
 function StartSession(game)
 {		
@@ -77,6 +167,8 @@ function RequestLogin(loginUsername, loginPassword)
 
 function ValidateLogin(map)
 {
+	try
+	{
 	decodedMap = json_decode(map)
 	idArray = []
 	ds_map_keys_to_array(decodedMap, idArray)
@@ -112,6 +204,11 @@ function ValidateLogin(map)
 	
 	if (playerId = undefined)
 		show_message("Wrong password or username")
+	}
+	catch(error)
+	{
+		room_goto(rm_UltManOverview)
+	}
 }
 
 function RequestStudent()
@@ -154,6 +251,7 @@ function RepondStudent(map)
 	RequestAllowedGames()
 	
 }
+
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {
