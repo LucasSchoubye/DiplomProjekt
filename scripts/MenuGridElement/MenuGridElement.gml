@@ -67,6 +67,8 @@ function MenuGridElement() constructor {
 				case "Ultimate Manager":
 					room_goto(rm_UltManOverview)
 				break
+				case "Fight The Dungeon":
+					room_goto(rm_FtD)
 			}
 			}
 		}
