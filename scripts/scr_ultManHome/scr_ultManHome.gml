@@ -103,13 +103,24 @@ function scr_ultManHome(){
 		draw_set_color(resultColor)
 		draw_text(previousMeetingsX - 2*previousMeetingsPaddingX + i * previousMeetingsPaddingX, previousMeetingsY, resultText)
 	}
-	
+	var leagueTableLeft = room_width * 0.725;
+	var leagueTableTop = room_height * 0.08;
 	for (var i = 0; i < ds_list_size(teamList); ++i) {
-	    
 		var team = ds_list_find_value(teamList, i)
-		
-		show_debug_message(team.clubName);
-		
+		var shownTeamName = team.clubName;
+		if (string_width(shownTeamName) > 150) {
+		    shownTeamName = string_copy(shownTeamName,1, 14);
+		}
+		var sepLenght = leagueTableTop + 30*(i+1)
+		draw_set_halign(fa_center)
+		draw_text(leagueTableLeft,sepLenght, i+1);
+		draw_set_halign(fa_left)
+		draw_text(leagueTableLeft + 20,sepLenght, shownTeamName);
+		draw_text(leagueTableLeft + 180,sepLenght, team.matchesPlayed);
+		draw_text(leagueTableLeft + 200,sepLenght, team.matchesWon);
+		draw_text(leagueTableLeft + 220,sepLenght, team.matchesDrawn);
+		draw_text(leagueTableLeft + 240,sepLenght, team.matchesLost);
+		draw_text(leagueTableLeft + 260,sepLenght, team.totalPoints);
 	}
 	
 	draw_set_color(c_white)

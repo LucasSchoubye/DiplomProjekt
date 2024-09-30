@@ -26,16 +26,16 @@ function scr_ultManTransferMarket(){
 	
 	draw_rectangle(sellBoxLeft, sellBoxTop, sellBoxRight, sellBoxBottom, true)
 	
-	for (var i = 0; i < array_length(Packs); ++i) {
+	//for (var i = 0; i < array_length(Packs); ++i) {
 		
-		x1val = 
-		x1 = room_height * 0.1
+	//	x1val = 
+	//	x1 = room_height * 0.1
 		
-		draw_roundrect_color(x1,y1,x2,y2, colour,colour, false )
+	//	draw_roundrect_color(x1,y1,x2,y2, colour,colour, false )
 		
-	}
+	//}
 	
-	draw_roundrect_color(x1,y1,x2,y2, colour,colour, false )
+	//draw_roundrect_color(x1,y1,x2,y2, colour,colour, false )
 	
 	// reset stuff
 	draw_set_valign(currentVAlign)
