@@ -21,9 +21,12 @@ function UltManPlayer() constructor {
 	topSpd = 300
 	topShootSpd = 2000
 	topPassSpd = 2000
+	shooting = 200
+	passing = 200
 	strength = 300
 	defence = 200
 	dribbling = 200
+	scr_UltManGeneratePlayerStats(self, position, UltManPackTier.Bronze)
 	
 	// Drawing animation
 	curX = room_width/2
