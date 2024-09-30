@@ -1,12 +1,13 @@
 {
   "FolderOrderSettings":[
     {"name":"Fight The Dungeon","order":1,"path":"folders/Assets/Fight The Dungeon.yy",},
-    {"name":"Structs","order":6,"path":"folders/Assets/Fight The Dungeon/Structs.yy",},
     {"name":"Objects","order":1,"path":"folders/Assets/Fight The Dungeon/Objects.yy",},
+    {"name":"Game Objects","order":1,"path":"folders/Assets/Fight The Dungeon/Objects/Game Objects.yy",},
     {"name":"Rooms","order":2,"path":"folders/Assets/Fight The Dungeon/Rooms.yy",},
     {"name":"Scripts","order":3,"path":"folders/Assets/Fight The Dungeon/Scripts.yy",},
     {"name":"Sounds","order":4,"path":"folders/Assets/Fight The Dungeon/Sounds.yy",},
     {"name":"Sprites","order":5,"path":"folders/Assets/Fight The Dungeon/Sprites.yy",},
+    {"name":"Structs","order":6,"path":"folders/Assets/Fight The Dungeon/Structs.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
