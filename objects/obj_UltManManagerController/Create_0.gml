@@ -6,7 +6,7 @@ enum ultManMenus{
 	Transfermarket
 }
 
-
+UltManTeams()
 
 // Variables
 clubName = "Arsenal FC"
