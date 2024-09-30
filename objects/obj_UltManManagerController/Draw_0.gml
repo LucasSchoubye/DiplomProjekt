@@ -87,22 +87,19 @@ if (room = rm_UltManOverview){
 
 	draw_set_color(#ffffff)
 
-	// draw submenu
-	switch(currentMenu){
-		case ultManMenus.Home:
-			scr_ultManHome()
-			break;
-		case ultManMenus.Tactics:
-			scr_ultManTactics()
-			break;
-		case ultManMenus.Players:
-			scr_ultManPlayers()
-			break;
-		case ultManMenus.Fixtures:
-			scr_ultManFixtures()
-			break;
-		case ultManMenus.Transfermarket:
-			scr_ultManTransferMarket()
-			break;
+// draw submenu
+switch(currentMenu){
+	case ultManMenus.Home:
+		scr_ultManHome()
+		break;
+	case ultManMenus.Tactics:
+		scr_ultManTactics()
+		break;
+	case ultManMenus.Fixtures:
+		scr_ultManFixtures()
+		break;
+	case ultManMenus.Transfermarket:
+		scr_ultManTransferMarket()
+		break;
 	}
 }

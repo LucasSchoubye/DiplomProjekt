@@ -2,10 +2,12 @@
 enum ultManMenus{
 	Home,
 	Tactics,
-	Players,
 	Fixtures,
 	Transfermarket
 }
+
+
+UltManTeams()
 
 enum FootballPositions 
 {
@@ -45,7 +47,6 @@ currentMenu = ultManMenus.Home
 // Populate menu options
 ds_list_add(menuOptions, "Home")
 ds_list_add(menuOptions, "Tactics")
-ds_list_add(menuOptions, "Players")
 ds_list_add(menuOptions, "Fixtures")
 ds_list_add(menuOptions, "Transfermarket")
 
