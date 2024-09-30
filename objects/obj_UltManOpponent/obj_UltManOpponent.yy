@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_UltManPlayer",
-    "path":"sprites/spr_UltManPlayer/spr_UltManPlayer.yy",
+    "name":"spr_UltManOpponent",
+    "path":"sprites/spr_UltManOpponent/spr_UltManOpponent.yy",
   },
   "spriteMaskId":null,
   "visible":true,

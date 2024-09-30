@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_storeSetup",
+  "%Name":"OptionsMenu",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_storeSetup",
+  "name":"OptionsMenu",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Assets/Store/Scripts.yy",
+    "name":"Structs",
+    "path":"folders/Assets/Shared Assets/Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

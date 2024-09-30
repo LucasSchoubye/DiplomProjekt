@@ -30,7 +30,7 @@
   "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
-  "solid":false,
+  "solid":true,
   "spriteId":{
     "name":"spr_typeracerCar",
     "path":"sprites/spr_typeracerCar/spr_typeracerCar.yy",
