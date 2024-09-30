@@ -127,7 +127,6 @@ function scr_ultManHome(){
 	draw_rectangle(teamStatsBoxLeft, teamStatsBoxTop, teamStatsBoxRight, teamStatsBoxBottom, true)
 	draw_rectangle(playerStatsBoxLeft, playerStatsBoxTop, playerStatsBoxRight, playerStatsBoxBottom, true)
 	
-	
 	// reset stuff
 	draw_set_valign(currentVAlign)
 	draw_set_halign(currentHAlign)

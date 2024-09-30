@@ -2,7 +2,6 @@
 enum ultManMenus{
 	Home,
 	Tactics,
-	Players,
 	Fixtures,
 	Transfermarket
 }
@@ -19,6 +18,5 @@ currentMenu = ultManMenus.Home
 
 ds_list_add(menuOptions, "Home")
 ds_list_add(menuOptions, "Tactics")
-ds_list_add(menuOptions, "Players")
 ds_list_add(menuOptions, "Fixtures")
 ds_list_add(menuOptions, "Transfermarket")

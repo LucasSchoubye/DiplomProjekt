@@ -92,9 +92,6 @@ switch(currentMenu){
 	case ultManMenus.Tactics:
 		scr_ultManTactics()
 		break;
-	case ultManMenus.Players:
-		scr_ultManPlayers()
-		break;
 	case ultManMenus.Fixtures:
 		scr_ultManFixtures()
 		break;
