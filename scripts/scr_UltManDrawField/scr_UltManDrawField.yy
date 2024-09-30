@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_UltManDrawField",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Assets/Ultimate Manager/Scripts.yy",
+    "name":"Visuals",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Visuals.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -10,10 +10,10 @@ else if (obj_UltManGameController.selectedAction = ActionType.Shoot)
 {
 	if (instance_exists(obj_UltManGameController.ballcarrier))
 	{
-		if (obj_UltManGameController.ballcarrier.id = player.id)
+		if (obj_UltManGameController.ballcarrier.id = player.owner.id)
 		{
-			targetX = (player.x*1.5 + mouse_x)/2.5
-			targetY = (player.y*1.5 + mouse_y)/2.5
+			targetX = (player.x + mouse_x)/2
+			targetY = (player.y + mouse_y)/2
 		}
 		else
 		{

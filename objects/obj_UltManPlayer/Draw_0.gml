@@ -16,7 +16,7 @@ scr_UltManSetPositionCoordinates(position,playerTeam)
 // Calculation
 targetSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/2
 if (targetSpd > topSpd){targetSpd = topSpd}
-targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.5
+targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.15
 if (targetShootSpd > topPassSpd){targetShootSpd = topPassSpd}
 
 // animation
@@ -28,3 +28,7 @@ image_angle = image_angle/1.08
 // Draw acceleration
 accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.4
 accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
+
+// Draw name
+draw_set_halign(fa_center)
+draw_text(x,y,name[1])

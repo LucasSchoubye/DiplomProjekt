@@ -3,7 +3,7 @@
 function scr_UltManDoActionType(selectedAction, targetX, targetY, goalAttempt){
 
 		// Increase timer
-		obj_UltManGameController.timer += 0.33
+		obj_UltManGameController.timer += 0.66
 	
 		// Player Performs their move
 		switch(selectedAction)
