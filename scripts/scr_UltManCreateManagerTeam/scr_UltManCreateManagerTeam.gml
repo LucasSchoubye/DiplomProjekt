@@ -23,6 +23,8 @@ function scr_UltManCreateManagerTeam(){
 			player.strength = manPlayer.strength
 			player.topPassSpd = manPlayer.topPassSpd
 			player.topShootSpd = manPlayer.topShootSpd
+			player.shooting = manPlayer.shooting
+			player.passing = manPlayer.passing
 		}
 	}
 

@@ -65,6 +65,15 @@ function AnsweredIncorrect()
 	var punishmentLength = 200
 	skillCheckAttemptsCounter++
 	
+	if (frozenGoalAttempt = true)
+	{
+		punishmentLength = obj_UltManBall.owner.shooting
+	}
+	else
+	{
+		punishmentLength = obj_UltManBall.owner.passing
+	}
+	
 	var nearPlayer = scr_assignClosestControlledPlayer(frozenTargetX, frozenTargetY)
 	var nearDir = point_direction(frozenTargetX, frozenTargetY, nearPlayer.x, nearPlayer.y)
 	
