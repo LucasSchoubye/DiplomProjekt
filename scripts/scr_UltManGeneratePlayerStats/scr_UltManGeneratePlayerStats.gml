@@ -33,14 +33,30 @@ function scr_UltManGeneratePlayerStats(player, pos, tier){
 			player.passing = random_range(300, 500)
 			player.shooting = random_range(300, 500)
 			player.strength = random_range(150, 200)
-			player.defence = random_range(125, 175)
-			player.dribbling = random_range(125, 175)
+			player.defence = random_range(150, 200)
+			player.dribbling = random_range(150, 200)
 		break;
 		
 		case UltManPackTier.Platinum:
+			player.topSpd = random_range(250, 350)
+			player.topShootSpd = random_range(1400, 1700)
+			player.topPassSpd = random_range(1400, 1700)
+			player.passing = random_range(300, 500)
+			player.shooting = random_range(300, 500)
+			player.strength = random_range(150, 200)
+			player.defence = random_range(150, 200)
+			player.dribbling = random_range(150, 200)
 		break;
 		
 		case UltManPackTier.Obsidian:
+			player.topSpd = random_range(250, 350)
+			player.topShootSpd = random_range(1400, 1700)
+			player.topPassSpd = random_range(1400, 1700)
+			player.passing = random_range(300, 500)
+			player.shooting = random_range(300, 500)
+			player.strength = random_range(150, 200)
+			player.defence = random_range(150, 200)
+			player.dribbling = random_range(150, 200)
 		break;
 		
 		case UltManPackTier.Legendary:
