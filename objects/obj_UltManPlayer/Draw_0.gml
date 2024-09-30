@@ -16,8 +16,8 @@ scr_UltManSetPositionCoordinates(position,playerTeam)
 // Calculation
 targetSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/2
 if (targetSpd > topSpd){targetSpd = topSpd}
-targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.5
-if (targetShootSpd > topShootSpd){targetShootSpd = topShootSpd}
+targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.15
+if (targetShootSpd > topPassSpd){targetShootSpd = topPassSpd}
 
 // animation
 depth = -y
@@ -29,18 +29,6 @@ image_angle = image_angle/1.08
 accX = lengthdir_x(lastMoveLen, lastMoveDir)*0.4
 accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
 
-// Draw state
-switch(state)
-{
-	case UltManNpcState.HoldPosition:
-		draw_text_ext_transformed(x,y+100,"HOLD",0,1000,3,3,0)
-	break;
-	
-	case UltManNpcState.PressPlayer:
-		draw_text_ext_transformed(x,y+100,"PRESS",0,1000,3,3,0)
-	break;
-	
-	case UltManNpcState.MarkMan:
-		draw_text_ext_transformed(x,y+100,"MARK",0,1000,3,3,0)
-	break;
-}
+// Draw name
+draw_set_halign(fa_center)
+draw_text(x,y,name[1])

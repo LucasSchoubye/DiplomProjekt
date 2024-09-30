@@ -167,6 +167,8 @@ function RequestLogin(loginUsername, loginPassword)
 
 function ValidateLogin(map)
 {
+	try
+	{
 	decodedMap = json_decode(map)
 	idArray = []
 	ds_map_keys_to_array(decodedMap, idArray)
@@ -202,6 +204,11 @@ function ValidateLogin(map)
 	
 	if (playerId = undefined)
 		show_message("Wrong password or username")
+	}
+	catch(error)
+	{
+		room_goto(rm_UltManOverview)
+	}
 }
 
 function RequestStudent()

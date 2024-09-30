@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_UltManKickoffSetup",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Assets/Ultimate Manager/Scripts.yy",
+    "name":"Logic",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Logic.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
