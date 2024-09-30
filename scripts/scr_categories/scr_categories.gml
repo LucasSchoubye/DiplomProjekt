@@ -29,10 +29,9 @@ switch(currentCategory) {
 for (var i = 0; i < ds_list_size(currentList); ++i) {
 	var currentElement = ds_list_find_value(currentList,i)
     ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
-	
 	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
 		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
-			if(selectedPrice <= balance && currentElement.isOwned == false) {
+			if(real(selectedPrice) <= real(balance) && currentElement.isOwned == false) {
 				audio_play_sound(sou_purchase,1,false, 1, 0.3, 1)
 				balance = balance-selectedPrice
 				currentElement.isOwned = true
@@ -41,6 +40,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				newInventoryElement.itemID = currentElement.itemID
 				newInventoryElement.category = currentElement.category
 				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
+				ds_list_add(obj_inventoryController.categoryViews[scr_getCategoryEnumFromString(currentElement.category)],newInventoryElement)
 				obj_firestore_controller.UpdateStudentInventory()
 				obj_firestore_controller.UpdateBalance()
 			}

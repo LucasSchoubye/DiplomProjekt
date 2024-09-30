@@ -47,6 +47,7 @@ function GetBalanceData(balanceData) {
 	var currentBalance = new StoreElement()
 	currentBalance.balance = balanceData[?"balance"]
 	balance = currentBalance.balance
+	
 }
 
 

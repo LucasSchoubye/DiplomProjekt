@@ -3,7 +3,7 @@
 
 function StoreElement() constructor {
 	itemName = ""
-	balance = ""
+	balance = undefined
 	price = undefined
 	itemID = ""
 	isOwned = false

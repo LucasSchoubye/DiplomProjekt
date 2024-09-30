@@ -35,8 +35,8 @@ function GetInventoryData(inventoryData) {
 			currentElement.category = currentStoreElement.category
 			ds_list_add(inventoryElements, currentElement)
 			ds_list_add(categoryViews[scr_getCategoryEnumFromString(currentElement.category)], currentElement)
-		}
 		
+		}
 	}
 }
 

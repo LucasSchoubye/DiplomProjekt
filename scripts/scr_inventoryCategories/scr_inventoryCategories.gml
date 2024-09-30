@@ -13,7 +13,9 @@ var itemWidth = room_width*0.15
 var inventoryElements = obj_inventoryController.inventoryElements
 var currentList = inventoryElements
 
+
 currentList = obj_inventoryController.inventoryElements
+
 
 switch(currentCategory) {
 	case Categories.All:
