@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Assets/Fight The Dungeon/Sprites.yy",
+    "name":"Room",
+    "path":"folders/Assets/Fight The Dungeon/Sprites/Room.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
