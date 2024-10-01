@@ -84,6 +84,27 @@ function scr_ultManTransferMarket(){
 	    packCounter++;
 	}
 	
+	
+	draw_set_font(fn_RobotoMedium8)
+	for (var i = 0; i < ds_list_size(squad); ++i) {
+	    var currentPlayer = ds_list_find_value(squad, i)
+		var sellListSep = sellBoxTop + 30*(i+1)
+		
+		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
+		playerRating = currentPlayer.overallRating
+		playerPosition = currentPlayer.PosToString()
+		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
+		if (string_width(playerName) > 150) {
+		    playerName = string_copy(playerName,1, 14);
+		}
+		draw_set_halign(fa_left)
+		draw_set_color(playerColour);
+		draw_text(sellBoxLeft + 20,sellListSep, playerName);
+		draw_set_color(c_white)
+		draw_text(sellBoxLeft + 180,sellListSep, playerRating);
+		draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
+	}
+	
 	// reset stuff
 	draw_set_valign(currentVAlign)
 	draw_set_halign(currentHAlign)
