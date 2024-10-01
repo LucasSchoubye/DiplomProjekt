@@ -37,6 +37,41 @@ function RespondAllowedGames(gamesList)
 	}
 }
 
+function RequestGamestate(gameId)
+{
+	FirebaseFirestore("/students/"+playerId+"/gamestates/"+gameId).Read()
+}
+
+function SaveGamestate(game, gamestateJson)
+{
+	var gamestateMap = ds_map_create()
+	gamestateMap[?"state"] = gamestateJson
+	FirebaseFirestore("/students/"+playerId+"/gamestates/"+game).Set(gamestateJson)
+	ds_map_destroy(gamestateMap)
+}
+
+function RespondEmptyGamestate(gamename)
+{	
+	// Handle empty gamestate based on game
+	switch(gamename)
+	{
+		case "ultimateManager":
+			obj_UltManManagerController.StartNewGamestate()
+		break
+	}
+}
+
+function RespondGamestate(gameStateJson, gamename)
+{
+	// Handle gamestate based on game
+	switch(gamename)
+	{
+		case "ultimateManager":
+			obj_UltManManagerController.LoadGamestate(gameStateJson)
+		break;
+	}
+}
+
 function RequestCategories() {
 	FirebaseFirestore("shop items/categories/")
 }
@@ -59,10 +94,10 @@ function RespondCategories(categoryList) {
 function RequestStoreTyperacerItems() {
 	FirebaseFirestore("/shop items/categories/typeracer").Read()
 }
+	
 function RequestStoreClotheItems() {
 	FirebaseFirestore("/shop items/categories/clothes").Read()
 }
-
 
 function RespondStoreItems(storeList,path) {
 	var storeMap = json_decode(storeList)
@@ -122,7 +157,6 @@ function UpdateStudentInventory() {
 	var json = json_encode(inventoryMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
 }
-
 
 function StartSession(game)
 {		
@@ -251,7 +285,6 @@ function RepondStudent(map)
 	RequestAllowedGames()
 	
 }
-
 
 function RequestClassSubtopics(schoolId, classId, subject)
 {
