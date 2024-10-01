@@ -251,6 +251,7 @@
     {"id":{"name":"scr_drawButton","path":"scripts/scr_drawButton/scr_drawButton.yy",},},
     {"id":{"name":"scr_drawMultipleChoice","path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},},
     {"id":{"name":"scr_drawOutlineText","path":"scripts/scr_drawOutlineText/scr_drawOutlineText.yy",},},
+    {"id":{"name":"scr_drawPackButton","path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},},
     {"id":{"name":"scr_drawTyping","path":"scripts/scr_drawTyping/scr_drawTyping.yy",},},
     {"id":{"name":"scr_getCategoryEnumFromString","path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},},
     {"id":{"name":"scr_getDanishMathQuestion","path":"scripts/scr_getDanishMathQuestion/scr_getDanishMathQuestion.yy",},},

@@ -69,7 +69,7 @@ function scr_ultManTransferMarket(){
 		
 		// Check for mouse click on the pack to select a player based on its tier
         if (mouse_x > currentX && mouse_x < currentX + packWidth &&
-            mouse_y > currentY && mouse_y < currentY + packHeight) {
+            mouse_y > currentY && mouse_y < currentY + packHeight && obj_UltManManagerController.showSellPopup = false) {
             if (mouse_check_button_pressed(mb_left)) {
                 // Call the UltManPlayer function with the appropriate tier
                 newPlayer = new UltManPlayer(pack.packEnum); 
@@ -93,6 +93,7 @@ function scr_ultManTransferMarket(){
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
 		playerRating = currentPlayer.overallRating
 		playerPosition = currentPlayer.PosToString()
+		playerPositionHeight = string_height(playerPosition)
 		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
 		if (string_width(playerName) > 150) {
 		    playerName = string_copy(playerName,1, 14);
@@ -103,7 +104,65 @@ function scr_ultManTransferMarket(){
 		draw_set_color(c_white)
 		draw_text(sellBoxLeft + 180,sellListSep, playerRating);
 		draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
+		
+		// Check for hover over player
+        if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
+            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+            
+            hoveredPlayerIndex = i;  // Store the index of the hovered player
+            
+            // Draw red "SELL" button
+            draw_set_color(c_red);
+			scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
+            draw_set_color(c_white);
+            
+            // Handle sell button click
+            if (mouse_check_button_pressed(mb_left) &&
+                mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
+                mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+                
+                // Show confirmation popup
+                showSellPopup = true;
+                playerToSell = i;  // Store the player index to be sold
+            }
+        }
 	}
+	
+	// Confirmation popup for selling a player
+    if (showSellPopup) {
+        draw_set_color(c_black);
+        draw_set_alpha(0.8);
+        draw_rectangle(room_width * 0.3, room_height * 0.3, room_width * 0.7, room_height * 0.5, false);
+        draw_set_alpha(1);
+        draw_set_color(c_white);
+        draw_text(room_width * 0.35, room_height * 0.35, "Are you sure you want to sell this player?");
+        
+        // Draw "YES" button
+		draw_set_color(c_green);
+		scr_drawButton(room_width * 0.4, room_height * 0.40, room_width * 0.45, room_height * 0.45, "YES")
+        draw_set_color(c_white);
+        
+        // Draw "NO" button
+        draw_set_color(c_red);
+		scr_drawButton(room_width * 0.55, room_height * 0.40, room_width * 0.6, room_height * 0.45, "NO")
+        draw_set_color(c_white);
+        // Handle "YES" and "NO" button clicks
+        if (mouse_check_button_pressed(mb_left)) {
+            // Check for "YES" button click
+            if (mouse_x > room_width * 0.4 && mouse_x < room_width * 0.45 &&
+                mouse_y > room_height * 0.40 && mouse_y < room_height * 0.45) {
+                // Remove the player from the squad list
+                ds_list_delete(squad, playerToSell);
+                showSellPopup = false;  // Close the popup
+            }
+            
+            // Check for "NO" button click
+            if (mouse_x > room_width * 0.55 && mouse_x < room_width * 0.6 &&
+                mouse_y > room_height * 0.40 && mouse_y < room_height * 0.45) {
+                showSellPopup = false;  // Close the popup without selling
+            }
+        }
+    }
 	
 	// reset stuff
 	draw_set_valign(currentVAlign)

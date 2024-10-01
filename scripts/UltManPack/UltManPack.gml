@@ -105,16 +105,9 @@ function UltManPack(tier) constructor {
 	    draw_set_color(c_white);
 	    draw_text(centeredPlayerInfoX, yValue + packPlayerInfoY + 2 * contentPadding, playerInfoText);  // Position player info text below title
 
-	    // Handle hover effect with transparency for the buy button
-	    if (mouse_x > xValue && mouse_x < xValue + packWidth 
-	        && mouse_y > yValue + packPlayerInfoY + 3 * textPadding 
-	        && mouse_y < yValue + packHeight) {
-	        draw_set_alpha(0.7);
-	    }
-
 	    // Draw the buy button within the white background
 		draw_set_color(#528aca);
-	    scr_drawButton(xValue + contentPadding, yValue + packPlayerInfoY + 3 * contentPadding, 
+	    scr_drawPackButton(xValue + contentPadding, yValue + packPlayerInfoY + 3 * contentPadding, 
 	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, "BUY");
 
 	    // Reset color and alpha

@@ -43,6 +43,7 @@ clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
+showSellPopup = false; // This variable is used in the transfermarket to determine if a user wants to sell a player
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
