@@ -24,10 +24,12 @@ function StoreElement() constructor {
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
 	category = ""
-	
+	//BLIV BEDRE VERDE
 
 	function DrawItem(xValue,yValue) {
+		// Make items draw if that are not above certain height
 		if(yValue >= categoryStartY) {
+			// Switch to draw correct sprite for items
 			switch(itemName){
 				case "Cat":
 					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
@@ -39,11 +41,13 @@ function StoreElement() constructor {
 					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 			}
+			// 5 KR OG BERTRAM BUNDER
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		else if(yValue+itemHeight >= categoryStartY) {
 			draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,true)
 		}
+		// Write text as long as text is not above max height and write correct text depending on if item is owned
 		if(yValue+itemPriceY-textHeight >= categoryStartY && isOwned == true) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,"Owned")
 		}
@@ -54,15 +58,18 @@ function StoreElement() constructor {
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 		}
 		
+		// Mouseover hover highlighter
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
 				draw_set_alpha(0.3)
+				// make sure they are not above max height
 				if(yValue >= categoryStartY) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
 				}
 				else if(yValue+itemHeight >= categoryStartY) {
 					draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,false)
 				}
+				// set current item price
 				obj_storeController.selectedPrice = price
 				draw_set_alpha(1)
 			}

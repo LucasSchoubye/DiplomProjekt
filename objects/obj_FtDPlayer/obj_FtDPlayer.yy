@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":true,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_FtDPlayer",
+    "path":"sprites/spr_FtDPlayer/spr_FtDPlayer.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
