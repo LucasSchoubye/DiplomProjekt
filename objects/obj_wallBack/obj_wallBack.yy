@@ -1,16 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_FtDController",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_wallBack",
+  "eventList":[],
   "managed":true,
-  "name":"obj_FtDController",
+  "name":"obj_wallBack",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Fight The Dungeon/Objects.yy",
+    "name":"Game Objects",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Game Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,7 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":true,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_wallBack",
+    "path":"sprites/spr_wallBack/spr_wallBack.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
