@@ -63,10 +63,15 @@ squad = ds_list_create()
 // Test Players
 scr_UltManTestTeamArsenal()
 
-for (var i = 0; i < 15; ++i) {
+for (var i = 0; i < 4; ++i) {
     ds_list_add(squad, new UltManPlayer())
 }
 
+packs = ds_list_create();
+ds_list_add(packs, new UltManPack(UltManPackTier.Bronze));
+ds_list_add(packs, new UltManPack(UltManPackTier.Silver));
+ds_list_add(packs, new UltManPack(UltManPackTier.Gold));
+ds_list_add(packs, new UltManPack(UltManPackTier.Ruby));
+ds_list_add(packs, new UltManPack(UltManPackTier.Obsidian));
+ds_list_add(packs, new UltManPack(UltManPackTier.Legendary));
 
-//DEBUG:
-debugPack = new UltManPack()

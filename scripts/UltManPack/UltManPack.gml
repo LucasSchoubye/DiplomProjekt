@@ -10,6 +10,10 @@ function UltManPack(tier) constructor {
 	packTitle = ""
 	packCost = 0
 	packPlayerInfo = ""
+	packEnum = tier
+	
+	//animation
+	animCounter = 0
 	
 	switch(tier)
 	{
@@ -31,9 +35,9 @@ function UltManPack(tier) constructor {
 			packCost = 50
 			packPlayerInfo = "1 65+ Rated Player"
 			break
-		case UltManPackTier.Platinum:
-			packColour = #BCBCBC
-			packTitle = "Platinum Pack"
+		case UltManPackTier.Ruby:
+			packColour = #e0115f
+			packTitle = "Ruby Pack"
 			packCost = 75
 			packPlayerInfo = "1 75+ Rated Player"
 			break
@@ -100,6 +104,10 @@ function DrawPack(xValue, yValue, packWidth, packHeight) {
         && mouse_y > yValue + packPlayerInfoY + 3 * textPadding 
         && mouse_y < yValue + packHeight) {
         draw_set_alpha(0.7);
+		
+		//if (condition) {
+		//    // code here
+		//}
     }
 
     // Draw the buy button within the white background

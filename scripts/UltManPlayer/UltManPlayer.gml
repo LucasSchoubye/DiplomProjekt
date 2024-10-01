@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function UltManPlayer() constructor {
-
+function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
+	
 	// Generel Information
 	name = scr_UltManRandomName()
 	number = "7"
@@ -26,7 +26,8 @@ function UltManPlayer() constructor {
 	strength = 300
 	defence = 200
 	dribbling = 200
-	scr_UltManGeneratePlayerStats(self, position, UltManPackTier.Bronze)
+	scr_UltManGeneratePlayerStats(self, position, playerTier)
+	show_message(json_stringify(self))
 	
 	// Drawing animation
 	curX = room_width/2
