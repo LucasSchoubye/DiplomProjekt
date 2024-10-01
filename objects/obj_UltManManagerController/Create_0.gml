@@ -66,3 +66,7 @@ scr_UltManTestTeamArsenal()
 for (var i = 0; i < 15; ++i) {
     ds_list_add(squad, new UltManPlayer())
 }
+
+
+//DEBUG:
+debugPack = new UltManPack()

@@ -6,7 +6,7 @@ function UltManTeam() constructor{
 	 nameLast = ["","",""];
 
 	 // Arrays for cities and suffixes
-	 switch(round(random_range(1,60)))
+	switch(round(random_range(1,60)))
 {
       case 1:
              name[0] = "Ash"
