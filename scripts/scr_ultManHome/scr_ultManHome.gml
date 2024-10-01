@@ -103,6 +103,8 @@ function scr_ultManHome(){
 		draw_set_color(resultColor)
 		draw_text(previousMeetingsX - 2*previousMeetingsPaddingX + i * previousMeetingsPaddingX, previousMeetingsY, resultText)
 	}
+	
+	// draw League Table
 	var leagueTableLeft = room_width * 0.725;
 	var leagueTableTop = room_height * 0.08;
 	for (var i = 0; i < ds_list_size(teamList); ++i) {
