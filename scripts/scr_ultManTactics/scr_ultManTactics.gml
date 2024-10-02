@@ -17,6 +17,7 @@ function scr_ultManTactics(){
 	draw_rectangle(fieldBoxLeft, fieldBoxTop, fieldBoxRight, fieldBoxBottom, true)
 	
 	// Draw formation
+	#region Formation
 	for (var column = 0; column < array_length(formationColumns); ++column) {
 		for (var i = 0; i < ds_list_size(formationColumns[column]); ++i) {
 		    // 
@@ -57,12 +58,10 @@ function scr_ultManTactics(){
 			placement++
 		}
 	}
+	#endregion 
 	
 	// Draw Player Box
 	scr_UltManTacticPlayerBox()
-	
-	
-	
 }
 
 function GetColorFromPos(pos)
