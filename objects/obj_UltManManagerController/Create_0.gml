@@ -7,8 +7,6 @@ enum ultManMenus{
 	Quit
 }
 
-UltManTeams()
-
 enum FootballPositions 
 {
 	GK,
