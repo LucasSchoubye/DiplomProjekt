@@ -105,5 +105,8 @@ switch(currentMenu){
 	case ultManMenus.Transfermarket:
 		scr_ultManTransferMarket()
 		break;
+	case ultManMenus.Quit:
+		room_goto(rm_menu)
+		break;
 	}
 }
