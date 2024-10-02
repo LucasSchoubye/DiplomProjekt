@@ -5,7 +5,7 @@ enum UltManPackTier
 	Bronze,
 	Silver,
 	Gold,
-	Platinum,
+	Ruby,
 	Obsidian,
 	Legendary
 }

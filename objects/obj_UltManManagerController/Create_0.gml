@@ -42,6 +42,10 @@ clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
+// This variable is used in the transfermarket to determine if a user wants to sell a player
+showSellPopup = false; 
+// This variable is used in the transfermarket if the user is trying to sell a player in the active team
+showCannotSellPopup = false
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
@@ -62,6 +66,15 @@ squad = ds_list_create()
 // Generate team from server
 obj_firestore_controller.RequestGamestate("ultimateManager")
 
+// Create packs for transfermarket
+packs = ds_list_create();
+ds_list_add(packs, new UltManPack(UltManPackTier.Bronze));
+ds_list_add(packs, new UltManPack(UltManPackTier.Silver));
+ds_list_add(packs, new UltManPack(UltManPackTier.Gold));
+ds_list_add(packs, new UltManPack(UltManPackTier.Ruby));
+ds_list_add(packs, new UltManPack(UltManPackTier.Obsidian));
+ds_list_add(packs, new UltManPack(UltManPackTier.Legendary)); 
+  
 // Functions
 function StartNewGamestate()
 {
@@ -148,7 +161,6 @@ function StartNewGamestate()
 		}
 		squadArray[column] = tempArray
 	}
-
 	
 	// Save gamestate
 	var gamestateMap = ds_map_create()
