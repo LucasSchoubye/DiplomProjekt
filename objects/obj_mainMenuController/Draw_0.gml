@@ -2,6 +2,8 @@
 
 if (room = rm_menu)
 {
+	draw_set_font(fn_textLato)
+	
 	// Setup view variables
 	var screenTop = 100
 	var screenMidX = room_width/2
