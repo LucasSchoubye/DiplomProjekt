@@ -47,6 +47,8 @@ currentMenu = ultManMenus.Home
 showSellPopup = false; 
 // This variable is used in the transfermarket if the user is trying to sell a player in the active team
 showCannotSellPopup = false
+// This variable is used in the transfermarket if the user is trying to buy a pack but they meet insufficient requirements
+showPopupCannotBuyPack = false
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
@@ -68,7 +70,6 @@ squad = ds_list_create()
 // Generate team from server
 obj_firestore_controller.RequestGamestate("ultimateManager")
 
-// Create packs for transfermarket
 packs = ds_list_create();
 ds_list_add(packs, new UltManPack(UltManPackTier.Bronze));
 ds_list_add(packs, new UltManPack(UltManPackTier.Silver));

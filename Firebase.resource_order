@@ -68,7 +68,7 @@
     {"name":"scr_danishSmallMultiplication","order":2,"path":"scripts/scr_danishSmallMultiplication/scr_danishSmallMultiplication.yy",},
     {"name":"scr_drawMultipleChoice","order":4,"path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},
     {"name":"scr_drawOutlineText","order":1,"path":"scripts/scr_drawOutlineText/scr_drawOutlineText.yy",},
-    {"name":"scr_drawPackButton","order":2,"path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},
+    {"name":"scr_drawPackButton","order":5,"path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},
     {"name":"scr_drawTyping","order":5,"path":"scripts/scr_drawTyping/scr_drawTyping.yy",},
     {"name":"scr_getCategoryEnumFromString","order":2,"path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},
     {"name":"scr_HUD","order":1,"path":"scripts/scr_HUD/scr_HUD.yy",},

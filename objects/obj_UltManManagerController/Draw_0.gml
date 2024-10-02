@@ -42,8 +42,12 @@ if (room = rm_UltManOverview){
 		}
 		draw_text(menuX, menuY + i*menuPaddingY, ds_list_find_value(menuOptions, i))
 		draw_set_color(c_white)
-		var stringWidth = string_width(ds_list_find_value(menuOptions, i))
-		if (menuWidthMax < stringWidth){menuWidthMax = stringWidth}
+		var menuOptionWidth = string_width(ds_list_find_value(menuOptions, i))
+		//show_message(string(ds_list_find_value(menuOptions, i)))
+		if (menuWidthMax < menuOptionWidth){
+			
+			menuWidthMax = menuOptionWidth
+			}
 	
 		if( ds_list_find_value(menuOptions, i) = "Fixtures" ){
 			draw_set_alpha(0.3)
@@ -56,11 +60,11 @@ if (room = rm_UltManOverview){
 	
 		// Take actions based on selected menu item
 		if (mouse_y > menuY - menuPaddingY && mouse_y < menuY + menuPaddingY*(ds_list_size(menuOptions)-1)
-			&& mouse_x > menuX && mouse_x < menuX+menuWidthMax*1.3)
+			&& mouse_x > menuX && mouse_x < menuX + menuOptionWidth)
 		{
 			if (i == selectedMenuOption)
 			{
-				draw_line(menuX, menuY + i*menuPaddingY, menuX + stringWidth, menuY + i*menuPaddingY)
+				draw_line(menuX, menuY + i*menuPaddingY, menuX + menuOptionWidth, menuY + i*menuPaddingY)
 				if (mouse_check_button_pressed(mb_left)){
 					currentMenu = i;
 				}
