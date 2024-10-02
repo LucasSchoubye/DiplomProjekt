@@ -65,12 +65,8 @@ teamformation = TeamFormations.FourFourTwo
 formationColumns = [ds_list_create(), ds_list_create(), ds_list_create(), ds_list_create(), ds_list_create(), ds_list_create()]
 squad = ds_list_create()
 
-// Test Players
-scr_UltManTestTeamArsenal()
-
-for (var i = 0; i < 4; ++i) {
-    ds_list_add(squad, new UltManPlayer())
-}
+// Generate team from server
+obj_firestore_controller.RequestGamestate("ultimateManager")
 
 packs = ds_list_create();
 ds_list_add(packs, new UltManPack(UltManPackTier.Bronze));
