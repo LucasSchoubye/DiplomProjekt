@@ -4,7 +4,7 @@ function scr_ultManTransferMarket(){
 	{
 		transfermarketPlayerScroll -= 10
 	}
-	if (transfermarketPlayerScroll < 10 && mouse_wheel_up())
+	if (transfermarketPlayerScroll < 0 && mouse_wheel_up())
 	{
 		transfermarketPlayerScroll += 10
 	}
@@ -68,7 +68,6 @@ function scr_ultManTransferMarket(){
 	var packCounter = 0;  // To count how many packs have been placed in the current row
 	
 	// Draw player sell list and sell button
-
 	draw_set_font(fn_RobotoMedium14)
 	for (var i = 0; i < ds_list_size(squad); ++i) {
 	    var currentPlayer = ds_list_find_value(squad, i)
@@ -92,7 +91,7 @@ function scr_ultManTransferMarket(){
 		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
 			draw_text(sellBoxLeft + 20,sellListSep, playerName);
 			draw_set_color(c_white)
-			draw_text(sellBoxLeft + 180,sellListSep, playerRating);
+			draw_text(sellBoxLeft + 190,sellListSep, playerRating);
 			draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
 		
 		
@@ -135,7 +134,7 @@ function scr_ultManTransferMarket(){
 	draw_rectangle(room_width * 0.8,room_height * 0.09125,room_width * 1,room_height * 0.1125, false)
 	// draw box below sell list for smooth scroll
 	draw_set_color(#393944)
-	draw_rectangle(room_width * 0.8,room_height * 0.9,room_width * 1,room_height * 1, false)
+	draw_rectangle(room_width * 0.8,room_height * 0.96125,room_width * 1,room_height * 1, false)
 	draw_set_color(c_white)
 	// Loop through each pack in the ds_list and draw it
 	for (var i = 0; i < totalPacks; i++) {

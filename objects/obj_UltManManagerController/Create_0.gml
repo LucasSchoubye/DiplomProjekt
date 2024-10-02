@@ -49,10 +49,12 @@ showSellPopup = false;
 showCannotSellPopup = false
 // If the user is trying to buy a pack but they meet insufficient requirements
 showPopupCannotBuyPack = false
-// Ff the user tries to buy a pack they cannot afford
+// If the user tries to buy a pack they cannot afford
 showPopupCannotAffordPack = false
-// Scroll
+// Transfermarket Player Scroll
 transfermarketPlayerScroll = 0
+// Tactics Player Scroll
+tacticsPlayerScroll = 0
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
