@@ -51,6 +51,8 @@ showCannotSellPopup = false
 showPopupCannotBuyPack = false
 // Ff the user tries to buy a pack they cannot afford
 showPopupCannotAffordPack = false
+// Scroll
+transfermarketPlayerScroll = 0
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")

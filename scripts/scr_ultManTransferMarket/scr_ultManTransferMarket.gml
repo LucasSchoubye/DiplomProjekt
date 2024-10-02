@@ -1,5 +1,14 @@
 function scr_ultManTransferMarket(){
 	
+	if (transfermarketPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
+	{
+		transfermarketPlayerScroll -= 10
+	}
+	if (transfermarketPlayerScroll < 10 && mouse_wheel_up())
+	{
+		transfermarketPlayerScroll += 10
+	}
+	
 	// get current settings
 	var currentColour = draw_get_color()
 	var currentVAlign = draw_get_valign()
@@ -12,7 +21,7 @@ function scr_ultManTransferMarket(){
 	var matchBoxLeft = room_width * 0.2;
 	var matchBoxRight = room_width * 0.8;
 	
-	var sellBoxTop = room_height * 0.1;
+	var sellBoxTop = room_height * 0.1125;
 	var sellBoxBottom = room_height * 1;
 	var sellBoxLeft = room_width * 0.8;
 	var sellBoxRight = room_width * 1;
@@ -59,10 +68,11 @@ function scr_ultManTransferMarket(){
 	var packCounter = 0;  // To count how many packs have been placed in the current row
 	
 	// Draw player sell list and sell button
+
 	draw_set_font(fn_RobotoMedium14)
 	for (var i = 0; i < ds_list_size(squad); ++i) {
 	    var currentPlayer = ds_list_find_value(squad, i)
-		var sellListSep = sellBoxTop + 30*(i+1)
+		var sellListSep = sellBoxTop + 30*(i+1) + transfermarketPlayerScroll;
 		
 		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
@@ -71,7 +81,7 @@ function scr_ultManTransferMarket(){
 		playerPositionHeight = string_height(playerPosition)
 		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
 		if (string_width(playerName) > 150) {
-		    playerName = string_copy(playerName,1, 14);
+			playerName = string_copy(playerName,1, 14);
 		}
 		if (i < 11 && playerTier < maxAvailablePackTier){
 			maxAvailablePackTier = playerTier;
@@ -79,44 +89,54 @@ function scr_ultManTransferMarket(){
 		
 		draw_set_halign(fa_left)
 		draw_set_color(playerColour);
-		draw_text(sellBoxLeft + 20,sellListSep, playerName);
-		draw_set_color(c_white)
-		draw_text(sellBoxLeft + 180,sellListSep, playerRating);
-		draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
+		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
+			draw_text(sellBoxLeft + 20,sellListSep, playerName);
+			draw_set_color(c_white)
+			draw_text(sellBoxLeft + 180,sellListSep, playerRating);
+			draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
 		
-		// Check for hover over player
-        if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
-            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+		
+			// Check for hover over player
+		    if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
+		        mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
             
-            hoveredPlayerIndex = i;  // Store the index of the hovered player
+		        hoveredPlayerIndex = i;  // Store the index of the hovered player
             
-            // Draw red "SELL" button
-            draw_set_color(c_red);
-			scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
-            draw_set_color(c_white);
+		        // Draw red "SELL" button
+		        draw_set_color(c_red);
+				scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
+		        draw_set_color(c_white);
             
-			// Handle sell button click if player is in starting 11
-            if (mouse_check_button_pressed(mb_left) &&
-                mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
-                mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep 
-				&& i < 11) {
+				// Handle sell button click if player is in starting 11
+		        if (mouse_check_button_pressed(mb_left) &&
+		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
+		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep 
+					&& i < 11) {
                 
-                // Show cannot sell popup
-				obj_UltManManagerController.showCannotSellPopup = true;
-            }
-			// Handle sell button click
-			else if (mouse_check_button_pressed(mb_left) &&
-                mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
-                mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+		            // Show cannot sell popup
+					obj_UltManManagerController.showCannotSellPopup = true;
+		        }
+				// Handle sell button click
+				else if (mouse_check_button_pressed(mb_left) &&
+		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
+		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
                 
-                // Show confirmation popup
-                obj_UltManManagerController.showSellPopup = true;
-                playerToSell = i;  // Store the player index to be sold
-				playerSellPrice = ds_list_find_value(packs, currentPlayer.tier).playerSellPrice
-            }
-        }
+		            // Show confirmation popup
+		            obj_UltManManagerController.showSellPopup = true;
+		            playerToSell = i;  // Store the player index to be sold
+					playerSellPrice = ds_list_find_value(packs, currentPlayer.tier).playerSellPrice
+		        }
+		    }
+		}
 	}
 	
+	// draw box above sell list for smooth scroll
+	draw_set_color(#393944)
+	draw_rectangle(room_width * 0.8,room_height * 0.09125,room_width * 1,room_height * 0.1125, false)
+	// draw box below sell list for smooth scroll
+	draw_set_color(#393944)
+	draw_rectangle(room_width * 0.8,room_height * 0.9,room_width * 1,room_height * 1, false)
+	draw_set_color(c_white)
 	// Loop through each pack in the ds_list and draw it
 	for (var i = 0; i < totalPacks; i++) {
 	    // Get the current pack from the list
@@ -248,13 +268,11 @@ function scr_ultManTransferMarket(){
         draw_set_color(c_white);
 		if (showPopupCannotBuyPack){
 			stringToShow = "Get a full starting 11 of your current available pack tier to get the next tier of pack";
-			
 		}
 		else if (showPopupCannotAffordPack){
 			stringToShow = "You do you possess the sufficient funds";
 			textXStart = rect_center_x
 			draw_set_halign(fa_center)
-			
 		}
 		else if (showCannotSellPopup){
 			stringToShow = "This player is currently in your starting 11 and cannot be sold, please remove them from your starting 11 to be able to sell"
