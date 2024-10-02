@@ -60,9 +60,6 @@ function scr_ultManTactics(){
 	
 	// Draw Player Box
 	scr_UltManTacticPlayerBox()
-	
-	
-	
 }
 
 function GetColorFromPos(pos)

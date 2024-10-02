@@ -136,6 +136,8 @@ function scr_UltManTacticPlayerBox(){
 					
 					// Swap Position in Squad
 					switch_ds_list_values(squad, fromPlayer, ds_list_find_value(squad, i))
+					ResetStartingSquadOrder()
+					obj_UltManManagerController.SaveGamestate()
 				}
 				fromPlayer = undefined
 			}
@@ -219,6 +221,7 @@ function MovePlayerColumn(fromColumn, toColumn)
 	// Clean up
 	ResetStartingSquadOrder()
 	obj_UltManManagerController.fieldViewFromPlayer = undefined
+	obj_UltManManagerController.SaveGamestate()
 }
 
 function GetPlayerInsertPos()
