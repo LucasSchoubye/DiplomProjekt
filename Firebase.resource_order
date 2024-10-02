@@ -66,7 +66,7 @@
     {"name":"scr_danishSmallMultiplication","order":2,"path":"scripts/scr_danishSmallMultiplication/scr_danishSmallMultiplication.yy",},
     {"name":"scr_drawMultipleChoice","order":4,"path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},
     {"name":"scr_drawOutlineText","order":1,"path":"scripts/scr_drawOutlineText/scr_drawOutlineText.yy",},
-    {"name":"scr_drawPackButton","order":2,"path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},
+    {"name":"scr_drawPackButton","order":5,"path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},
     {"name":"scr_drawTyping","order":5,"path":"scripts/scr_drawTyping/scr_drawTyping.yy",},
     {"name":"scr_getCategoryEnumFromString","order":2,"path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},
     {"name":"scr_HUD","order":1,"path":"scripts/scr_HUD/scr_HUD.yy",},
@@ -125,6 +125,7 @@
     {"name":"spr_UltManPerson","order":1,"path":"sprites/spr_UltManPerson/spr_UltManPerson.yy",},
     {"name":"spr_UltManRain","order":5,"path":"sprites/spr_UltManRain/spr_UltManRain.yy",},
     {"name":"spr_UltManStadiumWhite","order":4,"path":"sprites/spr_UltManStadiumWhite/spr_UltManStadiumWhite.yy",},
+    {"name":"spr_UltManWhiteMedal","order":6,"path":"sprites/spr_UltManWhiteMedal/spr_UltManWhiteMedal.yy",},
     {"name":"spr_wallBack","order":1,"path":"sprites/spr_wallBack/spr_wallBack.yy",},
     {"name":"spr_wallBackDecor","order":2,"path":"sprites/spr_wallBackDecor/spr_wallBackDecor.yy",},
     {"name":"spr_wallBackDoor","order":3,"path":"sprites/spr_wallBackDoor/spr_wallBackDoor.yy",},
@@ -132,6 +133,5 @@
     {"name":"spr_wallFront","order":5,"path":"sprites/spr_wallFront/spr_wallFront.yy",},
     {"name":"spr_wallFrontDecor","order":6,"path":"sprites/spr_wallFrontDecor/spr_wallFrontDecor.yy",},
     {"name":"spr_wallSide","order":7,"path":"sprites/spr_wallSide/spr_wallSide.yy",},
-    {"name":"spr_UltManWhiteMedal","order":6,"path":"sprites/spr_UltManWhiteMedal/spr_UltManWhiteMedal.yy",},
   ],
 }

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_drawPackButton",
   "parent":{
-    "name":"UI",
-    "path":"folders/Assets/Shared Assets/Scripts/UI.yy",
+    "name":"Visuals",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Visuals.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

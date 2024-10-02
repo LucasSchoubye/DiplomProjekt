@@ -26,6 +26,7 @@ function scr_ultManTransferMarket(){
 	packHeight = room_height * 0.325;
 
 	var totalPacks = ds_list_size(packs);
+	var maxAvailablePackTier = 5;
 
 	// Define the starting X and Y positions
 	var startX = room_width * 0.2;  // Starting X position (20% of room width)
@@ -51,40 +52,6 @@ function scr_ultManTransferMarket(){
 	var currentX = startX;
 	var currentY = startY;
 	var packCounter = 0;  // To count how many packs have been placed in the current row
-
-	// Loop through each pack in the ds_list and draw it
-	for (var i = 0; i < totalPacks; i++) {
-	    // Get the current pack from the list
-	    var pack = ds_list_find_value(packs, i);
-	    // Check if we have placed the maximum number of packs in this row
-	    if (packCounter == maxPacksPerRow) {
-	        // Move to the next row
-	        currentX = startX;  // Reset X position to the start
-	        currentY += packHeight + dynamicSpacingY;  // Move down by pack height + dynamic vertical spacing
-	        packCounter = 0;  // Reset the pack counter for the new row
-	    }
-
-	    // Draw the pack at the current X and Y positions
-	    pack.DrawPack(currentX, currentY, packWidth, packHeight);
-		
-		// Check for mouse click on the pack to select a player based on its tier
-        if (mouse_x > currentX && mouse_x < currentX + packWidth &&
-            mouse_y > currentY && mouse_y < currentY + packHeight) {
-				if (obj_UltManManagerController.showSellPopup = false && showCannotSellPopup = false) {
-					if (mouse_check_button_pressed(mb_left)) {
-		                // Call the UltManPlayer function with the appropriate tier
-		                newPlayer = new UltManPlayer(pack.packEnum); 
-						ds_list_add(squad,newPlayer)
-		            }
-				}
-        }
-
-	    // Update the X position for the next pack
-	    currentX += packWidth + dynamicSpacingX;  // Add dynamic horizontal spacing between packs
-
-	    // Increment the pack counter
-	    packCounter++;
-	}
 	
 	// Draw player sell list and sell button
 	draw_set_font(fn_RobotoMedium8)
@@ -92,6 +59,8 @@ function scr_ultManTransferMarket(){
 	    var currentPlayer = ds_list_find_value(squad, i)
 		var sellListSep = sellBoxTop + 30*(i+1)
 		
+		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
+		//show_message(string(playerTier))
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
 		playerRating = currentPlayer.overallRating
 		playerPosition = currentPlayer.PosToString()
@@ -100,6 +69,10 @@ function scr_ultManTransferMarket(){
 		if (string_width(playerName) > 150) {
 		    playerName = string_copy(playerName,1, 14);
 		}
+		if (i < 11 && playerTier < maxAvailablePackTier){
+			maxAvailablePackTier = playerTier;
+		}
+		
 		draw_set_halign(fa_left)
 		draw_set_color(playerColour);
 		draw_text(sellBoxLeft + 20,sellListSep, playerName);
@@ -121,7 +94,8 @@ function scr_ultManTransferMarket(){
 			// Handle sell button click if player is in starting 11
             if (mouse_check_button_pressed(mb_left) &&
                 mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
-                mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep && i < 11) {
+                mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep 
+				&& i < 11) {
                 
                 // Show cannot sell popup
 				obj_UltManManagerController.showCannotSellPopup = true;
@@ -136,6 +110,61 @@ function scr_ultManTransferMarket(){
                 playerToSell = i;  // Store the player index to be sold
             }
         }
+	}
+	
+	// Loop through each pack in the ds_list and draw it
+	for (var i = 0; i < totalPacks; i++) {
+	    // Get the current pack from the list
+	    var pack = ds_list_find_value(packs, i);
+		var currentPackTier = pack.packEnum
+	    // Check if we have placed the maximum number of packs in this row
+	    if (packCounter == maxPacksPerRow) {
+	        // Move to the next row
+	        currentX = startX;  // Reset X position to the start
+	        currentY += packHeight + dynamicSpacingY;  // Move down by pack height + dynamic vertical spacing
+	        packCounter = 0;  // Reset the pack counter for the new row
+	    }
+
+	    // Draw the packs at the current X and Y positions
+		//show_message("MaxPack " + string(maxPackTier) + " " + "CurrentPack " + string(currentPackTier))
+		if(maxAvailablePackTier+1 < currentPackTier){
+			pack.DrawUnavailablePack(currentX, currentY, packWidth, packHeight);
+		}
+		else{
+			pack.DrawPack(currentX, currentY, packWidth, packHeight);
+		}
+		
+		// Check for mouse click on the pack to select a player based on its tier
+        if (mouse_x > currentX && mouse_x < currentX + packWidth &&
+            mouse_y > currentY && mouse_y < currentY + packHeight) {
+			if (obj_UltManManagerController.showSellPopup = false 
+			&& obj_UltManManagerController.showCannotSellPopup = false 
+			&& obj_UltManManagerController.showPopupCannotBuyPack = false) {
+				if (mouse_check_button_pressed(mb_left)) {
+					if(maxAvailablePackTier+1 < currentPackTier){
+						obj_UltManManagerController.showPopupCannotBuyPack = true
+					}
+					else{
+						// Show effect
+						repeat(50)
+						{
+							newColour = merge_color(pack.packColour, c_white, random_range(0.1,0.5))
+							effect_create_above(ef_firework, sellBoxLeft + irandom_range(1,250), sellBoxTop + 30 + 30*(ds_list_size(squad)-0.5), 1000, newColour)
+							effect_create_above(ef_explosion, sellBoxLeft + irandom_range(1,250), sellBoxTop + 30 + 30*(ds_list_size(squad)-0.5), 1000, newColour)
+						}
+						// Call the UltManPlayer function with the appropriate tier
+			            newPlayer = new UltManPlayer(pack.packEnum); 
+						ds_list_add(squad,newPlayer)
+					}
+				}
+			}
+        }
+
+	    // Update the X position for the next pack
+	    currentX += packWidth + dynamicSpacingX;  // Add dynamic horizontal spacing between packs
+
+	    // Increment the pack counter
+	    packCounter++;
 	}
 	
 	// Confirmation popup for selling a player
@@ -209,6 +238,45 @@ function scr_ultManTransferMarket(){
             if (mouse_x > button_left && mouse_x < button_right &&
                 mouse_y > room_height * 0.425 && mouse_y < room_height * 0.475) {
                 showCannotSellPopup = false;  // Close the popup
+            }
+        }
+    }
+	
+	// Cannot sell popup
+    if (showPopupCannotBuyPack) {
+		// Rectangle coordinates
+		var rect_left = room_width * 0.3;
+		var rect_right = room_width * 0.7;
+
+		// Calculate the center of the rectangle
+		var rect_center_x = (rect_left + rect_right) / 2;
+
+		// Set button size
+		var button_width = room_width * 0.1;  // Width of the button (adjust as needed)
+
+		// Calculate the button's coordinates to center it
+		var button_left = rect_center_x - button_width / 2;
+		var button_right = rect_center_x + button_width / 2;
+        draw_set_color(c_black);
+        draw_set_alpha(0.8);
+        draw_rectangle(room_width * 0.3, room_height * 0.3, room_width * 0.7, room_height * 0.5, false);
+        draw_set_alpha(1);
+        draw_set_color(c_white);
+		draw_text_ext(room_width * 0.3125, room_height * 0.4125, 
+		"Get a full starting 11 of your current available pack tier to get the next tier of pack",
+		25,room_width * 0.6875 - room_width * 0.3)
+        
+        // Draw "OK" button
+		draw_set_color(#4994ec);
+		scr_drawButton(button_left, room_height * 0.425, button_right, room_height * 0.475, "OK")
+        draw_set_color(c_white);
+      
+        // Handle "OK" button clicks
+        if (mouse_check_button_pressed(mb_left)) {
+            // Check for "OK" button click
+            if (mouse_x > button_left && mouse_x < button_right &&
+                mouse_y > room_height * 0.425 && mouse_y < room_height * 0.475) {
+                showPopupCannotBuyPack = false;  // Close the popup
             }
         }
     }

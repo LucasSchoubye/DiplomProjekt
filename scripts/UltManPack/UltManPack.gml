@@ -114,5 +114,60 @@ function UltManPack(tier) constructor {
 	    draw_set_color(c_white);
 	    draw_set_alpha(1);
 	}
+	
+	function DrawUnavailablePack(xValue, yValue, packWidth, packHeight) {
+
+	    // Set the dimensions for the background rectangle
+	    var rectX1 = xValue;
+	    var rectY1 = yValue;
+	    var rectX2 = xValue + packWidth;
+	    var rectY2 = yValue + packHeight;
+
+	    // Draw a rounded rectangle (black background) that fits the exact size of the pack
+	    draw_set_color(c_black);
+		draw_set_alpha(0.5);
+	    draw_roundrect(rectX1, rectY1, rectX2, rectY2, false); // Last parameter is the radius for rounded corners
+		draw_set_alpha(1);
+	    // Set padding for contents inside the rectangle
+	    var contentPadding = 10;
+
+	    // Draw the sprite centered horizontally within the pack background
+	    var spriteWidth = sprite_get_width(packSprite) * 0.075;
+	    var spriteX = xValue + contentPadding + ((packWidth - (2 * contentPadding)) / 2) - (spriteWidth / 2); // Center the sprite
+	    draw_sprite_ext(packSprite, 0, spriteX, yValue + contentPadding, 0.075, 0.075, 0, packColour, draw_get_alpha());
+
+	    // Set font and color for the text
+	    draw_set_font(fn_RobotoMedium8);
+		
+	    // Center the price text within the white background
+		var priceTextNonCon = packCost
+	    var priceText = string(priceTextNonCon) + " CONTENT COINS";
+	    var priceTextWidth = string_width(priceText);
+	    var centeredPriceX = xValue + contentPadding + ((packWidth - (2 * contentPadding)) / 2) - (priceTextWidth / 2); // Center text
+	    draw_set_color(#528aca);
+	    draw_text(centeredPriceX, yValue + packPriceY + contentPadding, priceText);  // Position price text under the sprite
+
+	    // Center the pack title
+	    var titleTextWidth = string_width(packTitle);
+	    var centeredTitleX = xValue + contentPadding + ((packWidth - (2 * contentPadding)) / 2) - (titleTextWidth / 2);  // Center title text
+	    draw_set_color(packColour);
+	    draw_text(centeredTitleX, yValue + packTitleY + 1.5*contentPadding, packTitle);  // Position title text below price text
+
+	    // Center the player info text
+	    var playerInfoText = packPlayerInfo;
+	    var playerInfoTextWidth = string_width(playerInfoText);
+	    var centeredPlayerInfoX = xValue + contentPadding + ((packWidth - (2 * contentPadding)) / 2) - (playerInfoTextWidth / 2);  // Center text
+	    draw_set_color(c_white);
+	    draw_text(centeredPlayerInfoX, yValue + packPlayerInfoY + 2 * contentPadding, playerInfoText);  // Position player info text below title
+
+	    // Draw the unavailable button within the white background
+		draw_set_color(c_gray);
+	    scr_drawPackButton(xValue + contentPadding, yValue + packPlayerInfoY + 3 * contentPadding, 
+	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, "UNAVAILABLE");
+
+	    // Reset color and alpha
+	    draw_set_color(c_white);
+	    draw_set_alpha(1);
+	}
 
 }	
