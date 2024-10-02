@@ -85,7 +85,7 @@ function scr_UltManTacticPlayerBox(){
 							}
 						}
 							
-						if (ds_list_find_index(squad, fromPlayer) <= 11)
+						if (ds_list_find_index(squad, fromPlayer) < 11)
 						{
 							// Swapping two starting players
 							for (var column = 0; column < array_length(formationColumns); ++column) {
