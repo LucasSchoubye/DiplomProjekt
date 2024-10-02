@@ -1,7 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManGeneratePlayerStats(player, pos, tier){
-
+	show_debug_message(tier)
 	switch(tier)
 	{
 		case UltManPackTier.Bronze:
@@ -37,7 +37,7 @@ function scr_UltManGeneratePlayerStats(player, pos, tier){
 			player.dribbling = random_range(150, 200)
 		break;
 		
-		case UltManPackTier.Platinum:
+		case UltManPackTier.Ruby:
 			player.topSpd = random_range(250, 350)
 			player.topShootSpd = random_range(1400, 1700)
 			player.topPassSpd = random_range(1400, 1700)

@@ -1,4 +1,4 @@
-function scr_drawButton(x1,y1,x2,y2,text){
+function scr_drawPackButton(x1,y1,x2,y2,text){
 	
 	var currentFont = draw_get_font()
 	var currentHAlign = draw_get_halign()
@@ -15,7 +15,7 @@ function scr_drawButton(x1,y1,x2,y2,text){
 	draw_set_valign(currentVAlign)
 	draw_set_font(currentFont)
 	
-	if (mouse_x > x1 && mouse_x < x2 &&mouse_y > y1 && mouse_y < y2)
+	if (mouse_x > x1 && mouse_x < x2 &&mouse_y > y1 && mouse_y < y2 && obj_UltManManagerController.showSellPopup = false && obj_UltManManagerController.showCannotSellPopup = false)
 	{
 		draw_set_color(c_black)
 		draw_set_alpha(0.15)
