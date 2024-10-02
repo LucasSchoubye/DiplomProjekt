@@ -192,8 +192,6 @@ function LoadGamestate(Json)
 		}
 		
 	    ds_list_add(squad, player)
-		//show_message("Ingame Player: "+json_stringify(player))
-		//show_message("server Player: "+json_stringify(playerStruct))
 	}
 	#endregion
 	
@@ -217,9 +215,7 @@ function LoadGamestate(Json)
 			show_message("Next Column size: "+string(array_length(lineup[column])))
 		}
 	}
-	
-	//ds_list_add(formationColumns[5], ds_list_find_value(squad, i))
-	
+
 	show_message(parsed_data)
 	#endregion
 }

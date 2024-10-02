@@ -31,6 +31,9 @@ function MenuGridElement() constructor {
 				case "Ultimate Manager":
 					draw_sprite(spr_managerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
+				case "Fight The Dungeon":
+					draw_sprite(spr_FtDIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
+				break
 			}
 			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		}
@@ -67,6 +70,8 @@ function MenuGridElement() constructor {
 				case "Ultimate Manager":
 					room_goto(rm_UltManOverview)
 				break
+				case "Fight The Dungeon":
+					room_goto(rm_FtD)
 			}
 			}
 		}
