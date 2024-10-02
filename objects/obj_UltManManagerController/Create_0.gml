@@ -43,7 +43,10 @@ clubName = "Arsenal FC"
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
-showSellPopup = false; // This variable is used in the transfermarket to determine if a user wants to sell a player
+// This variable is used in the transfermarket to determine if a user wants to sell a player
+showSellPopup = false; 
+// This variable is used in the transfermarket if the user is trying to sell a player in the active team
+showCannotSellPopup = false
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
@@ -75,4 +78,3 @@ ds_list_add(packs, new UltManPack(UltManPackTier.Gold));
 ds_list_add(packs, new UltManPack(UltManPackTier.Ruby));
 ds_list_add(packs, new UltManPack(UltManPackTier.Obsidian));
 ds_list_add(packs, new UltManPack(UltManPackTier.Legendary));
-
