@@ -1,17 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_FtDPlayer",
+  "%Name":"obj_fireball",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_FtDPlayer",
+  "name":"obj_fireball",
   "overriddenProperties":[],
   "parent":{
-    "name":"Characters",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Characters.yy",
+    "name":"Attacks",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Attacks.yy",
   },
   "parentObjectId":{
     "name":"obj_damagePlayer",
@@ -33,10 +32,10 @@
   "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
-  "solid":true,
+  "solid":false,
   "spriteId":{
-    "name":"spr_FtDPlayer",
-    "path":"sprites/spr_FtDPlayer/spr_FtDPlayer.yy",
+    "name":"spr_fireBallR",
+    "path":"sprites/spr_fireBallR/spr_fireBallR.yy",
   },
   "spriteMaskId":null,
   "visible":true,

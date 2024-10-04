@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
-draw_self()
-scr_playerMovement()
+event_inherited()
+destroy = false
+dir = 0
+spd = 5
+xspd = 0
+yspd = 0
 
-draw_text(x,y-40, string(hp))
