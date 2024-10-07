@@ -80,7 +80,7 @@ function UltManPack(tier) constructor {
 	    draw_roundrect(rectX1, rectY1, rectX2, rectY2, false); // Last parameter is the radius for rounded corners
 		draw_set_alpha(1);
 	    // Set padding for contents inside the rectangle
-	    var contentPadding = 10;
+	    contentPadding = 10;
 
 	    // Draw the sprite centered horizontally within the pack background
 	    var spriteWidth = sprite_get_width(packSprite) * 0.075;
@@ -135,7 +135,7 @@ function UltManPack(tier) constructor {
 	    draw_roundrect(rectX1, rectY1, rectX2, rectY2, false); // Last parameter is the radius for rounded corners
 		draw_set_alpha(1);
 	    // Set padding for contents inside the rectangle
-	    var contentPadding = 10;
+	    contentPadding = 10;
 
 	    // Draw the sprite centered horizontally within the pack background
 	    var spriteWidth = sprite_get_width(packSprite) * 0.075;
