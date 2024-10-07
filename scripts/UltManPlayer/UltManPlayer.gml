@@ -4,10 +4,10 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	
 	// Generel Information
 	name = scr_UltManRandomName()
-	number = "7"
-	age = 22
+	number = irandom_range(1,99)
+	age = irandom_range(15,30)
 	nationality = Nationality.DK
-	height = 180
+	height = irandom_range(160,210)
 
 	// Tactics
 	position = FootballPositions.SUB
@@ -17,7 +17,7 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	scr_UltManRandomPosition(self)
 	
 	// Rating
-	overallRating = 84
+	overallRating = 45
 	topSpd = 300
 	topShootSpd = 2000
 	topPassSpd = 2000
