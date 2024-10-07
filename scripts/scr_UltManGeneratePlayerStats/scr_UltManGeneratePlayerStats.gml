@@ -202,21 +202,6 @@ function ModifyStatsWithPos(pos, player)
 				player.topShootSpd = player.topShootSpd*1.1
 		break;
 		case FootballPositions.LM:
-			// Nerfs
-			player.defence = player.defence*0.8
-			player.strength = player.strength*0.7
-			
-			// Buffs
-			player.topPassSpd = player.topPassSpd*1.1
-			player.passing = player.passing*0.9
-			player.dribbling = player.dribbling*1.3
-			
-			// Situational
-			if (random_range(1,100) > 90)
-				player.topShootSpd = player.topShootSpd*1.2
-			else
-				player.topShootSpd = player.topShootSpd*1
-		break;
 		case FootballPositions.RM:
 			// Nerfs
 			player.defence = player.defence*0.8
@@ -234,23 +219,6 @@ function ModifyStatsWithPos(pos, player)
 				player.topShootSpd = player.topShootSpd*1
 		break;
 		case FootballPositions.LW:
-			// Nerfs
-			player.defence = player.defence*0.5
-			player.strength = player.strength*0.6
-			
-			// Buffs
-			player.topPassSpd = player.topPassSpd*1.3
-			player.topSpd = player.topPassSpd*1.3
-			player.passing = player.passing*0.9
-			player.dribbling = player.dribbling*1.5
-			player.shooting = player.shooting*1.2
-			
-			// Situational
-			if (random_range(1,100) > 80)
-				player.topShootSpd = player.topShootSpd*1.5
-			else
-				player.topShootSpd = player.topShootSpd*1.1
-		break;
 		case FootballPositions.RW:
 			// Nerfs
 			player.defence = player.defence*0.5

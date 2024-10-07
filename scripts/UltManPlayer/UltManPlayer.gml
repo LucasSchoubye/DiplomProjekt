@@ -225,4 +225,53 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 			break;
 		}
 	}
+	
+	function CalculateRating(variableName)
+	{
+		switch(variableName)
+		{
+			case "topSpd":
+				var highestPossible = 550*1.3
+				return round(25 + (topSpd/highestPossible)*75)
+			break;
+			case "topShootSpd":
+				var highestPossible = 4500*1.7
+				return round(25 + (topShootSpd/highestPossible)*75)
+			break;
+			case "topPassSpd":
+				var highestPossible = 4500*1.4
+				return round(25 + (topPassSpd/highestPossible)*75)
+			break;
+			case "passing":
+				var minScore = 100*0.8
+			    var maxScore = 700 * 1.3;
+			    return round(25 + ((maxScore - passing) / (maxScore - minScore)) * 75)
+			break;
+			case "shooting":
+				var minScore = 100;
+			    var maxScore = 700 * 1.3;
+			    return round(25 + ((maxScore - shooting) / (maxScore - minScore)) * 75)
+			break;
+			case "strength":
+				var highestPossible = 600*1.7
+				return round(25 + (strength/highestPossible)*75)
+			break;
+			case "defence":
+				var highestPossible = 1000*1.7
+				return round(25 + (defence/highestPossible)*75)
+			break;
+			case "dribbling":
+				var highestPossible = 1000*1.5
+				return round(25 + (dribbling/highestPossible)*75)
+			break;
+		
+			// Overall rating
+			case "overallRating":
+				show_message(CalculateRating("topSpd"))
+				return round((CalculateRating("topSpd") + CalculateRating("topShootSpd") + CalculateRating("topPassSpd") + CalculateRating("passing") + CalculateRating("shooting") + CalculateRating("strength") + CalculateRating("defence") + CalculateRating("dribbling"))/8)
+			break;			
+		}
+	}
+	
+	overallRating = CalculateRating("overallRating")
 }
