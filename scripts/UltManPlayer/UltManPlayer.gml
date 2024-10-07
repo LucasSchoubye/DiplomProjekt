@@ -28,7 +28,6 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	dribbling = 200
 	tier = playerTier
 	scr_UltManGeneratePlayerStats(self, position, playerTier)
-	//show_message(json_stringify(self))
 	
 	// Drawing animation
 	curX = room_width/2
