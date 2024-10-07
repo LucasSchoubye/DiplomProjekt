@@ -61,7 +61,7 @@ for (var i = 0; i < 2; ++i) {
 if (timer > 90)
 {
 	room_goto(rm_UltManOverview)
-	obj_UltManManagerController.SimulateLeague(goals[0], goals[1])
+	obj_UltManManagerController.SimulateLeague(scoreline[0], scoreline[1])
 }
 
 scr_UltManActiontypes()

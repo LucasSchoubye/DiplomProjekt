@@ -14,27 +14,34 @@ function scr_UltManActiontypes(){
 			break;
 			case ActionType.Shoot:
 			
-				var targetGoal = obj_UltManGameController.goals[obj_UltManGameController.targetGoalIndex]
-				if (targetGoal.CheckMouseCollision())
+				if (obj_UltManBall.owner = controlledPlayer)
 				{
-					if (point_distance(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y) < controlledPlayer.topShootSpd)
+					var targetGoal = obj_UltManGameController.goals[obj_UltManGameController.targetGoalIndex]
+					if (targetGoal.CheckMouseCollision())
 					{
-						// Shoot on target
-						draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+						if (point_distance(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y) < controlledPlayer.topShootSpd)
+						{
+							// Shoot on target
+							draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+						}
+						else
+						{
+							playAllowed = false
+							draw_line_color(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y, c_maroon, c_maroon)
+						}
+						goalAttempt = true
 					}
 					else
 					{
-						playAllowed = false
-						draw_line_color(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y, c_maroon, c_maroon)
+						//Pass
+						targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
+						targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
+						scr_UltManPassing()
 					}
-					goalAttempt = true
 				}
 				else
 				{
-					//Pass
-					targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
-					targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
-					scr_UltManPassing()
+					playAllowed = false
 				}
 			break;
 		}
