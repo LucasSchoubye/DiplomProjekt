@@ -2,6 +2,15 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_ultManTactics(){
 	
+	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
+	{
+		tacticsPlayerScroll -= 10
+	}
+	if (tacticsPlayerScroll < 10 && mouse_wheel_up())
+	{
+		tacticsPlayerScroll += 10
+	}
+	
 	// Draw Field Box
 	fieldBoxTop = room_height * 0.12;
 	fieldBoxBottom = room_height * 0.90;
