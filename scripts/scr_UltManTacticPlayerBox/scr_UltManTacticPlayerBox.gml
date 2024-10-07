@@ -1,7 +1,16 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManTacticPlayerBox(){
-
+	
+	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
+	{
+		tacticsPlayerScroll -= 10
+	}
+	if (tacticsPlayerScroll < 0 && mouse_wheel_up())
+	{
+		tacticsPlayerScroll += 10
+	}
+	
 	var playerBoxTop = room_height * 0.12;
 	var playerBoxBottom = room_height * 1;
 	var playerBoxLeft = room_width * 0.7;
