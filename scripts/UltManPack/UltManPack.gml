@@ -23,36 +23,42 @@ function UltManPack(tier) constructor {
 				packTitle = "Bronze Pack"
 				packCost = 10
 				packPlayerInfo = "1 45+ Rated Player"
+				playerSellPrice = 5
 				break
 			case UltManPackTier.Silver:
 				packColour = #A9A49D
 				packTitle = "Silver Pack"
 				packCost = 25
 				packPlayerInfo = "1 55+ Rated Player"
+				playerSellPrice = 15
 				break
 			case UltManPackTier.Gold:
 				packColour = #FFDB20
 				packTitle = "Gold Pack"
 				packCost = 50
 				packPlayerInfo = "1 65+ Rated Player"
+				playerSellPrice = 25
 				break
 			case UltManPackTier.Ruby:
 				packColour = #e0115f
 				packTitle = "Ruby Pack"
 				packCost = 75
 				packPlayerInfo = "1 75+ Rated Player"
+				playerSellPrice = 40
 				break
 			case UltManPackTier.Obsidian:
 				packColour = #5B4965
 				packTitle = "Obsidian Pack"
 				packCost = 100
 				packPlayerInfo = "1 85+ Rated Player"
+				playerSellPrice = 50
 				break
 			case UltManPackTier.Legendary:
 				packColour = #F100E9
 				packTitle = "Legendary Pack"
 				packCost = 150
 				packPlayerInfo = "1 95+ Rated Player"
+				playerSellPrice = 75
 				break
 		}
 		return {packColour, packTitle, packCost, packPlayerInfo}
@@ -82,7 +88,7 @@ function UltManPack(tier) constructor {
 	    draw_sprite_ext(packSprite, 0, spriteX, yValue + contentPadding, 0.075, 0.075, 0, packColour, draw_get_alpha());
 
 	    // Set font and color for the text
-	    draw_set_font(fn_RobotoMedium8);
+	    draw_set_font(fn_RobotoMedium14);
 		
 	    // Center the price text within the white background
 		var priceTextNonCon = packCost
@@ -137,7 +143,7 @@ function UltManPack(tier) constructor {
 	    draw_sprite_ext(packSprite, 0, spriteX, yValue + contentPadding, 0.075, 0.075, 0, packColour, draw_get_alpha());
 
 	    // Set font and color for the text
-	    draw_set_font(fn_RobotoMedium8);
+	    draw_set_font(fn_RobotoMedium14);
 		
 	    // Center the price text within the white background
 		var priceTextNonCon = packCost

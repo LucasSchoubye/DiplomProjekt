@@ -48,9 +48,19 @@ clubName = playerClub.clubName
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
+
+// Determine if a user wants to sell a player
 showSellPopup = false; 
+// If the user is trying to sell a player in the active team
 showCannotSellPopup = false
+// If the user is trying to buy a pack but they meet insufficient requirements
 showPopupCannotBuyPack = false
+// If the user tries to buy a pack they cannot afford
+showPopupCannotAffordPack = false
+// Transfermarket Player Scroll
+transfermarketPlayerScroll = 0
+// Tactics Player Scroll
+tacticsPlayerScroll = 0
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
