@@ -14,15 +14,15 @@ function UltManTeam() constructor{
 	matchesPlayed = 0
     totalPoints = 0
 
-    // Randomly assign a club rating between 1 and 100
-    clubRating = irandom_range(1, 100);
+    // Randomly assign a club rating between 1 and 100	
+	attackerQuality = irandom_range(70, 100);
+	midfielderQuality = irandom_range(70, 100);
+	defenderQuality = irandom_range(70, 100);
+	goalKeeperQuality = irandom_range(70, 100);
+	ballPossesion = irandom_range(70, 100);
+	counterAttacks = irandom_range(70, 100);
 	
-	attackerQuality = irandom_range(1, 100);
-	midfielderQuality = irandom_range(1, 100);
-	defenderQuality = irandom_range(1, 100);
-	goalKeeperQuality = irandom_range(1, 100);
-	ballPossesion = irandom_range(1, 100);
-	counterAttacks = irandom_range(1, 100);
+	clubRating = (attackerQuality + midfielderQuality + defenderQuality + goalKeeperQuality + ballPossesion + counterAttacks)/6
 }
 
 enum UltManClubRatingCategories 

@@ -41,6 +41,7 @@ teamList = ds_list_create()
 // Variables
 
 playerClub = new UltManTeam()
+playerOpponentTeam = undefined
 
 clubName = playerClub.clubName
 
@@ -81,13 +82,121 @@ ds_list_add(packs, new UltManPack(UltManPackTier.Legendary));
   
 #region Gamelogic functions
 
-function SimulateLeague()
+function SimulateLeague(playerGoals, opponentGoals)
 {
-	var matchups = []
-	var clubsAvailable = ds_list_create()
+	GenerateMatchups()
+	
+	// Generate results
+	for (var i = 0; i < array_length(matchups); ++i) {
+	    
+		if (array_length(matchups[i]) != 0)
+		{
+			// point system
+			var MatchXG = [0,0]
+		
+			// Simulate results
+			var possessionRatio = (matchups[i][0].ballPossesion + matchups[i][0].midfielderQuality*2)/(matchups[i][1].ballPossesion + matchups[i][0].midfielderQuality*2)
+		
+			if (possessionRatio > 1)
+			{
+				var dominantTeamIndex = 0
+				var dominantTeam = matchups[i][0]
+				var submissiveTeam = matchups[i][1]
+			}
+			else
+			{
+				var dominantTeamIndex = 1
+				var dominantTeam = matchups[i][1]
+				var submissiveTeam = matchups[i][0]
+			}
+		
+			// Dominant team
+			var chancesCreated = 8 + (possessionRatio-1)*10
+			var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
+			MatchXG[dominantTeamIndex] = chancesCreated*chanceQuality
+		
+			// Submissive team
+			var chancesCreated = 3 + dominantTeam.counterAttacks
+			var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
+			MatchXG[!dominantTeamIndex] = chancesCreated*chanceQuality
+		
+			if (abs(MatchXG[dominantTeamIndex] - MatchXG[!dominantTeamIndex]) < 9)
+			{
+				matchups[i][0].matchesDrawn++
+				matchups[i][1].matchesDrawn++
+				matchups[i][0].matchesPlayed++
+				matchups[i][1].matchesPlayed++
+			}
+			else
+			{
+				if (MatchXG[dominantTeamIndex] > MatchXG[!dominantTeamIndex])
+				{
+					dominantTeam.matchesPlayed++
+					submissiveTeam.matchesPlayed++
+					dominantTeam.matchesWon++
+					submissiveTeam.matchesLost++
+				}
+				else
+				{
+					submissiveTeam.matchesPlayed++
+					dominantTeam.matchesPlayed++
+					submissiveTeam.matchesWon++
+					dominantTeam.matchesLost++
+				}
+			}
+		}
+	}
+	
+	// Player Results
+	if (playerGoals > opponentGoals)
+	{
+		obj_UltManManagerController.playerClub.matchesWon++
+		playerOpponentTeam.matchesLost++
+	}
+	else if (playerGoals < opponentGoals)
+	{
+		obj_UltManManagerController.playerClub.matchesLost++
+		playerOpponentTeam.matchesWon++
+	}
+	else
+	{
+		playerOpponentTeam.matchesDrawn++
+		obj_UltManManagerController.playerClub.matchesDrawn++
+	}
+	obj_UltManManagerController.playerClub.matchesPlayed++
+	playerOpponentTeam.matchesPlayed++
+	
+	// Update points
+	for (var i = 0; i < ds_list_size(teamList); ++i) {
+	    var team = ds_list_find_value(teamList, i)
+		
+		team.totalPoints = team.matchesWon*3 + team.matchesDrawn
+	}
+
+	scr_sort_struct_list(teamList, "totalPoints", false)
+	SaveGamestate()
+	ds_list_destroy(clubsAvailable)
+}
+
+
+function GenerateMatchups()
+{
+	matchups = []
+	clubsAvailable = ds_list_create()
 	ds_list_copy(clubsAvailable, teamList)
 	
-	// Generate Matchups
+	// Find opponent for player
+	playerOpponentTeam = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable)-1))
+	while(playerOpponentTeam = playerClub)
+	{
+		playerOpponentTeam = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable)-1))
+	}
+	
+	// Remove player and opponent from available matchups
+	ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, playerOpponentTeam))
+	ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, playerClub))
+	
+	// Generate rest of the matchups
 	for (var i = 0; 1 < ds_list_size(clubsAvailable); ++i) 
 	{
 		// Home Club
@@ -99,71 +208,8 @@ function SimulateLeague()
 		var clubId = irandom_range(0, ds_list_size(clubsAvailable)-1)
 		var awayClub = ds_list_find_value(clubsAvailable, clubId)
 		ds_list_delete(clubsAvailable, clubId)
-		
-		if (homeClub != playerClub and awayClub != playerClub)
-			matchups[i] = [homeClub, awayClub]
-
+		matchups[i] = [homeClub, awayClub]
 	}
-	
-	// Generate results
-	for (var i = 0; i < array_length(matchups); ++i) {
-	    
-		// point system
-		var MatchXG = [0,0]
-		
-		// Simulate results
-		var possessionRatio = (matchups[i][0].ballPossesion + matchups[i][0].midfielderQuality*2)/(matchups[i][1].ballPossesion + matchups[i][0].midfielderQuality*2)
-		
-		if (possessionRatio > 1)
-		{
-			var dominantTeamIndex = 0
-			var dominantTeam = matchups[i][0]
-			var submissiveTeam = matchups[i][1]
-		}
-		else
-		{
-			var dominantTeamIndex = 1
-			var dominantTeam = matchups[i][1]
-			var submissiveTeam = matchups[i][0]
-		}
-		
-		// Dominant team
-		var chancesCreated = 8 + (possessionRatio-1)*10
-		var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
-		MatchXG[dominantTeamIndex] = chancesCreated*chanceQuality
-		
-		// Submissive team
-		var chancesCreated = 3 + dominantTeam.counterAttacks
-		var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
-		MatchXG[!dominantTeamIndex] = chancesCreated*chanceQuality
-		
-		if (abs(MatchXG[dominantTeamIndex] - MatchXG[!dominantTeamIndex]) < MatchXG[dominantTeamIndex]*0.3)
-		{
-			matchups[i][0].matchesDrawn++
-			matchups[i][1].matchesDrawn++
-			matchups[i][0].matchesPlayed++
-			matchups[i][1].matchesPlayed++
-		}
-		else
-		{
-			if (MatchXG[dominantTeamIndex] > MatchXG[!dominantTeamIndex])
-			{
-				dominantTeam.matchesPlayed++
-				submissiveTeam.matchesPlayed++
-				dominantTeam.matchesWon++
-				submissiveTeam.matchesLost++
-			}
-			else
-			{
-				submissiveTeam.matchesPlayed++
-				dominantTeam.matchesPlayed++
-				submissiveTeam.matchesWon++
-				dominantTeam.matchesLost++
-			}
-		}
-	}
-	
-	show_message(json_stringify(matchups))
 }
 
 #endregion
@@ -245,6 +291,7 @@ function StartNewGamestate()
 			break;
 		}
 	}
+	GenerateMatchups()
 	SaveGamestate()
 }
 
@@ -334,7 +381,10 @@ function LoadGamestate(Json)
 	#region Team
 		obj_UltManManagerController.playerClub = json_parse(gamestateMap[?"team"]);
 		obj_UltManManagerController.clubName = playerClub.clubName
+		obj_UltManManagerController.playerClub = find_struct_in_list(teamList, "clubName", clubName)
 	#endregion
+
+	GenerateMatchups()
 }
 
 function SaveGamestate()
