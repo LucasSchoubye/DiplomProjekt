@@ -82,7 +82,7 @@ function scr_UltManTacticPlayerBox(){
 					{
 					
 						// If player is in starting squad
-						if (i < 11 or ds_list_find_index(squad, fromPlayer) <= 11)
+						if (i < 11 or ds_list_find_index(squad, fromPlayer) < 11)
 						{
 							var toPlayerCoor = [undefined,undefined]
 							var fromPlayerCoor = [undefined,undefined]
