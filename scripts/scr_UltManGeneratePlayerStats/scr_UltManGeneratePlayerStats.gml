@@ -60,7 +60,7 @@ function scr_UltManGeneratePlayerStats(player, pos, tier){
 			player.strength = irandom_range(400, 500)
 			player.defence = irandom_range(700, 850)
 			player.dribbling = irandom_range(700, 850)
-			player.overallRating = irandom_range(85, 84)
+			player.overallRating = irandom_range(85, 94)
 		break;
 		
 		case UltManPackTier.Legendary:

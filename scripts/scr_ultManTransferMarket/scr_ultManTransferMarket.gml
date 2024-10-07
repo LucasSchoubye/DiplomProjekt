@@ -159,8 +159,8 @@ function scr_ultManTransferMarket(){
 		}
 		
 		// Check for mouse click on the pack to select a player based on its tier
-        if (mouse_x > currentX && mouse_x < currentX + packWidth &&
-            mouse_y > currentY && mouse_y < currentY + packHeight) {
+        if (mouse_x > currentX + pack.contentPadding && mouse_x < currentX + packWidth - pack.contentPadding &&
+            mouse_y > currentY + pack.packPlayerInfoY + 3 * pack.contentPadding && mouse_y < currentY + packHeight - pack.contentPadding) {
 			if (obj_UltManManagerController.showSellPopup = false 
 			&& obj_UltManManagerController.showCannotSellPopup = false 
 			&& obj_UltManManagerController.showPopupCannotBuyPack = false) {
