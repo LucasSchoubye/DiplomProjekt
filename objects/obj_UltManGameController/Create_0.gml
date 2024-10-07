@@ -82,8 +82,8 @@ function AnsweredIncorrect()
 	
 	if (frozenTargetX > room_width or frozenShotMissed)
 	{
-		frozenTargetX = instance_nearest(x,y,obj_UltManOpponent).x
-		frozenTargetY = instance_nearest(x,y,obj_UltManOpponent).y
+		frozenTargetX = instance_nearest(frozenTargetX,frozenTargetY,obj_UltManOpponent).x
+		frozenTargetY = instance_nearest(frozenTargetX,frozenTargetY,obj_UltManOpponent).y
 		frozenShotMissed = true
 	}
 }
