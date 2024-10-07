@@ -6,7 +6,7 @@
   "name":"scr_UltManKickoffSetup",
   "parent":{
     "name":"Logic",
-    "path":"folders/Assets/Ultimate Manager/Scripts/Logic.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/In Match/Logic.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

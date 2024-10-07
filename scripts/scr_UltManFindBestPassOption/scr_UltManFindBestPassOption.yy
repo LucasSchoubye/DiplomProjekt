@@ -6,7 +6,7 @@
   "name":"scr_UltManFindBestPassOption",
   "parent":{
     "name":"Offensive",
-    "path":"folders/Assets/Ultimate Manager/Scripts/NPC Scripts/Offensive.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/In Match/NPC Scripts/Offensive.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

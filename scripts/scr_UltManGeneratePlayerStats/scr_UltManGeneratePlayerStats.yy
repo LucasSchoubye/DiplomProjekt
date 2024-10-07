@@ -6,7 +6,7 @@
   "name":"scr_UltManGeneratePlayerStats",
   "parent":{
     "name":"Player Generation",
-    "path":"folders/Assets/Ultimate Manager/Scripts/Player Generation.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Manager/Player Generation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
