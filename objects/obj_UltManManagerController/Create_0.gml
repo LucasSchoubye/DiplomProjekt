@@ -39,10 +39,15 @@ enum FormationColumns
 teamList = ds_list_create()
 
 // Variables
-clubName = "Arsenal FC"
+
+playerClub = new UltManTeam()
+
+clubName = playerClub.clubName
+
 menuOptions = ds_list_create()
 selectedMenuOption = 0
 currentMenu = ultManMenus.Home
+
 // Determine if a user wants to sell a player
 showSellPopup = false; 
 // If the user is trying to sell a player in the active team
@@ -84,11 +89,101 @@ ds_list_add(packs, new UltManPack(UltManPackTier.Ruby));
 ds_list_add(packs, new UltManPack(UltManPackTier.Obsidian));
 ds_list_add(packs, new UltManPack(UltManPackTier.Legendary)); 
   
-// Functions
+#region Gamelogic functions
+
+function SimulateLeague()
+{
+	var matchups = []
+	var clubsAvailable = ds_list_create()
+	ds_list_copy(clubsAvailable, teamList)
+	
+	// Generate Matchups
+	for (var i = 0; 1 < ds_list_size(clubsAvailable); ++i) 
+	{
+		// Home Club
+		var clubId = irandom_range(0, ds_list_size(clubsAvailable)-1)
+		var homeClub = ds_list_find_value(clubsAvailable, clubId)
+		ds_list_delete(clubsAvailable, clubId)
+		
+		// Away Club
+		var clubId = irandom_range(0, ds_list_size(clubsAvailable)-1)
+		var awayClub = ds_list_find_value(clubsAvailable, clubId)
+		ds_list_delete(clubsAvailable, clubId)
+		
+		if (homeClub != playerClub and awayClub != playerClub)
+			matchups[i] = [homeClub, awayClub]
+
+	}
+	
+	// Generate results
+	for (var i = 0; i < array_length(matchups); ++i) {
+	    
+		// point system
+		var MatchXG = [0,0]
+		
+		// Simulate results
+		var possessionRatio = (matchups[i][0].ballPossesion + matchups[i][0].midfielderQuality*2)/(matchups[i][1].ballPossesion + matchups[i][0].midfielderQuality*2)
+		
+		if (possessionRatio > 1)
+		{
+			var dominantTeamIndex = 0
+			var dominantTeam = matchups[i][0]
+			var submissiveTeam = matchups[i][1]
+		}
+		else
+		{
+			var dominantTeamIndex = 1
+			var dominantTeam = matchups[i][1]
+			var submissiveTeam = matchups[i][0]
+		}
+		
+		// Dominant team
+		var chancesCreated = 8 + (possessionRatio-1)*10
+		var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
+		MatchXG[dominantTeamIndex] = chancesCreated*chanceQuality
+		
+		// Submissive team
+		var chancesCreated = 3 + dominantTeam.counterAttacks
+		var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
+		MatchXG[!dominantTeamIndex] = chancesCreated*chanceQuality
+		
+		if (abs(MatchXG[dominantTeamIndex] - MatchXG[!dominantTeamIndex]) < MatchXG[dominantTeamIndex]*0.3)
+		{
+			matchups[i][0].matchesDrawn++
+			matchups[i][1].matchesDrawn++
+			matchups[i][0].matchesPlayed++
+			matchups[i][1].matchesPlayed++
+		}
+		else
+		{
+			if (MatchXG[dominantTeamIndex] > MatchXG[!dominantTeamIndex])
+			{
+				dominantTeam.matchesPlayed++
+				submissiveTeam.matchesPlayed++
+				dominantTeam.matchesWon++
+				submissiveTeam.matchesLost++
+			}
+			else
+			{
+				submissiveTeam.matchesPlayed++
+				dominantTeam.matchesPlayed++
+				submissiveTeam.matchesWon++
+				dominantTeam.matchesLost++
+			}
+		}
+	}
+	
+	show_message(json_stringify(matchups))
+}
+
+#endregion
+
+#region Gamestate Functions
 function StartNewGamestate()
 {
 	// Generate Teamslist
 	teamList = UltManTeams()
+	ds_list_replace(teamList, 0, playerClub)
 	
 	// Generate squad
 	var squadList = ds_list_create()
@@ -229,7 +324,7 @@ function LoadGamestate(Json)
     
 	    // Create a struct for the player
 	    var leagueTeamStruct = json_parse(parsed_data[amount]);
-		var leagueTeam = new UltManPlayer()
+		var leagueTeam = new UltManTeam()
 
 		// Loop through the fields and copy values dynamically
 		var fields = variable_struct_get_names(leagueTeamStruct);
@@ -244,6 +339,11 @@ function LoadGamestate(Json)
 		
 	    ds_list_add(teamList, leagueTeam)
 	}
+	#endregion
+	
+	#region Team
+		obj_UltManManagerController.playerClub = json_parse(gamestateMap[?"team"]);
+		obj_UltManManagerController.clubName = playerClub.clubName
 	#endregion
 }
 
@@ -283,7 +383,9 @@ function SaveGamestate()
 	gamestateMap[?"squad"] = json_stringify(squadJsonArray, true)
 	gamestateMap[?"lineup"] = json_stringify(formationArray, true)
 	gamestateMap[?"league"] = json_stringify(leagueArray, true)
+	gamestateMap[?"team"] = json_stringify(obj_UltManManagerController.playerClub, true)
 	
 	obj_firestore_controller.SaveGamestate("ultimateManager", json_encode(gamestateMap))
 	ds_map_destroy(gamestateMap)
 }
+#endregion

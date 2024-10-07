@@ -1,6 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+// debug
+if (keyboard_check_pressed(vk_enter))
+	SimulateLeague()
+
 if (room = rm_UltManOverview){
 	audio_stop_sound(sou_UltManCheer)
 
@@ -107,6 +111,7 @@ switch(currentMenu){
 		break;
 	case ultManMenus.Quit:
 		room_goto(rm_menu)
+		currentMenu = ultManMenus.Home
 		break;
 	}
 }

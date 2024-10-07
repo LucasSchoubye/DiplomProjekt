@@ -6,7 +6,7 @@
   "name":"scr_UltManTacticPlayerBox",
   "parent":{
     "name":"Sub Menus",
-    "path":"folders/Assets/Ultimate Manager/Scripts/ultManMenus/Sub Menus.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Manager/ultManMenus/Sub Menus.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
