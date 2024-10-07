@@ -1,22 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_fireball",
+  "%Name":"obj_Pause",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_fireball",
+  "name":"obj_Pause",
   "overriddenProperties":[],
   "parent":{
-    "name":"Attacks",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Attacks.yy",
+    "name":"Objects",
+    "path":"folders/Assets/Fight The Dungeon/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"obj_damagePlayer",
-    "path":"objects/obj_damagePlayer/obj_damagePlayer.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -34,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_fireBallR",
-    "path":"sprites/spr_fireBallR/spr_fireBallR.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -7,7 +7,7 @@ function scr_HUD(){
 	var healthbarStartX = view_wport[0]*0.9
 	var healthbarStartY = 700
 	
-	draw_text(timerStartx,40,"Time: 10")
+	
 	
 	switch(obj_FtDPlayer.hp) {
 		case 5:

@@ -36,6 +36,7 @@ var optionSelected = undefined
 
 	if (question != undefined)
 	{
+		
 		draw_rectangle(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
 		draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
 	

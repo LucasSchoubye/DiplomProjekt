@@ -1,0 +1,4 @@
+enum GAME_STATE {
+	PAUSED,
+	RUNNING,
+}
