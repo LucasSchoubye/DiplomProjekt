@@ -162,16 +162,28 @@ function SimulateLeague(playerGoals, opponentGoals)
 	{
 		obj_UltManManagerController.playerClub.matchesWon++
 		playerOpponentTeam.matchesLost++
+		if(opponentGoals = 0){
+			obj_storeController.balance += 10
+		}
+		obj_storeController.balance += 20
+		obj_storeController.balance += (5 * playerGoals)
+		
 	}
 	else if (playerGoals < opponentGoals)
 	{
 		obj_UltManManagerController.playerClub.matchesLost++
 		playerOpponentTeam.matchesWon++
+		obj_storeController.balance += 5
 	}
 	else
 	{
 		playerOpponentTeam.matchesDrawn++
 		obj_UltManManagerController.playerClub.matchesDrawn++
+		if(opponentGoals = 0){
+			obj_storeController.balance += 10
+		}
+		obj_storeController.balance += 10
+		obj_storeController.balance += (1 * playerGoals)
 	}
 	obj_UltManManagerController.playerClub.matchesPlayed++
 	playerOpponentTeam.matchesPlayed++
