@@ -67,6 +67,67 @@ function scr_ultManTransferMarket(){
 	var currentY = startY;
 	var packCounter = 0;  // To count how many packs have been placed in the current row
 	
+	// Draw player sell list and sell button
+	draw_set_font(fn_RobotoMedium14)
+	for (var i = 0; i < ds_list_size(squad); ++i) {
+	    var currentPlayer = ds_list_find_value(squad, i)
+		var sellListSep = sellBoxTop + 30*(i+1) + transfermarketPlayerScroll;
+		
+		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
+		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
+		playerRating = currentPlayer.overallRating
+		playerPosition = currentPlayer.PosToString()
+		playerPositionHeight = string_height(playerPosition)
+		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
+		if (string_width(playerName) > 150) {
+			playerName = string_copy(playerName,1, 14);
+		}
+		if (i < 11 && playerTier < maxAvailablePackTier){
+			maxAvailablePackTier = playerTier;
+		}
+		
+		draw_set_halign(fa_left)
+		draw_set_color(playerColour);
+		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
+			draw_text(sellBoxLeft + 20,sellListSep, playerName);
+			draw_set_color(c_white)
+			draw_text(sellBoxLeft + 190,sellListSep, playerRating);
+			draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
+		
+		
+			// Check for hover over player
+		    if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
+		        mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+            
+		        hoveredPlayerIndex = i;  // Store the index of the hovered player
+            
+		        // Draw red "SELL" button
+		        draw_set_color(c_red);
+				scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
+		        draw_set_color(c_white);
+            
+				// Handle sell button click if player is in starting 11
+		        if (mouse_check_button_pressed(mb_left) &&
+		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
+		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep 
+					&& i < 11) {
+                
+		            // Show cannot sell popup
+					obj_UltManManagerController.showCannotSellPopup = true;
+		        }
+				// Handle sell button click
+				else if (mouse_check_button_pressed(mb_left) &&
+		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
+		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+                
+		            // Show confirmation popup
+		            obj_UltManManagerController.showSellPopup = true;
+		            playerToSell = i;  // Store the player index to be sold
+					playerSellPrice = ds_list_find_value(packs, currentPlayer.tier).playerSellPrice
+		        }
+		    }
+		}
+	}
 	
 	// draw box above sell list for smooth scroll
 	draw_set_color(#393944)
@@ -137,85 +198,6 @@ function scr_ultManTransferMarket(){
 
 	    // Increment the pack counter
 	    packCounter++;
-	}
-	
-	// Draw player sell list and sell button
-	draw_set_font(fn_RobotoMedium14)
-	for (var i = 0; i < ds_list_size(squad); ++i) {
-	    var currentPlayer = ds_list_find_value(squad, i)
-		var sellListSep = sellBoxTop + 30*(i+1) + transfermarketPlayerScroll;
-		
-		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
-		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
-		playerRating = currentPlayer.overallRating
-		playerPosition = currentPlayer.PosToString()
-		playerPositionHeight = string_height(playerPosition)
-		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
-		if (string_width(playerName) > 150) {
-			playerName = string_copy(playerName,1, 14);
-		}
-		if (i < 11 && playerTier < maxAvailablePackTier){
-			maxAvailablePackTier = playerTier;
-		}
-		
-		draw_set_halign(fa_left)
-		draw_set_color(playerColour);
-		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
-			draw_text(sellBoxLeft + 20,sellListSep, playerName);
-			draw_set_color(c_white)
-			draw_text(sellBoxLeft + 190,sellListSep, playerRating);
-			draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
-		
-		
-			// Check for hover over player
-		    if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
-		        mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
-				
-		        hoveredPlayerIndex = i;  // Store the index of the hovered player
-				
-				
-				//Draw player card
-				currentPlayer.playerCardTimer--
-				
-				if(currentPlayer.playerCardTimer < 0){
-					
-					if(mouse_y < room_height / 2){
-						scr_DrawPlayerCard(sellBoxLeft - 250,mouse_y - 100,sellBoxLeft, mouse_y + 150 ,currentPlayer)
-					}
-					else{
-						scr_DrawPlayerCard(sellBoxLeft - 250,mouse_y - 250,sellBoxLeft, mouse_y ,currentPlayer)
-					}
-				}
-				
-		        // Draw red "SELL" button
-		        draw_set_color(c_red);
-				scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
-		        draw_set_color(c_white);
-            
-				// Handle sell button click if player is in starting 11
-		        if (mouse_check_button_pressed(mb_left) &&
-		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
-		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep 
-					&& i < 11) {
-                
-		            // Show cannot sell popup
-					obj_UltManManagerController.showCannotSellPopup = true;
-		        }
-				// Handle sell button click
-				else if (mouse_check_button_pressed(mb_left) &&
-		            mouse_x > sellBoxRight - 100 && mouse_x < sellBoxRight - 20 &&
-		            mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
-                
-		            // Show confirmation popup
-		            obj_UltManManagerController.showSellPopup = true;
-		            playerToSell = i;  // Store the player index to be sold
-					playerSellPrice = ds_list_find_value(packs, currentPlayer.tier).playerSellPrice
-		        }
-		    }
-			else{
-				currentPlayer.playerCardTimer = 30
-			}
-		}
 	}
 	
 	// Confirmation popup for selling a player

@@ -61,8 +61,6 @@ showPopupCannotAffordPack = false
 transfermarketPlayerScroll = 0
 // Tactics Player Scroll
 tacticsPlayerScroll = 0
-// Transfermarket Player Card Timer
-transfermarketPlayerCardTimer = 0
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")

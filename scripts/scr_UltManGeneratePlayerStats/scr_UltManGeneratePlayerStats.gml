@@ -226,7 +226,7 @@ function ModifyStatsWithPos(pos, player)
 			
 			// Buffs
 			player.topPassSpd = player.topPassSpd*1.3
-			player.topSpd = player.topSpd*1.3
+			player.topSpd = player.topPassSpd*1.3
 			player.passing = player.passing*0.9
 			player.dribbling = player.dribbling*1.5
 			player.shooting = player.shooting*1.2
@@ -244,7 +244,7 @@ function ModifyStatsWithPos(pos, player)
 			player.topPassSpd = player.topPassSpd*0.9
 			
 			// Buffs
-			player.topSpd = player.topSpd*1.2
+			player.topSpd = player.topPassSpd*1.2
 			player.dribbling = player.dribbling*1.2
 			player.shooting = player.shooting*1.5
 			

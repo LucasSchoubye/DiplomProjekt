@@ -55,32 +55,6 @@ function scr_UltManTacticPlayerBox(){
 			draw_sprite_ext(spr_UltManPerson, 0, playerBoxLeft + 63,playerBoxTop + (i+0.4)*30 - 2 + tacticsPlayerScroll, 0.15, string_height(player.name[1])*0.01, 0, c_white, 0.3)
 			draw_text(playerBoxLeft + 70,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,player.name[0] + " " + player.name[1])
 		
-		// Draw Selected
-		if (mouse_y - playerBoxTop < 30*(i+1) && mouse_y - playerBoxTop > 30*(i) &&
-			mouse_x > playerBoxLeft && mouse_x < playerBoxRight)
-		{
-			
-			//Draw player card
-			player.playerCardTimer--
-				
-			if(player.playerCardTimer < 0){
-					
-				if(mouse_y < room_height / 2){
-					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 100,playerBoxLeft, mouse_y + 150 ,player)
-				}
-				else{
-					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 250,playerBoxLeft, mouse_y ,player)
-				}
-			}
-			
-			draw_set_alpha(0.2)
-			draw_rectangle(playerBoxLeft, playerBoxTop + (i)*30, playerBoxRight, playerBoxTop + (i+1)*30, false)
-			draw_set_alpha(1)
-			
-			if (mouse_check_button_pressed(mb_left))
-			{
-				fromPlayer = ds_list_find_value(squad, i)
-			}
 			draw_set_halign(fa_center)
 			draw_text(playerBoxRight - 90,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,player.age)
 			draw_text(playerBoxRight - 60,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,string(player.condition)+"%")
@@ -181,11 +155,6 @@ function scr_UltManTacticPlayerBox(){
 					fromPlayer = undefined
 				}
 			}
-		}
-		else
-		{
-			player.playerCardTimer = 30
-			
 		}
 	}
 	
