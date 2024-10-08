@@ -18,6 +18,7 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	var attributeArray = ["topSpd", "dribbling", "shooting", "topShootSpd", "passing", "topPassSpd", "strength", "defence"]
 	var attributeStringArray = ["Pac", "Dri", "Sho", "Sho Str", "Pas", "Pas Str", "Str", "Def"]
 	
+	// aligns correct for text
 	draw_set_halign(fa_left)
 	
 	draw_set_font(fn_konk16);
@@ -32,6 +33,8 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	draw_set_color(#C9C9C9)
 	draw_text(x1 + 10,y1 + 20, currentPlayer.name[0])
 	draw_set_color(c_white)
+	
+	//checks if name is too long
 	if(string_length(currentPlayerLastName) > 8)
 	{
 		draw_set_font(fn_konk16);
@@ -42,6 +45,8 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	}
 	draw_text(x1 + 10,y1 + 45, currentPlayerLastName)
 	draw_set_color(playerColour)
+	
+	// makes font different if their rating is above 100
 	if (currentPlayer.overallRating >= 100)
 	{
 		draw_set_font(fn_LatoBold40);
@@ -61,6 +66,7 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	draw_text(x1 + 10 + string_width("Position: "), y1 + 110, currentPlayerPos)
 	draw_text(x2 - 100 + string_width("Age: "), y1 + 110, currentPlayer.age)
 	
+	// Writes their attribute as a number and the string
 	for (var i = 0; i < array_length(attributeArray); ++i) {
 	    var attribute = attributeArray[i]
 		var attributeString = attributeStringArray[i]
@@ -76,7 +82,6 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 			newRow += 1
 		}
 	}
-	
 	
 	draw_set_halign(currentHAlign)
 	draw_set_valign(currentVAlign)
