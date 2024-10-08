@@ -267,7 +267,7 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 		
 			// Overall rating
 			case "overallRating":
-				return round((CalculateRating("topSpd") + CalculateRating("topShootSpd") + CalculateRating("topPassSpd") + CalculateRating("passing") + CalculateRating("shooting") + CalculateRating("strength") + CalculateRating("defence") + CalculateRating("dribbling"))/8)
+				return round(((CalculateRating("topSpd") + CalculateRating("topShootSpd") + CalculateRating("topPassSpd") + CalculateRating("passing") + CalculateRating("shooting") + CalculateRating("strength") + CalculateRating("defence") + CalculateRating("dribbling"))/8)* 1.275) 
 			break;			
 		}
 	}
