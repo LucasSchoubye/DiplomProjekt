@@ -6,7 +6,7 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	name = scr_UltManRandomName()
 	number = irandom_range(1,99)
 	age = irandom_range(15,30)
-	nationality = Nationality.DK
+	nationality = irandom_range(0,17)
 	height = irandom_range(160,210)
 
 	// Tactics
@@ -27,11 +27,12 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	defence = 200
 	dribbling = 200
 	tier = playerTier
-	scr_UltManGeneratePlayerStats(self, position, playerTier)
+	scr_UltManGeneratePlayerStats(self, preferredPosition, playerTier)
 	
 	// Drawing animation
 	curX = room_width/2
 	curY = room_height/2
+	playerCardTimer = 30
 	
 	function DrawPlayer(X,Y, color = #43C44A)
 	{
@@ -63,6 +64,7 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 		{
 			obj_UltManManagerController.fieldViewFromPlayer = self
 		}
+		
 	}
 	
 	function DrawDragAndDrop()
@@ -125,6 +127,98 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 				return "GK"
 			case FootballPositions.SUB:
 				return "SUB"
+				
+		}
+	}
+	
+	function NatToString()
+	{
+		var drawnNationality = nationality
+		
+		switch(drawnNationality)
+		{
+			case Nationality.DK:
+				return "Denmark"
+			case Nationality.SWE:
+				return "Sweden"
+			case Nationality.NOR:
+				return "Norway"
+			case Nationality.DE:
+				return "Germany"
+			case Nationality.BEL:
+				return "Belgium"
+			case Nationality.ENG:
+				return "England"
+			case Nationality.CRO:
+				return "Croatia"
+			case Nationality.HOL:
+				return "Netherlands"
+			case Nationality.ITA:
+				return "Italy"
+			case Nationality.FRA:
+				return "France"
+			case Nationality.ESP:
+				return "Spain"
+			case Nationality.POR:
+				return "Portugal"
+			case Nationality.ARG:
+				return "Argentina"
+			case Nationality.BRA:
+				return "Brazil"
+			case Nationality.USA:
+				return "USA"
+			case Nationality.NIG:
+				return "Nigeria"
+			case Nationality.SEN:
+				return "Senegal"
+			case Nationality.CAM:
+				return "Cameroon"
+				
+		}
+	}
+	
+	function NatToSprite()
+	{
+		var drawnNationality = nationality
+		
+		switch(drawnNationality)
+		{
+			case Nationality.DK:
+				return spr_flagDenmark
+			case Nationality.SWE:
+				return spr_flagSweden
+			case Nationality.NOR:
+				return spr_flagNorway
+			case Nationality.DE:
+				return spr_flagGermany
+			case Nationality.BEL:
+				return spr_flagBelgium
+			case Nationality.ENG:
+				return spr_flagEngland
+			case Nationality.CRO:
+				return spr_flagCroatia
+			case Nationality.HOL:
+				return spr_flagNetherlands
+			case Nationality.ITA:
+				return spr_flagItaly
+			case Nationality.FRA:
+				return spr_flagFrance
+			case Nationality.ESP:
+				return spr_flagSpain
+			case Nationality.POR:
+				return spr_flagPortugal
+			case Nationality.ARG:
+				return spr_flagArgentina
+			case Nationality.BRA:
+				return spr_flagBrazil
+			case Nationality.USA:
+				return spr_flagUS
+			case Nationality.NIG:
+				return spr_flagNigeria
+			case Nationality.SEN:
+				return spr_flagSenegal
+			case Nationality.CAM:
+				return spr_flagCameroon
 				
 		}
 	}
@@ -232,7 +326,7 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 		{
 			case "topSpd":
 				var highestPossible = 550*1.3
-				return round(25 + (topSpd/highestPossible)*75)
+				return round(45 + (topSpd/highestPossible)*55)
 			break;
 			case "topShootSpd":
 				var highestPossible = 4500*1.7
