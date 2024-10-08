@@ -82,10 +82,11 @@ if(keyboard_check(vk_backspace)) {
 	room_goto(rm_menu)
 }
 
-if(mouse_wheel_down() || keyboard_check(vk_down)) {
+if((mouse_wheel_down() || keyboard_check(vk_down)) && verticalScroll >= -itemRow*itemHeight) {
 	verticalScroll -= 15
 }
-else if(mouse_wheel_up() || keyboard_check(vk_up)) {
+else if((mouse_wheel_up() || keyboard_check(vk_up)) && verticalScroll < 0) 
+{
 	verticalScroll += 15
 }
 }

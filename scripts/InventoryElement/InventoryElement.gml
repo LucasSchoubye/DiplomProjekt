@@ -19,10 +19,16 @@ function InventoryElement() constructor {
 	itemStartY = room_height*0.125
 
 	function DrawItem(xValue,yValue) {
-		if(yValue >= itemStartY) {
 
+			draw_set_font(fn_textLato)
+			draw_set_alpha(0.1)
+			draw_set_color(c_white)
+			draw_roundrect_color(xValue,yValue,xValue+itemWidth,yValue+itemHeight,c_black,c_white,false)
+			draw_set_alpha(0.3 + sin(current_time/500)*0.1)
+			
+			draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
+			draw_set_alpha(1)
 			draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
-			draw_rectangle(xValue,itemStartY,xValue+itemWidth,yValue+itemHeight,true)
 
 			if (isEquipped == true) {
 				txtEquip = "EQUIPPED"
@@ -45,7 +51,6 @@ function InventoryElement() constructor {
 				}
 				draw_set_alpha(1)
 			}
-		}
 		}
 	}
 }
