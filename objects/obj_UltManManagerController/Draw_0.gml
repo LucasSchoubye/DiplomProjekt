@@ -57,8 +57,6 @@ if (room = rm_UltManOverview){
 			draw_set_alpha(1)
 		}
 		
-		draw_text(mouse_x, mouse_y + i*30, menuOptionWidth)
-	
 		// Take actions based on selected menu item
 		if (mouse_y > menuY - menuPaddingY && mouse_y < menuY + menuPaddingY*(ds_list_size(menuOptions)-1) && 
 			mouse_x > menuX && mouse_x < menuX + menuOptionWidth)

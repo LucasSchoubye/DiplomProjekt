@@ -160,6 +160,14 @@ function scr_ultManHome(){
 			draw_rectangle(leagueTableLeft - numberPadding/1.5, leagueTableTop + rowHeight*(i+1) - rowHeight/6, leagueTableRight + numberPadding/1.5, leagueTableTop + rowHeight*(i+2) - rowHeight/6, false)
 			draw_set_alpha(1)
 		}
+		
+		// Draw Opponent Team
+		if (team.clubName = obj_UltManManagerController.playerOpponentTeam.clubName)
+		{
+			draw_set_alpha(0.6)
+			draw_rectangle(leagueTableLeft - numberPadding/1.5, leagueTableTop + rowHeight*(i+1) - rowHeight/6, leagueTableRight + numberPadding/1.5, leagueTableTop + rowHeight*(i+2) - rowHeight/6, true)
+			draw_set_alpha(1)
+		}
 	}
 	
 	draw_set_color(c_white)
