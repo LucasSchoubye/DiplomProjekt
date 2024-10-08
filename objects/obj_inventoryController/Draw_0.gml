@@ -23,16 +23,26 @@ if(room == rm_inventory) {
 		obj_firestore_controller.UpdateBalance()
 	}
 	
+
 draw_text(screenMidX,screenTop,"Inventory")
 draw_text(currencyStart,screenTop, string(balance) + "$")
 
 
 for (var i = 0; i < ds_list_size(categoryElements); ++i) {
-	draw_rectangle(categoryStartX,categoryStartY + i*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+i*categoryHeight,true)
-	draw_sprite(spr_theOneAndOnlySmall,0,categoryStartX+categoryImgStartX,categoryStartY+categoryCenterY + i*categoryHeight)
-	draw_set_halign(fa_left)
-	draw_text(categoryStartX+categoryTextStartX,categoryStartY+categoryCenterY+i*categoryHeight,ds_list_find_value(categoryElements,i))
+	
+	// Draw Category
+	draw_set_font(fn_textLato)
+	draw_set_alpha(0.1)
+	draw_set_color(c_white)
+	draw_roundrect(categoryStartX,categoryStartY + i*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+i*categoryHeight,false)
+	draw_set_alpha(0.4 + sin(current_time/500)*0.1)
+	draw_roundrect(categoryStartX,categoryStartY + i*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+i*categoryHeight,true)
+	draw_set_alpha(1)
 	draw_set_halign(fa_center)
+	draw_text(categoryStartX+categoryWidth/2,categoryStartY+categoryCenterY+i*categoryHeight,ds_list_find_value(categoryElements,i))
+	draw_set_halign(fa_center)
+	
+	// Category logic
 	if(mouse_x > categoryStartX && mouse_x < categoryStartX+categoryWidth) {
 		if(mouse_y > categoryStartY + i*categoryHeight && mouse_y < categoryStartY+categoryHeight+ i*categoryHeight) {
 			draw_set_alpha(0.3)
@@ -44,6 +54,7 @@ for (var i = 0; i < ds_list_size(categoryElements); ++i) {
 			}
 		}
 	}
+	
 	// Active Category
 	draw_set_alpha(0.15)
 	draw_rectangle(categoryStartX,categoryStartY + currentCategory*categoryHeight,categoryStartX+categoryWidth,categoryStartY+categoryHeight+ currentCategory*categoryHeight,false)

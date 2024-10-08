@@ -20,34 +20,20 @@ function InventoryElement() constructor {
 
 	function DrawItem(xValue,yValue) {
 		if(yValue >= itemStartY) {
-			switch(itemName){
-				case "Cat":
-					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-				case "Hat":
-					draw_sprite(spr_hat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-				case "Scat":
-					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-			}
-			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
-		}
-		else if(yValue+itemHeight >= itemStartY) {
+
+			draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
 			draw_rectangle(xValue,itemStartY,xValue+itemWidth,yValue+itemHeight,true)
-		}
-		if(yValue+itemEquipY-textHeight >= itemStartY) {
+
 			if (isEquipped == true) {
 				txtEquip = "EQUIPPED"
 			} else {
 				txtEquip = ""
 			}
 			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
-		}
-		if(yValue+itemTitleY-textHeight >= itemStartY) {
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
-		}
+
 		
+		// Logic
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
 				draw_set_alpha(0.3)
@@ -60,6 +46,6 @@ function InventoryElement() constructor {
 				draw_set_alpha(1)
 			}
 		}
-	
+		}
 	}
 }

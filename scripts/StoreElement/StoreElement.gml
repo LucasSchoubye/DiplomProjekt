@@ -35,7 +35,7 @@ function StoreElement() constructor {
 			
 		draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 		draw_set_alpha(1)
-		draw_sprite_ext(itemNameToSprite(),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite()), (itemHeight*0.6)/sprite_get_height(itemNameToSprite()),0,c_white,1)
+		draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
 		
 		// Price/owned text & Name
 		if(isOwned == true) {
@@ -65,22 +65,6 @@ function StoreElement() constructor {
 			}
 		}
 	}
-	
-	function itemNameToSprite()
-	{
-		switch(itemName)
-		{
-			case "Cat":
-				return spr_cat
-			case "Hat":
-				return spr_hat
-			case "Scat":
-				return spr_scat
-			default:
-				return Spr_YoYo_button
-		}
-	}
-	
 }
 
 
