@@ -13,10 +13,7 @@
     "name":"Characters",
     "path":"folders/Assets/Fight The Dungeon/Objects/Characters.yy",
   },
-  "parentObjectId":{
-    "name":"obj_damagePlayer",
-    "path":"objects/obj_damagePlayer/obj_damagePlayer.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

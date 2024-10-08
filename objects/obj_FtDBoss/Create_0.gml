@@ -1,8 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 event_inherited()
+getDamagedCreate(100)
 
-hp = 100
 spd = 0
 chaseSpd = 2
 xspd = 0
@@ -11,7 +11,7 @@ dir = 0
 face = 1
 
 // state machine 
-state = 1
+enemy_state = ENEMY_STATE.CHASING
 
 windupTimer = 60
 shootTimer = 0

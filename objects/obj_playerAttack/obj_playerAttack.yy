@@ -1,19 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_damageEnemy",
+  "%Name":"obj_playerAttack",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_damageEnemy",
+  "name":"obj_playerAttack",
   "overriddenProperties":[],
   "parent":{
-    "name":"Damage",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Damage.yy",
+    "name":"Attacks",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Attacks.yy",
   },
   "parentObjectId":{
-    "name":"obj_damageParent",
-    "path":"objects/obj_damageParent/obj_damageParent.yy",
+    "name":"obj_damageEnemy",
+    "path":"objects/obj_damageEnemy/obj_damageEnemy.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,7 +34,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_thunderBall",
+    "path":"sprites/spr_thunderBall/spr_thunderBall.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

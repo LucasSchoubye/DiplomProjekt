@@ -1,5 +1,5 @@
-if (global.game_state == GAME_STATE.PAUSED) {
-	questionTimer = questionTimer
+if (questionTimer == 0) {
+	questionTimer = 0
 } else {
 	questionTimer -= 1
 }

@@ -2,3 +2,18 @@ enum GAME_STATE {
 	PAUSED,
 	RUNNING,
 }
+
+enum ATTACK_STATE {
+	CHARGING,
+	SHOOT,
+}
+
+enum ENEMY_STATE {
+	CHASING,
+	STOPPED,
+}
+
+enum PLAYER_STATE {
+	MOVING,
+	ATTACKING,
+}

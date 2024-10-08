@@ -7,6 +7,8 @@ optionsMenu = new OptionsMenu()
 questionMenuActive = false
 questionType = QuestionType.MultipleChoice
 questionMenuClickCooldown = true
+correctAnswers = 0
+answeredQuestions = 0
 depth = -room_height
 
 layerID = layer_get_id("Backgrounds_2")
@@ -14,9 +16,11 @@ back = layer_background_get_id(layerID);
 layer_background_visible(back,false)
 
 function AnsweredCorrect() {
-	show_message("NICE COCK")
+	correctAnswers += 1
+	answeredQuestions += 1
+	
 }
 
 function AnsweredIncorrect() {
-	show_message("Nah man")
+	answeredQuestions += 1
 }

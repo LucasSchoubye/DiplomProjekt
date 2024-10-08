@@ -29,11 +29,6 @@ function scr_HUD(){
 	
 	draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
 
-	if (mouse_check_button_pressed(mb_left)) {
-		obj_FtDPlayer.hp = obj_FtDPlayer.hp-1
-		if (obj_FtDPlayer.hp == 0) {
-			obj_FtDPlayer.hp = 5
-		}
-	}
+
 		
 }

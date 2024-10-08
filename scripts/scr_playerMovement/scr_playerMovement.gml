@@ -20,6 +20,8 @@ vSpeed = (keyDown - keyUp) * walkSpeed;
 if (hSpeed != 0) and (vSpeed != 0) { hSpeed *= diagonalSpeed; vSpeed *= diagonalSpeed; }
 if (keyboard_check(vk_shift)) { hSpeed *= runSpeed; vSpeed *= runSpeed; }
 
+
+	
  // Horizontal movement with collision check
 if (!place_meeting(x + hSpeed, y, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wallDoor, obj_wallFront, obj_wallFrontDecor, obj_wallSide])) {
 	x += hSpeed;
@@ -29,6 +31,7 @@ if (!place_meeting(x + hSpeed, y, [obj_wallBackDecor, obj_wallBack, obj_wallCorn
 if (!place_meeting(x, y + vSpeed, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wallDoor, obj_wallFront, obj_wallFrontDecor, obj_wallSide])) {
     y += vSpeed;
 }
+
 
 x = floor(x);
 y = floor(y);
