@@ -28,7 +28,11 @@ switch(currentCategory) {
 
 for (var i = 0; i < ds_list_size(currentList); ++i) {
 	var currentElement = ds_list_find_value(currentList,i)
-    ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
+    
+	
+	ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*(itemWidth+5),itemStartY+itemRow*(itemHeight+5)+verticalScroll)
+	
+	
 	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
 		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
 			if(real(selectedPrice) <= real(balance) && currentElement.isOwned == false) {
@@ -53,7 +57,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 		}
 	}
 	itemCounter++
-	if (itemCounter == 5)
+	if (itemCounter == 4)
     {
         itemCounter = 0
         itemRow++

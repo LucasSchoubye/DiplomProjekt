@@ -46,7 +46,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 		}
 	}
 	itemCounter++
-	if (itemCounter == 5)
+	if (itemCounter == 4)
     {
         itemCounter = 0
         itemRow++

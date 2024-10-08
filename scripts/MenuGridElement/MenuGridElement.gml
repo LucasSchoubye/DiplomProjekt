@@ -44,16 +44,6 @@ function MenuGridElement() constructor {
 				break
 			}
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
-
-		/*
-		else if(yValue+itemHeight >= itemStartX) {
-			draw_set_alpha(0.5)
-			draw_roundrect(xValue,itemStartX,xValue+itemWidth,yValue+itemHeight,true)
-		}
-		if(yValue+itemPriceY-textHeight >= itemStartX) {
-			draw_set_alpha(0.5)
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
-		}*/
 		
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
@@ -95,8 +85,6 @@ function MenuGridElement() constructor {
 		draw_roundrect(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
 		draw_set_alpha(1)
 		
-		//draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
-		//draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
 		draw_set_halign(fa_center)
 		draw_text(xValue+categoryWidth/2,yValue+categoryCenterY,itemName)
 		draw_set_halign(fa_center)
