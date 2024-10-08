@@ -61,6 +61,20 @@ function scr_UltManTacticPlayerBox(){
 		if (mouse_y - playerBoxTop < 30*(i+1) && mouse_y - playerBoxTop > 30*(i) &&
 			mouse_x > playerBoxLeft && mouse_x < playerBoxRight)
 		{
+			
+			//Draw player card
+			player.playerCardTimer--
+				
+			if(player.playerCardTimer < 0){
+					
+				if(mouse_y < room_height / 2){
+					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 100,playerBoxLeft, mouse_y + 150 ,player)
+				}
+				else{
+					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 250,playerBoxLeft, mouse_y ,player)
+				}
+			}
+			
 			draw_set_alpha(0.2)
 			draw_rectangle(playerBoxLeft, playerBoxTop + (i)*30, playerBoxRight, playerBoxTop + (i+1)*30, false)
 			draw_set_alpha(1)
@@ -150,6 +164,11 @@ function scr_UltManTacticPlayerBox(){
 				}
 				fromPlayer = undefined
 			}
+		}
+		else
+		{
+			player.playerCardTimer = 30
+			
 		}
 	}
 	
