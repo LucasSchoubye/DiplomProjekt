@@ -24,7 +24,7 @@ if(room == rm_minigameMenu) {
 draw_set_font(fn_textLato)
 
 for (var i = 0; i < ds_list_size(itemElements); ++i) {
-    ds_list_find_value(itemElements,i).DrawItem(itemStartX+itemCounter*(itemWidth+padding),itemStartY+itemRow*itemHeight+verticalScroll)
+    ds_list_find_value(itemElements,i).DrawItem(itemStartX+itemCounter*(itemWidth+padding),itemStartY+itemRow*(itemHeight+padding)+verticalScroll)
 	itemCounter++
 	if (itemCounter == 4)
     {
@@ -66,7 +66,7 @@ if(keyboard_check(vk_backspace)) {
 if((mouse_wheel_down() || keyboard_check(vk_down)) && verticalScroll >= -itemRow*itemHeight) {
 	verticalScroll -= 15
 }
-else if((mouse_wheel_up() || keyboard_check(vk_up)) && verticalScroll <= 0) 
+else if((mouse_wheel_up() || keyboard_check(vk_up)) && verticalScroll < 0) 
 {
 	verticalScroll += 15
 }
