@@ -23,7 +23,15 @@ function MenuGridElement() constructor {
 
 	
 	function DrawItem(xValue,yValue) {
-		if(yValue >= itemStartX) {
+
+			draw_set_alpha(0.1)
+			draw_set_color(c_white)
+			draw_roundrect_color(xValue,yValue,xValue+itemWidth,yValue+itemHeight,c_black,c_white,false)
+			draw_set_alpha(0.3 + sin(current_time/500)*0.1)
+			
+			draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
+			draw_set_alpha(1)
+			
 			switch(itemName){
 				case "Typeracer":
 					draw_sprite(spr_typeracerIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
@@ -35,22 +43,22 @@ function MenuGridElement() constructor {
 					draw_sprite(spr_FtDIcon,0,xValue+itemCenterX,yValue+itemImgStartY)
 				break
 			}
-			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
-		}
+			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
+
+		/*
 		else if(yValue+itemHeight >= itemStartX) {
-			draw_rectangle(xValue,itemStartX,xValue+itemWidth,yValue+itemHeight,true)
+			draw_set_alpha(0.5)
+			draw_roundrect(xValue,itemStartX,xValue+itemWidth,yValue+itemHeight,true)
 		}
 		if(yValue+itemPriceY-textHeight >= itemStartX) {
+			draw_set_alpha(0.5)
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,itemName)
-		}
-		if(yValue+itemTitleY-textHeight >= itemStartX) {
-			//draw_text(xValue+itemCenterX,yValue+itemTitleY,"5000$")
-		}
+		}*/
 		
 		
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
-				draw_set_alpha(0.3)
+				draw_set_alpha(0.15)
 				if(yValue >= itemStartX) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
 				}
@@ -79,10 +87,18 @@ function MenuGridElement() constructor {
 	}
 	
 	function DrawCategory(xValue,yValue) {
-		draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
-		draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
-		draw_set_halign(fa_left)
-		draw_text(xValue+categoryTextStartX,yValue+categoryCenterY,"YOYOYO CATEGORY BRO")
+		
+		draw_set_alpha(0.1)
+		draw_set_color(c_white)
+		draw_roundrect(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
+		draw_set_alpha(0.4 + sin(current_time/500)*0.1)
+		draw_roundrect(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
+		draw_set_alpha(1)
+		
+		//draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
+		//draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
+		draw_set_halign(fa_center)
+		draw_text(xValue+categoryWidth/2,yValue+categoryCenterY,itemName)
 		draw_set_halign(fa_center)
 		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {

@@ -27,7 +27,7 @@ function CategoryElement() constructor {
 		draw_rectangle(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,true)
 		draw_sprite(spr_theOneAndOnlySmall,0,xValue+categoryImgStartX,yValue+categoryCenterY)
 		draw_set_halign(fa_left)
-		draw_text(xValue+categoryTextStartX,yValue+categoryCenterY,"YOYOYO CATEGORY BRO")
+		draw_text(xValue+categoryTextStartX,yValue+categoryCenterY,itemName)
 		draw_set_halign(fa_center)
 		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
