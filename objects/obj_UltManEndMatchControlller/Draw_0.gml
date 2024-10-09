@@ -21,8 +21,10 @@ for (var i = 0; i < ds_list_size(recapList); ++i)
 
 obj_characterController.DrawCharacterMenu(room_width/4,room_height*0.75,5)
 
-// Draw button
+
 draw_set_valign(fa_middle)
+draw_text((room_width/4)*2.5, room_height*0.7, "Total Reward: " + string(obj_UltManEndMatchControlller.totalReward))
+// Draw button
 draw_roundrect((room_width/4)*2.5 - buttonWidth/2,room_height*0.8 - buttonHeight/2,
 				(room_width/4)*2.5 + buttonWidth/2,room_height*0.8 + buttonHeight/2,true)
 draw_text((room_width/4)*2.5, room_height*0.8, "Get Reward")
@@ -41,5 +43,7 @@ if (mouse_x > (room_width/4)*2.5 - buttonWidth/2 &&
 	if(mouse_check_button_pressed(mb_left))
 	{
 		GetReward()
+		obj_UltManManagerController.lastScoreline[0] = 0
+		obj_UltManManagerController.lastScoreline[1] = 0
 	}
 }
