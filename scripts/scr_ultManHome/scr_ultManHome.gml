@@ -55,8 +55,9 @@ function scr_ultManHome(){
 		draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 54, string_copy(playerOpponentTeam.clubName, 0, 13)+". v "+string_copy(clubName, 0, 13)+".")
 	}
 	catch(error){}
+	
 	draw_set_font(fn_RobotoRegular12)
-	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 78, "1st vs 2nd")
+	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 78,  ordinalNumber(ds_list_find_index(teamList, playerOpponentTeam)+1)+". vs "+ordinalNumber(ds_list_find_index(teamList, playerClub)+1)+".")
 	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 96, "Premier League")
 	
 	var matchDetailsStadiumY = matchDetailsBoxTop + 120
@@ -199,4 +200,19 @@ function scr_ultManHome(){
 	draw_set_color(currentColour)
 	draw_set_font(currentFont)
 	draw_set_alpha(currentAlpha)
+}
+
+function ordinalNumber(number)
+{
+	switch(number)
+	{
+		case 1:
+			return "1st"
+		case 2:
+			return "2nd"
+		case 3:
+			return "3rd"
+		default:
+			return string(number)+"th"
+	}
 }
