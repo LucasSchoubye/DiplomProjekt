@@ -37,19 +37,13 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 			mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
 			if (currentElement.isEquipped == false) 
 			{
-				if show_question("Do you want to equip this item?") 
-				{
-					currentElement.isEquipped = true
-					obj_firestore_controller.UpdateInventory()
-				}
-			} else 
+				currentElement.isEquipped = true
+			} 
+			else 
 			{
-				if show_question("Do you want to unequip") 
-				{
-					currentElement.isEquipped = false
-					obj_firestore_controller.UpdateInventory()
-				}
+				currentElement.isEquipped = false
 			}
+			obj_firestore_controller.UpdateInventory(currentElement)
 		}
 	}
 	itemCounter++

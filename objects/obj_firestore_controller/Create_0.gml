@@ -158,25 +158,19 @@ function BuyShopItem() {
 	ds_map_destroy(inventoryMap)
 }
 
-function UpdateInventory()
+function UpdateInventory(itemStruct)
 {
-	show_message("Set Item")
+	show_message("Set Item: "+itemStruct.itemID)
 	
-	var inventoryMap = ds_map_create()
-	for (var i = 0; i < ds_list_size(obj_inventoryController.inventoryElements); ++i) 
-	{
-	    var subItemMap = ds_map_create()
-		subItemMap[?"shopItemRef"] = "/shop items/categories/"+ds_list_find_value(obj_inventoryController.inventoryElements,i).category+"/"+ds_list_find_value(obj_inventoryController.inventoryElements,i).itemID
-		subItemMap[?"equipped"] = ds_list_find_value(obj_inventoryController.inventoryElements,i).isEquipped
-		inventoryMap[?string(i)] = json_encode(subItemMap)
-		ds_map_destroy(subItemMap)
-	}
+	var itemMap = ds_map_create()
+	itemMap[?"shopItemRef"] = "/shop items/categories/"+itemStruct.itemID
+	itemMap[?"equipped"] = itemStruct.isEquipped
 	
-	var json = json_encode(inventoryMap)
-	FirebaseFirestore("/students/"+playerId+"/inventory").Set(json)
+	var json = json_encode(itemMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory/"+itemStruct.itemID).Set(json)
 
 	show_message(json)
-	ds_map_destroy(inventoryMap)
+	ds_map_destroy(itemMap)
 }
 
 function StartSession(game)
