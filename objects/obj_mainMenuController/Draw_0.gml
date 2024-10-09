@@ -3,37 +3,78 @@
 if (room = rm_menu)
 {
 	// Setup view variables
+	var optionBuffer = 30
+	var selectionBuffer = 180
 	var screenTop = 100
-	var screenMidX = room_width/2
+	var optionsTop = room_height - ds_list_size(options)*optionBuffer - 160
+	var screenMidX = 100
 	var screenMidY = room_width/2
 	var titleBuffer = 50
-	var optionBuffer = 20
-	var selectionBuffer = 180
+	var screenLeft = 100
+	
+	// Animation
+	animTimer+= 1/20
+	animColor = make_colour_rgb(204, sin(animTimer)*30 + 30, 255);
+	
+	// draw background
+	var horizon = room_height*0.6
+	draw_rectangle_color(0,0,room_width,horizon,c_black,c_black,animColor, animColor,false)
+	draw_set_color(c_black)
+	// draw ground
+	for (var i = 0; i < 40; ++i) {
+	    draw_line_color(room_width/2 + i*10 - 20*10,horizon,i+(room_width/40)*(i) + i*50 - 20*50,room_height,c_black,animColor)
+	}
+	// Draw building
+	for (var q = 0; q < array_length(skylineArray); ++q) {
+		switch(q)
+		{
+			case 0:
+				draw_set_alpha(0.3)
+			break;
+			case 1:
+				draw_set_alpha(0.6)
+			break;
+			case 2:
+				draw_set_alpha(0.8)
+			break;
+			case 3:
+				draw_set_alpha(1)
+			break;
+		}
+		for (var i = 0; i < array_length(skylineArray[q]); ++i) {
+		    draw_rectangle((room_width/array_length(skylineArray[q]))*(i+1)-1,horizon + q*10, (room_width/array_length(skylineArray[q]))*i, horizon - skylineArray[q][i]+q*10, false)
+		}
+	}
 
 	// Draw Text
-	draw_text(screenMidX,screenTop,"Main Menu")
-	draw_text(300,screenTop,"Welcome back, "+obj_firestore_controller.username)
+	draw_set_alpha(1)
+	draw_set_font(fn_longShot80)
+	scr_drawOutlineText(screenMidX,screenTop,c_black,c_white,"Main Menu")
+	draw_set_font(fn_lato16)
+	draw_text(screenLeft,screenTop + titleBuffer,"Welcome back "+obj_firestore_controller.username+"!")
 
+	// Draw options and logic
 	for (var i = 0; i < ds_list_size(options); ++i) {
-    
-		// dr
-		draw_set_halign(fa_middle)
+		draw_set_halign(fa_left)
 		draw_set_valign(fa_middle)
-		var optionY = screenTop + optionBuffer * i + titleBuffer;
+		var optionY = optionsTop + optionBuffer * i + titleBuffer;
 		// draw a list of all options in list
-		draw_text(screenMidX,screenTop + optionBuffer*i + titleBuffer,ds_list_find_value(options, i))
+		draw_text(screenLeft,optionsTop + optionBuffer*i + titleBuffer,ds_list_find_value(options, i))
 	
 		// If selected, draw pointer
 		if (selectedOption = i)
 		{
-			draw_circle(screenMidX - selectionBuffer,optionY,5,true)
+			//draw_circle(screenLeft - 30,optionsTop + optionBuffer*i + titleBuffer,10,false)
+			draw_line(screenLeft, optionsTop + optionBuffer*(i+0.5) + titleBuffer, screenLeft + string_width(ds_list_find_value(options, i)), optionsTop + optionBuffer*(i+0.5) + titleBuffer)
 		}
 		
+		#region Logic
 		// Check if the mouse is hovering over hte option
-		if (mouse_x >= screenMidX - 500 & mouse_x <= screenMidX + 50 
+		if (mouse_x >= screenLeft && mouse_x <= screenLeft + 200 
 		&& mouse_y >= optionY - 10 && mouse_y <= optionY + 10){
 			selectedOption = i;
 			
+
 			// If mouse clicked, choose option
 			if (mouse_check_button_pressed(mb_left))
 			{
@@ -90,4 +131,5 @@ if (room = rm_menu)
 			break
 		}
 	}
+	#endregion
 }

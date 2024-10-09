@@ -1,13 +1,13 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function UltManPlayer() constructor {
-
+function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
+	
 	// Generel Information
 	name = scr_UltManRandomName()
-	number = "7"
-	age = 22
-	nationality = Nationality.DK
-	height = 180
+	number = irandom_range(1,99)
+	age = irandom_range(15,30)
+	nationality = irandom_range(0,17)
+	height = irandom_range(160,210)
 
 	// Tactics
 	position = FootballPositions.SUB
@@ -17,7 +17,7 @@ function UltManPlayer() constructor {
 	scr_UltManRandomPosition(self)
 	
 	// Rating
-	overallRating = 84
+	overallRating = 45
 	topSpd = 300
 	topShootSpd = 2000
 	topPassSpd = 2000
@@ -26,11 +26,13 @@ function UltManPlayer() constructor {
 	strength = 300
 	defence = 200
 	dribbling = 200
-	scr_UltManGeneratePlayerStats(self, position, UltManPackTier.Bronze)
+	tier = playerTier
+	scr_UltManGeneratePlayerStats(self, preferredPosition, playerTier)
 	
 	// Drawing animation
 	curX = room_width/2
 	curY = room_height/2
+	playerCardTimer = 30
 	
 	function DrawPlayer(X,Y, color = #43C44A)
 	{
@@ -62,6 +64,7 @@ function UltManPlayer() constructor {
 		{
 			obj_UltManManagerController.fieldViewFromPlayer = self
 		}
+		
 	}
 	
 	function DrawDragAndDrop()
@@ -124,6 +127,98 @@ function UltManPlayer() constructor {
 				return "GK"
 			case FootballPositions.SUB:
 				return "SUB"
+				
+		}
+	}
+	
+	function NatToString()
+	{
+		var drawnNationality = nationality
+		
+		switch(drawnNationality)
+		{
+			case Nationality.DK:
+				return "Denmark"
+			case Nationality.SWE:
+				return "Sweden"
+			case Nationality.NOR:
+				return "Norway"
+			case Nationality.DE:
+				return "Germany"
+			case Nationality.BEL:
+				return "Belgium"
+			case Nationality.ENG:
+				return "England"
+			case Nationality.CRO:
+				return "Croatia"
+			case Nationality.HOL:
+				return "Netherlands"
+			case Nationality.ITA:
+				return "Italy"
+			case Nationality.FRA:
+				return "France"
+			case Nationality.ESP:
+				return "Spain"
+			case Nationality.POR:
+				return "Portugal"
+			case Nationality.ARG:
+				return "Argentina"
+			case Nationality.BRA:
+				return "Brazil"
+			case Nationality.USA:
+				return "USA"
+			case Nationality.NIG:
+				return "Nigeria"
+			case Nationality.SEN:
+				return "Senegal"
+			case Nationality.CAM:
+				return "Cameroon"
+				
+		}
+	}
+	
+	function NatToSprite()
+	{
+		var drawnNationality = nationality
+		
+		switch(drawnNationality)
+		{
+			case Nationality.DK:
+				return spr_flagDenmark
+			case Nationality.SWE:
+				return spr_flagSweden
+			case Nationality.NOR:
+				return spr_flagNorway
+			case Nationality.DE:
+				return spr_flagGermany
+			case Nationality.BEL:
+				return spr_flagBelgium
+			case Nationality.ENG:
+				return spr_flagEngland
+			case Nationality.CRO:
+				return spr_flagCroatia
+			case Nationality.HOL:
+				return spr_flagNetherlands
+			case Nationality.ITA:
+				return spr_flagItaly
+			case Nationality.FRA:
+				return spr_flagFrance
+			case Nationality.ESP:
+				return spr_flagSpain
+			case Nationality.POR:
+				return spr_flagPortugal
+			case Nationality.ARG:
+				return spr_flagArgentina
+			case Nationality.BRA:
+				return spr_flagBrazil
+			case Nationality.USA:
+				return spr_flagUS
+			case Nationality.NIG:
+				return spr_flagNigeria
+			case Nationality.SEN:
+				return spr_flagSenegal
+			case Nationality.CAM:
+				return spr_flagCameroon
 				
 		}
 	}
@@ -224,4 +319,52 @@ function UltManPlayer() constructor {
 			break;
 		}
 	}
+	
+	function CalculateRating(variableName)
+	{
+		switch(variableName)
+		{
+			case "topSpd":
+				var highestPossible = 550*1.3
+				return round(45 + (topSpd/highestPossible)*55)
+			break;
+			case "topShootSpd":
+				var highestPossible = 4500*1.7
+				return round(25 + (topShootSpd/highestPossible)*75)
+			break;
+			case "topPassSpd":
+				var highestPossible = 4500*1.4
+				return round(25 + (topPassSpd/highestPossible)*75)
+			break;
+			case "passing":
+				var minScore = 100*0.8
+			    var maxScore = 700 * 1.3;
+			    return round(25 + ((maxScore - passing) / (maxScore - minScore)) * 75)
+			break;
+			case "shooting":
+				var minScore = 100;
+			    var maxScore = 700 * 1.3;
+			    return round(25 + ((maxScore - shooting) / (maxScore - minScore)) * 75)
+			break;
+			case "strength":
+				var highestPossible = 600*1.7
+				return round(25 + (strength/highestPossible)*75)
+			break;
+			case "defence":
+				var highestPossible = 1000*1.7
+				return round(25 + (defence/highestPossible)*75)
+			break;
+			case "dribbling":
+				var highestPossible = 1000*1.5
+				return round(25 + (dribbling/highestPossible)*75)
+			break;
+		
+			// Overall rating
+			case "overallRating":
+				return round(((CalculateRating("topSpd") + CalculateRating("topShootSpd") + CalculateRating("topPassSpd") + CalculateRating("passing") + CalculateRating("shooting") + CalculateRating("strength") + CalculateRating("defence") + CalculateRating("dribbling"))/8)* 1.275) 
+			break;			
+		}
+	}
+	
+	overallRating = CalculateRating("overallRating")
 }

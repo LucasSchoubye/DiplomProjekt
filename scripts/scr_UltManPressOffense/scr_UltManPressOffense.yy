@@ -6,7 +6,7 @@
   "name":"scr_UltManPressOffense",
   "parent":{
     "name":"NPC Scripts",
-    "path":"folders/Assets/Ultimate Manager/Scripts/NPC Scripts.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/In Match/NPC Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -61,12 +61,7 @@ for (var i = 0; i < 2; ++i) {
 if (timer > 90)
 {
 	room_goto(rm_UltManOverview)
-}
-
-// DEBUG
-if (keyboard_check_pressed(vk_backspace))
-{
-	questionMenuActive = !questionMenuActive
+	obj_UltManManagerController.SimulateLeague(scoreline[0], scoreline[1])
 }
 
 scr_UltManActiontypes()

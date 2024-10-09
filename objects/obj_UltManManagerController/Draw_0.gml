@@ -1,6 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+// debug
+if (keyboard_check_pressed(vk_enter))
+	SimulateLeague()
+
 if (room = rm_UltManOverview){
 	audio_stop_sound(sou_UltManCheer)
 
@@ -42,8 +46,7 @@ if (room = rm_UltManOverview){
 		}
 		draw_text(menuX, menuY + i*menuPaddingY, ds_list_find_value(menuOptions, i))
 		draw_set_color(c_white)
-		var stringWidth = string_width(ds_list_find_value(menuOptions, i))
-		if (menuWidthMax < stringWidth){menuWidthMax = stringWidth}
+		var menuOptionWidth = string_width(ds_list_find_value(menuOptions, i))
 	
 		if( ds_list_find_value(menuOptions, i) = "Fixtures" ){
 			draw_set_alpha(0.3)
@@ -53,21 +56,21 @@ if (room = rm_UltManOverview){
 			menuDividerRight,menuY + ((i)*menuPaddingY)+menuDividerPadding)
 			draw_set_alpha(1)
 		}
-	
+		
 		// Take actions based on selected menu item
-		if (mouse_y > menuY - menuPaddingY && mouse_y < menuY + menuPaddingY*(ds_list_size(menuOptions)-1)
-			&& mouse_x > menuX && mouse_x < menuX+menuWidthMax*1.3)
+		if (mouse_y > menuY - menuPaddingY && mouse_y < menuY + menuPaddingY*(ds_list_size(menuOptions)-1) && 
+			mouse_x > menuX && mouse_x < menuX + menuOptionWidth)
 		{
-			if (i == selectedMenuOption)
-			{
-				draw_line(menuX, menuY + i*menuPaddingY, menuX + stringWidth, menuY + i*menuPaddingY)
-				if (mouse_check_button_pressed(mb_left)){
-					currentMenu = i;
-				}
-			}
 			if (mouse_y > menuY + (i-1)*menuPaddingY && mouse_y < menuY + (i)*menuPaddingY)
 			{
 				selectedMenuOption = i
+			}
+			if (i == selectedMenuOption)
+			{
+				draw_line(menuX, menuY + i*menuPaddingY, menuX + menuOptionWidth, menuY + i*menuPaddingY)
+				if (mouse_check_button_pressed(mb_left)){
+					currentMenu = i;
+				}
 			}
 
 		}
@@ -100,6 +103,10 @@ switch(currentMenu){
 		break;
 	case ultManMenus.Transfermarket:
 		scr_ultManTransferMarket()
+		break;
+	case ultManMenus.Quit:
+		room_goto(rm_menu)
+		currentMenu = ultManMenus.Home
 		break;
 	}
 }

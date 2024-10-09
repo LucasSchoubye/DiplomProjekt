@@ -6,7 +6,7 @@
   "name":"scr_ultManTactics",
   "parent":{
     "name":"ultManMenus",
-    "path":"folders/Assets/Ultimate Manager/Scripts/ultManMenus.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Manager/ultManMenus.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

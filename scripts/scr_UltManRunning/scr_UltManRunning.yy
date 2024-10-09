@@ -6,7 +6,7 @@
   "name":"scr_UltManRunning",
   "parent":{
     "name":"Actions",
-    "path":"folders/Assets/Ultimate Manager/Scripts/Actions.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/In Match/Actions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
