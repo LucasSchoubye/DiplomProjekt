@@ -5,4 +5,5 @@ function win(){
 	var prize = 2000
 	show_message("You win " + string(prize) + " content coins")
 	obj_storeController.balance = real(obj_storeController.balance)+prize
+	obj_firestore_controller.UpdateBalance()
 }

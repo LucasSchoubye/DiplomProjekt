@@ -9,7 +9,7 @@ questionType = QuestionType.MultipleChoice
 questionMenuClickCooldown = true
 correctAnswers = 0
 answeredQuestions = 0
-depth = -room_height
+depth = -7000
 
 layerID = layer_get_id("Backgrounds_2")
 back = layer_background_get_id(layerID);	

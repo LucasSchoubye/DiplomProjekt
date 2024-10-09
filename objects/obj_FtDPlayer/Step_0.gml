@@ -42,7 +42,12 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 //death
 if (hp <= 0) {
 	instance_destroy()
-	show_message("You Died lol!")
-	room_goto(rm_minigameMenu)
+	dead = true
 }
 
+//win
+if (!instance_exists(obj_enemyParent)) {
+	show_message("You Defeated the bossman!!!")
+	win()
+	room_goto(rm_minigameMenu)
+}
