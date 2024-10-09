@@ -14,8 +14,10 @@ function scr_playerMovement(){
 	var keyUp =  keyboard_check(vk_up) or keyboard_check(ord("W"));
 	var keyDown =  keyboard_check(vk_down) or keyboard_check(ord("S"));
 
+
 	hSpeed = (keyRight - keyLeft) * walkSpeed;
 	vSpeed = (keyDown - keyUp) * walkSpeed;
+
 
 	if (hSpeed != 0) and (vSpeed != 0) 
 	{ 

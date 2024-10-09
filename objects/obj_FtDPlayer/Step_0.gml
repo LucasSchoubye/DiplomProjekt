@@ -1,5 +1,18 @@
-/// @description Insert description here
-// You can write your code in this editor
+// set pause key
+pauseKey = keyboard_check_pressed(vk_escape)
+
+// pause
+if (pauseKey && global.game_state == GAME_STATE.RUNNING) {
+	if (!instance_exists(obj_FtDscreenPause)) {
+		instance_create_depth(0,0,0,obj_FtDscreenPause)
+	} else {
+		instance_destroy(obj_FtDscreenPause)
+	}
+}
+
+// check if paused
+if (screenPause()) {exit}
+
 if (global.game_state == GAME_STATE.PAUSED) {
 	return
 }
@@ -34,15 +47,18 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 		attackOngoing = false
 		global.player_state = PLAYER_STATE.MOVING
 		shootTimer = 0
-		obj_Pause.answeredQuestions = 0
-		obj_Pause.correctAnswers = 0
+		obj_FtDQuestionPause.answeredQuestions = 0
+		obj_FtDQuestionPause.correctAnswers = 0
 	}
 }
 
 //death
 if (hp <= 0) {
+	// create game over object
+	instance_create_depth(0,0,-10000, obj_FtDGameOverScreen)
+	
+	// destroy player
 	instance_destroy()
-	dead = true
 }
 
 //win

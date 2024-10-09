@@ -1,15 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_FtDCamera",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_FtDPauseMenu",
+  "eventList":[],
   "managed":true,
-  "name":"obj_FtDCamera",
+  "name":"obj_FtDPauseMenu",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Assets/Fight The Dungeon/Objects.yy",
+    "name":"Pause",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Pause.yy",
   },
   "parentObjectId":null,
   "persistent":false,

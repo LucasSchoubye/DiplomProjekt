@@ -23,6 +23,4 @@ draw_text_transformed(_camX + _camW/2, _camY + _camH/2 + _messageOffset, "- Pres
 
 
 // reset draw settings
-draw_set_halign(fa_left)
-draw_set_valign(fa_top)
 draw_set_alpha(1)

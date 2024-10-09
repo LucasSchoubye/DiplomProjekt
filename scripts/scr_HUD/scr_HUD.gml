@@ -8,7 +8,7 @@ function scr_HUD(){
 	var healthbarStartY = 700
 	
 	
-	if (instance_exists(obj_FtDPlayer)){
+	if ( instance_exists(obj_FtDPlayer)) {
 		switch(obj_FtDPlayer.hp) {
 			case 5:
 				currentHealthSprite = spr_healthFull
@@ -27,7 +27,7 @@ function scr_HUD(){
 			break
 		}
 	
-	draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
+		draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
 	}
 
 		
