@@ -66,9 +66,11 @@ function MenuGridElement() constructor {
 					room_goto(rm_typeracer)
 				break
 				case "Ultimate Manager":
+					obj_firestore_controller.StartSession("/games/ultimateManager")
 					room_goto(rm_UltManOverview)
 				break
 				case "Fight The Dungeon":
+					obj_firestore_controller.StartSession("/games/fightTheDungeon")
 					room_goto(rm_FtD)
 			}
 			}

@@ -107,6 +107,7 @@ switch(currentMenu){
 	case ultManMenus.Quit:
 		room_goto(rm_menu)
 		currentMenu = ultManMenus.Home
+		obj_firestore_controller.EndSession()
 		break;
 	}
 }
