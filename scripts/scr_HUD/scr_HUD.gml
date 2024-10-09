@@ -8,27 +8,27 @@ function scr_HUD(){
 	var healthbarStartY = 700
 	
 	
-	
-	switch(obj_FtDPlayer.hp) {
-		case 5:
-			currentHealthSprite = spr_healthFull
-		break
-		case 4:
-			currentHealthSprite = spr_healthAlmostFull
-		break
-		case 3:
-			currentHealthSprite = spr_healthMid
-		break
-		case 2:
-			currentHealthSprite = spr_healthAlmostDead
-		break
-		case 1:
-			currentHealthSprite = spr_healthLastLife
-		break
-	}
+	if (instance_exists(obj_FtDPlayer)){
+		switch(obj_FtDPlayer.hp) {
+			case 5:
+				currentHealthSprite = spr_healthFull
+			break
+			case 4:
+				currentHealthSprite = spr_healthAlmostFull
+			break
+			case 3:
+				currentHealthSprite = spr_healthMid
+			break
+			case 2:
+				currentHealthSprite = spr_healthAlmostDead
+			break
+			case 1:
+				currentHealthSprite = spr_healthLastLife
+			break
+		}
 	
 	draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
-
+	}
 
 		
 }

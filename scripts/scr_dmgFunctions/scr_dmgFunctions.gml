@@ -39,13 +39,15 @@ function getDamaged(dmgObj, _iframes = false) {
 		iframeTimer = iframeNumber
 	}
 	
+	// clamp HP
+	hp = clamp(hp,0,hp_max)
 }
 
 
 
 function getDamagedCreate(_hp = 10, _iframes = false){
 	hp = _hp
-	hp_max = hp
+	hp_max = _hp
 	if (_iframes == true) {
 		iframeTimer = 0
 		iframeNumber = 90

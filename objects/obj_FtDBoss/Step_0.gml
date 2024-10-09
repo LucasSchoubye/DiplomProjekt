@@ -1,5 +1,9 @@
-/// @description Insert description here
-// You can write your code in this editor
+// remove bulletInst if just unpaused
+if (instance_exists(bulletInst) && global.game_state == GAME_STATE.PAUSED) {
+	bulletInst.destroy = true
+}
+
+// exit if paused
 if (global.game_state == GAME_STATE.PAUSED) {
 	return
 }
@@ -59,13 +63,20 @@ if (instance_exists(obj_FtDPlayer)){
 	xspd = lengthdir_x(spd,dir)
 	yspd = lengthdir_y(spd,dir)
 	
+	//collision
+	if (place_meeting(x+xspd,y, obj_enemyParent) || place_meeting(x + xspd, y, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wallDoor, obj_wallFront, obj_wallFrontDecor, obj_wallSide])) {
+		xspd = 0
+	}
+	if (place_meeting(x,y+yspd, obj_enemyParent) || place_meeting(x, y + yspd, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wallDoor, obj_wallFront, obj_wallFrontDecor, obj_wallSide])){
+		yspd = 0
+	}
+	
 	// Get correct face
 	if (dir > 90 && dir < 270) {
 		face = -1
 	} else {
 		face = 1
 	}
-	
 
 	x += xspd
 	y += yspd
@@ -74,12 +85,12 @@ if (instance_exists(obj_FtDPlayer)){
 	y = floor(y);
 //receive dmg
 getDamaged(obj_damageEnemy)
+
 //death
 if (hp <= 0) {
-	instance_destroy(obj_FtDBoss)
-	show_message("You Defeated the bossman!!!")
-	win()
-	room_goto(rm_minigameMenu)
+	instance_destroy()
 }
+
+
 
 event_inherited()
