@@ -187,6 +187,7 @@ function SimulateLeague(playerGoals, opponentGoals)
 		obj_storeController.balance += 10
 		obj_storeController.balance += (1 * playerGoals)
 	}
+	obj_firestore_controller.UpdateBalance()
 	obj_UltManManagerController.playerClub.matchesPlayed++
 	playerOpponentTeam.matchesPlayed++
 	
