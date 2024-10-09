@@ -22,6 +22,7 @@ goalReward = 5
 function PlaySecondHalf()
 {
 	room_goto(rm_UltManMatch)
+	obj_UltManManagerController.lastScoreline = scoreline
 	obj_UltManManagerController.halftimeCompleted = true
 	obj_UltManManagerController.halftimeTimerReset = false
 }

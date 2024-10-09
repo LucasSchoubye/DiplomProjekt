@@ -1,10 +1,18 @@
 /// @description Draw Menu
 
 // 
-var buttonWidth = 150
-var buttonHeight = 60
-var buttonX = (room_width/10)*9
-var buttonY = room_height*0.1
+//var buttonWidth = 150
+//var buttonHeight = 60
+//var buttonX = (room_width/10)*8
+//var buttonY = room_height*0.1
+
+// Button position and size
+var buttonX = room_width * 0.85
+var buttonY = room_height * 0.035
+var buttonX2 = room_width * 0.9925
+var buttonY2 = room_height * 0.0965
+var titleHeight = (string_height(obj_UltManManagerController.clubName) / 2)
+var buttonText = "Play next half"
 
 // Title
 draw_set_font(fn_LatoBold40)
@@ -20,19 +28,17 @@ with(obj_UltManManagerController)
 // Draw button
 draw_set_valign(fa_middle)
 draw_set_font(fn_LatoSemiBold12)
-draw_roundrect(buttonX - buttonWidth/2,buttonY - buttonHeight/2,
-				buttonX + buttonWidth/2,buttonY + buttonHeight/2,true)
-draw_text(buttonX, buttonY, "Play next half")
-
+//draw_roundrect(buttonX - buttonWidth/2,buttonY - buttonHeight/2,
+//				buttonX + buttonWidth/2,buttonY + buttonHeight/2,true)
+//draw_text(buttonX, buttonY, "Play next half")
+draw_set_color(#3B95FF)
+scr_drawButton(buttonX, buttonY - titleHeight,buttonX2, buttonY2 - titleHeight, buttonText )
+draw_set_color(#ffffff)
 // Logic
-if (mouse_x > buttonX - buttonWidth/2 && 
-	mouse_x < buttonX + buttonWidth/2 &&
-	mouse_y > buttonY - buttonHeight/2 && 
-	mouse_y < buttonY + buttonHeight/2)
+if (mouse_x > buttonX && mouse_x < buttonX2 && mouse_y > buttonY - titleHeight && mouse_y < buttonY2 - titleHeight)
 {
 	draw_set_alpha(0.2)
-	draw_roundrect(buttonX - buttonWidth/2,buttonY - buttonHeight/2,
-				buttonX + buttonWidth/2,buttonY + buttonHeight/2,false)
+	draw_roundrect(buttonX,buttonY - titleHeight,buttonX2,buttonY2 - titleHeight,false)
 	draw_set_alpha(1)
 	
 	if(mouse_check_button_pressed(mb_left))

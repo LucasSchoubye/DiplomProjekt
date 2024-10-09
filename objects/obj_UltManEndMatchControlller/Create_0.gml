@@ -18,23 +18,28 @@ goalReward = 5
 if (scoreline[0] > scoreline[1])
 {
 	ds_list_add(recapList, "Match won: +"+string(winReward)+" Content Coins")
+	totalReward += winReward
 }
 else if (scoreline[0] < scoreline[1])
 {
 	ds_list_add(recapList, "Match lost: +"+string(lostReward)+" Content Coins")
+	totalReward += lostReward
 }
 else
 {
 	ds_list_add(recapList, "Match drawn: +"+string(drawReward)+" Content Coins")
+	totalReward += drawReward
 }
 
 if (scoreline[1] = 0)
 {
 	ds_list_add(recapList, "Clean Sheet: +"+string(cleanSheetReward)+" Content Coins")
+	totalReward += cleanSheetReward
 }
 if (scoreline[0] > 0)
 {
 	ds_list_add(recapList, "Goal Bonus X"+string(scoreline[0])+": +"+string(scoreline[0]*goalReward)+" Content Coins")
+	totalReward += scoreline[0]*goalReward
 }
 
 

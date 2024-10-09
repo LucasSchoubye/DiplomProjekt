@@ -40,8 +40,8 @@ playerTeamIndex = 0
 targetGoalIndex = 1
 goals[0] = instance_create_depth(300, room_height/2, -100, obj_UltManGoal) // Left
 goals[1] = instance_create_depth(room_width-300, room_height/2, -100, obj_UltManGoal) // Right
-scoreline[0] = 0
-scoreline[1] = 0
+scoreline[0] = obj_UltManManagerController.lastScoreline[0]
+scoreline[1] = obj_UltManManagerController.lastScoreline[1]
 timer = 0
 instance_create_depth(room_width/2, room_height/2, 0, obj_UltManBall)
 
