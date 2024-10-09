@@ -1,6 +1,6 @@
 function scr_ultManTransferMarket(){
 	
-	if (transfermarketPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
+	if (transfermarketPlayerScroll > ds_list_size(squad)*-30 + 19*30 && mouse_wheel_down())
 	{
 		transfermarketPlayerScroll -= 10
 	}
@@ -21,15 +21,15 @@ function scr_ultManTransferMarket(){
 	var matchBoxLeft = room_width * 0.2;
 	var matchBoxRight = room_width * 0.8;
 	
-	var sellBoxTop = room_height * 0.1125;
+	var sellBoxTop = room_height * 0.2;
 	var sellBoxBottom = room_height * 1;
 	var sellBoxLeft = room_width * 0.8;
 	var sellBoxRight = room_width * 1;
 	
 	// draw boxes
-	draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
+	//draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
 	
-	draw_rectangle(sellBoxLeft, sellBoxTop, sellBoxRight, sellBoxBottom, true)
+	//draw_rectangle(sellBoxLeft, sellBoxTop, sellBoxRight, sellBoxBottom, true)
 	
 	// draw balance
 	draw_set_font(fn_RobotoBlack16)
@@ -68,12 +68,7 @@ function scr_ultManTransferMarket(){
 	var packCounter = 0;  // To count how many packs have been placed in the current row
 	
 	
-	// draw box above sell list for smooth scroll
-	draw_set_color(#393944)
-	draw_rectangle(room_width * 0.8,room_height * 0.09125,room_width * 1,room_height * 0.1125, false)
-	// draw box below sell list for smooth scroll
-	draw_set_color(#393944)
-	draw_rectangle(room_width * 0.8,room_height * 0.96125,room_width * 1,room_height * 1, false)
+	
 	draw_set_color(c_white)
 	// Loop through each pack in the ds_list and draw it
 	for (var i = 0; i < totalPacks; i++) {
@@ -108,12 +103,23 @@ function scr_ultManTransferMarket(){
 						obj_UltManManagerController.showPopupCannotBuyPack = true
 					}
 					else if(obj_storeController.balance >= pack.packCost) {
+						
+						// SCROLL TO BOTTOM AFTER ADDING THE PLAYER
+				        var totalPlayers = ds_list_size(squad);
+				        var maxVisiblePlayers = 18;  // Adjust this if more/less players fit on screen
+        
+				        if (totalPlayers > maxVisiblePlayers) {
+				            transfermarketPlayerScroll = ds_list_size(squad) * -30 + maxVisiblePlayers * 30;
+				        } else {
+				            transfermarketPlayerScroll = 0;  // No need to scroll if list is smaller than the visible area
+				        }
+						
 						// Show effect
 						repeat(50)
 						{
 							newColour = merge_color(pack.packColour, c_white, random_range(0.1,0.5))
-							effect_create_above(ef_firework, sellBoxLeft + irandom_range(1,250), sellBoxTop + 30 + 30*(ds_list_size(squad)-0.5), 1000, newColour)
-							effect_create_above(ef_explosion, sellBoxLeft + irandom_range(1,250), sellBoxTop + 30 + 30*(ds_list_size(squad)-0.5), 1000, newColour)
+							effect_create_above(ef_firework, sellBoxLeft + irandom_range(1,250), sellBoxTop + (totalPlayers + 1) * 30 + transfermarketPlayerScroll, 1000, newColour)
+							effect_create_above(ef_explosion, sellBoxLeft + irandom_range(1,250), sellBoxTop + (totalPlayers + 1) * 30 + transfermarketPlayerScroll, 1000, newColour)
 						}
 						
 						// Update player balance
@@ -143,7 +149,7 @@ function scr_ultManTransferMarket(){
 	draw_set_font(fn_RobotoMedium14)
 	for (var i = 0; i < ds_list_size(squad); ++i) {
 	    var currentPlayer = ds_list_find_value(squad, i)
-		var sellListSep = sellBoxTop + 30*(i+1) + transfermarketPlayerScroll;
+		var sellListSep = sellBoxTop + 30*(i+1) + transfermarketPlayerScroll
 		
 		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
@@ -151,25 +157,36 @@ function scr_ultManTransferMarket(){
 		playerPosition = currentPlayer.PosToString()
 		playerPositionHeight = string_height(playerPosition)
 		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
-		if (string_width(playerName) > 150) {
-			playerName = string_copy(playerName,1, 14);
+		
+		// Shorten names if too long
+		if (string_width(playerName) > 145) {
+			playerName = string_copy(playerName,1, 13) + "...";
 		}
+		
+		// Find the max tier of pack the player can buy based on starting 11
 		if (i < 11 && playerTier < maxAvailablePackTier){
 			maxAvailablePackTier = playerTier;
 		}
 		
-		draw_set_halign(fa_left)
-		draw_set_color(playerColour);
 		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
-			draw_text(sellBoxLeft + 20,sellListSep, playerName);
+			if(i<11){
+				draw_set_alpha(0.15)
+				draw_rectangle(sellBoxLeft + 5, sellListSep - 30, sellBoxRight, sellListSep, false)
+				draw_set_alpha(1)
+			}
+			
+			draw_set_halign(fa_left)
+			draw_set_color(playerColour);
+			draw_text(sellBoxLeft + 10,sellListSep, playerName);
 			draw_set_color(c_white)
+			draw_set_halign(fa_center)
 			draw_text(sellBoxLeft + 190,sellListSep, playerRating);
-			draw_text(sellBoxLeft + 220,sellListSep, playerPosition);
-		
+			draw_text(sellBoxLeft + 240,sellListSep, playerPosition);
+			draw_set_halign(fa_left)
 		
 			// Check for hover over player
 		    if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
-		        mouse_y > sellListSep - playerPositionHeight && mouse_y < sellListSep) {
+		        mouse_y > sellListSep - 30 && mouse_y < sellListSep) {
 				
 		        hoveredPlayerIndex = i;  // Store the index of the hovered player
 				
@@ -180,16 +197,17 @@ function scr_ultManTransferMarket(){
 				if(currentPlayer.playerCardTimer < 0){
 					
 					if(mouse_y < room_height / 2){
-						scr_DrawPlayerCard(sellBoxLeft - 250,mouse_y - 100,sellBoxLeft, mouse_y + 150 ,currentPlayer)
+						scr_DrawPlayerCard(sellBoxLeft - 255,mouse_y - 100,sellBoxLeft - 5, mouse_y + 150 ,currentPlayer)
 					}
 					else{
-						scr_DrawPlayerCard(sellBoxLeft - 250,mouse_y - 250,sellBoxLeft, mouse_y ,currentPlayer)
+						scr_DrawPlayerCard(sellBoxLeft - 255,mouse_y - 250,sellBoxLeft - 5, mouse_y ,currentPlayer)
 					}
 				}
 				
 		        // Draw red "SELL" button
 		        draw_set_color(c_red);
-				scr_drawButton(sellBoxLeft + 210,sellListSep - playerPositionHeight, sellBoxRight - 10, sellListSep, "SELL")
+				//draw_set_valign(fa_middle)
+				scr_drawButton(sellBoxLeft + 210,sellListSep - 30, sellBoxRight - 10, sellListSep, "SELL")
 		        draw_set_color(c_white);
             
 				// Handle sell button click if player is in starting 11
@@ -217,6 +235,12 @@ function scr_ultManTransferMarket(){
 			}
 		}
 	}
+	
+	// draw box above sell list for smooth scroll
+	draw_set_color(#393944)
+	draw_rectangle(room_width * 0.8,room_height * 0.175,room_width * 1,room_height * 0.2, false)
+	// draw box below sell list for smooth scroll
+	draw_rectangle(room_width * 0.8,room_height * 0.9675,room_width * 1,room_height * 1, false)
 	
 	// Confirmation popup for selling a player
 	if (showSellPopup){
