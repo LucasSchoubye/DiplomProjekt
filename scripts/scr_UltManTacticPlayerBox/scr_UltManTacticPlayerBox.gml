@@ -60,11 +60,25 @@ function scr_UltManTacticPlayerBox(){
 			draw_text(playerBoxRight - 60,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,string(player.condition)+"%")
 			draw_text(playerBoxRight - 30,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,player.overallRating)
 		
-		
 			// Draw Selected
 			if (mouse_y - playerBoxTop < 30*(i+1)+tacticsPlayerScroll && mouse_y - playerBoxTop > 30*(i)+tacticsPlayerScroll &&
 				mouse_x > playerBoxLeft && mouse_x < playerBoxRight)
 			{
+        
+        //Draw player card
+			player.playerCardTimer--
+				
+			if(player.playerCardTimer < 0){
+					
+				if(mouse_y < room_height / 2){
+					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 100,playerBoxLeft, mouse_y + 150 ,player)
+				}
+				else{
+					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 250,playerBoxLeft, mouse_y ,player)
+				}
+			}
+        
+        // Draw selected rectangle
 				draw_set_alpha(0.2)
 				draw_rectangle(playerBoxLeft, playerBoxTop + (i)*30 + tacticsPlayerScroll, playerBoxRight, playerBoxTop + (i+1)*30 + tacticsPlayerScroll, false)
 				draw_set_alpha(1)
@@ -155,6 +169,11 @@ function scr_UltManTacticPlayerBox(){
 					fromPlayer = undefined
 				}
 			}
+		}
+		else
+		{
+			player.playerCardTimer = 30
+			
 		}
 	}
 	
