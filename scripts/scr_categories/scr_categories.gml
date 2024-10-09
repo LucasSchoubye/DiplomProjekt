@@ -45,7 +45,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				newInventoryElement.category = currentElement.category
 				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
 				ds_list_add(obj_inventoryController.categoryViews[scr_getCategoryEnumFromString(currentElement.category)],newInventoryElement)
-				obj_firestore_controller.UpdateStudentInventory()
+				obj_firestore_controller.BuyShopItem()
 				obj_firestore_controller.UpdateBalance()
 			}
 			else if (currentElement.isOwned == true) {

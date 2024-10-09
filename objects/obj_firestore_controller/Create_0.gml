@@ -91,12 +91,8 @@ function RespondCategories(categoryList) {
 	}
 }
 
-function RequestStoreTyperacerItems() {
-	FirebaseFirestore("/shop items/categories/typeracer").Read()
-}
-	
-function RequestStoreClotheItems() {
-	FirebaseFirestore("/shop items/categories/clothes").Read()
+function RequestStoreItems(categoryString) {
+	FirebaseFirestore("/shop items/categories/"+categoryString).Read()
 }
 
 function RespondStoreItems(storeList,path) {
@@ -150,12 +146,35 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-function UpdateStudentInventory() {
+function BuyShopItem() {
 	var inventoryMap = ds_map_create()
 	inventoryMap[?"shopItemRef"] = "/shop items/categories/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).category+"/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
+	inventoryMap[?"equipped"] = false
 	
 	var json = json_encode(inventoryMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
+	ds_map_destroy(inventoryMap)
+}
+
+function UpdateInventory()
+{
+	show_message("Set Item")
+	
+	var inventoryMap = ds_map_create()
+	for (var i = 0; i < ds_list_size(obj_inventoryController.inventoryElements); ++i) 
+	{
+	    var subItemMap = ds_map_create()
+		subItemMap[?"shopItemRef"] = "/shop items/categories/"+ds_list_find_value(obj_inventoryController.inventoryElements,i).category+"/"+ds_list_find_value(obj_inventoryController.inventoryElements,i).itemID
+		subItemMap[?"equipped"] = ds_list_find_value(obj_inventoryController.inventoryElements,i).isEquipped
+		inventoryMap[?string(i)] = json_encode(subItemMap)
+		ds_map_destroy(subItemMap)
+	}
+	
+	var json = json_encode(inventoryMap)
+	FirebaseFirestore("/students/"+playerId+"/inventory").Set(json)
+
+	show_message(json)
+	ds_map_destroy(inventoryMap)
 }
 
 function StartSession(game)
