@@ -1,10 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-// debug
-if (keyboard_check_pressed(vk_enter))
-	SimulateLeague(0,0)
-
 if (room = rm_UltManOverview){
 	audio_stop_sound(sou_UltManCheer)
 

@@ -183,6 +183,7 @@ function SimulateLeague(playerGoals, opponentGoals)
 		playerOpponentTeam.matchesDrawn++
 		obj_UltManManagerController.playerClub.matchesDrawn++
 	}
+	obj_firestore_controller.UpdateBalance()
 	obj_UltManManagerController.playerClub.matchesPlayed++
 	playerOpponentTeam.matchesPlayed++
 	
