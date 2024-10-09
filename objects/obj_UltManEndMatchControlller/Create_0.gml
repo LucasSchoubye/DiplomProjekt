@@ -62,6 +62,7 @@ function GetReward()
 	}
 	
 	// Exit the room
+	obj_UltManManagerController.halftimeCompleted = false
 	obj_UltManManagerController.SimulateLeague(playerGoals, opponentGoals)
 	obj_firestore_controller.UpdateBalance()
 	room_goto(rm_UltManOverview)

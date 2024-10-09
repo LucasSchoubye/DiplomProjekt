@@ -60,11 +60,17 @@ for (var i = 0; i < 2; ++i) {
 }
 
 // End Match
+if (timer > 45 && obj_UltManManagerController.halftimeCompleted = false)
+{
+	room_goto(rm_UltManHalftime)
+	obj_UltManManagerController.lastScoreline = scoreline
+	obj_UltManManagerController.halftimeCompleted = true
+}
 if (timer > 90)
 {
 	room_goto(rm_UltManEndMatch)
 	obj_UltManManagerController.lastScoreline = scoreline
-	//obj_UltManManagerController.SimulateLeague(scoreline[0], scoreline[1])
+	obj_UltManManagerController.halftimeCompleted = false
 }
 
 scr_UltManActiontypes()

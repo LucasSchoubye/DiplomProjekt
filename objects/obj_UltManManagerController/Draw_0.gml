@@ -111,3 +111,8 @@ switch(currentMenu){
 		break;
 	}
 }
+else if (room = rm_UltManMatch && halftimeTimerReset = false)
+{
+	obj_UltManGameController.timer = 45
+	halftimeTimerReset = true
+}

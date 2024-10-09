@@ -83,6 +83,8 @@ squad = ds_list_create()
 
 // Local Persistence control
 lastScoreline = [0,0]
+halftimeCompleted = false
+halftimeTimerReset = true
 
 // Generate team from server
 obj_firestore_controller.RequestGamestate("ultimateManager")
@@ -167,31 +169,19 @@ function SimulateLeague(playerGoals, opponentGoals)
 	{
 		// Won
 		obj_UltManManagerController.playerClub.matchesWon++
-		playerOpponentTeam.matchesLost++
-		if(opponentGoals = 0){
-			obj_storeController.balance += 10
-		}
-		obj_storeController.balance += 20
-		obj_storeController.balance += (5 * playerGoals)
-		
+		playerOpponentTeam.matchesLost++	
 	}
 	else if (playerGoals < opponentGoals)
 	{
 		// Lost
 		obj_UltManManagerController.playerClub.matchesLost++
 		playerOpponentTeam.matchesWon++
-		obj_storeController.balance += 5
 	}
 	else
 	{
 		// Draw
 		playerOpponentTeam.matchesDrawn++
 		obj_UltManManagerController.playerClub.matchesDrawn++
-		if(opponentGoals = 0){
-			obj_storeController.balance += 10
-		}
-		obj_storeController.balance += 10
-		obj_storeController.balance += (1 * playerGoals)
 	}
 	obj_UltManManagerController.playerClub.matchesPlayed++
 	playerOpponentTeam.matchesPlayed++
@@ -205,10 +195,8 @@ function SimulateLeague(playerGoals, opponentGoals)
 
 	scr_sort_struct_list(teamList, "totalPoints", false)
 	SaveGamestate()
-	
 	ds_list_destroy(clubsAvailable)
 }
-
 
 function GenerateMatchups()
 {
