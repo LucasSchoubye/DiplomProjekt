@@ -1,19 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_characterController",
+  "%Name":"obj_UltManEndMatchControlller",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_characterController",
+  "name":"obj_UltManEndMatchControlller",
   "overriddenProperties":[],
   "parent":{
     "name":"Controllers",
-    "path":"folders/Assets/Shared Assets/Objects/Controllers.yy",
+    "path":"folders/Assets/Ultimate Manager/Objects/Controllers.yy",
   },
   "parentObjectId":null,
-  "persistent":true,
+  "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,

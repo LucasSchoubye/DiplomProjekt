@@ -3,7 +3,7 @@
 
 // debug
 if (keyboard_check_pressed(vk_enter))
-	SimulateLeague()
+	SimulateLeague(0,0)
 
 if (room = rm_UltManOverview){
 	audio_stop_sound(sou_UltManCheer)
@@ -107,6 +107,12 @@ switch(currentMenu){
 	case ultManMenus.Quit:
 		room_goto(rm_menu)
 		currentMenu = ultManMenus.Home
+		obj_firestore_controller.EndSession()
 		break;
 	}
+}
+else if (room = rm_UltManMatch && halftimeTimerReset = false)
+{
+	obj_UltManGameController.timer = 45
+	halftimeTimerReset = true
 }
