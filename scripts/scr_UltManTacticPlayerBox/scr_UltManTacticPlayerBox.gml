@@ -2,11 +2,11 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManTacticPlayerBox(){
 	
-	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
+	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 22*30 && mouse_wheel_down())
 	{
 		tacticsPlayerScroll -= 10
 	}
-	if (tacticsPlayerScroll < 30 && mouse_wheel_up())
+	if (tacticsPlayerScroll < 0 && mouse_wheel_up())
 	{
 		tacticsPlayerScroll += 10
 	}
@@ -23,8 +23,9 @@ function scr_UltManTacticPlayerBox(){
 	
 	for (var i = 0; i < ds_list_size(squad); ++i) {
 	    var player = ds_list_find_value(squad, i)
-		
-		if (playerBoxTop + (i)*30 + tacticsPlayerScroll > playerBoxTop)
+		//show_message(tacticsPlayerScroll)
+		//show_message(string(ds_list_size(squad)*-30 + 30*30))
+		if (playerBoxTop + (i)*30 + tacticsPlayerScroll + 30 > playerBoxTop)
 		{
 		
 			// Draw Player Outline
@@ -71,10 +72,10 @@ function scr_UltManTacticPlayerBox(){
 			if(player.playerCardTimer < 0){
 					
 				if(mouse_y < room_height / 2){
-					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 100,playerBoxLeft, mouse_y + 150 ,player)
+					scr_DrawPlayerCard(playerBoxLeft - 255,mouse_y - 100,playerBoxLeft - 5, mouse_y + 150 ,player)
 				}
 				else{
-					scr_DrawPlayerCard(playerBoxLeft - 250,mouse_y - 250,playerBoxLeft, mouse_y ,player)
+					scr_DrawPlayerCard(playerBoxLeft - 255,mouse_y - 250,playerBoxLeft - 5, mouse_y ,player)
 				}
 			}
         
@@ -179,7 +180,7 @@ function scr_UltManTacticPlayerBox(){
 	
 	// Draw Smooth scroll box
 	draw_set_color(#393944)
-	draw_rectangle(playerBoxLeft, playerBoxTop, playerBoxRight, playerBoxTop+30, false)
+	draw_rectangle(playerBoxLeft, playerBoxTop-30, playerBoxRight, playerBoxTop, false)
 	draw_set_color(c_white)
 	
 	// Release player

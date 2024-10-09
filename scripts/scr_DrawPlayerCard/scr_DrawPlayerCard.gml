@@ -35,7 +35,7 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	draw_set_color(c_white)
 	
 	//checks if name is too long
-	if(string_length(currentPlayerLastName) > 8)
+	if(string_width(currentPlayerLastName) > 105)
 	{
 		draw_set_font(fn_konk16);
 	}

@@ -2,14 +2,9 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_ultManTactics(){
 	
-	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 20*30 && mouse_wheel_down())
-	{
-		tacticsPlayerScroll -= 10
-	}
-	if (tacticsPlayerScroll < 10 && mouse_wheel_up())
-	{
-		tacticsPlayerScroll += 10
-	}
+	var currentFont = draw_get_font()
+	var currentHAlign = draw_get_halign()
+	var currentVAlign = draw_get_valign()
 	
 	// Draw Field Box
 	fieldBoxTop = room_height * 0.12;
@@ -71,6 +66,10 @@ function scr_ultManTactics(){
 	
 	// Draw Player Box
 	scr_UltManTacticPlayerBox()
+	
+	draw_set_halign(currentHAlign)
+	draw_set_valign(currentVAlign)
+	draw_set_font(currentFont)
 }
 
 function GetColorFromPos(pos)
