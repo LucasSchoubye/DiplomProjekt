@@ -1,15 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_floor",
+  "%Name":"obj_FtDParticleDust",
   "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_floor",
+  "name":"obj_FtDParticleDust",
   "overriddenProperties":[],
   "parent":{
-    "name":"Game Objects",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Game Objects.yy",
+    "name":"Particles",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Particles.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_FtDBackgroundFlat",
-    "path":"sprites/spr_FtDBackgroundFlat/spr_FtDBackgroundFlat.yy",
+    "name":"spr_FtDParticleBasic",
+    "path":"sprites/spr_FtDParticleBasic/spr_FtDParticleBasic.yy",
   },
   "spriteMaskId":null,
   "visible":true,
