@@ -5,9 +5,9 @@ var screenMidX = room_width/2
 var screenMidY = room_height/2
 var itemStartX = room_width*0.23
 var itemStartY = room_height*0.125
-var itemHeight = room_height*0.3
+itemHeight = room_height*0.3
 var itemCounter = 0
-var itemRow = 0
+itemRow = 0
 var itemWidth = room_width*0.15
 var storeElements = obj_storeController.storeElements
 var currentList = storeElements
@@ -28,7 +28,11 @@ switch(currentCategory) {
 
 for (var i = 0; i < ds_list_size(currentList); ++i) {
 	var currentElement = ds_list_find_value(currentList,i)
-    ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
+    
+	
+	ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*(itemWidth+5),itemStartY+itemRow*(itemHeight+5)+verticalScroll)
+	
+	
 	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
 		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
 			if(real(selectedPrice) <= real(balance) && currentElement.isOwned == false) {
@@ -41,7 +45,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				newInventoryElement.category = currentElement.category
 				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
 				ds_list_add(obj_inventoryController.categoryViews[scr_getCategoryEnumFromString(currentElement.category)],newInventoryElement)
-				obj_firestore_controller.UpdateStudentInventory()
+				obj_firestore_controller.BuyShopItem()
 				obj_firestore_controller.UpdateBalance()
 			}
 			else if (currentElement.isOwned == true) {
@@ -53,7 +57,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 		}
 	}
 	itemCounter++
-	if (itemCounter == 5)
+	if (itemCounter == 4)
     {
         itemCounter = 0
         itemRow++

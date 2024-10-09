@@ -93,6 +93,7 @@
     {"name":"ds_list_to_array","order":2,"path":"scripts/ds_list_to_array/ds_list_to_array.yy",},
     {"name":"find_struct_in_list","order":5,"path":"scripts/find_struct_in_list/find_struct_in_list.yy",},
     {"name":"InventoryElement","order":2,"path":"scripts/InventoryElement/InventoryElement.yy",},
+    {"name":"ItemNameToSprite","order":5,"path":"scripts/ItemNameToSprite/ItemNameToSprite.yy",},
     {"name":"MenuGridElement","order":1,"path":"scripts/MenuGridElement/MenuGridElement.yy",},
     {"name":"Nationalities","order":4,"path":"scripts/Nationalities/Nationalities.yy",},
     {"name":"OptionsMenu","order":3,"path":"scripts/OptionsMenu/OptionsMenu.yy",},

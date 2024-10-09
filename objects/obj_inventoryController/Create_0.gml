@@ -17,6 +17,7 @@ ds_list_add(categoryElements, "Typeracer")
 
 function GetInventoryData(inventoryData) {
 	var currentElement = new InventoryElement()
+	var isEquipped = bool(inventoryData[?"equipped"])
 	var substring = inventoryData[?"shopItemRef"]
 	var last_dash_pos = string_last_pos("/", substring);
     currentElement.isEquipped = false
@@ -32,7 +33,9 @@ function GetInventoryData(inventoryData) {
 		if (currentStoreElement.itemID == substring) {
 			currentElement.itemName = currentStoreElement.itemName
 			currentStoreElement.isOwned = true
+			currentElement.itemID = currentStoreElement.itemID
 			currentElement.category = currentStoreElement.category
+			currentElement.isEquipped = isEquipped
 			ds_list_add(inventoryElements, currentElement)
 			ds_list_add(categoryViews[scr_getCategoryEnumFromString(currentElement.category)], currentElement)
 		

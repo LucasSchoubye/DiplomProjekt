@@ -9,8 +9,8 @@ selectedPrice = 0
 isOwned = false
 currentCategory = Categories.All
 
-obj_firestore_controller.RequestStoreTyperacerItems()
-obj_firestore_controller.RequestStoreClotheItems()
+obj_firestore_controller.RequestStoreItems("typeracer")
+obj_firestore_controller.RequestStoreItems("clothes")
 obj_firestore_controller.RequestBalance()
 
 
