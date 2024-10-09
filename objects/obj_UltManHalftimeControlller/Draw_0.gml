@@ -2,9 +2,9 @@
 
 // 
 var buttonWidth = 150
-var buttonHeight = 80
-var buttonX = room_width/10
-var buttonY = room_height*0.8
+var buttonHeight = 60
+var buttonX = (room_width/10)*9
+var buttonY = room_height*0.1
 
 // Title
 draw_set_font(fn_LatoBold40)
@@ -19,6 +19,7 @@ with(obj_UltManManagerController)
 
 // Draw button
 draw_set_valign(fa_middle)
+draw_set_font(fn_LatoSemiBold12)
 draw_roundrect(buttonX - buttonWidth/2,buttonY - buttonHeight/2,
 				buttonX + buttonWidth/2,buttonY + buttonHeight/2,true)
 draw_text(buttonX, buttonY, "Play next half")
