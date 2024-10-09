@@ -12,3 +12,12 @@ dead = false
 
 bulletXoff = 160
 bulletYoff = -64
+
+// Animation
+animCycle = 0
+facing = 1
+targetFacing = 1
+lean = 0
+targetLean = 1
+smokeTimer = 0
+weaponSprite = spr_FtDKatana
