@@ -24,51 +24,47 @@ function StoreElement() constructor {
 	categoryCenterY = categoryHeight/2
 	categoryImgStartX = categoryWidth-30
 	category = ""
-	
 
 	function DrawItem(xValue,yValue) {
-		if(yValue >= categoryStartY) {
-			switch(itemName){
-				case "Cat":
-					draw_sprite(spr_cat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-				case "Hat":
-					draw_sprite(spr_hat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-				case "Scat":
-					draw_sprite(spr_scat,0,xValue+itemCenterX,yValue+itemImgStartY)
-				break
-			}
-			draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
-		}
-		else if(yValue+itemHeight >= categoryStartY) {
-			draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,true)
-		}
-		if(yValue+itemPriceY-textHeight >= categoryStartY && isOwned == true) {
+		
+		draw_set_font(fn_textLato)
+		draw_set_alpha(0.1)
+		draw_set_color(c_white)
+		draw_roundrect_color(xValue,yValue,xValue+itemWidth,yValue+itemHeight,c_black,c_white,false)
+		draw_set_alpha(0.3 + sin(current_time/500)*0.1)
+			
+		draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
+		draw_set_alpha(1)
+		draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
+		
+		// Price/owned text & Name
+		if(isOwned == true) {
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,"Owned")
 		}
-		else if(yValue+itemPriceY-textHeight >= categoryStartY) {
+		else 
+		{
 			draw_text(xValue+itemCenterX,yValue+itemPriceY,price+"$")
 		}
-		if(yValue+itemTitleY-textHeight >= categoryStartY) {
-			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
-		}
+		draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
+
 		
+		// Mouseover hover highlighter
 		if(mouse_x > xValue && mouse_x < xValue+itemWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
 				draw_set_alpha(0.3)
+				// make sure they are not above max height
 				if(yValue >= categoryStartY) {
 					draw_rectangle(xValue,yValue,xValue+itemWidth,yValue+itemHeight,false)
 				}
 				else if(yValue+itemHeight >= categoryStartY) {
 					draw_rectangle(xValue,categoryStartY,xValue+itemWidth,yValue+itemHeight,false)
 				}
+				// set current item price
 				obj_storeController.selectedPrice = price
 				draw_set_alpha(1)
 			}
 		}
 	}
-	
 }
 
 

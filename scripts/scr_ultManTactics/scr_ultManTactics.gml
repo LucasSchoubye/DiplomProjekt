@@ -2,6 +2,10 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_ultManTactics(){
 	
+	var currentFont = draw_get_font()
+	var currentHAlign = draw_get_halign()
+	var currentVAlign = draw_get_valign()
+	
 	// Draw Field Box
 	fieldBoxTop = room_height * 0.12;
 	fieldBoxBottom = room_height * 0.90;
@@ -17,6 +21,7 @@ function scr_ultManTactics(){
 	draw_rectangle(fieldBoxLeft, fieldBoxTop, fieldBoxRight, fieldBoxBottom, true)
 	
 	// Draw formation
+	#region Formation
 	for (var column = 0; column < array_length(formationColumns); ++column) {
 		for (var i = 0; i < ds_list_size(formationColumns[column]); ++i) {
 		    // 
@@ -57,12 +62,14 @@ function scr_ultManTactics(){
 			placement++
 		}
 	}
+	#endregion 
 	
 	// Draw Player Box
 	scr_UltManTacticPlayerBox()
 	
-	
-	
+	draw_set_halign(currentHAlign)
+	draw_set_valign(currentVAlign)
+	draw_set_font(currentFont)
 }
 
 function GetColorFromPos(pos)

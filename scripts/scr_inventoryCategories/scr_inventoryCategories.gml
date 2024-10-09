@@ -6,9 +6,9 @@ var screenMidX = room_width/2
 var screenMidY = room_height/2
 var itemStartX = room_width*0.23
 var itemStartY = room_height*0.125
-var itemHeight = room_height*0.3
+itemHeight = room_height*0.3
 var itemCounter = 0
-var itemRow = 0
+itemRow = 0
 var itemWidth = room_width*0.15
 var inventoryElements = obj_inventoryController.inventoryElements
 var currentList = inventoryElements
@@ -33,20 +33,21 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 	var currentElement = ds_list_find_value(currentList,i)
     ds_list_find_value(currentList,i).DrawItem(itemStartX+itemCounter*itemWidth,itemStartY+itemRow*itemHeight+verticalScroll)
 	if (mouse_check_button_pressed(mb_left) and mouse_x > itemStartX+itemCounter*itemWidth && mouse_x < itemStartX+itemCounter*itemWidth+itemWidth){
-		if(mouse_y > itemStartY+itemRow*itemHeight && mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
-			if (currentElement.isEquipped == false) {
-				if show_question("Do you want to equip this item?") {
-					currentElement.isEquipped = true
-				}
-			} else {
-				if show_question("Do you want to unequip") {
-					currentElement.isEquipped = false
-				}
+		if(mouse_y > itemStartY+itemRow*itemHeight && 
+			mouse_y < itemStartY+itemRow*itemHeight+itemHeight) {
+			if (currentElement.isEquipped == false) 
+			{
+				currentElement.isEquipped = true
+			} 
+			else 
+			{
+				currentElement.isEquipped = false
 			}
+			obj_firestore_controller.UpdateInventory(currentElement)
 		}
 	}
 	itemCounter++
-	if (itemCounter == 5)
+	if (itemCounter == 4)
     {
         itemCounter = 0
         itemRow++

@@ -2,7 +2,7 @@ function UltManTeams() {
    
 	teamList = ds_list_create()
 	
-	for (var i = 0; i < 19; ++i) {
+	for (var i = 0; i < 20; ++i) {
 		
 		var newTeam = new UltManTeam()
 	

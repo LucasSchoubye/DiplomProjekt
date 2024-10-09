@@ -6,7 +6,7 @@
   "name":"scr_UltManDrawField",
   "parent":{
     "name":"Visuals",
-    "path":"folders/Assets/Ultimate Manager/Scripts/Visuals.yy",
+    "path":"folders/Assets/Ultimate Manager/Scripts/Manager/Visuals.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -4,7 +4,7 @@ function scr_UltManRandomScandinavianNames(){
 
 	var name = ["",""]
 	
-	switch(round(random_range(1,74)))
+	switch(round(random_range(1,76)))
 	{
 	    case 1:
 	        name[0] = "Albin";
@@ -228,6 +228,12 @@ function scr_UltManRandomScandinavianNames(){
 	    case 74:
 	        name[0] = "Örjan";
 	    break;
+		case 75:
+	        name[0] = "Lucas";
+	    break;
+		case 76:
+			name[0] = "Erling";
+		break;
 
 	}
 
@@ -355,7 +361,7 @@ function scr_UltManRandomScandinavianNames(){
 		break;
 	}
 	
-	switch (round(random_range(1,40)))
+	switch (round(random_range(1,42)))
 	{
 		case 1:
 			name[1] = name[1] + "berg";
@@ -476,6 +482,12 @@ function scr_UltManRandomScandinavianNames(){
 		break;
 		case 40:
 			name[1] = name[1] + "li";
+		break;
+		case 41:
+			name[1] = name[1] + "by";
+		break;
+		case 42:
+			name[1] = name[1] + "bye";
 		break;
 	}
 

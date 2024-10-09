@@ -50,9 +50,14 @@ function scr_ultManHome(){
 	draw_set_alpha(currentAlpha)
 	
 	draw_set_font(fn_RobotoBlack16)
-	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 54, "Manchester City v Arsenal")
+	try
+	{
+		draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 54, string_copy(playerOpponentTeam.clubName, 0, 13)+". v "+string_copy(clubName, 0, 13)+".")
+	}
+	catch(error){}
+	
 	draw_set_font(fn_RobotoRegular12)
-	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 78, "1st vs 2nd")
+	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 78,  ordinalNumber(ds_list_find_index(teamList, playerOpponentTeam)+1)+". vs "+ordinalNumber(ds_list_find_index(teamList, playerClub)+1)+".")
 	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 96, "Premier League")
 	
 	var matchDetailsStadiumY = matchDetailsBoxTop + 120
@@ -104,12 +109,66 @@ function scr_ultManHome(){
 		draw_text(previousMeetingsX - 2*previousMeetingsPaddingX + i * previousMeetingsPaddingX, previousMeetingsY, resultText)
 	}
 	
+	// draw League Table
+	var rowHeight = 30
+	var leagueTableLeft = room_width * 0.725;
+	var leagueTableRight = room_width * 0.95;
+	var leagueTableTop = room_height * 0.08 + rowHeight;
+	var numberPadding = 25
+	
+	// Draw table
+	draw_set_color(c_white)
+	draw_set_alpha(0.1)
+	draw_roundrect(leagueTableLeft - numberPadding/1.5, leagueTableTop+rowHeight/1.5, leagueTableRight + numberPadding/1.5, leagueTableTop + rowHeight*(ds_list_size(teamList)+1), false)
+	draw_set_alpha(1)
+	
+	draw_set_font(fn_textLato)
+	// Draw first row
+	draw_text(leagueTableLeft,leagueTableTop, "PL");
+	draw_set_halign(fa_center)
+	draw_text(leagueTableRight - numberPadding*4,leagueTableTop, "P");
+	draw_text(leagueTableRight - numberPadding*3,leagueTableTop, "W");
+	draw_text(leagueTableRight - numberPadding*2,leagueTableTop, "D");
+	draw_text(leagueTableRight - numberPadding,leagueTableTop, "L");
+	draw_text(leagueTableRight, leagueTableTop, "Pts.");
+	
 	for (var i = 0; i < ds_list_size(teamList); ++i) {
-	    
 		var team = ds_list_find_value(teamList, i)
 		
-		show_debug_message(team.clubName);
+		// Draw Name
+		var shownTeamName = team.clubName;
+		if (string_width(shownTeamName) > 150) {
+		    shownTeamName = string_copy(shownTeamName,1, 14);
+		}
 		
+		// Draw Numbers
+		var sepLenght = leagueTableTop + rowHeight*(i+1)
+		draw_set_halign(fa_center)
+		draw_text(leagueTableLeft,sepLenght, i+1);
+		draw_set_halign(fa_left)
+		draw_text(leagueTableLeft + 20,sepLenght, shownTeamName);
+		draw_set_halign(fa_center)
+		draw_text(leagueTableRight - numberPadding*4,sepLenght, team.matchesPlayed);
+		draw_text(leagueTableRight - numberPadding*3,sepLenght, team.matchesWon);
+		draw_text(leagueTableRight - numberPadding*2,sepLenght, team.matchesDrawn);
+		draw_text(leagueTableRight - numberPadding,sepLenght, team.matchesLost);
+		draw_text(leagueTableRight, sepLenght, team.totalPoints);
+		
+		// Draw selected team
+		if (team.clubName = obj_UltManManagerController.clubName)
+		{
+			draw_set_alpha(0.2)
+			draw_rectangle(leagueTableLeft - numberPadding/1.5, leagueTableTop + rowHeight*(i+1) - rowHeight/6, leagueTableRight + numberPadding/1.5, leagueTableTop + rowHeight*(i+2) - rowHeight/6, false)
+			draw_set_alpha(1)
+		}
+		
+		// Draw Opponent Team
+		if (team.clubName = obj_UltManManagerController.playerOpponentTeam.clubName)
+		{
+			draw_set_alpha(0.6)
+			draw_rectangle(leagueTableLeft - numberPadding/1.5, leagueTableTop + rowHeight*(i+1) - rowHeight/6, leagueTableRight + numberPadding/1.5, leagueTableTop + rowHeight*(i+2) - rowHeight/6, true)
+			draw_set_alpha(1)
+		}
 	}
 	
 	draw_set_color(c_white)
@@ -141,4 +200,19 @@ function scr_ultManHome(){
 	draw_set_color(currentColour)
 	draw_set_font(currentFont)
 	draw_set_alpha(currentAlpha)
+}
+
+function ordinalNumber(number)
+{
+	switch(number)
+	{
+		case 1:
+			return "1st"
+		case 2:
+			return "2nd"
+		case 3:
+			return "3rd"
+		default:
+			return string(number)+"th"
+	}
 }
