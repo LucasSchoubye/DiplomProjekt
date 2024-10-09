@@ -148,11 +148,13 @@ function RespondStudentInventory(inventoryList) {
 
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
-	inventoryMap[?"shopItemRef"] = "/shop items/categories/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).category+"/"+ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1).itemID
-	inventoryMap[?"equipped"] = false
+	var item = ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1)
 	
+	inventoryMap[?"shopItemRef"] = "/shop items/categories/"+item.itemID
+	inventoryMap[?"equipped"] = false
 	var json = json_encode(inventoryMap)
-	FirebaseFirestore("/students/"+playerId+"/inventory/").Set(json)
+	
+	FirebaseFirestore("/students/"+playerId+"/inventory/"+item.itemID).Set(json)
 	ds_map_destroy(inventoryMap)
 }
 
