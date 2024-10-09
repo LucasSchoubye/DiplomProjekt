@@ -49,22 +49,7 @@ function GetReward()
 	var playerGoals = scoreline[0]
 	var opponentGoals = scoreline[1]
 	
-	if (playerGoals > opponentGoals)
-		// Win
-		obj_storeController.balance += winReward
-	else if (playerGoals < opponentGoals)
-		// Lose
-		obj_storeController.balance += lostReward
-	else
-		// Draw
-		obj_storeController.balance += drawReward
-	
-	// Goal and clean sheet rewards
-	obj_storeController.balance += (goalReward * playerGoals)
-	if(opponentGoals = 0)
-	{
-		obj_storeController.balance += cleanSheetReward
-	}
+	obj_storeController.balance += totalReward
 	
 	// Exit the room
 	obj_UltManManagerController.halftimeCompleted = false
