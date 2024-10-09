@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":true,
   "spriteId":{
-    "name":"spr_FtDPlayer",
-    "path":"sprites/spr_FtDPlayer/spr_FtDPlayer.yy",
+    "name":"spr_FtDPlayerSmall",
+    "path":"sprites/spr_FtDPlayerSmall/spr_FtDPlayerSmall.yy",
   },
   "spriteMaskId":null,
   "visible":true,
