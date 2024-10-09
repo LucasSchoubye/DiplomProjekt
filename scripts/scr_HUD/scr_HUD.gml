@@ -7,7 +7,7 @@ function scr_HUD(){
 	var healthbarStartX = view_wport[0]*0.9
 	var healthbarStartY = 700
 	
-	draw_text(timerStartx,40,"Time: 10")
+	
 	
 	switch(obj_FtDPlayer.hp) {
 		case 5:
@@ -29,11 +29,6 @@ function scr_HUD(){
 	
 	draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
 
-	if (mouse_check_button_pressed(mb_left)) {
-		obj_FtDPlayer.hp = obj_FtDPlayer.hp-1
-		if (obj_FtDPlayer.hp == 0) {
-			obj_FtDPlayer.hp = 5
-		}
-	}
+
 		
 }
