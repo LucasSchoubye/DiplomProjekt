@@ -1,5 +1,7 @@
 
-// 
+// DEBUG:
+if (keyboard_check(vk_tab))
+	timer = 91
 
 scr_UltManDrawLine()
 scr_UltManDrawField()
@@ -60,8 +62,9 @@ for (var i = 0; i < 2; ++i) {
 // End Match
 if (timer > 90)
 {
-	room_goto(rm_UltManOverview)
-	obj_UltManManagerController.SimulateLeague(scoreline[0], scoreline[1])
+	room_goto(rm_UltManEndMatch)
+	obj_UltManManagerController.lastScoreline = scoreline
+	//obj_UltManManagerController.SimulateLeague(scoreline[0], scoreline[1])
 }
 
 scr_UltManActiontypes()
