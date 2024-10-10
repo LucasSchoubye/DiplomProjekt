@@ -1,4 +1,7 @@
-// remove bulletInst if just unpaused
+// check if paused
+if (screenPause()) {exit}
+
+// remove bulletInst if just question unpaused
 if (instance_exists(bulletInst) && global.game_state == GAME_STATE.PAUSED) {
 	bulletInst.destroy = true
 }

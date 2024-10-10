@@ -1,6 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+// check if paused
+if (screenPause()) {exit}
+
 if (global.game_state == GAME_STATE.PAUSED) {
 	return
 }
