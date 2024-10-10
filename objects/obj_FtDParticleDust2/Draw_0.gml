@@ -3,12 +3,10 @@
 
 draw_self()
 
-image_alpha -= fade
-if (image_xscale > 0)
-{
-	image_xscale -= shrink
-	image_yscale -= shrink
-}
+image_alpha -= 0.1
+image_xscale -= 0.2
+image_yscale -= 0.2
+
 
 if (image_alpha < 0)
 {
