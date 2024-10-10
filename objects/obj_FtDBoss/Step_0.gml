@@ -27,7 +27,7 @@ if (enemy_state == ENEMY_STATE.CHASING)
 { // pause
 	if (instance_exists(obj_FtDPlayer)){
 		dir = point_direction(x,y, obj_FtDPlayer.x, obj_FtDPlayer.y)		
-	}
+	
 	spd = 0
 	
 	// stop animating
@@ -41,8 +41,17 @@ if (enemy_state == ENEMY_STATE.CHASING)
 	}
 		
 	if (shootTimer <= windupTimer && instance_exists(bulletInst)) {
-		bulletInst.x = x + bulletXoff*face
-		bulletInst.y = y + bulletYoff
+		
+		bulletInst.x = x + lengthdir_x(bulletXoff,dir) 
+		bulletInst.y = y + bulletYoff + lengthdir_y(bulletXoff,dir) 
+		
+		// Particle Animation
+		var dist = random_range(100,120)
+		var dir = random(360)
+		var part = instance_create_depth(bulletInst.x + lengthdir_x(dist,dir), bulletInst.y + lengthdir_y(dist,dir), -100, obj_FtDParticleDust)
+		part.image_angle = random(360)
+		part.direction = point_direction(part.x,part.y,bulletInst.x,bulletInst.y)
+		part.speed = 15
 	}
 		
 	if (shootTimer = windupTimer && instance_exists(bulletInst)) {
@@ -52,6 +61,7 @@ if (enemy_state == ENEMY_STATE.CHASING)
 		enemy_state = ENEMY_STATE.CHASING
 		shootTimer = 0
 		}
+	}
 }
 
 
@@ -59,7 +69,7 @@ if (enemy_state == ENEMY_STATE.CHASING)
 // chase the player
 if (instance_exists(obj_FtDPlayer)){
 	dir = point_direction(x,y, obj_FtDPlayer.x, obj_FtDPlayer.y)
-}
+
 	xspd = lengthdir_x(spd,dir)
 	yspd = lengthdir_y(spd,dir)
 	
@@ -83,6 +93,8 @@ if (instance_exists(obj_FtDPlayer)){
 	
 	x = floor(x);
 	y = floor(y);
+}
+
 //receive dmg
 getDamaged(obj_damageEnemy)
 

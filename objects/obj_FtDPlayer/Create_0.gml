@@ -21,3 +21,5 @@ lean = 0
 targetLean = 1
 smokeTimer = 0
 weaponSprite = spr_FtDKatana
+animX = x
+animY = y

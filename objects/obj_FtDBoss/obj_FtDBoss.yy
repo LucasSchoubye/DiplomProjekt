@@ -36,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_FtDBossMan",
-    "path":"sprites/spr_FtDBossMan/spr_FtDBossMan.yy",
+    "name":"spr_FtDEvilMage",
+    "path":"sprites/spr_FtDEvilMage/spr_FtDEvilMage.yy",
   },
   "spriteMaskId":null,
   "visible":true,
