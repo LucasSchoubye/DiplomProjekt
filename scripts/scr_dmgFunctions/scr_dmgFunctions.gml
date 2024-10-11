@@ -32,9 +32,19 @@ function getDamaged(dmgObj, _iframes = false) {
 		_hitConfirm = true
 		// tell the damage instance to destroy itself
 		_inst.destroy = true
-		// Knockback
-		var near = instance_nearest(x,y,obj_enemyParent)
-		move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*200)
+		
+		if (!object_is_ancestor(id.object_index, obj_enemyParent))
+		{
+			// Knockback Player
+			var near = instance_nearest(x,y,obj_enemyParent)
+			move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*200)
+		}
+		else
+		{
+			// Knockback Player
+			var near = instance_nearest(x,y,obj_FtDPlayer)
+			move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*30)
+		}
 	}
 	
 	// set iframes if we were hit 

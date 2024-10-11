@@ -1,7 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
-questionTimer = 20
+questionTimer = 10
 showTime = questionTimer
+animTargetHp = 0
 
 alarm[0] = 60
 

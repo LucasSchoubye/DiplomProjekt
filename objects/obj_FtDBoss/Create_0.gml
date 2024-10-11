@@ -1,7 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 event_inherited()
-getDamagedCreate(3)
+getDamagedCreate(30)
+
 
 spd = 0
 chaseSpd = 2
@@ -25,3 +26,5 @@ bulletYoff = -64
 
 // Animation
 animTargetHp = hp
+animX = x
+animY = y
