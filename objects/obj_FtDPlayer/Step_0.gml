@@ -14,6 +14,8 @@ if (pauseKey && global.game_state == GAME_STATE.RUNNING) {
 if (screenPause()) {exit}
 
 if (global.game_state == GAME_STATE.PAUSED) {
+	//iframeTimer = 0
+	image_alpha = 1
 	return
 }
 
