@@ -16,12 +16,12 @@ if (obj_FtDController.questionTimer == 0) {
 		layer_background_visible(back,false)
 		global.player_state = PLAYER_STATE.ATTACKING
 		global.game_state = GAME_STATE.RUNNING
-		obj_FtDController.questionTimer = 20
+		obj_FtDController.questionTimer = dodgeTime
 	}
 } else if (answeredQuestions == 3 && global.game_state == GAME_STATE.PAUSED) {
 	layer_background_visible(back,false)
 	global.player_state = PLAYER_STATE.ATTACKING
 	global.game_state = GAME_STATE.RUNNING
-	obj_FtDController.questionTimer = 20
+	obj_FtDController.questionTimer = dodgeTime
 }
 

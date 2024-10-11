@@ -9,6 +9,7 @@ questionType = QuestionType.MultipleChoice
 questionMenuClickCooldown = true
 correctAnswers = 0
 answeredQuestions = 0
+dodgeTime = 15
 depth = -7000
 
 layerID = layer_get_id("Backgrounds_2")

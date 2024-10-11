@@ -63,7 +63,7 @@ if (hp <= 0) {
 
 //win
 if (!instance_exists(obj_enemyParent)) {
-	show_message("You Defeated the bossman!!!")
+	//show_message("You Defeated the bossman!!!")
 	win()
 	room_goto(rm_minigameMenu)
 }
