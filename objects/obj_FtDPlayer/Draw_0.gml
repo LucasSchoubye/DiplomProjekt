@@ -48,6 +48,8 @@ if (global.game_state == GAME_STATE.PAUSED)
 		part.speed = 2 + obj_FtDQuestionPause.correctAnswers*2
 		part.direction = 90 + random_range(-5,5)
 		part.image_xscale = obj_FtDQuestionPause.correctAnswers*0.5 + 1
+		part.image_yscale = obj_FtDQuestionPause.correctAnswers*0.5 + 1
+		part.fade = part.fade*2
 	}
 }
 
