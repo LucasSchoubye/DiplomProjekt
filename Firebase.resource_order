@@ -30,6 +30,7 @@
     {"name":"obj_damageEnemy","order":1,"path":"objects/obj_damageEnemy/obj_damageEnemy.yy",},
     {"name":"obj_damageParent","order":2,"path":"objects/obj_damageParent/obj_damageParent.yy",},
     {"name":"obj_enemyParent","order":2,"path":"objects/obj_enemyParent/obj_enemyParent.yy",},
+    {"name":"obj_fireballSmall","order":2,"path":"objects/obj_fireballSmall/obj_fireballSmall.yy",},
     {"name":"obj_floor","order":3,"path":"objects/obj_floor/obj_floor.yy",},
     {"name":"obj_FtDBoss","order":1,"path":"objects/obj_FtDBoss/obj_FtDBoss.yy",},
     {"name":"obj_FtDCamera","order":8,"path":"objects/obj_FtDCamera/obj_FtDCamera.yy",},

@@ -172,6 +172,7 @@
     {"id":{"name":"Obj_Debug_FallText_Firestore","path":"objects/Obj_Debug_FallText_Firestore/Obj_Debug_FallText_Firestore.yy",},},
     {"id":{"name":"obj_enemyParent","path":"objects/obj_enemyParent/obj_enemyParent.yy",},},
     {"id":{"name":"obj_fireball","path":"objects/obj_fireball/obj_fireball.yy",},},
+    {"id":{"name":"obj_fireballSmall","path":"objects/obj_fireballSmall/obj_fireballSmall.yy",},},
     {"id":{"name":"Obj_FirebaseFirestore_allCallbacks","path":"objects/Obj_FirebaseFirestore_allCallbacks/Obj_FirebaseFirestore_allCallbacks.yy",},},
     {"id":{"name":"Obj_FirebaseFirestore_Collection_Add","path":"objects/Obj_FirebaseFirestore_Collection_Add/Obj_FirebaseFirestore_Collection_Add.yy",},},
     {"id":{"name":"Obj_FirebaseFirestore_Collection_Listener","path":"objects/Obj_FirebaseFirestore_Collection_Listener/Obj_FirebaseFirestore_Collection_Listener.yy",},},
