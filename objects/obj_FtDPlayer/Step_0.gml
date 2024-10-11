@@ -66,4 +66,5 @@ if (!instance_exists(obj_enemyParent)) {
 	//show_message("You Defeated the bossman!!!")
 	win()
 	room_goto(rm_minigameMenu)
+	audio_stop_sound(sou_FtDFightMusicLoop);
 }

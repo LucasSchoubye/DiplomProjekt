@@ -20,8 +20,11 @@ function AnsweredCorrect() {
 	correctAnswers += 1
 	answeredQuestions += 1
 	
+	audio_play_sound(sou_FtDCorrect, 2, false, 1, 0, 1 + correctAnswers*0.15)
+	
 }
 
 function AnsweredIncorrect() {
 	answeredQuestions += 1
+	audio_play_sound(sou_FtDSmallDamage, 2, false, 1, 0, 1 + correctAnswers*0.15)
 }

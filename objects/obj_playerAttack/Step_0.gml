@@ -18,7 +18,9 @@ if (attack_state == ATTACK_STATE.CHARGING)
 	x += xspd
 	y += yspd
 
-
+	var flash = instance_create_depth(x,y,depth + 10,obj_FtDParticleFlashing)
+	flash.baseSize = 5
+	flash.decaySize = 3
 }
 
 

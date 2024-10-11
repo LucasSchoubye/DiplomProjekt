@@ -8,3 +8,5 @@ alarm[0] = 60
 
 global.game_state = GAME_STATE.RUNNING
 
+// Music
+audio_play_sound(sou_FtDFightMusicLoop, 1, true)

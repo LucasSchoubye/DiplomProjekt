@@ -9,7 +9,7 @@ if (obj_FtDController.questionTimer == 0) {
 	if (global.game_state == GAME_STATE.RUNNING)
 	{ // PAUSE GAME
 		global.game_state = GAME_STATE.PAUSED
-		obj_FtDController.questionTimer = 10
+		obj_FtDController.questionTimer = 120
 		
 	} else if (global.game_state == GAME_STATE.PAUSED) {
 		// UNPAUSE IF PLAYER ATTACK IS FINISHED

@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 event_inherited()
-getDamagedCreate(30)
+getDamagedCreate(40)
 
 
 spd = 0

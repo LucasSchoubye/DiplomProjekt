@@ -21,3 +21,4 @@ if (instance_exists(obj_FtDPlayer))
 }
 
 while(current_time < freezeTime){}
+audio_play_sound(sou_FtDExplosion, 1, false,3)

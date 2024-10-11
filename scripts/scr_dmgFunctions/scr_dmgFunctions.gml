@@ -38,12 +38,13 @@ function getDamaged(dmgObj, _iframes = false) {
 			// Knockback Player
 			var near = instance_nearest(x,y,obj_enemyParent)
 			move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*200)
+			audio_play_sound(sou_FtDSmallDamage, 0, false)
 		}
 		else
 		{
 			// Knockback Player
 			var near = instance_nearest(x,y,obj_FtDPlayer)
-			move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*30)
+			move_contact_solid(point_direction(x,y,near.x,near.y)-180,_inst.dmg*30 + 10)
 		}
 	}
 	
