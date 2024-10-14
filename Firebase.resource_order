@@ -44,6 +44,7 @@
     {"name":"obj_loginController","order":4,"path":"objects/obj_loginController/obj_loginController.yy",},
     {"name":"obj_mainMenuController","order":2,"path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},
     {"name":"obj_menuGridController","order":6,"path":"objects/obj_menuGridController/obj_menuGridController.yy",},
+    {"name":"obj_par_text","order":1,"path":"objects/obj_par_text/obj_par_text.yy",},
     {"name":"obj_playerAttack","order":1,"path":"objects/obj_playerAttack/obj_playerAttack.yy",},
     {"name":"obj_questionController","order":5,"path":"objects/obj_questionController/obj_questionController.yy",},
     {"name":"obj_typeracerCarNpc","order":1,"path":"objects/obj_typeracerCarNpc/obj_typeracerCarNpc.yy",},

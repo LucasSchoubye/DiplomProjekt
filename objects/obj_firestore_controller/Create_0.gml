@@ -248,8 +248,13 @@ function ValidateLogin(map)
 			show_debug_message("No Match found")
 	}
 	
-	if (playerId = undefined)
-		show_message("Wrong password or username")
+		if (playerId = undefined)
+		{
+			//show_message("Wrong password or username")
+			room_goto(rm_login)
+			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
+			part.text = "Wrong password or username"
+		}
 	}
 	catch(error)
 	{
