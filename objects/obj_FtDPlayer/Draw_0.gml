@@ -22,6 +22,9 @@ if (smokeTimer < 0)
 	smokeTimer = 10
 	instance_create_depth(animX,animY+shadowOffset,depth + 10,obj_FtDParticleDust)
 	
+	// Play sound
+	audio_play_sound(sou_FtDFootstep,1,false,0.2,0,random_range(0.9,1.1))
+	
 	if (keyboard_check(vk_shift))
 	{
 		var afterImage = instance_create_depth(animX,animY,depth + 10,obj_FtDParticleDust)
@@ -31,6 +34,22 @@ if (smokeTimer < 0)
 		afterImage.image_angle = -lean*targetFacing + sin(animCycle)
 		afterImage.shrink = 0.001
 		afterImage.fade = 0.03
+	}
+}
+
+// Charge Up animation
+if (global.game_state == GAME_STATE.PAUSED)
+{
+	//animCycle += 0.4
+	repeat(obj_FtDQuestionPause.correctAnswers + 1)
+	{
+		targetLean = 0
+		var part = instance_create_depth(animX + random_range(-50,50), animY + 30, -10, obj_FtDParticleDust)
+		part.speed = 2 + obj_FtDQuestionPause.correctAnswers*2
+		part.direction = 90 + random_range(-5,5)
+		part.image_xscale = obj_FtDQuestionPause.correctAnswers*0.5 + 1
+		part.image_yscale = obj_FtDQuestionPause.correctAnswers*0.5 + 1
+		part.fade = part.fade*2
 	}
 }
 

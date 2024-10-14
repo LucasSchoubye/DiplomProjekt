@@ -160,8 +160,6 @@ function BuyShopItem() {
 
 function UpdateInventory(itemStruct)
 {
-	show_message("Set Item: "+itemStruct.itemID)
-	
 	var itemMap = ds_map_create()
 	itemMap[?"shopItemRef"] = "/shop items/categories/"+itemStruct.itemID
 	itemMap[?"equipped"] = itemStruct.isEquipped
@@ -169,7 +167,6 @@ function UpdateInventory(itemStruct)
 	var json = json_encode(itemMap)
 	FirebaseFirestore("/students/"+playerId+"/inventory/"+itemStruct.itemID).Set(json)
 
-	show_message(json)
 	ds_map_destroy(itemMap)
 }
 

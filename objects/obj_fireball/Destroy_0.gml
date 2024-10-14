@@ -21,3 +21,13 @@ if (instance_exists(obj_FtDPlayer))
 }
 
 while(current_time < freezeTime){}
+audio_play_sound(sou_FtDExplosion, 1, false,3)
+
+if (place_meeting(x, y, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wallDoor, obj_wallFront, obj_wallFrontDecor, obj_wallSide]))
+
+	for (var i = 0; i < 6; ++i) {
+	    // code here
+		var smallFireball = instance_create_depth(x + lengthdir_x(100, -60*(i)), y + lengthdir_y(100,-60*(i)),-10,obj_fireballSmall)
+		direction = -60*i
+	
+}
