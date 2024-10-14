@@ -63,7 +63,9 @@ function MenuGridElement() constructor {
 			switch(itemName){
 				case "Typeracer":
 					obj_firestore_controller.StartSession("/games/typeracer")
-					room_goto(rm_typeracer)
+					obj_firestore_controller.playedGame = "typeracer"
+					room_goto(rm_tutorial)
+					//room_goto(rm_typeracer)
 				break
 				case "Ultimate Manager":
 					obj_firestore_controller.StartSession("/games/ultimateManager")

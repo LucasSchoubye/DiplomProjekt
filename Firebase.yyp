@@ -229,6 +229,7 @@
     {"id":{"name":"obj_questionController","path":"objects/obj_questionController/obj_questionController.yy",},},
     {"id":{"name":"obj_rock","path":"objects/obj_rock/obj_rock.yy",},},
     {"id":{"name":"obj_storeController","path":"objects/obj_storeController/obj_storeController.yy",},},
+    {"id":{"name":"obj_tutorialController","path":"objects/obj_tutorialController/obj_tutorialController.yy",},},
     {"id":{"name":"obj_typeracerCar","path":"objects/obj_typeracerCar/obj_typeracerCar.yy",},},
     {"id":{"name":"obj_typeracerCarNpc","path":"objects/obj_typeracerCarNpc/obj_typeracerCarNpc.yy",},},
     {"id":{"name":"obj_typeracerController","path":"objects/obj_typeracerController/obj_typeracerController.yy",},},
@@ -263,6 +264,7 @@
     {"id":{"name":"rm_minigameMenu","path":"rooms/rm_minigameMenu/rm_minigameMenu.yy",},},
     {"id":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},},
     {"id":{"name":"rm_store","path":"rooms/rm_store/rm_store.yy",},},
+    {"id":{"name":"rm_tutorial","path":"rooms/rm_tutorial/rm_tutorial.yy",},},
     {"id":{"name":"rm_typeracer","path":"rooms/rm_typeracer/rm_typeracer.yy",},},
     {"id":{"name":"rm_UltManEndMatch","path":"rooms/rm_UltManEndMatch/rm_UltManEndMatch.yy",},},
     {"id":{"name":"rm_UltManHalftime","path":"rooms/rm_UltManHalftime/rm_UltManHalftime.yy",},},
@@ -485,6 +487,7 @@
     {"roomId":{"name":"rm_UltManHalftime","path":"rooms/rm_UltManHalftime/rm_UltManHalftime.yy",},},
     {"roomId":{"name":"rm_FtD","path":"rooms/rm_FtD/rm_FtD.yy",},},
     {"roomId":{"name":"rm_loginWaiting","path":"rooms/rm_loginWaiting/rm_loginWaiting.yy",},},
+    {"roomId":{"name":"rm_tutorial","path":"rooms/rm_tutorial/rm_tutorial.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

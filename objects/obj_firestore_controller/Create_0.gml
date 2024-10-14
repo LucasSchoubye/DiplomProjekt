@@ -8,6 +8,7 @@ sessionMap = undefined
 answerTimer = 0
 categories = undefined
 inventoryID = undefined
+playedGame = ""
 
 // Login 
 username = undefined
