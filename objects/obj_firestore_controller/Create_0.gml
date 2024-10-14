@@ -253,7 +253,7 @@ function ValidateLogin(map)
 	}
 	catch(error)
 	{
-		room_goto(rm_UltManOverview)
+		room_goto(rm_login)
 	}
 }
 
