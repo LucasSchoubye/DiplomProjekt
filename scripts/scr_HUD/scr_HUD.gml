@@ -9,6 +9,15 @@ function scr_HUD(){
 	
 	
 	if ( instance_exists(obj_FtDPlayer)) {
+		var hpbarLength = 150
+		var hpbarThickness = 10
+		var hpbarOffset = 30
+		animTargetHp -= (animTargetHp - obj_FtDPlayer.hp)/3
+
+		draw_rectangle(healthbarStartX - hpbarLength/2,healthbarStartY + hpbarOffset,healthbarStartX - hpbarLength/2 + animTargetHp/obj_FtDPlayer.hp_max*hpbarLength,healthbarStartY+hpbarOffset+hpbarThickness,false)
+		draw_rectangle_color(healthbarStartX - hpbarLength/2,healthbarStartY + hpbarOffset,healthbarStartX - hpbarLength/2 + obj_FtDPlayer.hp/obj_FtDPlayer.hp_max*hpbarLength,healthbarStartY+hpbarOffset+hpbarThickness,c_maroon,c_maroon,c_maroon,c_maroon,false)
+		draw_rectangle(healthbarStartX - hpbarLength/2,healthbarStartY + hpbarOffset,healthbarStartX + hpbarLength/2,healthbarStartY+hpbarOffset+hpbarThickness,true)
+		/*
 		switch(obj_FtDPlayer.hp) {
 			case 5:
 				currentHealthSprite = spr_healthFull
@@ -25,9 +34,9 @@ function scr_HUD(){
 			case 1:
 				currentHealthSprite = spr_healthLastLife
 			break
-		}
+		}*/
 	
-		draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
+		//draw_sprite(currentHealthSprite,0,healthbarStartX,healthbarStartY)
 	}
 
 		

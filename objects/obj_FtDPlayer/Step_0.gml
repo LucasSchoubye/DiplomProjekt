@@ -14,6 +14,7 @@ if (pauseKey && global.game_state == GAME_STATE.RUNNING) {
 if (screenPause()) {exit}
 
 if (global.game_state == GAME_STATE.PAUSED) {
+	image_alpha = 1
 	return
 }
 
@@ -63,7 +64,8 @@ if (hp <= 0) {
 
 //win
 if (!instance_exists(obj_enemyParent)) {
-	show_message("You Defeated the bossman!!!")
+	//show_message("You Defeated the bossman!!!")
 	win()
 	room_goto(rm_minigameMenu)
+	audio_stop_sound(sou_FtDFightMusicLoop);
 }

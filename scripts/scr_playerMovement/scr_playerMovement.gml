@@ -5,7 +5,7 @@ function scr_playerMovement(){
 	var hSpeed = 0
 	var vSpeed = 0
 	var walkSpeed = 6
-	var runSpeed = 1.45
+	var runSpeed = 2
 	var diagonalSpeed = 0.707107
 	var collisionSpeed = walkSpeed + 2
 
@@ -25,7 +25,12 @@ function scr_playerMovement(){
 		vSpeed *= diagonalSpeed; 
 	}
 	
-	if (keyboard_check(vk_shift)) { hSpeed *= runSpeed; vSpeed *= runSpeed; smokeTimer -= 0.5}
+	if (keyboard_check(vk_shift)) 
+	{ 
+		hSpeed *= runSpeed; 
+		vSpeed *= runSpeed; 
+		smokeTimer -= 0.5;
+	}
 
 
 	
