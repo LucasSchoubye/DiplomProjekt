@@ -337,17 +337,17 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 				return round(25 + (topPassSpd/highestPossible)*75)
 			break;
 			case "passing":
-				var minScore = 100*0.8
-			    var maxScore = 700 * 1.3;
+				var minScore = 100*0.7
+			    var maxScore = 700 * 1.5;
 			    return round(25 + ((maxScore - passing) / (maxScore - minScore)) * 75)
 			break;
 			case "shooting":
-				var minScore = 100;
-			    var maxScore = 700 * 1.3;
+				var minScore = 100*0.7;
+			    var maxScore = 325 * 1.7;
 			    return round(25 + ((maxScore - shooting) / (maxScore - minScore)) * 75)
 			break;
 			case "strength":
-				var highestPossible = 600*1.7
+				var highestPossible = 550*1.7
 				return round(25 + (strength/highestPossible)*75)
 			break;
 			case "defence":
