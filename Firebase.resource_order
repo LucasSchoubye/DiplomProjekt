@@ -65,6 +65,7 @@
     {"name":"obj_wallSide","order":2,"path":"objects/obj_wallSide/obj_wallSide.yy",},
     {"name":"rm_inventory","order":5,"path":"rooms/rm_inventory/rm_inventory.yy",},
     {"name":"rm_login","order":3,"path":"rooms/rm_login/rm_login.yy",},
+    {"name":"rm_loginWaiting","order":6,"path":"rooms/rm_loginWaiting/rm_loginWaiting.yy",},
     {"name":"rm_menu","order":2,"path":"rooms/rm_menu/rm_menu.yy",},
     {"name":"rm_minigameMenu","order":4,"path":"rooms/rm_minigameMenu/rm_minigameMenu.yy",},
     {"name":"rm_start","order":1,"path":"rooms/rm_start/rm_start.yy",},

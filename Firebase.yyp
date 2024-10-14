@@ -257,6 +257,7 @@
     {"id":{"name":"rm_FtD","path":"rooms/rm_FtD/rm_FtD.yy",},},
     {"id":{"name":"rm_inventory","path":"rooms/rm_inventory/rm_inventory.yy",},},
     {"id":{"name":"rm_login","path":"rooms/rm_login/rm_login.yy",},},
+    {"id":{"name":"rm_loginWaiting","path":"rooms/rm_loginWaiting/rm_loginWaiting.yy",},},
     {"id":{"name":"rm_menu","path":"rooms/rm_menu/rm_menu.yy",},},
     {"id":{"name":"rm_minigameMenu","path":"rooms/rm_minigameMenu/rm_minigameMenu.yy",},},
     {"id":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},},
@@ -482,6 +483,7 @@
     {"roomId":{"name":"rm_UltManEndMatch","path":"rooms/rm_UltManEndMatch/rm_UltManEndMatch.yy",},},
     {"roomId":{"name":"rm_UltManHalftime","path":"rooms/rm_UltManHalftime/rm_UltManHalftime.yy",},},
     {"roomId":{"name":"rm_FtD","path":"rooms/rm_FtD/rm_FtD.yy",},},
+    {"roomId":{"name":"rm_loginWaiting","path":"rooms/rm_loginWaiting/rm_loginWaiting.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

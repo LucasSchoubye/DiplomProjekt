@@ -56,9 +56,9 @@ if (room = rm_login)
 	draw_rectangle(boxLeft, boxTop, boxRight, boxBot, true)
 	if (mouse_check_button_pressed(mb_left) && mouse_x > boxRight && mouse_x < boxLeft && mouse_y > boxTop && mouse_y < boxBot)
 	{
+		room_goto(rm_loginWaiting)
 		if (instance_exists(obj_firestore_controller))
 		{
-			show_debug_message(sha1_string_utf8(password))
 			obj_firestore_controller.RequestLogin(username,password)
 		}
 	}
@@ -81,4 +81,10 @@ if (room = rm_login)
 	        return false;
 	    }
 	}
+}
+
+// Waiting
+if (room = rm_loginWaiting)
+{
+	draw_text(room_width/2, 300, "Logging In...")
 }
