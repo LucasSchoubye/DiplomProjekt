@@ -63,15 +63,21 @@ function MenuGridElement() constructor {
 			switch(itemName){
 				case "Typeracer":
 					obj_firestore_controller.StartSession("/games/typeracer")
-					room_goto(rm_typeracer)
+					obj_firestore_controller.playedGameTitle = "Typeracer"
+					room_goto(rm_tutorial)
+					//room_goto(rm_typeracer)
 				break
 				case "Ultimate Manager":
 					obj_firestore_controller.StartSession("/games/ultimateManager")
-					room_goto(rm_UltManOverview)
+					obj_firestore_controller.playedGameTitle = "Ultimate Manager"
+					room_goto(rm_tutorial)
+					//room_goto(rm_UltManOverview)
 				break
 				case "Fight The Dungeon":
 					obj_firestore_controller.StartSession("/games/fightTheDungeon")
-					room_goto(rm_FtD)
+					obj_firestore_controller.playedGameTitle = "Fight the Dungeon"
+					room_goto(rm_tutorial)
+					//room_goto(rm_FtD)
 			}
 			}
 		}
