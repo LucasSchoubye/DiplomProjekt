@@ -435,6 +435,7 @@
     {"id":{"name":"spr_healthMid","path":"sprites/spr_healthMid/spr_healthMid.yy",},},
     {"id":{"name":"spr_managerIcon","path":"sprites/spr_managerIcon/spr_managerIcon.yy",},},
     {"id":{"name":"spr_manBluePlaceholder","path":"sprites/spr_manBluePlaceholder/spr_manBluePlaceholder.yy",},},
+    {"id":{"name":"spr_newsGif","path":"sprites/spr_newsGif/spr_newsGif.yy",},},
     {"id":{"name":"spr_placeholder_rectangle","path":"sprites/spr_placeholder_rectangle/spr_placeholder_rectangle.yy",},},
     {"id":{"name":"spr_placeholder_tiles","path":"sprites/spr_placeholder_tiles/spr_placeholder_tiles.yy",},},
     {"id":{"name":"spr_pokemon_character_D","path":"sprites/spr_pokemon_character_D/spr_pokemon_character_D.yy",},},

@@ -4,6 +4,10 @@
 var backgroundColor = #191115
 //#191115
 
+// Skip tutorial
+if (ds_list_find_index(obj_menuGridController.tutorialsPlayed, tutorialArray[0].title) > -1)
+	room_goto(textStruct.roomRef)
+
 // Draw Background
 draw_set_alpha(0.3)
 draw_rectangle_color(0,0,room_width,room_height*0.3, c_white, c_white, backgroundColor, backgroundColor, false)
@@ -37,13 +41,16 @@ scr_drawOutlineText(room_width*0.015, room_height*0.075, c_black, c_white, textS
 draw_set_font(fn_lato16)
 //draw_text(pictureRight + 10, room_height*0.25, "Controls:")
 scr_drawOutlineText(pictureRight + 10, room_height*0.25, c_black, c_white,  "Controls:")
-scr_drawOutlineText(pictureLeft, pictureBot + 30, c_black, c_white,  "Goal:")
+scr_drawOutlineText(pictureLeft + 200, pictureBot + 30, c_black, c_white,  "Goal:")
 
 // Paragraf
 draw_set_font(fn_textLato)
 draw_set_valign(fa_top)
-draw_text_ext(pictureLeft + 10, pictureBot + 65, textStruct.goalParagraf, string_height("I")+2,room_width*0.4)
+draw_text_ext(pictureLeft + 200, pictureBot + 65, textStruct.goalParagraf, string_height("I")+2,room_width*0.4)
 draw_text_ext(pictureRight + 20, room_height*0.25 + 35, textStruct.controlParagraf, string_height("I")*2+2,room_width*0.5)
+
+// Character
+obj_characterController.DrawCharacterMenu(room_width*0.075, room_height, 2)
 
 // Draw button
 var buttonMiddleX = pictureRight + (room_width-pictureRight)/2
@@ -77,6 +84,7 @@ if (mouse_x > buttonMiddleX - buttonWidth/2 &&
 		if(currentTutorialScreen = tutorialScreens)
 		{
 			room_goto(textStruct.roomRef)
+			ds_list_add(obj_menuGridController.tutorialsPlayed, tutorialArray[0].title)
 		}
 		else
 		{
@@ -88,7 +96,6 @@ if (mouse_x > buttonMiddleX - buttonWidth/2 &&
 
 
 // Back button
-// Draw button
 var buttonMiddleX = room_width*0.95
 var buttonMiddleY = room_height*0.05
 var buttonWidth = 100

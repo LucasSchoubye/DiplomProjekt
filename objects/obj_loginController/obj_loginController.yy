@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_newsGif",
+    "path":"sprites/spr_newsGif/spr_newsGif.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
