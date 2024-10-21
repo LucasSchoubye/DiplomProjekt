@@ -177,6 +177,7 @@
     {"name":"spr_healthMid","order":2,"path":"sprites/spr_healthMid/spr_healthMid.yy",},
     {"name":"spr_managerIcon","order":1,"path":"sprites/spr_managerIcon/spr_managerIcon.yy",},
     {"name":"spr_manBluePlaceholder","order":1,"path":"sprites/spr_manBluePlaceholder/spr_manBluePlaceholder.yy",},
+    {"name":"spr_newsGif","order":2,"path":"sprites/spr_newsGif/spr_newsGif.yy",},
     {"name":"spr_placeholder_tiles","order":1,"path":"sprites/spr_placeholder_tiles/spr_placeholder_tiles.yy",},
     {"name":"spr_pokemon_character_L","order":1,"path":"sprites/spr_pokemon_character_L/spr_pokemon_character_L.yy",},
     {"name":"spr_pokemon_character_R","order":3,"path":"sprites/spr_pokemon_character_R/spr_pokemon_character_R.yy",},
