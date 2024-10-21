@@ -1,8 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function UltManTeam() constructor{
-	
-
 
     // Concatenate the city and suffix to form the club name
     clubName = scr_UltManGenerateTeamName()
@@ -13,6 +11,10 @@ function UltManTeam() constructor{
 	matchesLost = 0
 	matchesPlayed = 0
     totalPoints = 0
+	goalsScored = 0
+	goalsConceded = 0
+	yellowCards = 0
+	redCards = 0
 
     // Randomly assign a club rating between 1 and 100	
 	attackerQuality = irandom_range(70, 100);

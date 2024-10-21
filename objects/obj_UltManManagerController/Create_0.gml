@@ -43,6 +43,12 @@ teamList = ds_list_create()
 playerClub = new UltManTeam()
 playerOpponentTeam = undefined
 
+teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
+["Goals Scored", spr_UltManCheckmark, obj_UltManManagerController.playerClub.goalsScored],
+["Goals Conceded",spr_UltManCancel, obj_UltManManagerController.playerClub.goalsConceded],
+["Yellow Cards", spr_UltManYellowCard, obj_UltManManagerController.playerClub.yellowCards],
+["Red Cards",spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
+
 clubName = playerClub.clubName
 
 menuOptions = ds_list_create()
