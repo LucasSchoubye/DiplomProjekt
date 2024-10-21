@@ -8,6 +8,7 @@ shootTimer = 0
 bulletInst = noone
 cooldown = 4*60
 attackOngoing = false
+won = false
 
 
 bulletXoff = 160

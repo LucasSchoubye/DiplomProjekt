@@ -126,7 +126,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
     "PackageType":"Asset",
     "PackageName":"Firebase Firestore Ext",
     "PackageID":"com.yoyogames.firebasefirestoreext",
@@ -218,6 +218,7 @@
     {"id":{"name":"obj_FtDPlayer","path":"objects/obj_FtDPlayer/obj_FtDPlayer.yy",},},
     {"id":{"name":"obj_FtDQuestionPause","path":"objects/obj_FtDQuestionPause/obj_FtDQuestionPause.yy",},},
     {"id":{"name":"obj_FtDscreenPause","path":"objects/obj_FtDscreenPause/obj_FtDscreenPause.yy",},},
+    {"id":{"name":"obj_FtDWinScreen","path":"objects/obj_FtDWinScreen/obj_FtDWinScreen.yy",},},
     {"id":{"name":"obj_inventoryController","path":"objects/obj_inventoryController/obj_inventoryController.yy",},},
     {"id":{"name":"obj_loginController","path":"objects/obj_loginController/obj_loginController.yy",},},
     {"id":{"name":"obj_mainMenuController","path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},},

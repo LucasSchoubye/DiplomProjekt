@@ -40,6 +40,7 @@
     {"name":"obj_FtDParticleFlashing","order":2,"path":"objects/obj_FtDParticleFlashing/obj_FtDParticleFlashing.yy",},
     {"name":"obj_FtDPauseMenu","order":1,"path":"objects/obj_FtDPauseMenu/obj_FtDPauseMenu.yy",},
     {"name":"obj_FtDscreenPause","order":2,"path":"objects/obj_FtDscreenPause/obj_FtDscreenPause.yy",},
+    {"name":"obj_FtDWinScreen","order":9,"path":"objects/obj_FtDWinScreen/obj_FtDWinScreen.yy",},
     {"name":"obj_inventoryController","order":7,"path":"objects/obj_inventoryController/obj_inventoryController.yy",},
     {"name":"obj_loginController","order":4,"path":"objects/obj_loginController/obj_loginController.yy",},
     {"name":"obj_mainMenuController","order":2,"path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},

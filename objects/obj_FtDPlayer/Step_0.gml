@@ -64,8 +64,10 @@ if (hp <= 0) {
 
 //win
 if (!instance_exists(obj_enemyParent)) {
-	//show_message("You Defeated the bossman!!!")
-	win()
-	room_goto(rm_minigameMenu)
+	instance_create_depth(0,0,-10000, obj_FtDWinScreen)
+	if(won == false) {
+		obj_FtDWinScreen.ftdGetPrize()
+		won = true
+	}
 	audio_stop_sound(sou_FtDFightMusicLoop);
 }
