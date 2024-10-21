@@ -1,5 +1,7 @@
-/// @description Insert description here
-// You can write your code in this editor
+
+// check if paused
+if (screenPause()) {exit}
+
 // State Machine
 if (attack_state == ATTACK_STATE.CHARGING)
 { // aim for player
