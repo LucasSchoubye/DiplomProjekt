@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_FtDscreenPause",
+  "%Name":"obj_FtDWinScreen",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_FtDscreenPause",
+  "name":"obj_FtDWinScreen",
   "overriddenProperties":[],
   "parent":{
-    "name":"Pause",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Pause.yy",
+    "name":"Objects",
+    "path":"folders/Assets/Fight The Dungeon/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
