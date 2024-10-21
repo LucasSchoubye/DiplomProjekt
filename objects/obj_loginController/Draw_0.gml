@@ -21,7 +21,6 @@ if (room = rm_login)
 	draw_rectangle_color(0,0,room_width/2, room_height, #191115, #191115, c_white, c_white, false)
 	draw_set_alpha(1)
 	
-	
 	// Left box text
 	draw_text(roomQuarterWidth, room_height*0.1, "News Title")
 	draw_set_font(fn_textLato)

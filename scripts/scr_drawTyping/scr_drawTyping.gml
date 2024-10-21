@@ -34,10 +34,17 @@ var threeOptionsY = optionsMenu.threeOptionsY
 
 	if (question != undefined)
 	{
-		draw_rectangle(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
-		draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
+		draw_set_color(c_white)
+		draw_set_alpha(0.5)
+		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,false)
+		draw_set_alpha(1)
+		
+		draw_set_color(c_black)
+		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,true)
+		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
 	
 		// Drawing prompt text
+		draw_set_color(c_black)
 		draw_set_halign(fa_center)
 		draw_text(screenMidX,promptBoxMid,question.prompt)
 		
@@ -45,6 +52,7 @@ var threeOptionsY = optionsMenu.threeOptionsY
 	
 	// Draw typing string
 	draw_set_halign(fa_center)
+	
 	draw_text(screenMidX,answerBoxMidY,"Answer: "+typingString)
 	if (keyboard_check_pressed(vk_anykey))
 	{
@@ -55,6 +63,7 @@ var threeOptionsY = optionsMenu.threeOptionsY
 	}
 	controllerId.typingString = typingString
 
+	draw_set_color(c_white)
 
 	// Answer and send to firebase
 	obj_firestore_controller.answerTimer++
