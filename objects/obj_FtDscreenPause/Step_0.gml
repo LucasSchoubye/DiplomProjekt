@@ -2,6 +2,7 @@ restartKey = keyboard_check(ord("R"))
 quitKey = keyboard_check(ord("Q"))
 
 
+
 // restart
 if (restartKey) {
 	room_restart()
