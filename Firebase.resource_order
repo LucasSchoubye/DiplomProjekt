@@ -1,5 +1,7 @@
 {
-  "FolderOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
+  ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"fn_ArialBlack48","order":9,"path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},
@@ -180,6 +182,12 @@
     {"name":"spr_scat","order":4,"path":"sprites/spr_scat/spr_scat.yy",},
     {"name":"spr_theOneAndOnlySmall","order":1,"path":"sprites/spr_theOneAndOnlySmall/spr_theOneAndOnlySmall.yy",},
     {"name":"spr_thunderBall","order":2,"path":"sprites/spr_thunderBall/spr_thunderBall.yy",},
+    {"name":"spr_tutorialTyperacer","order":6,"path":"sprites/spr_tutorialTyperacer/spr_tutorialTyperacer.yy",},
+    {"name":"spr_tutorialUltManHome","order":1,"path":"sprites/spr_tutorialUltManHome/spr_tutorialUltManHome.yy",},
+    {"name":"spr_tutorialUltManMatch","order":3,"path":"sprites/spr_tutorialUltManMatch/spr_tutorialUltManMatch.yy",},
+    {"name":"spr_tutorialUltManMatchGif","order":4,"path":"sprites/spr_tutorialUltManMatchGif/spr_tutorialUltManMatchGif.yy",},
+    {"name":"spr_tutorialUltManTacticsGif","order":2,"path":"sprites/spr_tutorialUltManTacticsGif/spr_tutorialUltManTacticsGif.yy",},
+    {"name":"spr_tutorialUltManTransfermarket","order":5,"path":"sprites/spr_tutorialUltManTransfermarket/spr_tutorialUltManTransfermarket.yy",},
     {"name":"spr_typeracerRoad","order":3,"path":"sprites/spr_typeracerRoad/spr_typeracerRoad.yy",},
     {"name":"spr_typeracerRoadLines","order":4,"path":"sprites/spr_typeracerRoadLines/spr_typeracerRoadLines.yy",},
     {"name":"spr_UltManBall","order":1,"path":"sprites/spr_UltManBall/spr_UltManBall.yy",},
