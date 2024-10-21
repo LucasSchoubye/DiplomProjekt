@@ -374,7 +374,6 @@
     {"id":{"name":"scr_ultManTactics","path":"scripts/scr_ultManTactics/scr_ultManTactics.yy",},},
     {"id":{"name":"scr_UltManTestTeamArsenal","path":"scripts/scr_UltManTestTeamArsenal/scr_UltManTestTeamArsenal.yy",},},
     {"id":{"name":"scr_ultManTransferMarket","path":"scripts/scr_ultManTransferMarket/scr_ultManTransferMarket.yy",},},
-    {"id":{"name":"scr_win","path":"scripts/scr_win/scr_win.yy",},},
     {"id":{"name":"StoreElement","path":"scripts/StoreElement/StoreElement.yy",},},
     {"id":{"name":"UltManPack","path":"scripts/UltManPack/UltManPack.yy",},},
     {"id":{"name":"UltManPlayer","path":"scripts/UltManPlayer/UltManPlayer.yy",},},
