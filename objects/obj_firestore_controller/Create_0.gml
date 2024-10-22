@@ -92,6 +92,7 @@ function RespondCategories(categoryList) {
 	}
 }
 
+
 function RequestStoreItems(categoryString) {
 	FirebaseFirestore("/shop items/categories/"+categoryString).Read()
 }
@@ -139,11 +140,28 @@ function RespondStudentInventory(inventoryList) {
 	
 	for (var i = 0; i < array_length(idArray); i++) 
 	{
-		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(inventoryMap[? ID]);
 	
 		obj_inventoryController.GetInventoryData(value)
+	}	
+}
+
+function RequestFtDInventory() {
+	FirebaseFirestore("/students/"+playerId+"/inventory/ftd/").Read()
+}
+
+function RespondFtDInventory(ftdInventoryList) {
+	var ftdInventoryMap = json_decode(ftdInventoryList)
+	var idArray = []
+	ds_map_keys_to_array(ftdInventoryMap, idArray)
+	
+	for (var i = 0; i < array_length(idArray); i++) 
+	{
+	    var ID = idArray[i];
+	    var value = json_decode(ftdInventoryMap[? ID]);
+	
+		obj_FtDLoadoutMenu.GetFtDInventoryData(value)
 	}	
 }
 

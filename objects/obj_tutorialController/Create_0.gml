@@ -71,7 +71,7 @@ tutorialArray = []
 			tutorialArray[0].title = "Fight the Dungeon"
 			tutorialArray[0].controlParagraf = "WASD: Movement \nShift: Sprint"
 			tutorialArray[0].goalParagraf = "Avoid projectiles and wait for your attack to charge up! Answering questions correct makes your attacks deal more damage! Try getting more correct in a row for even MORE DAMAGE!"
-			tutorialArray[0].roomRef = rm_FtD
+			tutorialArray[0].roomRef = rm_FtDLoadoutMenu
 		break;
 	}
 

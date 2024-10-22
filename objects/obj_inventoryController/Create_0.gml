@@ -3,7 +3,7 @@
 verticalScroll = 0
 inventoryElements = ds_list_create()
 categoryElements = ds_list_create()
-categoryViews = [ds_list_create(),ds_list_create(),ds_list_create()]
+categoryViews = [ds_list_create(),ds_list_create(),ds_list_create(),ds_list_create()]
 balance = undefined
 currentCategory = Categories.All
 
@@ -13,6 +13,7 @@ obj_firestore_controller.RequestStudentInventory()
 ds_list_add(categoryElements, "All")
 ds_list_add(categoryElements, "Clothes")
 ds_list_add(categoryElements, "Typeracer")
+ds_list_add(categoryElements, "FightTheDungeon")
 
 
 function GetInventoryData(inventoryData) {

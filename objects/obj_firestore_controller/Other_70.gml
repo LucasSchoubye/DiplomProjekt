@@ -46,6 +46,10 @@ if (async_load[? "status"] == 200)
 			{
 				RespondStoreItems(async_load[? "value"],async_load[? "path"])
 			}
+			else if (string_pos("ftd",async_load[? "path"]) > 0)
+			{
+				RespondFtDInventory(async_load[? "value"])
+			}
 			else if (string_pos("inventory",async_load[? "path"]) > 0 && 
 				string_count("bank",async_load[? "path"]) = 0)
 			{

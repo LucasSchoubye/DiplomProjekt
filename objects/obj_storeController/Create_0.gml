@@ -3,7 +3,7 @@
 verticalScroll = 0
 storeElements = ds_list_create()
 categoryElements = ds_list_create()
-categoryViews = [ds_list_create(),ds_list_create(),ds_list_create()]
+categoryViews = [ds_list_create(),ds_list_create(),ds_list_create(),ds_list_create()]
 balance = undefined
 selectedPrice = 0
 isOwned = false
@@ -11,18 +11,21 @@ currentCategory = Categories.All
 
 obj_firestore_controller.RequestStoreItems("typeracer")
 obj_firestore_controller.RequestStoreItems("clothes")
+obj_firestore_controller.RequestStoreItems("ftd")
 obj_firestore_controller.RequestBalance()
 
 
 enum Categories{
 	All,
 	Clothes,
-	Typeracer
+	Typeracer,
+	FightTheDungeon
 }
 
 ds_list_add(categoryElements, "All")
 ds_list_add(categoryElements, "Clothes")
 ds_list_add(categoryElements, "Typeracer")
+ds_list_add(categoryElements, "FightTheDungeon")
 
 function GetStoreData(storeData,itemID) {
 	var currentElement = new StoreElement()
