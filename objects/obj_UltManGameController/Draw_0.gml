@@ -53,7 +53,12 @@ for (var i = 0; i < 2; ++i) {
 		else
 		{
 			scoreline[0]++
-			show_message("SCORED GOAL")
+			playerControllerHistory[0].goalsScored++
+ 
+			if(playerControllerHistory[0] !=playerControllerHistory[1] && playerControllerHistory[1] != undefined){
+				playerControllerHistory[1].assists++
+				//show_message("ASSIST BY " + string(playerControllerHistory[1].name))
+			}
 			scr_UltManKickoffSetup(false)
 		}
 	}

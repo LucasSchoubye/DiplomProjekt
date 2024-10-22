@@ -1,6 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
-
 if (room = rm_UltManOverview){
 	audio_stop_sound(sou_UltManCheer)
 
@@ -23,6 +20,13 @@ if (room = rm_UltManOverview){
 	var buttonHeight = room_height * 0.0965
 	var buttonText = "Play Match"
 	var titleHeight = (string_height(clubName) / 2)
+	
+	teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
+	["Win Percentage",spr_UltManPercentage, obj_UltManManagerController.playerClub.winPercentage],
+	["Goals Scored", spr_UltManCheckmark, obj_UltManManagerController.playerClub.goalsScored],
+	["Goals Conceded",spr_UltManCancel, obj_UltManManagerController.playerClub.goalsConceded],
+	["Yellow Cards", spr_UltManWarning, obj_UltManManagerController.playerClub.yellowCards],
+	["Red Cards",spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
 
 	draw_set_font(fn_titleLato);
 

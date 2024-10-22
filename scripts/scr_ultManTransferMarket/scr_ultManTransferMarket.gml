@@ -70,6 +70,16 @@ function scr_ultManTransferMarket(){
 	
 	
 	draw_set_color(c_white)
+	
+	for (var i = 0; i < ds_list_size(squad); ++i) {
+		var currentPlayer = ds_list_find_value(squad, i)
+		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
+		// Find the max tier of pack the player can buy based on starting 11
+		if (i < 11 && playerTier < maxAvailablePackTier){
+			maxAvailablePackTier = playerTier;
+		}
+	}
+	
 	// Loop through each pack in the ds_list and draw it
 	for (var i = 0; i < totalPacks; i++) {
 	    // Get the current pack from the list
@@ -82,15 +92,17 @@ function scr_ultManTransferMarket(){
 	        currentY += packHeight + dynamicSpacingY;  // Move down by pack height + dynamic vertical spacing
 	        packCounter = 0;  // Reset the pack counter for the new row
 	    }
-
+	
 	    // Draw the packs at the current X and Y positions
 		//show_message("MaxPack " + string(maxPackTier) + " " + "CurrentPack " + string(currentPackTier))
+		depth = 3;
 		if(maxAvailablePackTier+1 < currentPackTier){
 			pack.DrawUnavailablePack(currentX, currentY, packWidth, packHeight);
 		}
 		else{
 			pack.DrawPack(currentX, currentY, packWidth, packHeight);
 		}
+		depth = 0;
 		
 		// Check for mouse click on the pack to select a player based on its tier
         if (mouse_x > currentX + pack.contentPadding && mouse_x < currentX + packWidth - pack.contentPadding &&
@@ -163,11 +175,6 @@ function scr_ultManTransferMarket(){
 			playerName = string_copy(playerName,1, 13) + "...";
 		}
 		
-		// Find the max tier of pack the player can buy based on starting 11
-		if (i < 11 && playerTier < maxAvailablePackTier){
-			maxAvailablePackTier = playerTier;
-		}
-		
 		if(sellListSep > sellBoxTop && sellListSep < sellBoxBottom){
 			if(i<11){
 				draw_set_alpha(0.15)
@@ -183,13 +190,13 @@ function scr_ultManTransferMarket(){
 			draw_text(sellBoxLeft + 190,sellListSep, playerRating);
 			draw_text(sellBoxLeft + 240,sellListSep, playerPosition);
 			draw_set_halign(fa_left)
-		
+			
 			// Check for hover over player
 		    if (mouse_x > sellBoxLeft && mouse_x < sellBoxRight &&
 		        mouse_y > sellListSep - 30 && mouse_y < sellListSep) {
 				
 		        hoveredPlayerIndex = i;  // Store the index of the hovered player
-				
+				depth = 0;
 				
 				//Draw player card
 				currentPlayer.playerCardTimer--
