@@ -1,6 +1,6 @@
 /// Set variablesbalance = obj_storeController.inventoryElements
 
-prize = 1000
+prize = 400 - global.typeracerPlacement*75
 
 // Logical pos
 pos = 0
@@ -19,9 +19,13 @@ function win()
 {
 	obj_storeController.balance = real(obj_storeController.balance)+prize
 	obj_firestore_controller.UpdateBalance()
-	show_message("YOU WON")
-	show_message("You won a "+string(prize)+"$ prize!!!")
-	room_goto(rm_menu)
+	global.typeracerPlacement = 1
+	with(obj_typeracerCarNpc)
+	{
+		if (x > obj_typeracerCar.x)
+			global.typeracerPlacement++
+	}
+	room_goto(rm_typeracerWin)
 }
 
 function AnsweredCorrect() 

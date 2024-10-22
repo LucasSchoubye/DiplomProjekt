@@ -91,7 +91,6 @@ function MoveToPos(X,Y)
 
 function ShootToPos(X,Y)
 {
-	
 	var ball = obj_UltManBall
 	
 	targetX = ball.x
