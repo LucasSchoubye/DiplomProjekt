@@ -6,6 +6,7 @@
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"fn_ArialBlack48","order":9,"path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},
     {"name":"fn_buttonOpenSans","order":3,"path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},
+    {"name":"fn_konk12","order":19,"path":"fonts/fn_konk12/fn_konk12.yy",},
     {"name":"fn_konk16","order":11,"path":"fonts/fn_konk16/fn_konk16.yy",},
     {"name":"fn_konk18","order":15,"path":"fonts/fn_konk18/fn_konk18.yy",},
     {"name":"fn_konk22","order":12,"path":"fonts/fn_konk22/fn_konk22.yy",},

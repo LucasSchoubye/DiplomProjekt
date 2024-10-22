@@ -140,6 +140,7 @@
     {"id":{"name":"YYFirebaseFirestore","path":"extensions/YYFirebaseFirestore/YYFirebaseFirestore.yy",},},
     {"id":{"name":"fn_ArialBlack48","path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},},
     {"id":{"name":"fn_buttonOpenSans","path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},},
+    {"id":{"name":"fn_konk12","path":"fonts/fn_konk12/fn_konk12.yy",},},
     {"id":{"name":"fn_konk16","path":"fonts/fn_konk16/fn_konk16.yy",},},
     {"id":{"name":"fn_konk18","path":"fonts/fn_konk18/fn_konk18.yy",},},
     {"id":{"name":"fn_konk22","path":"fonts/fn_konk22/fn_konk22.yy",},},

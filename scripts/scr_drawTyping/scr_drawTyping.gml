@@ -3,6 +3,8 @@
 function scr_drawTyping(optionsMenu, controllerId)
 {
 
+draw_set_font(fn_konk12)
+
 var top = optionsMenu.top
 var screenMidX = optionsMenu.screenMidX
 var screenMidY = optionsMenu.screenMidY
