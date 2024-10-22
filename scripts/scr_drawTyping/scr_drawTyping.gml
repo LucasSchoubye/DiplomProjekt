@@ -37,7 +37,7 @@ var threeOptionsY = optionsMenu.threeOptionsY
 	if (question != undefined)
 	{
 		draw_set_color(c_white)
-		draw_set_alpha(0.5)
+		draw_set_alpha(0.85)
 		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,false)
 		draw_set_alpha(1)
 		

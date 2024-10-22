@@ -3,7 +3,7 @@
 function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
-draw_set_font(fn_konk18)
+//draw_set_font(fn_konk18)
 
 var resolutionSizeRatio = 1
 

@@ -1,5 +1,7 @@
 /// Setup variables for typeracer
 
+global.typeracerPlacement = 1
+
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
 typingString = ""
