@@ -26,4 +26,10 @@ else if (readyForPickup = true)
 x -= (x - targetX)/10
 y -= (y - targetY)/9
 
-// Score goals
+// ball carrier history
+if(instance_exists(owner)){
+	if(owner.playerStruct != obj_UltManGameController.playerControllerHistory[0] && owner.playerTeam){
+		obj_UltManGameController.playerControllerHistory[1] = obj_UltManGameController.playerControllerHistory[0]
+		obj_UltManGameController.playerControllerHistory[0] = owner.playerStruct
+	}
+}

@@ -10,6 +10,13 @@ function UltManTeam() constructor{
 	matchesDrawn = 0
 	matchesLost = 0
 	matchesPlayed = 0
+	//if(is_nan(round(matchesWon/matchesPlayed))){
+	//	winPercentage = 0
+	//}
+	//else{
+	//	winPercentage= matchesWon / matchesPlayed
+	//}
+	winPercentage = 0
     totalPoints = 0
 	goalsScored = 0
 	goalsConceded = 0

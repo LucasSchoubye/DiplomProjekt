@@ -114,8 +114,8 @@ function scr_ultManHome(){
 	
 	// draw League Table
 	var rowHeight = 30
-	var leagueTableLeft = room_width * 0.725;
-	var leagueTableRight = room_width * 0.95;
+	var leagueTableLeft = room_width * 0.75;
+	var leagueTableRight = room_width * 0.975;
 	var leagueTableTop = room_height * 0.08 + rowHeight;
 	var numberPadding = 25
 	
@@ -176,7 +176,7 @@ function scr_ultManHome(){
 	
 	draw_set_color(c_white)
 	draw_set_halign(fa_center)
-	draw_set_font(fn_RobotoMedium14)
+	draw_set_font(fn_RobotoBlack16)
 	
 	var teamStatsBoxTop = room_height * 0.425;
 	var teamStatsBoxBottom = room_height * 0.9;
@@ -184,32 +184,113 @@ function scr_ultManHome(){
 	var teamStatsBoxRight = room_width * 0.45;
 	var teamStatsBoxCenter = (teamStatsBoxLeft + teamStatsBoxRight) / 2
 	var teamStatsStart = teamStatsBoxLeft + 75
+	var teamStatsRow = 50
 	draw_text(teamStatsBoxCenter, room_height * 0.40, "Team Stats")
 	draw_set_halign(fa_left)
 	try{
-	for (var i = 0; i < array_length(teamStats); ++i) {
-		var teamStatsSpace = teamStatsBoxTop + rowHeight*(i+1)
-		var statName = teamStats[i][0]
-		var statSprite = teamStats[i][1]
-		var statNumber = teamStats[i][2]
-		var statNumberSize = string_width(string(statNumber))
-		
-		var statPlacement = teamStatsBoxTop + rowHeight*(i+1)
-		draw_sprite_stretched(statSprite,false,teamStatsStart, teamStatsSpace, 24, 24)
-		draw_text(teamStatsStart + 30, teamStatsSpace , string(statNumber))
-		draw_text(teamStatsStart + 35 +  statNumberSize, teamStatsSpace , statName)
-	}
+		for (var i = 0; i < array_length(teamStats); ++i) {
+			draw_set_color(c_white)
+			draw_set_font(fn_RobotoBlack16)
+			var teamStatsSpace = teamStatsBoxTop + teamStatsRow*(i+1) - 30
+			var statName = teamStats[i][0]
+			var statSprite = teamStats[i][1]
+			var statNumber = teamStats[i][2]
+			var statNumberSize = string_width(string(statNumber))
+			//show_message(statName + ": " + string(statNumber))
+			var statPlacement = teamStatsBoxTop + teamStatsRow*(i+1)
+			draw_sprite_stretched(statSprite,false,teamStatsStart, teamStatsSpace, 47, 47)
+			draw_text(teamStatsStart + 56, teamStatsSpace , string(statNumber))
+			draw_set_font(fn_RobotoRegular12)
+			draw_set_color(c_grey)
+			draw_text(teamStatsStart + 56, teamStatsSpace + 25  , statName)
+		}
 	}
 	catch(error){}
 	
-	//var teamStats = [[spr_leagueImage,21],[spr_goalsScored, 51],[spr_goalsConceded, 12],[spr_yellowCards, 38],[spr_redCards, 1]]
+	draw_set_color(c_white)
+	draw_set_font(fn_RobotoBlack16)
 	
-	var playerStatsBoxTop = room_height * 0.45;
+	var playerStatsBoxTop = room_height * 0.425;
 	var playerStatsBoxBottom = room_height * 0.9;
 	var playerStatsBoxLeft = room_width * 0.45;
 	var playerStatsBoxRight = room_width * 0.7;
 	var playerStatsBoxCenter = (playerStatsBoxLeft + playerStatsBoxRight) / 2
+	var playerStatsBoxStart = playerStatsBoxLeft + 75;
+	var maxGoalsScored = 0
+	var maxGoalsScoredPlayerName = undefined
+	var maxAssists = 0
+	var maxAssistsPlayerName = undefined
+	var maxTackles = 0
+	var maxTacklesPlayerName = undefined
+	var maxAttemptedPasses = 0
+	var maxAttemptedPassesPlayerName = undefined
+	var maxAttemptedShots = 0
+	var maxAttemptedShotsPlayerName = undefined	
+	var maxTouches = 0
+	var maxTouchesPlayerName = undefined	
+	draw_set_halign(fa_center)
 	draw_text(playerStatsBoxCenter, room_height * 0.40, "Player Stats")
+	draw_set_halign(fa_left)
+	
+	
+	var playerStatsRow = 50
+	try{
+		for (var i = 0; i < ds_list_size(squad); ++i) {
+			var player = ds_list_find_value(squad, i)
+			
+			if(player.goalsScored >= maxGoalsScored){
+				maxGoalsScored = player.goalsScored
+				maxGoalsScoredPlayerName = player.name[0] + " " + player.name[1]
+			}
+			if(player.assists >= maxAssists){
+				maxAssists = player.assists
+				maxAssistsPlayerName = player.name[0] + " " + player.name[1]
+			}
+			if(player.tackles >= maxTackles){
+				maxTackles = player.tackles
+				maxTacklesPlayerName = player.name[0] + " " + player.name[1]
+			}
+			if(player.attemptedPasses >= maxAttemptedPasses){
+				maxAttemptedPasses = player.attemptedPasses
+				maxAttemptedPassesPlayerName = player.name[0] + " " + player.name[1]
+			}
+			if(player.attemptedShots >= maxAttemptedShots){
+				maxAttemptedShots = player.attemptedShots
+				maxAttemptedShotsPlayerName = player.name[0] + " " + player.name[1]
+			}
+			if(player.touches >= maxTouches){
+				maxTouches = player.touches
+				maxTouchesPlayerName = player.name[0] + " " + player.name[1]
+			}
+		}
+		draw_sprite_stretched(spr_UltManGoalscorer,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(1) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(1) - 30 , string(maxGoalsScored) + " " + maxGoalsScoredPlayerName)
+		
+		draw_sprite_stretched(spr_UltManAssist,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(2) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(2) - 30 , string(maxAssists) + " " + maxAssistsPlayerName)
+			
+		draw_sprite_stretched(spr_UltManShield,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(3) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(3) - 30 , string(maxTackles) + " " + maxTacklesPlayerName)
+			
+		draw_sprite_stretched(spr_UltManPasses,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(4) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(4) - 30 , string(maxAttemptedPasses) + " " + maxAttemptedPassesPlayerName)
+		
+		draw_sprite_stretched(spr_UltManTarget,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(5) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(5) - 30 , string(maxAttemptedShots) + " " + maxAttemptedShotsPlayerName)
+		
+		draw_sprite_stretched(spr_UltManTouches,false,playerStatsBoxStart, playerStatsBoxTop + playerStatsRow*(6) - 30, 47, 47)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(6) - 30 , string(maxTouches) + " " + maxTouchesPlayerName)
+		
+		draw_set_font(fn_RobotoRegular12)
+		draw_set_color(c_grey)
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(1) - 5 , "Top Goalscorer")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(2) - 5 , "Most Assists")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(3) - 5 , "Most Tackles")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(4) - 5 , "Attempted Passes")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(5) - 5 , "Attempted Shots")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(6) - 5 , "Most Touches")
+	}
+	catch(error){}
 	
 	//draw_rectangle(teamStatsBoxLeft, teamStatsBoxTop, teamStatsBoxRight, teamStatsBoxBottom, true)
 	//draw_rectangle(playerStatsBoxLeft, playerStatsBoxTop, playerStatsBoxRight, playerStatsBoxBottom, true)

@@ -27,6 +27,7 @@ frozenShotMissed = false
 
 // 
 ballcarrier = undefined
+playerControllerHistory = [undefined,undefined]
 commandedPlayer = undefined
 controlledPlayer = undefined
 selectedAction = ActionType.Run

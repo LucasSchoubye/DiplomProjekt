@@ -8,6 +8,15 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 	age = irandom_range(15,30)
 	nationality = irandom_range(0,17)
 	height = irandom_range(160,210)
+	
+	// Match stats
+	goalsScored = 0
+	assists = 0
+	tackles = 0
+	passes = 0
+	attemptedPasses = 0
+	attemptedShots = 0
+	touches = 0
 
 	// Tactics
 	position = FootballPositions.SUB

@@ -15,6 +15,7 @@ function scr_UltManCreateManagerTeam(){
 			
 			player.position = manPlayer.position
 			player.name = manPlayer.name
+			player.playerStruct = manPlayer
 			
 			// Stats
 			player.defence = manPlayer.defence
