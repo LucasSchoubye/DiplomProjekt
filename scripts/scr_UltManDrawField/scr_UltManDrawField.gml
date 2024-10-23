@@ -1,6 +1,8 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManDrawField(){
+	
+depth = 10
 
 var roomWidthBuffer = 300
 var roomMidWidth = room_width/2
@@ -28,5 +30,14 @@ var yardBoxWidth = room_width*0.06
 	// 6-yard box
 	draw_rectangle(roomWidthBuffer, yardBoxHeightStart, yardBoxWidth + roomWidthBuffer, yardBoxHeightEnd, true)
 	draw_rectangle(room_width - roomWidthBuffer, yardBoxHeightStart, room_width - yardBoxWidth - roomWidthBuffer, yardBoxHeightEnd, true)
+
+	// Pitch patterns
+	draw_set_alpha(0.05)
+	for (var i = 0; i < 20; ++i) {
+	    // code here
+		if (i mod 2 = 0)
+			draw_rectangle((room_width/20)*(i-1),0,(room_width/20)*i,room_height,false)
+	}
+	draw_set_alpha(1)
 
 }

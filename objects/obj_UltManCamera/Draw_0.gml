@@ -1,5 +1,6 @@
 
 var player = obj_UltManBall
+scr_UltManDrawField()
 
 if (obj_UltManGameController.selectedAction = ActionType.Run)
 {

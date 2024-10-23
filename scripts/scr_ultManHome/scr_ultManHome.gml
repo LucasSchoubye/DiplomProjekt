@@ -29,7 +29,7 @@ function scr_ultManHome(){
 	
 	// draw boxes
 	//draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
-	//draw_sprite(spr_manBluePlaceholder, 0, logoHomeBoxLeft, logoHomeBoxTop)
+	//draw_sprite(spr_manaquaPlaceholder, 0, logoHomeBoxLeft, logoHomeBoxTop)
 	//draw_rectangle(matchDetailsBoxLeft, matchDetailsBoxTop, matchDetailsBoxRight, matchDetailsBoxBottom, true)
 	//draw_sprite(spr_arsenalPlaceholder, 0, logoAwayBoxLeft, logoAwayBoxTop)
 	
