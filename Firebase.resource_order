@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings":[
+    {"name":"Hashing","order":10,"path":"folders/Assets/Shared Assets/Scripts/Hashing.yy",},
     {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
   ],
   "ResourceOrderSettings":[
@@ -111,6 +112,7 @@
     {"name":"scr_pauseFunctions","order":5,"path":"scripts/scr_pauseFunctions/scr_pauseFunctions.yy",},
     {"name":"scr_reverseDsList","order":1,"path":"scripts/scr_reverseDsList/scr_reverseDsList.yy",},
     {"name":"scr_sort_struct_list","order":4,"path":"scripts/scr_sort_struct_list/scr_sort_struct_list.yy",},
+    {"name":"scr_stringSha512","order":1,"path":"scripts/scr_stringSha512/scr_stringSha512.yy",},
     {"name":"scr_UltManActiontypes","order":2,"path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},
     {"name":"scr_UltManCreateEnemyTeam","order":1,"path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},
     {"name":"scr_UltManCreateManagerTeam","order":2,"path":"scripts/scr_UltManCreateManagerTeam/scr_UltManCreateManagerTeam.yy",},
