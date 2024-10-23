@@ -46,10 +46,12 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				newInventoryElement.itemName = currentElement.itemName
 				newInventoryElement.itemID = currentElement.itemID
 				newInventoryElement.category = currentElement.category
+				newInventoryElement.itemType = currentElement.itemType
 				ds_list_add(obj_inventoryController.inventoryElements, newInventoryElement)
 				ds_list_add(obj_inventoryController.categoryViews[scr_getCategoryEnumFromString(currentElement.category)],newInventoryElement)
 				obj_firestore_controller.BuyShopItem()
 				obj_firestore_controller.UpdateBalance()
+				
 			}
 			else if (currentElement.isOwned == true) {
 				show_message("You already own this item")

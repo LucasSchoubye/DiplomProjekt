@@ -22,6 +22,7 @@ function GetInventoryData(inventoryData) {
 	var substring = inventoryData[?"shopItemRef"]
 	var last_dash_pos = string_last_pos("/", substring);
     currentElement.isEquipped = false
+	
 	// Check if there is a dash in the string
 	if (last_dash_pos != -1) {
 		// Extract the substring after the last dash
@@ -32,6 +33,7 @@ function GetInventoryData(inventoryData) {
 	for (var i = 0; i < ds_list_size(obj_storeController.storeElements); ++i) {
 		var currentStoreElement = ds_list_find_value(obj_storeController.storeElements,i)
 		if (currentStoreElement.itemID == substring) {
+			currentElement.itemType = currentStoreElement.itemType
 			currentElement.itemName = currentStoreElement.itemName
 			currentStoreElement.isOwned = true
 			currentElement.itemID = currentStoreElement.itemID

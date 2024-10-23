@@ -3,6 +3,7 @@
 
 function StoreElement() constructor {
 	itemName = ""
+	itemType = ""
 	balance = undefined
 	price = undefined
 	itemID = ""

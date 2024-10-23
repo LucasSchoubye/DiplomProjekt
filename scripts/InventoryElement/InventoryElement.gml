@@ -5,6 +5,7 @@ function InventoryElement() constructor {
 	category = ""
 	itemName = ""
 	balance = ""
+	itemType = ""
 	itemID = ""
 	isEquipped = false
 	txtEquip = ""

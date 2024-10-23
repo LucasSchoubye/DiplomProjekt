@@ -34,6 +34,7 @@ function GetStoreData(storeData,itemID) {
 	currentElement.itemID = itemID
 	currentElement.isOwned = false
 	currentElement.category = storeData[?"category"]
+	currentElement.itemType = storeData[?"type"]
 	var last_dash_pos = string_last_pos("/", currentElement.category);
 	// Check if there is a dash in the string
 	if (last_dash_pos != -1) {

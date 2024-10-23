@@ -11,11 +11,15 @@ function LoadoutElement() constructor {
 	itemHeight = room_height*0.15
 	itemCenterX = itemWidth/2
 	itemCenterY = itemHeight/2
-	itemTitleY = itemHeight-20
-	itemEquipY = itemHeight-40
+	itemEquipY = itemHeight-10
+	itemTitleY = itemHeight-22
 	itemImgStartY = itemCenterY-10
 	textHeight = 10
 	itemStartY = room_height*0.125
+	defaultFont = draw_get_font()
+	itemType = ""
+	
+	
 
 	function DrawFtDItem(xValue,yValue) {
 
@@ -28,14 +32,17 @@ function LoadoutElement() constructor {
 			draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 			draw_set_alpha(1)
 			draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
-
+			
 			if (isEquipped == true) {
 				txtEquip = "EQUIPPED"
 			} else {
 				txtEquip = ""
 			}
+			draw_set_font(fn_RobotoBlack8)
 			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
+			draw_set_font(defaultFont)
+			
 
 		
 		// Logic

@@ -172,6 +172,7 @@ function UpdateInventory(itemStruct)
 	ds_map_destroy(itemMap)
 }
 
+
 function StartSession(game)
 {		
 	sessionMap = ds_map_create()

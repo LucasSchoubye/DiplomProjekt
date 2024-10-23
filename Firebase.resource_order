@@ -28,6 +28,7 @@
     {"name":"fn_RobotoRegular12","order":4,"path":"fonts/fn_RobotoRegular12/fn_RobotoRegular12.yy",},
     {"name":"fn_sideBarOptionsRoboto","order":2,"path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},
     {"name":"fn_titleLato","order":1,"path":"fonts/fn_titleLato/fn_titleLato.yy",},
+    {"name":"fn_TwCenMTCondensed","order":19,"path":"fonts/fn_TwCenMTCondensed/fn_TwCenMTCondensed.yy",},
     {"name":"obj_cam_controller","order":1,"path":"objects/obj_cam_controller/obj_cam_controller.yy",},
     {"name":"obj_characterController","order":8,"path":"objects/obj_characterController/obj_characterController.yy",},
     {"name":"obj_damageEnemy","order":1,"path":"objects/obj_damageEnemy/obj_damageEnemy.yy",},
