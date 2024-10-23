@@ -18,10 +18,10 @@ var backButtonWidth = categoryWidth/3
 var itemHeight = room_height*0.15
 var itemWidth = room_width*0.075
 
-var playButtonStartX = screenMidX-50
-var playButtonEndX = screenMidX+50
-var playButtonStartY = room_height*0.95
-var playButtonEndY = room_height*0.9
+var playButtonStartX = screenMidX-70
+var playButtonEndX = screenMidX+70
+var playButtonStartY = room_height*0.97
+var playButtonEndY = room_height*0.88
 
 var weaponStartX = room_width*0.05
 var weaponStartY = room_height*0.18
@@ -43,12 +43,12 @@ draw_text(screenMidX,screenTop,"Fight The Dungeon Loadout")
 draw_set_font(fn_textLato)
 
 // play button
-draw_rectangle(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)
+draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)
 draw_text((playButtonStartX + playButtonEndX)/2,(playButtonStartY+playButtonEndY)/2,"Fight!")
 if(mouse_x > playButtonStartX && mouse_x < playButtonEndX) {
-	if(mouse_y > playButtonStartY && mouse_y < playButtonEndY) {
+	if(mouse_y < playButtonStartY && mouse_y > playButtonEndY) {
 		draw_set_alpha(0.3)
-		draw_rectangle(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,false)
+		draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,false)
 		draw_set_alpha(1)
 		if (mouse_check_button_pressed(mb_left)){
 			room_goto(rm_FtD)
