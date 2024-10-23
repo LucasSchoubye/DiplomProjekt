@@ -2,6 +2,9 @@
 draw_set_color(c_black)
 draw_set_alpha(0.4)
 draw_ellipse(x-30,y-10,x+30,y+10,false)
+for (var i = 0; i < 4; ++i) {
+	draw_sprite_ext(sprite_index, 0, x, y, image_xscale, 1, 45 + 90*i, c_black, 0.02)
+}
 draw_set_alpha(0.4)
 draw_set_color(c_white)
 
