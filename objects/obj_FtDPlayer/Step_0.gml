@@ -57,15 +57,21 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 if (hp <= 0) {
 	// create game over object
 	instance_create_depth(0,0,-10000, obj_FtDGameOverScreen)
+	audio_play_sound(sou_FtDGameOver,1,false)
 	
 	// destroy player
 	instance_destroy()
+	audio_stop_sound(sou_FtDFightMusicLoop);
 }
 
 //win
 if (!instance_exists(obj_enemyParent)) {
-	//show_message("You Defeated the bossman!!!")
-	win()
-	room_goto(rm_minigameMenu)
+	instance_create_depth(0,0,-10000, obj_FtDWinScreen)
+	if(won == false) {
+		audio_play_sound(sou_FtDWin,1,false)
+		audio_play_sound(sou_FtDApplause,1,false)
+		obj_FtDWinScreen.ftdGetPrize()
+		won = true
+	}
 	audio_stop_sound(sou_FtDFightMusicLoop);
 }

@@ -13,7 +13,7 @@
     "path":"folders/Assets/Shared Assets/Objects/Controllers.yy",
   },
   "parentObjectId":null,
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_newsGif",
+    "path":"sprites/spr_newsGif/spr_newsGif.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -1,6 +1,32 @@
 
 state = UltManNpcState.HoldPosition
 
+switch(irandom(4))
+{
+	case 0:
+		sprite_index = spr_UltManPlayer
+	break;
+	
+	case 1:
+		sprite_index = spr_UltManPlayer2
+	break;
+	
+	case 2:
+		sprite_index = spr_UltManPlayer3
+	break;
+	
+	case 3:
+		sprite_index = spr_UltManPlayer4
+	break;
+	
+	case 4:
+		sprite_index = spr_UltManPlayer5
+	break;
+}
+
+// player struct
+playerStruct = undefined
+
 // animation
 animCycle = random_range(0,360)
 facing = 1
@@ -49,8 +75,8 @@ function MoveToPos(X,Y)
 	lastMoveLen = point_distance(x, y, X, Y)
 	
 	// Set new target dist
-	targetX = X + accX
-	targetY = Y + accY
+	targetX = X 
+	targetY = Y
 	
 	// Tackle
 	if (instance_exists(obj_UltManBall.owner) && tackleCooldown = false)
@@ -67,12 +93,20 @@ function MoveToPos(X,Y)
 				obj_UltManBall.owner.tackleCooldown = true
 				obj_UltManBall.owner.image_angle -= (strength/10)*obj_UltManBall.owner.facing
 				obj_UltManBall.owner = id
+				if(playerStruct != undefined){
+					playerStruct.tackles++
+				}
 				tackleCooldown = true
+				audio_play_sound(sou_UltManKickLight, 1, false, 1, 0, 0.7)
 			}
 		}
 		else
 		{
 			audio_play_sound(sou_UltManKickLight, 1, false)
+			if(playerStruct != undefined){
+				playerStruct.touches++
+			}
+			
 		}
 	}
 	else
@@ -81,17 +115,18 @@ function MoveToPos(X,Y)
 	}
 	
 	var nearestOpponent = instance_nearest(x,y,obj_UltManOpponent)
-	if (distance_to_object(nearestOpponent) < 20)
+	if (distance_to_object(nearestOpponent) < 20 && !playerTeam)
 	{
-		//targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
-		//targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
 	}
+	
+	image_angle += -15*facing
 	
 }
 
 function ShootToPos(X,Y)
 {
-	
 	var ball = obj_UltManBall
 	
 	targetX = ball.x

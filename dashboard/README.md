@@ -1,3 +1,11 @@
+# Dashboard Project
+
+## Prerequisites
+- Node.js (version 14.x or higher)
+- npm (version 6.x or higher)
+
+## Setup
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_typeracerCar",
-    "path":"sprites/spr_typeracerCar/spr_typeracerCar.yy",
+    "name":"spr_typeracerCar2",
+    "path":"sprites/spr_typeracerCar2/spr_typeracerCar2.yy",
   },
   "spriteMaskId":null,
   "visible":true,

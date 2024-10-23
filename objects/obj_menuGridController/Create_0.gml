@@ -5,6 +5,9 @@ itemElements = ds_list_create()
 categoryElements = ds_list_create()
 gameNames = ds_list_create()
 
+// Tutorials played 
+tutorialsPlayed = ds_list_create()
+
 for (var i = 0; i < 20; ++i) {
     //ds_list_add(itemElements, new MenuGridElement())
 }

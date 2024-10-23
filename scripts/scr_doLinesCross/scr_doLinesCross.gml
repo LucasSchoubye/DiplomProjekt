@@ -14,9 +14,6 @@ function scr_doLinesCross(x1, y1, x2, y2, x3, y3, x4, y4){
 /// @param y4 The y-coordinate of the second endpoint of line 2
 /// @return Returns true if the lines intersect, false otherwise
 
-	draw_line_color(x1, y1, x2, y2, c_maroon, c_maroon)
-	draw_line_color(x1, y1, x2, y2, c_navy, c_navy)
-
 
     var denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
     if (denom == 0) {

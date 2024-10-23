@@ -27,6 +27,9 @@ switch(currentCategory) {
 	case Categories.Typeracer:
 		currentList = obj_inventoryController.categoryViews[Categories.Typeracer]
 		break;
+	case Categories.FightTheDungeon:
+		currentList = obj_inventoryController.categoryViews[Categories.FightTheDungeon]
+		break;
 }
 
 for (var i = 0; i < ds_list_size(currentList); ++i) {

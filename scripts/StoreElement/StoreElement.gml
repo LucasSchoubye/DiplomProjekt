@@ -3,6 +3,7 @@
 
 function StoreElement() constructor {
 	itemName = ""
+	itemType = ""
 	balance = undefined
 	price = undefined
 	itemID = ""
@@ -17,13 +18,7 @@ function StoreElement() constructor {
 	itemImgStartY = itemCenterY-20
 	textHeight = 10
 	categoryStartY = room_height*0.125
-	categorySprite = spr_theOneAndOnlySmall
-	categoryWidth = room_width*0.2
-	categoryHeight = room_height*0.07
-	categoryTextStartX =  room_width*0.01
-	categoryCenterY = categoryHeight/2
-	categoryImgStartX = categoryWidth-30
-	category = ""
+	
 
 	function DrawItem(xValue,yValue) {
 		

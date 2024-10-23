@@ -8,6 +8,7 @@ sessionMap = undefined
 answerTimer = 0
 categories = undefined
 inventoryID = undefined
+playedGameTitle = ""
 
 // Login 
 username = undefined
@@ -91,6 +92,7 @@ function RespondCategories(categoryList) {
 	}
 }
 
+
 function RequestStoreItems(categoryString) {
 	FirebaseFirestore("/shop items/categories/"+categoryString).Read()
 }
@@ -138,13 +140,13 @@ function RespondStudentInventory(inventoryList) {
 	
 	for (var i = 0; i < array_length(idArray); i++) 
 	{
-		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(inventoryMap[? ID]);
 	
 		obj_inventoryController.GetInventoryData(value)
 	}	
 }
+
 
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
@@ -169,6 +171,7 @@ function UpdateInventory(itemStruct)
 
 	ds_map_destroy(itemMap)
 }
+
 
 function StartSession(game)
 {		
@@ -225,8 +228,9 @@ function ValidateLogin(map)
 		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(decodedMap[? ID]);
+		var passwordSalt = value[?"passwordSalt"];
 		
-		if (value[?"username"] = username && value[?"password"] = sha1_string_utf8(password))
+		if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
 		{
 			playerId = value[?"ref"]
 			
@@ -248,12 +252,17 @@ function ValidateLogin(map)
 			show_debug_message("No Match found")
 	}
 	
-	if (playerId = undefined)
-		show_message("Wrong password or username")
+		if (playerId = undefined)
+		{
+			//show_message("Wrong password or username")
+			room_goto(rm_login)
+			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
+			part.text = "Wrong password or username"
+		}
 	}
 	catch(error)
 	{
-		room_goto(rm_UltManOverview)
+		room_goto(rm_login)
 	}
 }
 

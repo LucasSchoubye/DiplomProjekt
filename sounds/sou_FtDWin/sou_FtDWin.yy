@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sou_FtDWin",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.776,
+  "name":"sou_FtDWin",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Assets/Fight The Dungeon/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sou_FtDWin.mp3",
+  "type":0,
+  "volume":1.0,
+}

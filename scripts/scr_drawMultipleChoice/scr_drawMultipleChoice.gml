@@ -3,6 +3,8 @@
 function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
+//draw_set_font(fn_konk18)
+
 var resolutionSizeRatio = 1
 
 var screenMidX = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2
@@ -36,16 +38,21 @@ var optionSelected = undefined
 
 	if (question != undefined)
 	{
+		draw_set_alpha(0.7)
+		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,false)
+		draw_set_alpha(1)
 		
-		draw_rectangle(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
-		draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
+		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
+		//draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
 	
 		// Vertical middle line for options
 		draw_line(screenMidX,answerBoxTop,screenMidX,answerBoxBot)
 	
 		// Drawing prompt text
 		draw_set_halign(fa_center)
+		draw_set_color(c_black)
 		draw_text(screenMidX,promptBoxMid,question.prompt)
+		draw_set_color(c_white)
 		
 		
 		// Draw option boxes
@@ -71,6 +78,7 @@ var optionSelected = undefined
 			
 				// Draw text
 				for(var i = 0; i < array_length(question.options); i++) {
+					draw_set_color(c_black)
 					switch(i) {
 						case 0:
 							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i])
@@ -79,6 +87,7 @@ var optionSelected = undefined
 							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i])
 						break;
 					}
+					draw_set_color(c_white)
 				}
 				//optionSelected
 			break;
@@ -122,6 +131,7 @@ var optionSelected = undefined
 					}
 				}
 				draw_set_alpha(1)
+				draw_set_color(c_black)
 				
 				for(var i = 0; i < array_length(question.options); i++) {
 					switch(i) {
@@ -141,6 +151,7 @@ var optionSelected = undefined
 						break;
 					}
 				}
+				draw_set_color(c_white)
 			break;
 			case 5:
 			case 6:
@@ -194,6 +205,7 @@ var optionSelected = undefined
 				draw_set_alpha(1)
 				
 				for(var i = 0; i < array_length(question.options); i++) {
+					draw_set_color(c_black)
 					switch(i) {
 						case 0:
 							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+5*threeOptionsY,question.options[i])
@@ -216,6 +228,7 @@ var optionSelected = undefined
 							}
 						break;
 					}
+					draw_set_color(c_white)
 				}
 			break;
 			case 7:
@@ -281,6 +294,7 @@ var optionSelected = undefined
 				draw_set_alpha(1)
 	
 				for(var i = 0; i < array_length(question.options); i++) {
+					draw_set_color(c_black)
 					switch(i) {
 						case 0:
 							draw_text(answerBoxLeft+fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
@@ -309,6 +323,7 @@ var optionSelected = undefined
 							}
 						break;
 					}
+					draw_set_color(c_white)
 				}
 			break;
 		}
