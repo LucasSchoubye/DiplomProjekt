@@ -5,7 +5,8 @@ function scr_UltManPassing(){
 			if (instance_exists(ballcarrier))
 			{
 				if (ballcarrier.id != controlledPlayer.id or 
-					collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true))
+					collision_line(controlledPlayer.x, controlledPlayer.y, targetX, targetY, obj_UltManOpponent, true, true) or
+					targetX > obj_UltManGameController.goals[1].x)
 					{
 						playAllowed = false
 						for (var i = 0; i < 10; ++i) {

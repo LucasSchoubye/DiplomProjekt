@@ -30,7 +30,7 @@ if (obj_UltManBall.owner = id)
 {
 	draw_set_alpha(0.5 + sin(current_time/80)*0.2)
 	if (playerTeam)
-		draw_triangle_color(x-20,y-290, x,y-250, x+20,y-290, c_lime, c_lime, c_lime, false)
+		draw_triangle_color(x-20,y-290, x,y-250, x+20,y-290, c_aqua, c_aqua, c_aqua, false)
 	else
 		draw_triangle_color(x-20,y-290, x,y-250, x+20,y-290, c_red, c_red, c_red, false)
 	draw_set_alpha(1)

@@ -115,11 +115,13 @@ function MoveToPos(X,Y)
 	}
 	
 	var nearestOpponent = instance_nearest(x,y,obj_UltManOpponent)
-	if (distance_to_object(nearestOpponent) < 20)
+	if (distance_to_object(nearestOpponent) < 20 && !playerTeam)
 	{
-		//targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
-		//targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetX += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
+		targetY += random_range(instance_nearest(x,y,obj_UltManOpponent).strength, instance_nearest(x,y,obj_UltManOpponent).strength*-1)
 	}
+	
+	image_angle += -15*facing
 	
 }
 

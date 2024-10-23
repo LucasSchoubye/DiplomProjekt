@@ -68,7 +68,16 @@ function scr_UltManActiontypes(){
 	{
 		// Draw frozen action
 		var drawLineObject = obj_UltManBall
-		draw_line(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
+		for (var i = 0; i < 10; ++i) {
+	    
+					var dist = point_distance(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
+					var dire = point_direction(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)	
+					var alphaDist = point_distance(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
+			
+					//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
+					draw_sprite_ext(spr_FtDParticleBasic, 0 , drawLineObject.x + lengthdir_x((dist/10)*(i+1), dire), drawLineObject.y + lengthdir_y((dist/10)*(i+1), dire), 1+i*0.3, 1+i*0.3, dire, c_white, 1-i*0.1)
+
+				}
 	}
 	
 	// Freeze Game

@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fn_textLato",
+  "%Name":"fn_textLatoSmall",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":11,
@@ -134,7 +134,7 @@
   "last":0,
   "lineHeight":15,
   "maintainGms1Font":false,
-  "name":"fn_textLato",
+  "name":"fn_textLatoSmall",
   "parent":{
     "name":"Fonts",
     "path":"folders/Assets/Shared Assets/Fonts.yy",
