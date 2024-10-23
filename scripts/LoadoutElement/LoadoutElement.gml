@@ -1,25 +1,27 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
-function InventoryElement() constructor {
+function LoadoutElement() constructor {
 	category = ""
 	itemName = ""
-	balance = ""
-	itemType = ""
 	itemID = ""
 	isEquipped = false
 	txtEquip = ""
-	itemWidth = room_width*0.15
-	itemHeight = room_height*0.3
+	itemWidth = room_width*0.075
+	itemHeight = room_height*0.15
 	itemCenterX = itemWidth/2
 	itemCenterY = itemHeight/2
-	itemTitleY = itemHeight-20
-	itemEquipY = itemHeight-40
+	itemEquipY = itemHeight-10
+	itemTitleY = itemHeight-22
 	itemImgStartY = itemCenterY-10
 	textHeight = 10
 	itemStartY = room_height*0.125
+	defaultFont = draw_get_font()
+	itemType = ""
+	
+	
 
-	function DrawItem(xValue,yValue) {
+	function DrawFtDItem(xValue,yValue) {
 
 			draw_set_font(fn_textLato)
 			draw_set_alpha(0.1)
@@ -30,14 +32,17 @@ function InventoryElement() constructor {
 			draw_roundrect(xValue,yValue,xValue+itemWidth,yValue+itemHeight,true)
 			draw_set_alpha(1)
 			draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
-
+			
 			if (isEquipped == true) {
 				txtEquip = "EQUIPPED"
 			} else {
 				txtEquip = ""
 			}
+			draw_set_font(fn_RobotoBlack8)
 			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
+			draw_set_font(defaultFont)
+			
 
 		
 		// Logic

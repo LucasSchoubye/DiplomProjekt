@@ -6,5 +6,7 @@ function scr_getCategoryEnumFromString(enumString){
 		return Categories.Clothes
 		case "typeracer":
 		return Categories.Typeracer
+		case "ftd":
+		return Categories.FightTheDungeon
 	}
 }

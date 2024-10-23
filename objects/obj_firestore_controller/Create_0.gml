@@ -92,6 +92,7 @@ function RespondCategories(categoryList) {
 	}
 }
 
+
 function RequestStoreItems(categoryString) {
 	FirebaseFirestore("/shop items/categories/"+categoryString).Read()
 }
@@ -139,13 +140,13 @@ function RespondStudentInventory(inventoryList) {
 	
 	for (var i = 0; i < array_length(idArray); i++) 
 	{
-		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(inventoryMap[? ID]);
 	
 		obj_inventoryController.GetInventoryData(value)
 	}	
 }
+
 
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
@@ -170,6 +171,7 @@ function UpdateInventory(itemStruct)
 
 	ds_map_destroy(itemMap)
 }
+
 
 function StartSession(game)
 {		

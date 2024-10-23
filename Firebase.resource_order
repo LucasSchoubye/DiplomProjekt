@@ -1,5 +1,7 @@
 {
   "FolderOrderSettings":[
+
+    {"name":"Loadout Menu","order":10,"path":"folders/Assets/Fight The Dungeon/Objects/Loadout Menu.yy",},
     {"name":"Hashing","order":10,"path":"folders/Assets/Shared Assets/Scripts/Hashing.yy",},
     {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
     {"name":"Tiles","order":22,"path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",},
@@ -34,6 +36,7 @@
     {"name":"fn_sideBarOptionsRoboto","order":2,"path":"fonts/fn_sideBarOptionsRoboto/fn_sideBarOptionsRoboto.yy",},
     {"name":"fn_textLatoSmall","order":22,"path":"fonts/fn_textLatoSmall/fn_textLatoSmall.yy",},
     {"name":"fn_titleLato","order":1,"path":"fonts/fn_titleLato/fn_titleLato.yy",},
+    {"name":"fn_TwCenMTCondensed","order":19,"path":"fonts/fn_TwCenMTCondensed/fn_TwCenMTCondensed.yy",},
     {"name":"obj_cam_controller","order":1,"path":"objects/obj_cam_controller/obj_cam_controller.yy",},
     {"name":"obj_characterController","order":8,"path":"objects/obj_characterController/obj_characterController.yy",},
     {"name":"obj_damageEnemy","order":1,"path":"objects/obj_damageEnemy/obj_damageEnemy.yy",},
@@ -75,6 +78,7 @@
     {"name":"obj_wallFront","order":1,"path":"objects/obj_wallFront/obj_wallFront.yy",},
     {"name":"obj_wallFrontDecor","order":8,"path":"objects/obj_wallFrontDecor/obj_wallFrontDecor.yy",},
     {"name":"obj_wallSide","order":2,"path":"objects/obj_wallSide/obj_wallSide.yy",},
+    {"name":"rm_FtDLoadoutMenu","order":1,"path":"rooms/rm_FtDLoadoutMenu/rm_FtDLoadoutMenu.yy",},
     {"name":"rm_inventory","order":5,"path":"rooms/rm_inventory/rm_inventory.yy",},
     {"name":"rm_login","order":3,"path":"rooms/rm_login/rm_login.yy",},
     {"name":"rm_loginWaiting","order":6,"path":"rooms/rm_loginWaiting/rm_loginWaiting.yy",},
@@ -113,6 +117,7 @@
     {"name":"scr_getCategoryEnumFromString","order":2,"path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},
     {"name":"scr_HUD","order":1,"path":"scripts/scr_HUD/scr_HUD.yy",},
     {"name":"scr_inventoryCategories","order":8,"path":"scripts/scr_inventoryCategories/scr_inventoryCategories.yy",},
+    {"name":"scr_loadoutInventory","order":6,"path":"scripts/scr_loadoutInventory/scr_loadoutInventory.yy",},
     {"name":"scr_pauseFunctions","order":5,"path":"scripts/scr_pauseFunctions/scr_pauseFunctions.yy",},
     {"name":"scr_reverseDsList","order":1,"path":"scripts/scr_reverseDsList/scr_reverseDsList.yy",},
     {"name":"scr_sort_struct_list","order":4,"path":"scripts/scr_sort_struct_list/scr_sort_struct_list.yy",},
