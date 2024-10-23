@@ -2,6 +2,8 @@
 // You can write your code in this editor
 
 draw_self()
+image_xscale = 0.05
+image_yscale = 0.05
 
 animTarget = targetStartPos + (pos/endPos)*(targetEndPos-targetStartPos)
 animPos -= (animPos - animTarget)/20

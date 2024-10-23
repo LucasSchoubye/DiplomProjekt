@@ -1,5 +1,7 @@
 /// @description Draw event
 
+image_speed = 1
+
 if (room = rm_login)
 {
 	// Variables
@@ -26,6 +28,7 @@ if (room = rm_login)
 	draw_set_alpha(0.8)
 	draw_text(roomQuarterWidth, room_height*0.9 + 25, "Information found here!")
 	draw_set_alpha(1)
+	draw_sprite_stretched(spr_newsGif,image_index,room_width*0.05,room_height*0.15,room_width*0.45-room_width*0.05,room_height*0.85-room_height*0.15)
 	draw_roundrect(room_width*0.05,room_height*0.15,room_width*0.45,room_height*0.85,true)
 	
 	draw_set_font(fn_textLato)

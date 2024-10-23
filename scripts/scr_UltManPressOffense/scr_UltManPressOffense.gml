@@ -61,5 +61,4 @@ function scr_UltManPressOffense(){
 			{
 				state = UltManNpcState.HoldPosition
 			}
-
 }

@@ -1,6 +1,9 @@
 
 state = UltManNpcState.HoldPosition
 
+// player struct
+playerStruct = undefined
+
 // animation
 animCycle = random_range(0,360)
 facing = 1
@@ -67,12 +70,19 @@ function MoveToPos(X,Y)
 				obj_UltManBall.owner.tackleCooldown = true
 				obj_UltManBall.owner.image_angle -= (strength/10)*obj_UltManBall.owner.facing
 				obj_UltManBall.owner = id
+				if(playerStruct != undefined){
+					playerStruct.tackles++
+				}
 				tackleCooldown = true
 			}
 		}
 		else
 		{
 			audio_play_sound(sou_UltManKickLight, 1, false)
+			if(playerStruct != undefined){
+				playerStruct.touches++
+			}
+			
 		}
 	}
 	else
@@ -91,7 +101,6 @@ function MoveToPos(X,Y)
 
 function ShootToPos(X,Y)
 {
-	
 	var ball = obj_UltManBall
 	
 	targetX = ball.x

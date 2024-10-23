@@ -6,12 +6,12 @@ difficulty = random_range(0.3,1.1)
 // Inherit the parent event
 event_inherited();
 
-image_blend = c_aqua
+image_blend = make_color_hsv(irandom(255),150,100+irandom(155))
 
 function win()
 {
-	show_message("YOU SUCK LOSER!!!")
-	room_goto(rm_menu)
+	//show_message("YOU SUCK LOSER!!!")
+	pos = 100
 }
 
 function AnsweredCorrect()

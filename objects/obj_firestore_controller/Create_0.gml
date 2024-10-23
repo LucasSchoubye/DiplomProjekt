@@ -228,8 +228,9 @@ function ValidateLogin(map)
 		// Check their username
 	    var ID = idArray[i];
 	    var value = json_decode(decodedMap[? ID]);
+		var passwordSalt = value[?"passwordSalt"];
 		
-		if (value[?"username"] = username && value[?"password"] = sha1_string_utf8(password))
+		if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
 		{
 			playerId = value[?"ref"]
 			

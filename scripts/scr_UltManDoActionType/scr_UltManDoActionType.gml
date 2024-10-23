@@ -12,10 +12,14 @@ function scr_UltManDoActionType(selectedAction, targetX, targetY, goalAttempt){
 				controlledPlayer.MoveToPos(targetX, targetY)
 			break;
 			case ActionType.Shoot:
-				if (goalAttempt = true)
+				if (goalAttempt = true){
+					controlledPlayer.playerStruct.attemptedShots++
 					controlledPlayer.ShootToPos(targetX, targetY)
-				else
+				}
+				else{
+					controlledPlayer.playerStruct.attemptedPasses++
 					controlledPlayer.ShootToPos(targetX, targetY)
+				}
 			break;
 		}
 		

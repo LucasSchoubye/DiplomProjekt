@@ -43,6 +43,13 @@ teamList = ds_list_create()
 playerClub = new UltManTeam()
 playerOpponentTeam = undefined
 
+teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
+["Win Percentage",spr_UltManPercentage, obj_UltManManagerController.playerClub.winPercentage],
+["Goals Scored", spr_UltManCheckmark, obj_UltManManagerController.playerClub.goalsScored],
+["Goals Conceded",spr_UltManCancel, obj_UltManManagerController.playerClub.goalsConceded],
+["Yellow Cards", spr_UltManWarning, obj_UltManManagerController.playerClub.yellowCards],
+["Red Cards",spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
+// 
 clubName = playerClub.clubName
 
 menuOptions = ds_list_create()
@@ -186,6 +193,7 @@ function SimulateLeague(playerGoals, opponentGoals)
 	obj_firestore_controller.UpdateBalance()
 	obj_UltManManagerController.playerClub.matchesPlayed++
 	playerOpponentTeam.matchesPlayed++
+	obj_UltManManagerController.playerClub.winPercentage = string(round((obj_UltManManagerController.playerClub.matchesWon / obj_UltManManagerController.playerClub.matchesPlayed)*100))+"%"
 	
 	// Update points
 	for (var i = 0; i < ds_list_size(teamList); ++i) {
