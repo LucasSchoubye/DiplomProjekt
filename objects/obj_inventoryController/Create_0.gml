@@ -39,7 +39,6 @@ function GetInventoryData(inventoryData) {
 			currentElement.isEquipped = isEquipped
 			ds_list_add(inventoryElements, currentElement)
 			ds_list_add(categoryViews[scr_getCategoryEnumFromString(currentElement.category)], currentElement)
-		
 		}
 	}
 }

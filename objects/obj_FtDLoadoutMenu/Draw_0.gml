@@ -19,7 +19,6 @@ var backButtonWidth = categoryWidth/3
 
 if(room == rm_FtDLoadoutMenu) {
 	
-
 scr_loadoutInventory()
 
 draw_set_color(#191115)

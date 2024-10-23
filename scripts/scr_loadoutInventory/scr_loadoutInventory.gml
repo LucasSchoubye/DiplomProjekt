@@ -10,11 +10,11 @@ var itemHeight = room_height*0.15
 var itemWidth = room_width*0.075
 var itemCounter = 0
 itemRow = 0
-var inventoryElements = obj_FtDLoadoutMenu.inventoryElements
-var currentList = inventoryElements
+var ftdInventoryElements = obj_FtDLoadoutMenu.ftdInventoryElements
+var currentList = ftdInventoryElements
 
 
-currentList = obj_FtDLoadoutMenu.inventoryElements
+currentList = obj_FtDLoadoutMenu.ftdInventoryElements
 
 
 for (var i = 0; i < ds_list_size(currentList); ++i) {

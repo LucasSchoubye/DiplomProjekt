@@ -147,23 +147,6 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-function RequestFtDInventory() {
-	FirebaseFirestore("/students/"+playerId+"/inventory/ftd/").Read()
-}
-
-function RespondFtDInventory(ftdInventoryList) {
-	var ftdInventoryMap = json_decode(ftdInventoryList)
-	var idArray = []
-	ds_map_keys_to_array(ftdInventoryMap, idArray)
-	
-	for (var i = 0; i < array_length(idArray); i++) 
-	{
-	    var ID = idArray[i];
-	    var value = json_decode(ftdInventoryMap[? ID]);
-	
-		obj_FtDLoadoutMenu.GetFtDInventoryData(value)
-	}	
-}
 
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
