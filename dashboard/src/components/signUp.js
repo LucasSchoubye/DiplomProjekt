@@ -25,8 +25,8 @@ const SignUp = ({ onSignUpSuccess, onGoBack }) => {
             setOpenSnackbar(true);
             return;
         }
-
-        const hashedPassword = sha512(password);
+        const salt = crypto.getRandomValues(new Uint8Array(16)).join('');
+        const hashedPassword = sha512(password + salt);
         try {
             const q = query(usersCollectionRef, where("username", "==", username));
             const querySnapshot = await getDocs(q);
@@ -40,7 +40,8 @@ const SignUp = ({ onSignUpSuccess, onGoBack }) => {
 
             await setDoc(doc(usersCollectionRef), {
                 username: username,
-                password: hashedPassword
+                password: hashedPassword,
+                passwordSalt: salt
             });
 
             setSnackbarMessage("User signed up successfully");

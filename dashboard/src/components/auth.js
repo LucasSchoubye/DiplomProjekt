@@ -21,45 +21,63 @@ export const Auth = ({ onLoginSuccess }) => {
     };
 
     const signIn = async () => {
-        const hashedPassword = sha512(password);
         try {
-            const q = query(
-                usersCollectionRef,
-                where("username", "==", username),
-                where("password", "==", hashedPassword)
-            );
+            // Query the user by username
+            const q = query(usersCollectionRef, where("username", "==", username));
             const querySnapshot = await getDocs(q);
-            console.log(querySnapshot);
 
             if (querySnapshot.empty) {
                 setSnackbarMessage("Username or password is incorrect");
                 setSnackbarSeverity("error");
                 setOpenSnackbar(true);
+                return;
+            }
+
+            // Retrieve the salt and hashed password from the user document
+            let userData = null;
+            querySnapshot.forEach((doc) => {
+                userData = doc.data();
+            });
+
+            if (!userData) {
+                setSnackbarMessage("Username or password is incorrect");
+                setSnackbarSeverity("error");
+                setOpenSnackbar(true);
+                return;
+            }
+
+            const { passwordSalt, password: storedHashedPassword } = userData;
+            const hashedPassword = sha512(password + passwordSalt);
+            console.log("stored password: " + storedHashedPassword);
+            console.log("hashed password: " + hashedPassword);
+            // Check if the hashed password matches the stored hashed password
+            if (hashedPassword !== storedHashedPassword) {
+                setSnackbarMessage("Username or password is incorrect");
+                setSnackbarSeverity("error");
+                setOpenSnackbar(true);
+                return;
+            }
+
+            // Check if the user is a teacher
+            let isTeacher = false;
+            let teacherData = null;
+
+            if (userData.ref && userData.ref.path.includes("teachers")) {
+                isTeacher = true;
+                teacherData = userData;
+            }
+
+            if (isTeacher) {
+                setSnackbarMessage("User signed in successfully");
+                setSnackbarSeverity("success");
+                setOpenSnackbar(true);
+                setTimeout(() => {
+                    onLoginSuccess(teacherData);
+                }, 1000);
             } else {
-                let isTeacher = false;
-                let teacherData = null;
-
-                querySnapshot.forEach((doc) => {
-                    const userData = doc.data();
-                    console.log(doc.id, " => ", userData);
-                    if (userData.ref && userData.ref.path.includes("teachers")) {
-                        isTeacher = true;
-                        teacherData = userData;
-                    }
-                });
-
-                if (isTeacher) {
-                    setSnackbarMessage("User signed in successfully");
-                    setSnackbarSeverity("success");
-                    setOpenSnackbar(true);
-                    setTimeout(() => {
-                        onLoginSuccess(teacherData);
-                    }, 1000);
-                } else {
-                    setSnackbarMessage("User is not a teacher");
-                    setSnackbarSeverity("error");
-                    setOpenSnackbar(true);
-                }
+                setSnackbarMessage("User is not a teacher");
+                setSnackbarSeverity("error");
+                setOpenSnackbar(true);
             }
         } catch (err) {
             setSnackbarMessage("Error during sign in: " + err.message);
