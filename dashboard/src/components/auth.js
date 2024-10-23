@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, TextField, Box, Snackbar, Alert, Typography, useTheme } from "@mui/material";
-import { sha1 } from 'js-sha1';
+import { sha512 } from 'js-sha512';
 import { collection, query, where, getDocs, setDoc, doc } from "firebase/firestore"; // Import Firestore functions
 import { db } from "../config/firebase"; // Import your Firestore database
 
@@ -18,7 +18,7 @@ export const Auth = ({ onLoginSuccess }) => {
     };
 
     const signIn = async () => {
-        const hashedPassword = sha1(password);
+        const hashedPassword = sha512(password);
         try {
             const q = query(
                 usersCollectionRef,
@@ -68,7 +68,7 @@ export const Auth = ({ onLoginSuccess }) => {
     };
 
     const signUp = async () => {
-        const hashedPassword = sha1(password);
+        const hashedPassword = sha512(password);
         try {
             await setDoc(doc(usersCollectionRef), {
                 username: username,
