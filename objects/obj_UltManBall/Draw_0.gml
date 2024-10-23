@@ -1,6 +1,11 @@
 /// Logic
 
 // animation
+draw_set_color(c_black)
+draw_set_alpha(0.4)
+draw_ellipse(x-25,y+10,x+25,y+30,false)
+draw_set_color(c_white)
+draw_set_alpha(1)
 draw_self()
 image_xscale = 0.5
 image_yscale = 0.5
