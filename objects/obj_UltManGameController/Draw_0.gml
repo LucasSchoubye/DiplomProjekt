@@ -4,18 +4,17 @@ if (keyboard_check(vk_tab))
 	timer = 91
 
 scr_UltManDrawLine()
-scr_UltManDrawField()
 
 // Player control
 controlledPlayer = scr_assignClosestControlledPlayer(obj_UltManBall.x, obj_UltManBall.y)
 ballcarrier = obj_UltManBall.owner
 
-len = controlledPlayer.targetSpd
 dir = point_direction(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)
+len = controlledPlayer.targetSpd + lengthdir_x(controlledPlayer.accX, dir) + lengthdir_y(controlledPlayer.accY, dir)
 lenX = lengthdir_x(len, dir)
 lenY = lengthdir_y(len, dir)
-targetX = controlledPlayer.x+lenX
-targetY = controlledPlayer.y+lenY
+targetX = controlledPlayer.x+lenX//+controlledPlayer.accX
+targetY = controlledPlayer.y+lenY//+controlledPlayer.accY
 playAllowed = true
 	
 // Action type selected
@@ -33,7 +32,11 @@ else
 var commandClickedPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, true, true)
 if (mouse_check_button_pressed(mb_right))
 {
-	commandedPlayer = commandClickedPlayer
+	if (instance_exists(commandClickedPlayer))
+	{
+		if (commandClickedPlayer.playerTeam = true)
+		commandedPlayer = commandClickedPlayer
+	}
 }
 if (instance_exists(commandedPlayer) && mouse_check_button(mb_right))
 {

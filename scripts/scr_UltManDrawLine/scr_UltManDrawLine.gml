@@ -14,10 +14,14 @@ if (instance_exists(ballcarrier))
 // Draw commanded player
 if (instance_exists(commandedPlayer) and commandTargetX != undefined and commandTargetY != undefined)
 {
-	draw_set_color(c_lime)
-	draw_ellipse(commandedPlayer.x - ellipseWidth, commandedPlayer.y - ellipseHeight, commandedPlayer.x + ellipseWidth, commandedPlayer.y + ellipseHeight, false)
-	draw_line(commandedPlayer.x, commandedPlayer.y, commandTargetX, commandTargetY)
-	draw_set_color(c_white)
+	for (var i = 0; i < 4; ++i) {
+	    
+		var dist = point_distance(commandedPlayer.x, commandedPlayer.y, commandTargetX, commandTargetY)
+		var dir = point_direction(commandedPlayer.x, commandedPlayer.y, commandTargetX, commandTargetY)	
+		var alphaDist = point_distance(commandedPlayer.x, commandedPlayer.y, commandTargetX, commandTargetY)
+			
+		draw_sprite_ext(spr_FtDParticleBasic, 0 , commandedPlayer.x + lengthdir_x((dist/4)*(i+1), dir), commandedPlayer.y + lengthdir_y((dist/4)*(i+1), dir), 1+i*0.5, 1+i*0.5, dir, c_lime, 1-i*0.2)
+	}
 }
 
 }

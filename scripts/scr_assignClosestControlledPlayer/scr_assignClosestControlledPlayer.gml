@@ -5,6 +5,12 @@ function scr_assignClosestControlledPlayer(X, Y){
 var closestPlayer = noone; // Variable to store the closest valid player
 var closestDist = -1;      // Variable to store the distance of the closest valid player
 
+if (instance_exists(obj_UltManBall.owner))
+{
+	if (obj_UltManBall.owner.playerTeam = true)
+		return obj_UltManBall.owner
+}
+
 // Loop through all instances of obj_UltManPlayer
 with (obj_UltManPlayer) {
     // Check if the player is on the player's team

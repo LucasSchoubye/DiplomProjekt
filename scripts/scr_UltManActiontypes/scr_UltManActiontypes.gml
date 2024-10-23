@@ -22,12 +22,30 @@ function scr_UltManActiontypes(){
 						if (point_distance(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y) < controlledPlayer.topShootSpd)
 						{
 							// Shoot on target
-							draw_line(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y)
+							for (var i = 0; i < 20; ++i) {
+	    
+								var dist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
+								var dire = point_direction(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)	
+								var alphaDist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
+			
+								//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
+								draw_sprite_ext(spr_FtDParticleBasic, 0 , obj_UltManBall.x + lengthdir_x((dist/20)*(i+1), dire), obj_UltManBall.y + lengthdir_y((dist/20)*(i+1), dire), 1+i*0.15, 1+i*0.15, dire, c_white, 1-i*0.05 + sin(current_time/50)*0.1)
+
+							}
 						}
 						else
 						{
 							playAllowed = false
-							draw_line_color(obj_UltManBall.x, obj_UltManBall.y, mouse_x, mouse_y, c_maroon, c_maroon)
+							for (var i = 0; i < 20; ++i) {
+	    
+								var dist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
+								var dire = point_direction(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)	
+								var alphaDist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
+			
+								//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
+								draw_sprite_ext(spr_FtDParticleBasic, 0 , obj_UltManBall.x + lengthdir_x((dist/20)*(i+1), dire), obj_UltManBall.y + lengthdir_y((dist/20)*(i+1), dire), 1+i*0.15, 1+i*0.15, dire, c_red, 1-i*0.05 + sin(current_time/50)*0.1)
+
+							}
 						}
 						goalAttempt = true
 					}

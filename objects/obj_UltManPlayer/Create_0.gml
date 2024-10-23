@@ -1,6 +1,29 @@
 
 state = UltManNpcState.HoldPosition
 
+switch(irandom(4))
+{
+	case 0:
+		sprite_index = spr_UltManPlayer
+	break;
+	
+	case 1:
+		sprite_index = spr_UltManPlayer2
+	break;
+	
+	case 2:
+		sprite_index = spr_UltManPlayer3
+	break;
+	
+	case 3:
+		sprite_index = spr_UltManPlayer4
+	break;
+	
+	case 4:
+		sprite_index = spr_UltManPlayer5
+	break;
+}
+
 // player struct
 playerStruct = undefined
 
@@ -52,8 +75,8 @@ function MoveToPos(X,Y)
 	lastMoveLen = point_distance(x, y, X, Y)
 	
 	// Set new target dist
-	targetX = X + accX
-	targetY = Y + accY
+	targetX = X 
+	targetY = Y
 	
 	// Tackle
 	if (instance_exists(obj_UltManBall.owner) && tackleCooldown = false)
@@ -74,6 +97,7 @@ function MoveToPos(X,Y)
 					playerStruct.tackles++
 				}
 				tackleCooldown = true
+				audio_play_sound(sou_UltManKickLight, 1, false, 1, 0, 0.7)
 			}
 		}
 		else

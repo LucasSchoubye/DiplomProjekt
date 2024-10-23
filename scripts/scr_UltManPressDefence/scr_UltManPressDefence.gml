@@ -24,12 +24,10 @@ function scr_UltManPressDefence(){
 			if (kickoffPos[1] > room_height/2)
 			{
 				shotDir = point_direction(moveX, moveY, goal.x, goal.y + goal.goalHeight/3)
-				draw_line(moveX, moveY, goal.x, goal.y + goal.goalHeight/3)
 			}
 			else
 			{
 				shotDir = point_direction(moveX, moveY, goal.x, goal.y - goal.goalHeight/3)
-				draw_line(moveX, moveY, goal.x, goal.y - goal.goalHeight/3)
 			}
 	
 			var shotStoppingPosX = 0

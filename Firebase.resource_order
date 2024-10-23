@@ -1,6 +1,8 @@
 {
   "FolderOrderSettings":[
     {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
+    {"name":"Tiles","order":22,"path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",},
+    {"name":"Player Sprites","order":21,"path":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
@@ -148,6 +150,7 @@
     {"name":"sou_FtDSmallDamage","order":1,"path":"sounds/sou_FtDSmallDamage/sou_FtDSmallDamage.yy",},
     {"name":"sou_FtDWin","order":6,"path":"sounds/sou_FtDWin/sou_FtDWin.yy",},
     {"name":"sou_UltManCheer","order":1,"path":"sounds/sou_UltManCheer/sou_UltManCheer.yy",},
+    {"name":"sou_UltManTackle","order":2,"path":"sounds/sou_UltManTackle/sou_UltManTackle.yy",},
     {"name":"spr_basicParticle","order":1,"path":"sprites/spr_basicParticle/spr_basicParticle.yy",},
     {"name":"spr_cat","order":3,"path":"sprites/spr_cat/spr_cat.yy",},
     {"name":"spr_enemyHealth_1","order":6,"path":"sprites/spr_enemyHealth_1/spr_enemyHealth_1.yy",},
@@ -206,10 +209,14 @@
     {"name":"spr_UltManCone","order":2,"path":"sprites/spr_UltManCone/spr_UltManCone.yy",},
     {"name":"spr_UltManFootball","order":7,"path":"sprites/spr_UltManFootball/spr_UltManFootball.yy",},
     {"name":"spr_UltManGoalscorer","order":20,"path":"sprites/spr_UltManGoalscorer/spr_UltManGoalscorer.yy",},
-    {"name":"spr_UltManOpponent","order":4,"path":"sprites/spr_UltManOpponent/spr_UltManOpponent.yy",},
     {"name":"spr_UltManPasses","order":13,"path":"sprites/spr_UltManPasses/spr_UltManPasses.yy",},
     {"name":"spr_UltManPercentage","order":14,"path":"sprites/spr_UltManPercentage/spr_UltManPercentage.yy",},
     {"name":"spr_UltManPerson","order":1,"path":"sprites/spr_UltManPerson/spr_UltManPerson.yy",},
+    {"name":"spr_UltManPlayer","order":1,"path":"sprites/spr_UltManPlayer/spr_UltManPlayer.yy",},
+    {"name":"spr_UltManPlayer2","order":2,"path":"sprites/spr_UltManPlayer2/spr_UltManPlayer2.yy",},
+    {"name":"spr_UltManPlayer3","order":3,"path":"sprites/spr_UltManPlayer3/spr_UltManPlayer3.yy",},
+    {"name":"spr_UltManPlayer4","order":4,"path":"sprites/spr_UltManPlayer4/spr_UltManPlayer4.yy",},
+    {"name":"spr_UltManPlayer5","order":5,"path":"sprites/spr_UltManPlayer5/spr_UltManPlayer5.yy",},
     {"name":"spr_UltManRain","order":5,"path":"sprites/spr_UltManRain/spr_UltManRain.yy",},
     {"name":"spr_UltManRedCard","order":16,"path":"sprites/spr_UltManRedCard/spr_UltManRedCard.yy",},
     {"name":"spr_UltManShield","order":12,"path":"sprites/spr_UltManShield/spr_UltManShield.yy",},
