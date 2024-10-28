@@ -20,7 +20,7 @@ var weaponCounter = 0
 weaponRow = 0
 var ftdInventoryWeapons = obj_FtDLoadoutMenu.ftdInventoryWeapons
 var currentWeaponList = ftdInventoryWeapons
-currenWeapontList = obj_FtDLoadoutMenu.ftdInventoryWeapons
+
 
 
 //draw weapon collection rectancle and title
@@ -78,7 +78,6 @@ var armorCounter = 0
 armorRow = 0
 var ftdInventoryArmor = obj_FtDLoadoutMenu.ftdInventoryArmor
 var currentArmorList = ftdInventoryArmor
-currentArmorList = obj_FtDLoadoutMenu.ftdInventoryArmor
 
 
 //draw armor collection rectancle and title
