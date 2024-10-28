@@ -1,11 +1,10 @@
 {
   "FolderOrderSettings":[
-
     {"name":"Loadout Menu","order":10,"path":"folders/Assets/Fight The Dungeon/Objects/Loadout Menu.yy",},
     {"name":"Hashing","order":10,"path":"folders/Assets/Shared Assets/Scripts/Hashing.yy",},
     {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
-    {"name":"Tiles","order":22,"path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",},
     {"name":"Player Sprites","order":21,"path":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy",},
+    {"name":"Tiles","order":22,"path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},

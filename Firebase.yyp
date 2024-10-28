@@ -97,10 +97,10 @@
     {"$GMFolder":"","%Name":"Visuals","folderPath":"folders/Assets/Ultimate Manager/Scripts/Manager/Visuals.yy","name":"Visuals","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sounds","folderPath":"folders/Assets/Ultimate Manager/Sounds.yy","name":"Sounds","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Assets/Ultimate Manager/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Tiles","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy","name":"Tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Player Sprites","folderPath":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy","name":"Player Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tactics Menu","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tactics Menu.yy","name":"Tactics Menu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"teamLogos","folderPath":"folders/Assets/Ultimate Manager/Sprites/teamLogos.yy","name":"teamLogos","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Tiles","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy","name":"Tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Structs","folderPath":"folders/Assets/Ultimate Manager/Structs.yy","name":"Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Integration","folderPath":"folders/Firebase Integration.yy","name":"Firebase Integration","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Firestore","folderPath":"folders/Firebase Integration/Firebase Firestore.yy","name":"Firebase Firestore","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -538,7 +538,6 @@
     {"roomId":{"name":"rm_tutorial","path":"rooms/rm_tutorial/rm_tutorial.yy",},},
     {"roomId":{"name":"rm_FtDLoadoutMenu","path":"rooms/rm_FtDLoadoutMenu/rm_FtDLoadoutMenu.yy",},},
     {"roomId":{"name":"rm_typeracerWin","path":"rooms/rm_typeracerWin/rm_typeracerWin.yy",},},
-
   ],
   "templateType":null,
   "TextureGroups":[
