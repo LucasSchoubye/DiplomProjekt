@@ -12,7 +12,6 @@ if (async_load[? "status"] == 200)
 			{
 				RepondStudent(async_load[? "value"])
 			}
-			
 			else if (string_pos("bank",async_load[? "path"]) > 0)
 			{
 				RespondBalance(async_load[? "value"])	
@@ -27,7 +26,6 @@ if (async_load[? "status"] == 200)
 				show_message(async_load[? "value"])
 			}
 		break;
-		
 		case "FirebaseFirestore_Collection_Read":
 			if (async_load[? "path"] == "/users/")
 			{
