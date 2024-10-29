@@ -5,8 +5,11 @@ function scr_UltManCelebrate(){
 	var player = global.celebratingPlayer
 	
 	// If the player has scored a goal
-	if (instance_exists(player) and player.playerTeam)
+	if (global.leftScored = false)
 	{
+		if (!instance_exists(player))
+			player = scr_assignClosestControlledPlayer(obj_UltManBall.x, obj_UltManBall.y)
+
 		if (sin(current_time/5) > 0)
 		{
 			var afterImage = instance_create_depth(player.x, player.y, -y, obj_FtDParticleDust)
@@ -20,18 +23,21 @@ function scr_UltManCelebrate(){
 		player.targetX += lengthdir_x(28, point_direction(player.x,player.y,mouse_x,mouse_y))
 		player.targetY += lengthdir_y(28, point_direction(player.x,player.y,mouse_x,mouse_y))
 		
-		
 		if (mouse_x > player.x)
 			player.facing = 1
 		else
 			player.facing = -1
 			
-		draw_set_alpha(sin(current_time/50)*0.25 + 0.8)
-		draw_text_ext_transformed(
-		camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.5 + sin(current_time/200)*60,
-		camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.18 + sin(current_time/100)*50,
-		player.playerStruct.name[0] + " " + player.playerStruct.name[1] ,0,1000,1,1,sin(current_time/150)*10)
-		draw_set_alpha(1)
+		try
+		{
+			draw_set_alpha(sin(current_time/50)*0.25 + 0.8)
+			draw_text_ext_transformed(
+			camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.5 + sin(current_time/200)*60,
+			camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.18 + sin(current_time/100)*50,
+			player.playerStruct.name[0] + " " + player.playerStruct.name[1] ,0,1000,1,1,sin(current_time/150)*10)
+			draw_set_alpha(1)
+		}
+		catch(errorMessage){}
 	
 		repeat(3)
 		{
