@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { Button, TextField, Box, Snackbar, Alert, Typography, useTheme, IconButton } from "@mui/material";
-import { sha512 } from 'js-sha512';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 import SignUp from "./signUp";
 import { ArrowBack } from "@mui/icons-material";
 
 export const Auth = ({ onLoginSuccess }) => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [snackbarSeverity, setSnackbarSeverity] = useState("success");
     const [isSignUp, setIsSignUp] = useState(false);
-    const usersCollectionRef = collection(db, "users");
     const theme = useTheme();
 
     const handleCloseSnackbar = () => {
@@ -22,65 +21,32 @@ export const Auth = ({ onLoginSuccess }) => {
 
     const signIn = async () => {
         try {
-            // Query the user by username
-            const q = query(usersCollectionRef, where("username", "==", username));
-            const querySnapshot = await getDocs(q);
+            // Firebase Authentication sign-in with email and password
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-            if (querySnapshot.empty) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
+            if (user) {
+                // Query Firestore for the user document based on the authenticated user's UID
+                const usersCollectionRef = collection(db, "users");
+                const q = query(usersCollectionRef, where("userID", "==", user.uid));
+                const querySnapshot = await getDocs(q);
 
-            // Retrieve the salt and hashed password from the user document
-            let userData = null;
-            querySnapshot.forEach((doc) => {
-                userData = doc.data();
-            });
-
-            if (!userData) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
-
-            const { passwordSalt, password: storedHashedPassword } = userData;
-            const hashedPassword = sha512(password + passwordSalt);
-            console.log("stored password: " + storedHashedPassword);
-            console.log("hashed password: " + hashedPassword);
-            // Check if the hashed password matches the stored hashed password
-            if (hashedPassword !== storedHashedPassword) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
-
-            // Check if the user is a teacher
-            let isTeacher = false;
-            let teacherData = null;
-
-            if (userData.ref && userData.ref.path.includes("teachers")) {
-                isTeacher = true;
-                teacherData = userData;
-            }
-
-            if (isTeacher) {
-                setSnackbarMessage("User signed in successfully");
-                setSnackbarSeverity("success");
-                setOpenSnackbar(true);
-                setTimeout(() => {
-                    onLoginSuccess(teacherData);
-                }, 1000);
-            } else {
-                setSnackbarMessage("User is not a teacher");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
+                if (!querySnapshot.empty) {
+                    const userData = querySnapshot.docs[0].data();
+                    setSnackbarMessage("User signed in successfully");
+                    setSnackbarSeverity("success");
+                    setOpenSnackbar(true);
+                    setTimeout(() => {
+                        onLoginSuccess(userData);
+                    }, 1000);
+                } else {
+                    setSnackbarMessage("Email or password is incorrect");
+                    setSnackbarSeverity("error");
+                    setOpenSnackbar(true);
+                }
             }
         } catch (err) {
-            setSnackbarMessage("Error during sign in: " + err.message);
+            setSnackbarMessage("Email or password is incorrect");
             setSnackbarSeverity("error");
             setOpenSnackbar(true);
         }
@@ -127,11 +93,11 @@ export const Auth = ({ onLoginSuccess }) => {
                     }}
                 >
                     <TextField
-                        label="Username"
+                        label="Email"
                         variant="outlined"
-                        placeholder="Username..."
+                        placeholder="Email..."
                         fullWidth
-                        onChange={(inputEvent) => setUsername(inputEvent.target.value)}
+                        onChange={(inputEvent) => setEmail(inputEvent.target.value)}
                     />
                     <TextField
                         label="Password"
