@@ -211,59 +211,65 @@ function RequestLogin(loginUsername, loginPassword)
 	username = loginUsername
 	password = loginPassword
 	
-	FirebaseFirestore("/users/").Read()
+	FirebaseAuthentication_SignIn_Email(username, password);
+	//FirebaseFirestore("/users/").Read()
 }
 
 function ValidateLogin(map)
 {
-	try
-	{
-	decodedMap = json_decode(map)
-	idArray = []
-	ds_map_keys_to_array(decodedMap, idArray)
-	
-	// for each user
-	for (var i = 0; i < array_length(idArray); i++) 
-	{
-		// Check their username
-	    var ID = idArray[i];
-	    var value = json_decode(decodedMap[? ID]);
-		var passwordSalt = value[?"passwordSalt"];
-		
-		if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
-		{
-			playerId = value[?"ref"]
-			
-			// Find the position of the last dash ("/")
-		    var last_dash_pos = string_last_pos("/", playerId);
-    
-		    // Check if there is a dash in the string
-		    if (last_dash_pos != -1) {
-		        // Extract the substring after the last dash
-		        playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
-		    }
-			
-			username = value[?"username"]
-			room_goto(rm_menu)
-			
-			RequestStudent()
-		}
-		else
-			show_debug_message("No Match found")
-	}
-	
-		if (playerId = undefined)
-		{
-			//show_message("Wrong password or username")
-			room_goto(rm_login)
-			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
-			part.text = "Wrong password or username"
-		}
-	}
-	catch(error)
-	{
-		room_goto(rm_login)
-	}
+    try
+    {
+        // Decode the JSON map
+        var decodedMap = json_parse(map);
+        var usersArray = decodedMap.users; // Get the array of users directly
+
+        // for each user in usersArray
+        for (var i = 0; i < array_length(usersArray); i++) 
+        {
+            var user = usersArray[i]; // Access individual user data
+            show_debug_message(user);
+            
+            // Accessing the email, localId, and passwordHash correctly
+            var usernameValue = user.email; // Direct access to email
+            var passwordHash = user.passwordHash; // Direct access to passwordHash
+            var playerId = user.localId; // Direct access to localId
+            show_message("user: " + playerId + ": id");
+
+            // Validate username and password
+            if (usernameValue == username && passwordHash == scr_stringSha512(password + passwordSalt))
+            {
+                // Find the position of the last dash ("/")
+                var last_dash_pos = string_last_pos("/", playerId);
+                
+                // Check if there is a dash in the string
+                if (last_dash_pos != -1) {
+                    // Extract the substring after the last dash
+                    playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
+                }
+
+                // Successfully authenticated
+                room_goto(rm_menu);
+                RequestStudent();
+                break; // Exit loop once a match is found
+            }
+            else
+            {
+                show_debug_message("No match found for this user");
+            }
+        }
+
+        // If no match was found after loop, handle failed login
+        if (playerId == undefined)
+        {
+            room_goto(rm_login);
+            var part = instance_create_depth(room_width / 2, 200, -1, obj_par_text);
+            part.text = "Wrong password or username";
+        }
+    }
+    catch(error)
+    {
+        room_goto(rm_login);
+    }
 }
 
 function RequestStudent()
