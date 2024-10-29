@@ -32,14 +32,7 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 	else
 	{
 		celebrationActive = true
-		if (leftScored)
-		{
-			alarm[1] = 60*4
-		}
-		else
-		{
-			alarm[1] = 60*4
-		}
+		alarm[1] = 60*4
 		obj_UltManBall.x = room_width/2
 		obj_UltManBall.y = room_height/2
 		obj_UltManBall.targetX = room_width/2
