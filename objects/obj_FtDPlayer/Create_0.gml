@@ -3,6 +3,7 @@
 getDamagedCreate(5,true)
 
 global.player_state = PLAYER_STATE.MOVING
+stamina = 100
 windupTimer = 60
 shootTimer = 0
 bulletInst = noone
