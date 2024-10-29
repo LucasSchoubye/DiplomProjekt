@@ -25,13 +25,22 @@ function scr_playerMovement(){
 		vSpeed *= diagonalSpeed; 
 	}
 	
-	if (keyboard_check(vk_shift)) 
-	{ 
-		hSpeed *= runSpeed; 
-		vSpeed *= runSpeed; 
-		smokeTimer -= 0.5;
+	if (stamZeroHit == false) {
+		if (stamina <= 0) {
+			stamZeroHit = true
+		}
+		else if (keyboard_check(vk_shift) && stamina > 0) 
+		{ 
+			stamina -= 1
+			hSpeed *= runSpeed; 
+			vSpeed *= runSpeed; 
+			smokeTimer -= 0.5;
+		} else if (stamina <= stamina_max) {
+			stamina += 0.5
+		}
+	} else {
+		stamina += 0.5
 	}
-
 
 	
 	 // Horizontal movement with collision check

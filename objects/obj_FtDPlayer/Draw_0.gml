@@ -25,7 +25,7 @@ if (smokeTimer < 0)
 	// Play sound
 	audio_play_sound(sou_FtDFootstep,1,false,0.2,0,random_range(0.9,1.1))
 	
-	if (keyboard_check(vk_shift))
+	if (keyboard_check(vk_shift) && stamCD == 0)
 	{
 		var afterImage = instance_create_depth(animX,animY,depth + 10,obj_FtDParticleDust)
 		afterImage.sprite_index = sprite_index
