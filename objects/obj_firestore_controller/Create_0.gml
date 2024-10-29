@@ -222,7 +222,7 @@ function ValidateLogin(map)
 		idArray = []
 		ds_map_keys_to_array(decodedMap, idArray)
 	
-		if (array_length(idArray) > 0)
+		if (array_length(idArray) > 1)
 		{
 			return undefined;
 			show_debug_message("More than one user in the query!")
