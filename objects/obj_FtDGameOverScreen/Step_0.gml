@@ -14,4 +14,5 @@ if (restartKey && alpha >= 1) {
 if (quitKey && alpha >= 1) {
 	room_goto(rm_minigameMenu)
 	audio_stop_sound(sou_FtDFightMusicLoop);
+	audio_stop_sound(sou_FtDGameOver);
 }

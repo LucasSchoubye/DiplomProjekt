@@ -62,6 +62,13 @@ if (async_load[? "status"] == 200)
 		break;
 		case "FirebaseAuthentication_SignIn_Email":	
 			RequestLogin(async_load[? "value"])
+    break;
+		case "FirebaseFirestore_Collection_Query":
+			if (async_load[? "path"] == "/users/")
+			{
+				show_debug_message("ValidateLogin()")
+				ValidateLogin(async_load[? "value"])
+			}
 		break;
 	
 		default:

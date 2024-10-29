@@ -42,6 +42,13 @@ function scr_UltManPressOffense(){
 				obj_UltManBall.readyForPickup = false
 				obj_UltManBall.alarm[0] = 30
 				tackleCooldown = true
+				
+				repeat(5)
+				{
+					var part = instance_create_depth(obj_UltManBall.x,obj_UltManBall.y,-100, obj_FtDParticleDust2)
+					part.speed = random_range(10,20)
+					part.direction = random(360)
+				}
 			}
 			
 			MoveToPos(PosX,PosY)

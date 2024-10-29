@@ -38,5 +38,16 @@ if(instance_exists(owner)){
 	if(owner.playerStruct != obj_UltManGameController.playerControllerHistory[0] && owner.playerTeam){
 		obj_UltManGameController.playerControllerHistory[1] = obj_UltManGameController.playerControllerHistory[0]
 		obj_UltManGameController.playerControllerHistory[0] = owner.playerStruct
+		global.celebratingPlayer = owner
 	}
+	else if (owner.playerTeam = false)
+	{
+		global.celebratingPlayer = owner
+	}
+}
+
+// Particles
+if (point_distance(x,y,targetX,targetY) > 400)
+{
+	var part = instance_create_depth(x,y,-100, obj_FtDParticleDust2)
 }

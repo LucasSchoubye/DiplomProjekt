@@ -59,4 +59,14 @@ function LoadoutElement() constructor {
 			}
 		}
 	}
+	
+	function DrawFtDEquipped(xValue, yValue) {
+		draw_sprite_ext(itemNameToSprite(itemName),0,xValue+itemCenterX,yValue+itemImgStartY,(itemWidth*0.8)/sprite_get_width(itemNameToSprite(itemName)), (itemHeight*0.6)/sprite_get_height(itemNameToSprite(itemName)),0,c_white,1)
+		
+		draw_set_font(fn_RobotoBlack8)
+		draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
+		draw_set_font(defaultFont)
+		
+	}
+	
 }
