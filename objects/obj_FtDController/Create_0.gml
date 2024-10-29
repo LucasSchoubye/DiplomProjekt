@@ -3,6 +3,7 @@
 questionTimer = 10
 showTime = questionTimer
 animTargetHp = 0
+animTargetStamina = 0
 
 alarm[0] = 60
 
