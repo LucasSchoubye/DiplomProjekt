@@ -97,10 +97,10 @@
     {"$GMFolder":"","%Name":"Visuals","folderPath":"folders/Assets/Ultimate Manager/Scripts/Manager/Visuals.yy","name":"Visuals","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sounds","folderPath":"folders/Assets/Ultimate Manager/Sounds.yy","name":"Sounds","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Assets/Ultimate Manager/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Tiles","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy","name":"Tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Player Sprites","folderPath":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy","name":"Player Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tactics Menu","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tactics Menu.yy","name":"Tactics Menu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"teamLogos","folderPath":"folders/Assets/Ultimate Manager/Sprites/teamLogos.yy","name":"teamLogos","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Tiles","folderPath":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy","name":"Tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Structs","folderPath":"folders/Assets/Ultimate Manager/Structs.yy","name":"Structs","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Integration","folderPath":"folders/Firebase Integration.yy","name":"Firebase Integration","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Firebase Firestore","folderPath":"folders/Firebase Integration/Firebase Firestore.yy","name":"Firebase Firestore","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -131,7 +131,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.8.0.169",
     "PackageType":"Asset",
     "PackageName":"Firebase Firestore Ext",
     "PackageID":"com.yoyogames.firebasefirestoreext",
@@ -142,6 +142,7 @@
   "resources":[
     {"id":{"name":"FirebaseSetup","path":"extensions/FirebaseSetup/FirebaseSetup.yy",},},
     {"id":{"name":"YYFirebaseFirestore","path":"extensions/YYFirebaseFirestore/YYFirebaseFirestore.yy",},},
+    {"id":{"name":"fn_ArialBlack160","path":"fonts/fn_ArialBlack160/fn_ArialBlack160.yy",},},
     {"id":{"name":"fn_ArialBlack48","path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},},
     {"id":{"name":"fn_buttonOpenSans","path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},},
     {"id":{"name":"fn_konk12","path":"fonts/fn_konk12/fn_konk12.yy",},},
@@ -233,6 +234,7 @@
     {"id":{"name":"obj_mainMenuController","path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},},
     {"id":{"name":"obj_menuGridController","path":"objects/obj_menuGridController/obj_menuGridController.yy",},},
     {"id":{"name":"obj_par_mainMenuLine","path":"objects/obj_par_mainMenuLine/obj_par_mainMenuLine.yy",},},
+    {"id":{"name":"obj_par_screenfade","path":"objects/obj_par_screenfade/obj_par_screenfade.yy",},},
     {"id":{"name":"obj_par_text","path":"objects/obj_par_text/obj_par_text.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_playerAttack","path":"objects/obj_playerAttack/obj_playerAttack.yy",},},
@@ -357,6 +359,7 @@
     {"id":{"name":"scr_stringSha512","path":"scripts/scr_stringSha512/scr_stringSha512.yy",},},
     {"id":{"name":"scr_UltManActiontypes","path":"scripts/scr_UltManActiontypes/scr_UltManActiontypes.yy",},},
     {"id":{"name":"scr_UltManBronzePack","path":"scripts/scr_UltManBronzePack/scr_UltManBronzePack.yy",},},
+    {"id":{"name":"scr_UltManCelebrate","path":"scripts/scr_UltManCelebrate/scr_UltManCelebrate.yy",},},
     {"id":{"name":"scr_UltManCreateEnemyTeam","path":"scripts/scr_UltManCreateEnemyTeam/scr_UltManCreateEnemyTeam.yy",},},
     {"id":{"name":"scr_UltManCreateManagerTeam","path":"scripts/scr_UltManCreateManagerTeam/scr_UltManCreateManagerTeam.yy",},},
     {"id":{"name":"scr_UltManCreateTeam","path":"scripts/scr_UltManCreateTeam/scr_UltManCreateTeam.yy",},},
@@ -538,7 +541,6 @@
     {"roomId":{"name":"rm_tutorial","path":"rooms/rm_tutorial/rm_tutorial.yy",},},
     {"roomId":{"name":"rm_FtDLoadoutMenu","path":"rooms/rm_FtDLoadoutMenu/rm_FtDLoadoutMenu.yy",},},
     {"roomId":{"name":"rm_typeracerWin","path":"rooms/rm_typeracerWin/rm_typeracerWin.yy",},},
-
   ],
   "templateType":null,
   "TextureGroups":[
