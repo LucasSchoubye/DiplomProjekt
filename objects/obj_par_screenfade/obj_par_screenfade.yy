@@ -1,19 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_UltManGameController",
+  "%Name":"obj_par_screenfade",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":1,"eventType":2,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_UltManGameController",
+  "name":"obj_par_screenfade",
   "overriddenProperties":[],
   "parent":{
-    "name":"Controllers",
-    "path":"folders/Assets/Ultimate Manager/Objects/Controllers.yy",
+    "name":"Particles",
+    "path":"folders/Assets/Shared Assets/Objects/Particles.yy",
   },
   "parentObjectId":null,
   "persistent":false,
