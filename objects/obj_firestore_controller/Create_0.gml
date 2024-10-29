@@ -218,19 +218,15 @@ function ValidateLogin(map)
 {
 	try
 	{
-		show_message(map)
-		
-		
 		decodedMap = json_decode(map)
 		idArray = []
 		ds_map_keys_to_array(decodedMap, idArray)
-		
-		show_message("ID: "+idArray[0])
-		
-		keyArray = []
-		ds_map_keys_to_array(decodedMap[? idArray[0]], keyArray)
-		show_message("Keys are: "+string(keyArray))
-		show_message("Username: "+string(decodedMap[? idArray[0]][?"username"]))
+	
+		if (array_length(idArray) > 0)
+		{
+			return undefined;
+			show_debug_message("More than one user in the query!")
+		}
 	
 		// for each user
 		for (var i = 0; i < array_length(idArray); i++) 
@@ -258,8 +254,8 @@ function ValidateLogin(map)
 			
 				RequestStudent()
 			}
-			else
-				show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
+			//else
+				//show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
 		}
 	
 		if (playerId = undefined)
