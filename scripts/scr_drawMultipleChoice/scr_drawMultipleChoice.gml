@@ -329,10 +329,13 @@ var optionSelected = undefined
 		}
 	}
 
+	// Increment the answer timer if the mouse button is not currently pressed
+	if (!mouse_check_button(mb_left)) {
+	    obj_firestore_controller.answerTimer++;
+	}
 
 	// Answer and send to firebase
-	obj_firestore_controller.answerTimer++
-	if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true)
+	if (mouse_check_button_pressed(mb_left) and mouseWithinAnswerBox == true and obj_firestore_controller.answerTimer >= 2)
 	{
 		if (optionSelected < array_length(question.options))
 		{
