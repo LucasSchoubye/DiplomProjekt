@@ -211,46 +211,56 @@ function RequestLogin(loginUsername, loginPassword)
 	username = loginUsername
 	password = loginPassword
 	
-	FirebaseFirestore("/users/").Read()
+	FirebaseFirestore("/users/").Where("username", "==", loginUsername).Query()
 }
 
 function ValidateLogin(map)
 {
 	try
 	{
-	decodedMap = json_decode(map)
-	idArray = []
-	ds_map_keys_to_array(decodedMap, idArray)
-	
-	// for each user
-	for (var i = 0; i < array_length(idArray); i++) 
-	{
-		// Check their username
-	    var ID = idArray[i];
-	    var value = json_decode(decodedMap[? ID]);
-		var passwordSalt = value[?"passwordSalt"];
+		show_message(map)
 		
-		if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
+		
+		decodedMap = json_decode(map)
+		idArray = []
+		ds_map_keys_to_array(decodedMap, idArray)
+		
+		show_message("ID: "+idArray[0])
+		
+		keyArray = []
+		ds_map_keys_to_array(decodedMap[? idArray[0]], keyArray)
+		show_message("Keys are: "+string(keyArray))
+		show_message("Username: "+string(decodedMap[? idArray[0]][?"username"]))
+	
+		// for each user
+		for (var i = 0; i < array_length(idArray); i++) 
 		{
-			playerId = value[?"ref"]
+			// Check their username
+		    var ID = idArray[i];
+		    var value = decodedMap[? ID];
+			var passwordSalt = value[?"passwordSalt"];
+		
+			if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
+			{
+				playerId = value[?"ref"]
 			
-			// Find the position of the last dash ("/")
-		    var last_dash_pos = string_last_pos("/", playerId);
+				// Find the position of the last dash ("/")
+			    var last_dash_pos = string_last_pos("/", playerId);
     
-		    // Check if there is a dash in the string
-		    if (last_dash_pos != -1) {
-		        // Extract the substring after the last dash
-		        playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
-		    }
+			    // Check if there is a dash in the string
+			    if (last_dash_pos != -1) {
+			        // Extract the substring after the last dash
+			        playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
+			    }
 			
-			username = value[?"username"]
-			room_goto(rm_menu)
+				username = value[?"username"]
+				room_goto(rm_menu)
 			
-			RequestStudent()
+				RequestStudent()
+			}
+			else
+				show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
 		}
-		else
-			show_debug_message("No Match found")
-	}
 	
 		if (playerId = undefined)
 		{
