@@ -20,7 +20,7 @@ var weaponCounter = 0
 weaponRow = 0
 var ftdInventoryWeapons = obj_FtDLoadoutMenu.ftdInventoryWeapons
 var currentWeaponList = ftdInventoryWeapons
-var currentWeaponEquip = ds_list_create()
+var currentWeaponEquip = undefined
 
 
 
@@ -36,6 +36,9 @@ draw_set_font(defaultFont)
 for (var i = 0; i < ds_list_size(currentWeaponList); ++i) {
 	var currentWeaponElement = ds_list_find_value(currentWeaponList,i)
 	
+	if (currentWeaponElement.isEquipped == true) {
+		currentWeaponEquip = currentWeaponElement
+	}
 	// make sure that it is the overall inventory item that is the one being updated in regards to wether it is equipped
 	for (var z = 0; z < ds_list_size(inventoryList); ++z) {
 		var currentInventoryElement = ds_list_find_value(inventoryList,z)
@@ -49,7 +52,6 @@ for (var i = 0; i < ds_list_size(currentWeaponList); ++i) {
 		if(mouse_y > weaponStartY+weaponRow*itemHeight && 
 			mouse_y < weaponStartY+weaponRow*itemHeight+itemHeight) {
 			
-			ds_list_clear(currentWeaponEquip)
 			// update both the local version (for the text) and the database inventory item on wether it is equipped
 			if (activeInventoryElement.isEquipped == false) 
 			{
@@ -70,12 +72,13 @@ for (var i = 0; i < ds_list_size(currentWeaponList); ++i) {
 				
 				activeInventoryElement.isEquipped = true
 				currentWeaponElement.isEquipped = true
-				ds_list_add(currentWeaponEquip,currentWeaponElement)
+				currentWeaponEquip = currentWeaponElement
 			} 
 			else 
 			{
 				activeInventoryElement.isEquipped = false
 				currentWeaponElement.isEquipped = false
+				currentWeaponEquip = undefined
 			}
 			obj_firestore_controller.UpdateInventory(activeInventoryElement)
 		}
@@ -97,7 +100,7 @@ var armorCounter = 0
 armorRow = 0
 var ftdInventoryArmor = obj_FtDLoadoutMenu.ftdInventoryArmor
 var currentArmorList = ftdInventoryArmor
-var currentArmorEquip = ds_list_create()
+var currentArmorEquip = undefined
 
 
 //draw armor collection rectancle and title
@@ -114,6 +117,9 @@ draw_set_font(defaultFont)
 for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 	var currentArmorElement = ds_list_find_value(currentArmorList,i)
 
+	if (currentArmorElement.isEquipped == true) {
+		currentArmorEquip = currentArmorElement	
+	}
 	// make sure that it is the overall inventory item that is the one being updated in regards to wether it is equipped
 	for (var z = 0; z < ds_list_size(inventoryList); ++z) {
 		var currentInventoryElement = ds_list_find_value(inventoryList,z)
@@ -127,7 +133,6 @@ for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 		if(mouse_y > armorStartY+armorRow*itemHeight && 
 			mouse_y < armorStartY+armorRow*itemHeight+itemHeight) {
 				
-			ds_list_clear(currentArmorEquip)
 			// update both the local version (for the text) and the database inventory item on wether it is equipped
 			if (activeInventoryElement.isEquipped == false) 
 			{
@@ -148,12 +153,13 @@ for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 				
 				activeInventoryElement.isEquipped = true
 				currentArmorElement.isEquipped = true
-				ds_list_add(currentArmorEquip,currentArmorElement)
+				currentArmorEquip = currentArmorElement
 			} 
 			else 
 			{
 				activeInventoryElement.isEquipped = false
 				currentArmorElement.isEquipped = false
+				currentArmorEquip = undefined
 			}
 			obj_firestore_controller.UpdateInventory(activeInventoryElement)
 		}
@@ -170,8 +176,12 @@ for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 // VARIABLES
 var weaponEquipStartX = room_width*0.65
 var weaponEquipStartY = room_height*0.8
+var weaponEquipTextStartX = weaponEquipStartX + itemWidth/2
+var weaponEquipTextStartY = weaponEquipStartY+itemHeight+20
 var armorEquipStartX = weaponEquipStartX + itemWidth + 20
 var armorEquipStartY = weaponEquipStartY
+var armorEquipTextStartX = armorEquipStartX + itemWidth/2
+var armorEquipTextStartY = armorEquipStartY+itemHeight+20
 
 
 
@@ -182,10 +192,11 @@ draw_roundrect_color(weaponEquipStartX,weaponEquipStartY,weaponEquipStartX+itemW
 draw_set_alpha(0.3 + sin(current_time/500)*0.1)	
 draw_roundrect(weaponEquipStartX,weaponEquipStartY,weaponEquipStartX+itemWidth,weaponEquipStartY+itemHeight,true)
 draw_set_alpha(1)
-for (var i = 0; i < ds_list_size(currentWeaponEquip); ++i) {
-	var currentWeaponEquipped = ds_list_find_value(currentWeaponEquip,i)
-	show_message(currentWeaponEquipped)
-	currentWeaponEquipped.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(weaponEquipTextStartX,weaponEquipTextStartY,"Weapon")
+draw_set_font(defaultFont)
+if (currentWeaponEquip != undefined) {
+	currentWeaponEquip.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
 }
 
 
@@ -196,12 +207,12 @@ draw_roundrect_color(armorEquipStartX,armorEquipStartY,armorEquipStartX+itemWidt
 draw_set_alpha(0.3 + sin(current_time/500)*0.1)	
 draw_roundrect(armorEquipStartX,armorEquipStartY,armorEquipStartX+itemWidth,armorEquipStartY+itemHeight,true)
 draw_set_alpha(1)
-for (var i = 0; i < ds_list_size(currentArmorEquip); ++i) {
-	var currentArmorEquipped = ds_list_find_value(currentArmorEquip,i)
-	show_message(currentArmorEquipped)
-	currentArmorEquipped.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(armorEquipTextStartX,armorEquipTextStartY,"Armor")
+draw_set_font(defaultFont)
+if (currentArmorEquip != undefined) {
+	currentArmorEquip.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)
 }
-
 
 
 draw_triangle_color(screenMidX+100,screenMidY-50,screenMidX+100,screenMidY-10,screenMidX+70,screenMidY-30,c_olive,c_olive,c_olive,false)
