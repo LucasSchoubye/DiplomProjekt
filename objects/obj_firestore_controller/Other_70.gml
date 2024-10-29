@@ -12,6 +12,7 @@ if (async_load[? "status"] == 200)
 			{
 				RepondStudent(async_load[? "value"])
 			}
+			
 			else if (string_pos("bank",async_load[? "path"]) > 0)
 			{
 				RespondBalance(async_load[? "value"])	
@@ -62,7 +63,7 @@ if (async_load[? "status"] == 200)
 			show_debug_message(variable_instance_get(async_load[? "listener"], "url"))
 		break;
 		case "FirebaseAuthentication_SignIn_Email":	
-			ValidateLogin(async_load[? "value"])
+			RequestLogin(async_load[? "value"])
 		break;
 	
 		default:
