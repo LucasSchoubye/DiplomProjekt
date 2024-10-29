@@ -206,12 +206,15 @@ function DeleteAllSession()
 	FirebaseFirestore("/sessions/").Delete()
 }
 
-function RequestLogin(loginUsername, loginPassword)
+function RequestLogin(UserID)
 {
-	username = loginUsername
-	password = loginPassword
-	
-	FirebaseFirestore("/users/").Where("username", "==", loginUsername).Query()
+	show_debug_message(UserID)
+	FirebaseFirestore("/users/").Where("userID", "==", UserID).Query()
+}
+
+function RequestAuthUser(loginUsername, loginPassword)
+{	
+	FirebaseAuthentication_SignIn_Email(loginUsername, loginPassword);
 }
 
 function ValidateLogin(map)
