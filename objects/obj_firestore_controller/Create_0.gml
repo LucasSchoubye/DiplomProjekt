@@ -218,20 +218,24 @@ function RequestLogin(map)
 			// Check their username
 			var user = users[i];
 			userID = user.localId
-			show_message(userID);
 		}
 		FirebaseFirestore("/users/").Where("userID", "==", userID).Query()
 	}
 }
 
 function RequestAuthUser(loginUsername, loginPassword)
-{	
+{
+	// For testing purposes
+	if(loginUsername == "admin" && loginPassword == "admin")
+	{
+		loginUsername = "lucas.knudsen7@gmail.com";
+		loginPassword = "lucas123";
+	}
 	FirebaseAuthentication_SignIn_Email(loginUsername, loginPassword);
 }
 
 function ValidateLogin(map)
 {
-	show_message(map)
 	try
 	{
 		decodedMap = json_decode(map)
