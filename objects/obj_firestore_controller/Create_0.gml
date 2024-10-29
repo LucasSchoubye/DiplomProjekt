@@ -206,10 +206,22 @@ function DeleteAllSession()
 	FirebaseFirestore("/sessions/").Delete()
 }
 
-function RequestLogin(UserID)
+function RequestLogin(map)
 {
-	show_debug_message(UserID)
-	FirebaseFirestore("/users/").Where("userID", "==", UserID).Query()
+	var decodedMap = json_parse(map);
+	var users = decodedMap.users
+	
+	if (users != undefined){
+		// for each user
+		for (var i = 0; i < array_length(users); i++) 
+		{
+			// Check their username
+			var user = users[i];
+			userID = user.localId
+			show_message(userID);
+		}
+		FirebaseFirestore("/users/").Where("userID", "==", userID).Query()
+	}
 }
 
 function RequestAuthUser(loginUsername, loginPassword)
@@ -219,6 +231,7 @@ function RequestAuthUser(loginUsername, loginPassword)
 
 function ValidateLogin(map)
 {
+	show_message(map)
 	try
 	{
 		decodedMap = json_decode(map)
@@ -237,9 +250,8 @@ function ValidateLogin(map)
 			// Check their username
 		    var ID = idArray[i];
 		    var value = decodedMap[? ID];
-			var passwordSalt = value[?"passwordSalt"];
 		
-			if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
+			if (value[?"userID"] = userID)
 			{
 				playerId = value[?"ref"]
 			
