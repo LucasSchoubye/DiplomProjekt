@@ -29,5 +29,12 @@ else if (obj_UltManGameController.selectedAction = ActionType.Shoot)
 	}
 }
 
+if (obj_UltManGameController.celebrationActive = true and instance_exists(global.celebratingPlayer))
+{
+	targetX = global.celebratingPlayer.x
+	targetY = global.celebratingPlayer.y
+}
+
 x -= (x - targetX)/3
 y -= (y - targetY)/3
+
