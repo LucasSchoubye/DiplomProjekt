@@ -94,7 +94,8 @@ if (room = rm_login)
 			room_goto(rm_loginWaiting)
 			if (instance_exists(obj_firestore_controller))
 			{
-				obj_firestore_controller.RequestLogin(username,password)
+				obj_firestore_controller.RequestAuthUser(username,password)
+				
 			}
 		}
 	}

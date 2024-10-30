@@ -90,7 +90,6 @@ function FirebaseAuthentication_SignIn_Email(email,password)
 {
 	if(FirebaseAuthentication_Library_useSDK)
 		return SDKFirebaseAuthentication_SignIn_Email(email,password);
-	
 	FirebaseAuthentication_controllerVerification()
 	var listener = FirebaseREST_asyncFunction_Authentication(
 		"FirebaseAuthentication_SignIn_Email"+FirebaseREST_MiddleCallbackTAG,
