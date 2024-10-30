@@ -31,10 +31,6 @@ function weaponEquipped() {
 			bulletInst = instance_create_depth(x,y,depth,obj_FtDPlayerFireball)
 			ekstraFireBall1 = instance_create_depth(x,y,depth,obj_FtDPlayerFireball) 
 			ekstraFireBall2 = instance_create_depth(x,y,depth,obj_FtDPlayerFireball)
-			// aim for enemy
-			//if (instance_exists(obj_FtDBoss)){
-			// dir = point_direction(x,y, obj_FtDBoss.x, obj_FtDBoss.y)
-			//}
 		break
 	}
 }
