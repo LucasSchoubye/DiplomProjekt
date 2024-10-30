@@ -37,14 +37,13 @@ if (room = rm_UltManOverview){
 	if(mouse_y > menuClubNameY && mouse_y < menuClubNameY + string_height(clubName) && 
 			mouse_x > menuClubNameX && mouse_x < menuClubNameX + string_width(clubName)){
 		draw_set_alpha(0.2)
-		draw_text(menuClubNameX + string_width(clubName) + 20, menuClubNameY, "Change club name")
+		draw_text(menuClubNameX + string_width(clubName) + 20, menuClubNameY, "Press club name to change")
 		if(mouse_check_button_pressed(mb_left)){
 			changeClubNamePopup = true;			
 		}
 	}
-	draw_text(menuClubNameX, menuClubNameY, clubName)
-	
 	draw_set_alpha(1)
+	draw_text(menuClubNameX, menuClubNameY, clubName)
 
 	draw_set_font(fn_sideBarOptionsRoboto);
 	draw_set_valign(fa_bottom)
@@ -134,15 +133,16 @@ if (changeClubNamePopup){
 		
 		draw_roundrect(room_width * 0.35,room_height*0.375,room_width * 0.65,room_height*0.425, true)
 		try{
-		if(newClubName != undefined){
-			draw_text(room_width * 0.3625, room_height*0.4175, string(newClubName))	
-		}
-		
+		draw_text(room_width * 0.3625, room_height*0.4175, string(newClubName))	
+		draw_set_alpha(sin(current_time/75))
+		draw_text(room_width * 0.3625 + string_width(newClubName) - 2, room_height * 0.4175, "|");
+		draw_set_alpha(1)
+		//show_message(string(font_get_name(draw_get_font())))
 		if (keyboard_check_pressed(vk_anykey))
 		{
 			if ( charValidClub() and !keyboard_check_pressed(vk_shift))
 				newClubName = newClubName + keyboard_lastchar
-			if (keyboard_check_pressed(vk_backspace))
+			if(keyboard_check_pressed(vk_backspace))
 				newClubName = string_delete(newClubName, string_length(newClubName), 1)
 		}
 		}
@@ -151,20 +151,20 @@ if (changeClubNamePopup){
 		}
         
 		// Draw "Change" button
-		draw_set_color(c_green);
-		scr_drawButton(room_width * 0.4, room_height * 0.45, room_width * 0.45, room_height * 0.5, "Change")
+		draw_set_color(#3B95FF);
+		scr_drawButton(room_width * 0.55, room_height * 0.475, room_width * 0.6, room_height * 0.525, "Change")
 		draw_set_color(c_white);
         
 		// Draw "Cancel" button
 		draw_set_color(c_red);
-		scr_drawButton(room_width * 0.55, room_height * 0.45, room_width * 0.6, room_height * 0.5, "Cancel")
+		scr_drawButton(room_width * 0.4, room_height * 0.475, room_width * 0.45, room_height * 0.525, "Cancel")
 		draw_set_color(c_white);
 		// Handle "Change" and "Cancel" button clicks
 		if (mouse_check_button_pressed(mb_left)) {
 			//draw_circle(room_width * 0.4, room_height*0.40, 5, true)
 		    // Check for "Change" button click
-		    if (mouse_x > room_width * 0.4 && mouse_x < room_width * 0.45 &&
-		        mouse_y > room_height * 0.45 && mouse_y < room_height * 0.5) {
+		    if (mouse_x > room_width * 0.55 && mouse_x < room_width * 0.6 &&
+		        mouse_y > room_height * 0.475 && mouse_y < room_height * 0.525) {
 				// Changes clubname
 				playerClub.clubName = newClubName;
 				clubName = newClubName;
@@ -173,8 +173,8 @@ if (changeClubNamePopup){
 		    }
             
 		    // Check for "Cancel" button click
-		    if (mouse_x > room_width * 0.55 && mouse_x < room_width * 0.6 &&
-		        mouse_y > room_height * 0.40 && mouse_y < room_height * 0.45) {
+		    if (mouse_x > room_width * 0.4 && mouse_x < room_width * 0.45 &&
+		        mouse_y > room_height * 0.475 && mouse_y < room_height * 0.525) {
 		        changeClubNamePopup = false;  // Close the popup without selling
 		    }
 		}
@@ -192,9 +192,8 @@ if (changeClubNamePopup){
 		    // Check if the key pressed is a letter or a number
 		    if ((key_pressed >= "0" && key_pressed <= "9") 
 			|| (key_pressed >= "A" && key_pressed <= "Å") 
-			|| (key_pressed >= "a" && key_pressed <= "å")
-			//|| key_pressed == "æ" || key_pressed == "ø" || key_pressed == "å"
-			//|| key_pressed == "æ" || key_pressed == "ø" || key_pressed == "å"
+			|| (key_pressed >= "a" && key_pressed <= "z")
+			|| key_pressed == "æ" || key_pressed == "ø" || key_pressed == "å"
 			|| key_pressed == " ") {
 		        return true;
 		    } else {
