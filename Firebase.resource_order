@@ -147,6 +147,7 @@
     {"name":"Nationalities","order":4,"path":"scripts/Nationalities/Nationalities.yy",},
     {"name":"OptionsMenu","order":3,"path":"scripts/OptionsMenu/OptionsMenu.yy",},
     {"name":"scr_anim_player_look","order":1,"path":"scripts/scr_anim_player_look/scr_anim_player_look.yy",},
+    {"name":"scr_armorFunctions","order":7,"path":"scripts/scr_armorFunctions/scr_armorFunctions.yy",},
     {"name":"scr_assignClosestControlledPlayer","order":3,"path":"scripts/scr_assignClosestControlledPlayer/scr_assignClosestControlledPlayer.yy",},
     {"name":"scr_categories","order":3,"path":"scripts/scr_categories/scr_categories.yy",},
     {"name":"scr_clearDuplicateOptionsAndInsertAnswer","order":4,"path":"scripts/scr_clearDuplicateOptionsAndInsertAnswer/scr_clearDuplicateOptionsAndInsertAnswer.yy",},

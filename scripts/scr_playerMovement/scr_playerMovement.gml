@@ -1,10 +1,9 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_playerMovement(){
+function scr_playerMovement(walkSpeed = 6){
 
 	var hSpeed = 0
 	var vSpeed = 0
-	var walkSpeed = 6
 	var runSpeed = 2
 	var diagonalSpeed = 0.707107
 	var collisionSpeed = walkSpeed + 2
