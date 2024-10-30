@@ -1,5 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
+
+depth = -10000
+
 if (instance_exists(obj_FtDPlayer)) {
 	
 	var targetZoom = 0
@@ -37,3 +40,16 @@ if (instance_exists(obj_FtDPlayer)) {
 	camera_set_view_pos(cam, x - new_width / 2, y - new_height / 2);
 }
 
+draw_distance_shadow(x,y,800,400 + sin(current_time/800)*50,c_black,c_black,0.05,1)
+
+
+
+/*x   = argument[0], // X Position
+    _y   = argument[1], // Y Position
+    _r   = argument[2], // Radius
+    _d   = argument[3], // Glow Distance (Outwards)
+    _c1  = argument[4], // Inner Color
+    _c2  = argument[5], // Outer Color
+    _a1  = argument[6], // Inner Alpha
+    _a2  = argument[7], // Outer Alpha
+)
