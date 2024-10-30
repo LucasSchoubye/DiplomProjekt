@@ -387,6 +387,7 @@
     {"id":{"name":"QuestionGenerator","path":"scripts/QuestionGenerator/QuestionGenerator.yy",},},
     {"id":{"name":"scr_8d_movement","path":"scripts/scr_8d_movement/scr_8d_movement.yy",},},
     {"id":{"name":"scr_anim_player_look","path":"scripts/scr_anim_player_look/scr_anim_player_look.yy",},},
+    {"id":{"name":"scr_armorFunctions","path":"scripts/scr_armorFunctions/scr_armorFunctions.yy",},},
     {"id":{"name":"scr_assignClosestControlledPlayer","path":"scripts/scr_assignClosestControlledPlayer/scr_assignClosestControlledPlayer.yy",},},
     {"id":{"name":"scr_bufferSha512","path":"scripts/scr_bufferSha512/scr_bufferSha512.yy",},},
     {"id":{"name":"scr_categories","path":"scripts/scr_categories/scr_categories.yy",},},

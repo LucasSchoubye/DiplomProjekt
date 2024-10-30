@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-getDamagedCreate(5,true)
+armorCreate()
 
 global.player_state = PLAYER_STATE.MOVING
 stamina = 100
