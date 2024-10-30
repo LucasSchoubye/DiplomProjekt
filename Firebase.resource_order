@@ -1,4 +1,13 @@
 {
   "FolderOrderSettings":[],
-  "ResourceOrderSettings":[],
+  "ResourceOrderSettings":[
+    {"name":"obj_FtDLight","order":1,"path":"objects/obj_FtDLight/obj_FtDLight.yy",},
+    {"name":"obj_FtDParticleFire","order":4,"path":"objects/obj_FtDParticleFire/obj_FtDParticleFire.yy",},
+    {"name":"obj_FtDPuddle","order":2,"path":"objects/obj_FtDPuddle/obj_FtDPuddle.yy",},
+    {"name":"obj_FtDTorch","order":3,"path":"objects/obj_FtDTorch/obj_FtDTorch.yy",},
+    {"name":"draw_distance_shadow","order":1,"path":"scripts/draw_distance_shadow/draw_distance_shadow.yy",},
+    {"name":"spr_FtDBrick","order":2,"path":"sprites/spr_FtDBrick/spr_FtDBrick.yy",},
+    {"name":"spr_FtDPuddle","order":1,"path":"sprites/spr_FtDPuddle/spr_FtDPuddle.yy",},
+    {"name":"spr_FtDTorch","order":1,"path":"sprites/spr_FtDTorch/spr_FtDTorch.yy",},
+  ],
 }
