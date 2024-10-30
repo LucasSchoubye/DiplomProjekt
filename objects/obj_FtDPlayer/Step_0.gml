@@ -18,7 +18,7 @@ if (global.game_state == GAME_STATE.PAUSED) {
 	return
 }
 
-scr_playerMovement()
+armorMovement()
 
 if (global.player_state == PLAYER_STATE.MOVING) {
 	getDamaged(obj_damagePlayer,true)	
