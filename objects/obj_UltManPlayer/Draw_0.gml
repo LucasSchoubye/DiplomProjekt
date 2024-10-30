@@ -45,6 +45,9 @@ accY = lengthdir_y(lastMoveLen, lastMoveDir)*0.4
 
 // Draw name
 draw_set_alpha(1)
-draw_set_halign(fa_center)
-draw_set_font(fn_LatoBold40)
-draw_text(x, y + 90, name[1])
+if (playerTeam)
+{
+	draw_set_halign(fa_center)
+	draw_set_font(fn_LatoBold40)
+	draw_text(x, y + 90, name[1])
+}
