@@ -14,7 +14,6 @@ function getDamaged(dmgObj, _iframes = false) {
 				image_alpha = 1
 			}
 		}
-		
 		exit
 	}
 	
