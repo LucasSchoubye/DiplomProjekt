@@ -15,7 +15,7 @@ draw_text(room_width/2, room_height*0.05, "Halftime: "+string(scoreline[0])+" - 
 
 with(obj_UltManManagerController)
 {
-	scr_ultManTactics()	
+	scr_ultManTactics(true)	
 }
 
 // Draw button

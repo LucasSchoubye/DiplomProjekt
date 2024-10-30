@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_UltManTacticPlayerBox(){
+function scr_UltManTacticPlayerBox(halftimeActive = false){
 	
 	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 22*30 && mouse_wheel_down())
 	{
@@ -9,6 +9,13 @@ function scr_UltManTacticPlayerBox(){
 	if (tacticsPlayerScroll < 0 && mouse_wheel_up())
 	{
 		tacticsPlayerScroll += 10
+	}
+	
+	if(halftimeActive == true){
+		squadToDraw = 16;
+	}
+	else{
+		squadToDraw = ds_list_size(squad);
 	}
 	
 	var playerBoxTop = room_height * 0.12;
@@ -21,7 +28,7 @@ function scr_UltManTacticPlayerBox(){
 	
 	draw_rectangle(playerBoxLeft, playerBoxTop, playerBoxRight, playerBoxBottom, true)
 	
-	for (var i = 0; i < ds_list_size(squad); ++i) {
+	for (var i = 0; i < squadToDraw; ++i) {
 	    var player = ds_list_find_value(squad, i)
 		//show_message(tacticsPlayerScroll)
 		//show_message(string(ds_list_size(squad)*-30 + 30*30))
