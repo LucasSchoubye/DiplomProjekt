@@ -5,6 +5,7 @@ verticalWeaponScroll = 0
 ftdInventoryWeapons = ds_list_create()
 ftdInventoryArmor = ds_list_create()
 itemHeight = 0
+fillEquipmentTXT = ""
 
 
 function getFtDInventory() {
