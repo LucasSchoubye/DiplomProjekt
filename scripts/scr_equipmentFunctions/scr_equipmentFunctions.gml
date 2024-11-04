@@ -22,6 +22,19 @@ function armorMovement() {
 	}
 }
 
+function weaponEquipped() {
+	switch(obj_FtDLoadoutMenu.currentWeaponEquip.itemName) {
+		case "Thunderbolt": 
+			bulletInst = instance_create_depth(x,y,depth,obj_playerAttack)
+		break
+		case "Fireball":
+			bulletInst = instance_create_depth(x,y,depth,obj_FtDPlayerFireball)
+			ekstraFireBall1 = instance_create_depth(x,y,depth,obj_FtDPlayerFireball) 
+			ekstraFireBall2 = instance_create_depth(x,y,depth,obj_FtDPlayerFireball)
+		break
+	}
+}
+
 
 
 	

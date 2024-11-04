@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_armorFunctions",
+  "%Name":"scr_equipmentFunctions",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_armorFunctions",
+  "name":"scr_equipmentFunctions",
   "parent":{
     "name":"Scripts",
     "path":"folders/Assets/Fight The Dungeon/Scripts.yy",
