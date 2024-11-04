@@ -406,6 +406,7 @@
     {"id":{"name":"scr_dmgFunctions","path":"scripts/scr_dmgFunctions/scr_dmgFunctions.yy",},},
     {"id":{"name":"scr_doLinesCross","path":"scripts/scr_doLinesCross/scr_doLinesCross.yy",},},
     {"id":{"name":"scr_drawButton","path":"scripts/scr_drawButton/scr_drawButton.yy",},},
+    {"id":{"name":"scr_drawChangeClubName","path":"scripts/scr_drawChangeClubName/scr_drawChangeClubName.yy",},},
     {"id":{"name":"scr_drawMultipleChoice","path":"scripts/scr_drawMultipleChoice/scr_drawMultipleChoice.yy",},},
     {"id":{"name":"scr_drawOutlineText","path":"scripts/scr_drawOutlineText/scr_drawOutlineText.yy",},},
     {"id":{"name":"scr_drawPackButton","path":"scripts/scr_drawPackButton/scr_drawPackButton.yy",},},
