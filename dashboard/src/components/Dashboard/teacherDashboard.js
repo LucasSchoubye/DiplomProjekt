@@ -5,6 +5,7 @@ import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
 import StudentStats from "./studentStats.js";
+import { CircularProgress, Box } from '@mui/material';
 
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
@@ -15,6 +16,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
     const [answerMap, setAnswerMap] = useState({});
     const [answerContextType, setAnswerContextType] = useState('');
+    const [isLoadingClasses, setIsLoadingClasses] = useState(true);
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -40,6 +42,8 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                 }
             } catch (err) {
                 console.error("Error fetching classes: ", err);
+            } finally {
+                setIsLoadingClasses(false);
             }
         };
 
@@ -90,7 +94,11 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
             <DrawerLayout>
-                {!isViewingStudents ? (
+                {isLoadingClasses ? (
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
+                        <CircularProgress />
+                    </Box>
+                ) : !isViewingStudents ? (
                     <ClassList 
                         classes={classes} 
                         teacherName={teacherName} 
