@@ -13,7 +13,7 @@ function scr_UltManFindBestPassOption(goal, safePassDist){
 		var lenDirY = lengthdir_y(point_distance(passer.x,passer.y,targetX,targetY)-400, point_direction(passer.x,passer.y,targetX,targetY))
 		
 		// If you aren't the passer and the pass is legal
-		if (passer != id and !collision_circle(targetX,targetY,safePassDist,obj_UltManPlayer,true,true))
+		if (passer != id and !collision_circle(targetX,targetY,safePassDist,obj_UltManPlayer,true,true) && point_distance(x,y,passer.x,passer.y) < passer.topPassSpd)
 		{
 			if (ClosestToGoal > point_distance(targetX,targetY,goal.x,goal.y))
 			{
