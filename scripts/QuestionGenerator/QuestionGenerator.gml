@@ -105,7 +105,7 @@ function QuestionGenerator(Curriculum) constructor {
 			break;
 			
 			default:
-				show_message(string(subject)+" is not recognized as a subject")
+				show_debug_message(string(subject)+" is not recognized as a subject")
 		}
 	}
 	

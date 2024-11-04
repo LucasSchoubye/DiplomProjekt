@@ -94,7 +94,6 @@ function scr_ultManTransferMarket(){
 	    }
 	
 	    // Draw the packs at the current X and Y positions
-		//show_message("MaxPack " + string(maxPackTier) + " " + "CurrentPack " + string(currentPackTier))
 		depth = 3;
 		if(maxAvailablePackTier+1 < currentPackTier){
 			pack.DrawUnavailablePack(currentX, currentY, packWidth, packHeight);

@@ -220,6 +220,10 @@ function RequestLogin(map)
 		}
 		FirebaseFirestore("/users/").Where("userID", "==", userID).Query()
 	}
+	else
+	{
+		ValidateLogin("ERROR: USERS == UNDEFINED")
+	}
 }
 
 function RequestAuthUser(loginUsername, loginPassword)
@@ -278,7 +282,6 @@ function ValidateLogin(map)
 	
 		if (playerId = undefined)
 		{
-			//show_message("Wrong password or username")
 			room_goto(rm_login)
 			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
 			part.text = "Wrong password or username"
@@ -339,7 +342,7 @@ function RequestClassSubtopics(schoolId, classId, subject)
 	}
 	else
 	{
-		show_message("SchoolId or classId are undefined")
+		//show_message("SchoolId or classId are undefined")
 	}
 }
 
