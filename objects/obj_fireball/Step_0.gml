@@ -14,12 +14,13 @@ if (instance_exists(obj_FtDPlayer)){
 	{ // aim for player
 		dir = point_direction(x,y, obj_FtDPlayer.x, obj_FtDPlayer.y)
 	
-		
-		// Get correct face
-		if (obj_FtDBoss.dir > 90 && obj_FtDBoss.dir < 270) {
-			face = -1
-		} else {
-			face = 1
+		if (instance_exists(obj_FtDBoss)) {
+			// Get correct face
+			if (obj_FtDBoss.dir > 90 && obj_FtDBoss.dir < 270) {
+				face = -1
+			} else {
+				face = 1
+			}
 		}
 		
 		// set depth to make player more visible

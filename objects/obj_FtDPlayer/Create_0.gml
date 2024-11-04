@@ -9,6 +9,8 @@ stamCD = 0
 stamCDComplete = 2
 stamZeroHit = false
 alarm[0] = 60
+ekstraFireBall1 = undefined
+ekstraFireBall2 = undefined
 
 windupTimer = 60
 shootTimer = 0

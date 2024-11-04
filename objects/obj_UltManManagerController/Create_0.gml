@@ -51,6 +51,7 @@ teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.p
 ["Red Cards",spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
 // 
 clubName = playerClub.clubName
+newClubName = playerClub.clubName
 
 menuOptions = ds_list_create()
 selectedMenuOption = 0
@@ -70,6 +71,9 @@ transfermarketPlayerScroll = 0
 tacticsPlayerScroll = 0
 // Transfermarket Player Card Timer
 transfermarketPlayerCardTimer = 0
+// Change Club Name
+changeClubNamePopup = false
+
 
 // Populate menu options
 ds_list_add(menuOptions, "Home")
@@ -95,6 +99,7 @@ halftimeTimerReset = true
 
 // Generate team from server
 obj_firestore_controller.RequestGamestate("ultimateManager")
+newClubName = playerClub.clubName
 
 packs = ds_list_create();
 ds_list_add(packs, new UltManPack(UltManPackTier.Bronze));
@@ -409,6 +414,7 @@ function LoadGamestate(Json)
 	#region Team
 		obj_UltManManagerController.playerClub = json_parse(gamestateMap[?"team"]);
 		obj_UltManManagerController.clubName = playerClub.clubName
+		obj_UltManManagerController.newClubName = playerClub.clubName
 		obj_UltManManagerController.playerClub = find_struct_in_list(teamList, "clubName", clubName)
 	#endregion
 
