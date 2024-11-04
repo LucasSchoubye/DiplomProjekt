@@ -210,7 +210,6 @@ function RequestLogin(map)
 {
 	var decodedMap = json_parse(map);
 	var users = decodedMap.users
-	
 	if (users != undefined){
 		// for each user
 		for (var i = 0; i < array_length(users); i++) 

@@ -86,7 +86,7 @@ function FirebaseAuthentication_SignUp_Email(email,password)
 }
 
 //Sign in with email / password
-function FirebaseAuthentication_SignIn_Email(email,password)
+ function FirebaseAuthentication_SignIn_Email(email,password)
 {
 	if(FirebaseAuthentication_Library_useSDK)
 		return SDKFirebaseAuthentication_SignIn_Email(email,password);
