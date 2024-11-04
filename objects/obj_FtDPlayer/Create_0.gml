@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-getDamagedCreate(5,true)
+armorCreate()
 
 global.player_state = PLAYER_STATE.MOVING
 stamina = 100
@@ -9,6 +9,8 @@ stamCD = 0
 stamCDComplete = 2
 stamZeroHit = false
 alarm[0] = 60
+ekstraFireBall1 = undefined
+ekstraFireBall2 = undefined
 
 windupTimer = 60
 shootTimer = 0

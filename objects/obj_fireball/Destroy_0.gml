@@ -29,5 +29,4 @@ if (place_meeting(x, y, [obj_wallBackDecor, obj_wallBack, obj_wallCorner, obj_wa
 	    // code here
 		var smallFireball = instance_create_depth(x + lengthdir_x(100, -60*(i)), y + lengthdir_y(100,-60*(i)),-10,obj_fireballSmall)
 		direction = -60*i
-	
-}
+	}

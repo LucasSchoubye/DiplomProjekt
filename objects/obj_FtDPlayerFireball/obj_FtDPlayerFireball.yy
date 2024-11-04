@@ -1,20 +1,24 @@
 {
   "$GMObject":"",
-  "%Name":"obj_FtDLoadoutMenu",
+  "%Name":"obj_FtDPlayerFireball",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_FtDLoadoutMenu",
+  "name":"obj_FtDPlayerFireball",
   "overriddenProperties":[],
   "parent":{
-    "name":"Loadout Menu",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Loadout Menu.yy",
+    "name":"Attacks",
+    "path":"folders/Assets/Fight The Dungeon/Objects/Attacks.yy",
   },
-  "parentObjectId":null,
-  "persistent":true,
+  "parentObjectId":{
+    "name":"obj_damageEnemy",
+    "path":"objects/obj_damageEnemy/obj_damageEnemy.yy",
+  },
+  "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
@@ -31,7 +35,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_fireBallR",
+    "path":"sprites/spr_fireBallR/spr_fireBallR.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

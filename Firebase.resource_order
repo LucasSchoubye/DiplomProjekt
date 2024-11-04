@@ -1,24 +1,5 @@
 {
-  "FolderOrderSettings":[
-    {"name":"Loadout Menu","order":10,"path":"folders/Assets/Fight The Dungeon/Objects/Loadout Menu.yy",},
-    {"name":"Hashing","order":10,"path":"folders/Assets/Shared Assets/Scripts/Hashing.yy",},
-    {"name":"TutorialGifs","order":1,"path":"folders/Assets/Shared Assets/Sprites/TutorialGifs.yy",},
-    {"name":"Player Sprites","order":21,"path":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy",},
-    {"name":"Tiles","order":22,"path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",},
-    {"name":"Firebase Authentication","order":1,"path":"folders/Firebase Authentication.yy",},
-    {"name":"Firebase REST API Library (Don't Touch)","order":1,"path":"folders/Firebase Authentication/Extensions/Firebase REST API Library (Don't Touch).yy",},
-    {"name":"Listeners Authentication","order":1,"path":"folders/Firebase Authentication/Extensions/Firebase REST API Library (Don't Touch)/Listeners Authentication.yy",},
-    {"name":"Objects","order":1,"path":"folders/Firebase Authentication/Extensions/Firebase REST API Library (Don't Touch)/Listeners Authentication/Objects.yy",},
-    {"name":"Tools","order":2,"path":"folders/Firebase Authentication/Extensions/Firebase REST API Library (Don't Touch)/Tools.yy",},
-    {"name":"Firebase Authentication Extras Logins","order":3,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins.yy",},
-    {"name":"Apple","order":1,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins/Apple.yy",},
-    {"name":"Facebook","order":2,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins/Facebook.yy",},
-    {"name":"GameCenter","order":3,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins/GameCenter.yy",},
-    {"name":"Google","order":4,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins/Google.yy",},
-    {"name":"GooglePlaySevices","order":5,"path":"folders/Firebase Authentication/Firebase Authentication Extras Logins/GooglePlaySevices.yy",},
-    {"name":"Rooms","order":1,"path":"folders/Firebase Authentication/Rooms.yy",},
-    {"name":"Testing","order":2,"path":"folders/Firebase Authentication/Testing.yy",},
-  ],
+  "FolderOrderSettings":[],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"YYFirebaseAuthentication_tools","order":3,"path":"extensions/YYFirebaseAuthentication_tools/YYFirebaseAuthentication_tools.yy",},
@@ -294,5 +275,6 @@
     {"name":"spr_wallFront","order":5,"path":"sprites/spr_wallFront/spr_wallFront.yy",},
     {"name":"spr_wallFrontDecor","order":6,"path":"sprites/spr_wallFrontDecor/spr_wallFrontDecor.yy",},
     {"name":"spr_wallSide","order":7,"path":"sprites/spr_wallSide/spr_wallSide.yy",},
+    {"name":"obj_FtDPlayerFireball","order":1,"path":"objects/obj_FtDPlayerFireball/obj_FtDPlayerFireball.yy",},
   ],
 }
