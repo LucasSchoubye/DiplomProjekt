@@ -141,7 +141,18 @@ if (changeClubNamePopup){
 		if (keyboard_check_pressed(vk_anykey))
 		{
 			if ( charValidClub() and !keyboard_check_pressed(vk_shift))
-				newClubName = newClubName + keyboard_lastchar
+				if(string_length(newClubName) >= 20){
+					
+					clubNameLimit = instance_create_depth(room_width * 0.35, room_height*0.3725, -12, obj_par_text)
+					clubNameLimit.text = "Club name cannot exceed 20 characters"
+					clubNameLimit.colour = #c0c0c0
+					clubNameLimit.font = fn_RobotoRegular12
+					draw_set_font(fn_sideBarOptionsRoboto);
+					draw_set_color(c_black);
+				}
+				else{
+					newClubName = newClubName + keyboard_lastchar
+				}
 			if(keyboard_check_pressed(vk_backspace))
 				newClubName = string_delete(newClubName, string_length(newClubName), 1)
 		}

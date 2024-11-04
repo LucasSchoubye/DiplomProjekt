@@ -33,10 +33,10 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 	{
 		celebrationActive = true
 		alarm[1] = 60*4
-		obj_UltManBall.x = room_width/2
-		obj_UltManBall.y = room_height/2
-		obj_UltManBall.targetX = room_width/2
-		obj_UltManBall.targetY = room_height/2
+		obj_UltManBall.x = 0//room_width/2
+		obj_UltManBall.y = 0//room_height/2
+		obj_UltManBall.targetX = 0//room_width/2
+		obj_UltManBall.targetY = 0//room_height/2
 		obj_UltManBall.owner = undefined
 		global.leftScored = leftScored
 	}
