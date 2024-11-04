@@ -49,7 +49,7 @@ global.celebratingPlayer = undefined
 instance_create_depth(room_width/2, room_height/2, 0, obj_UltManBall)
 
 // Create teams
-scr_UltManCreateEnemyTeam(UltManPackTier.Ruby)
+scr_UltManCreateEnemyTeam(UltManPackTier.Bronze)
 scr_UltManCreateManagerTeam()
 
 scr_UltManKickoffSetup(false)
