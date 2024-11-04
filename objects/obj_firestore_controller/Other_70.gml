@@ -77,6 +77,19 @@ if (async_load[? "status"] == 200)
 }
 else
 {
+	#region Authentication and Others
+	if (async_load[?"status"] != 404)
+	{
+		switch(async_load[? "type"])
+		{
+			case "FirebaseAuthentication_SignIn_Email":
+				ValidateLogin(async_load[? "errorMessage"])
+			break;
+		}
+	}
+	#endregion Authentication and Others
+	
+	#region Not Found Errors
 	if (async_load[? "status"] == 404)
 	{
 		switch(async_load[? "type"])
@@ -96,8 +109,9 @@ else
 			break;
 		}
 	}
+	#endregion Not Found Errors
 	
-	
-	var errorMessage = async_load[? "errorMessage"]
+	show_debug_message("FAILED TYPE WAS "+string(async_load[? "type"]))
+	show_debug_message("ERROR: "+string(async_load[? "errorMessage"]))
 }
 

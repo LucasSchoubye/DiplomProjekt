@@ -208,6 +208,8 @@ function DeleteAllSession()
 
 function RequestLogin(map)
 {
+	show_message("Request Login")
+	
 	var decodedMap = json_parse(map);
 	var users = decodedMap.users
 	
@@ -220,6 +222,10 @@ function RequestLogin(map)
 			userID = user.localId
 		}
 		FirebaseFirestore("/users/").Where("userID", "==", userID).Query()
+	}
+	else
+	{
+		ValidateLogin("ERROR: USERS == UNDEFINED")
 	}
 }
 
@@ -279,7 +285,6 @@ function ValidateLogin(map)
 	
 		if (playerId = undefined)
 		{
-			//show_message("Wrong password or username")
 			room_goto(rm_login)
 			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
 			part.text = "Wrong password or username"
