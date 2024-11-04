@@ -68,6 +68,7 @@
     {"name":"obj_FtDGameOverScreen","order":6,"path":"objects/obj_FtDGameOverScreen/obj_FtDGameOverScreen.yy",},
     {"name":"obj_FtDParticleDust2","order":1,"path":"objects/obj_FtDParticleDust2/obj_FtDParticleDust2.yy",},
     {"name":"obj_FtDParticleFlashing","order":2,"path":"objects/obj_FtDParticleFlashing/obj_FtDParticleFlashing.yy",},
+    {"name":"obj_FtDPlayerFireball","order":1,"path":"objects/obj_FtDPlayerFireball/obj_FtDPlayerFireball.yy",},
     {"name":"obj_FtDscreenPause","order":2,"path":"objects/obj_FtDscreenPause/obj_FtDscreenPause.yy",},
     {"name":"obj_FtDWinScreen","order":9,"path":"objects/obj_FtDWinScreen/obj_FtDWinScreen.yy",},
     {"name":"obj_inventoryController","order":7,"path":"objects/obj_inventoryController/obj_inventoryController.yy",},
@@ -275,6 +276,5 @@
     {"name":"spr_wallFront","order":5,"path":"sprites/spr_wallFront/spr_wallFront.yy",},
     {"name":"spr_wallFrontDecor","order":6,"path":"sprites/spr_wallFrontDecor/spr_wallFrontDecor.yy",},
     {"name":"spr_wallSide","order":7,"path":"sprites/spr_wallSide/spr_wallSide.yy",},
-    {"name":"obj_FtDPlayerFireball","order":1,"path":"objects/obj_FtDPlayerFireball/obj_FtDPlayerFireball.yy",},
   ],
 }

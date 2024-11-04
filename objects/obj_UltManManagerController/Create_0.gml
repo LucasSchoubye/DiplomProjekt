@@ -73,6 +73,8 @@ tacticsPlayerScroll = 0
 transfermarketPlayerCardTimer = 0
 // Change Club Name
 changeClubNamePopup = false
+// Warn user about club name length
+clubNameLimit = undefined;
 
 
 // Populate menu options
