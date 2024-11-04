@@ -60,7 +60,7 @@ if (async_load[? "status"] == 200)
 		case "FirebaseFirestore_Collection_Add":	
 			show_debug_message(variable_instance_get(async_load[? "listener"], "url"))
 		break;
-		case "FirebaseAuthentication_SignIn_Email":	
+		case "FirebaseAuthentication_SignIn_Email":
 			RequestLogin(async_load[? "value"])
     break;
 		case "FirebaseFirestore_Collection_Query":

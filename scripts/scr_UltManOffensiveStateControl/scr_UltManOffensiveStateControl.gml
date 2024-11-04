@@ -10,19 +10,19 @@ function scr_UltManOffensiveStateControl(X,Y){
 	var goalMoveY = lengthdir_y(topSpd, point_direction(x,y,oppGoal.x,oppGoal.y))
 	var safeDist = topSpd*2//topSpd*2
 	var pullbackDist = topSpd*3//topSpd*2
-	var goalShootDist = 2000
+	var goalShootDist = topShootSpd*0.7
 	
 	
 	if (obj_UltManBall.owner = id)
 	{
-		// 
+		// Shoot
 		if (point_distance(targetX, targetY, oppGoal.x, oppGoal.y) < goalShootDist)
 		{
 			obj_UltManBall.owner = undefined
 			obj_UltManBall.readyForPickup = false
 			obj_UltManBall.alarm[0] = 30
-			obj_UltManBall.targetX = oppGoal.x - oppGoal.goalDepth/2*oppGoal.facing
-			obj_UltManBall.targetY = oppGoal.y
+			obj_UltManBall.targetX = oppGoal.x - oppGoal.goalDepth*oppGoal.facing*0.9
+			obj_UltManBall.targetY = oppGoal.y + random_range(-oppGoal.goalHeight/2,oppGoal.goalHeight/2)
 		}
 		else
 		{

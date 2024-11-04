@@ -14,11 +14,7 @@ event_inherited();
 state = UltManNpcState.HoldPosition
 image_blend = c_ltgray
 playerTeam = false
-defence = 1000
 pressingDistance = 900
-topSpd = topSpd*1.2
-
-
 
 // Functions
 function PerformAction(X,Y)

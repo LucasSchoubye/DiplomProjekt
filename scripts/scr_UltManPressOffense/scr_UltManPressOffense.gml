@@ -2,14 +2,14 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManPressOffense(){
 
-			var strength = 200
-			var tackleDist = 300
+			//var strength = strength
+			var tackleDist = defence
 			var player = obj_UltManGameController.controlledPlayer
 			var spd = topSpd
 
 			if (point_distance(x,y,player.x,player.y) < topSpd)
 			{
-				spd = topSpd/2
+				//spd = topSpd/2
 			}
 			var PosX = x + lengthdir_x(spd,point_direction(x,y,player.x,player.y))
 			var PosY = y + lengthdir_y(spd,point_direction(x,y,player.x,player.y))
