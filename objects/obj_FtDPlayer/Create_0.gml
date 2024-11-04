@@ -5,6 +5,8 @@ armorCreate()
 global.player_state = PLAYER_STATE.MOVING
 stamina = 100
 stamina_max = stamina
+staminaDecrease = -1
+staminaRestoration = 0.5
 stamCD = 0
 stamCDComplete = 2
 stamZeroHit = false

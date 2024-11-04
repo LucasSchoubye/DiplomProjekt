@@ -42,6 +42,7 @@ draw_set_color(c_white)
 draw_text(screenMidX,screenTop,"Fight The Dungeon Loadout")
 draw_set_font(fn_textLato)
 draw_text(screenMidX, screenTop+35, fillEquipmentTXT)
+obj_characterController.DrawCharacterMenu(room_width*0.73,room_height*0.5,4)
 
 // play button
 draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)

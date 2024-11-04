@@ -4,12 +4,18 @@ function itemNameToSprite(name)
 	{
 		switch(name)
 		{
-			case "Cat":
-				return spr_cat
-			case "Hat":
-				return spr_hat
-			case "Scat":
-				return spr_scat
+			case "Black Hole":
+				return spr_blackHole
+			case "Thunderbolt":
+				return spr_thunderBall
+			case "Fireball":
+				return spr_fireBallR
+			case "Heavy Armor":
+				return spr_heavyArmor
+			case "Medium Armor":
+				return spr_mediumArmor
+			case "Light Armor":
+				return spr_lightArmor
 			default:
 				return Spr_YoYo_button
 		}
