@@ -30,8 +30,6 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 	
 	for (var i = 0; i < squadToDraw; ++i) {
 	    var player = ds_list_find_value(squad, i)
-		//show_message(tacticsPlayerScroll)
-		//show_message(string(ds_list_size(squad)*-30 + 30*30))
 		if (playerBoxTop + (i)*30 + tacticsPlayerScroll + 30 > playerBoxTop)
 		{
 		

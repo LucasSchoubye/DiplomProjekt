@@ -208,8 +208,6 @@ function DeleteAllSession()
 
 function RequestLogin(map)
 {
-	show_message("Request Login")
-	
 	var decodedMap = json_parse(map);
 	var users = decodedMap.users
 	
@@ -345,7 +343,7 @@ function RequestClassSubtopics(schoolId, classId, subject)
 	}
 	else
 	{
-		show_message("SchoolId or classId are undefined")
+		//show_message("SchoolId or classId are undefined")
 	}
 }
 

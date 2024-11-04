@@ -53,7 +53,7 @@ if (async_load[? "status"] == 200)
 			}
 			else
 			{
-				show_message("Path was "+string(async_load[? "path"]))	
+				show_debug_message("Path was "+string(async_load[? "path"]))	
 			}
 		break;
 	

@@ -54,10 +54,10 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				
 			}
 			else if (currentElement.isOwned == true) {
-				show_message("You already own this item")
+				//show_message("You already own this item")
 			}
 			else {
-				show_message("You need more $$$")
+				//show_message("You need more $$$")
 			}
 		}
 	}
