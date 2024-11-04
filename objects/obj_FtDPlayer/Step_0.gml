@@ -57,6 +57,13 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 		}
 	}
 	
+	
+	if (instance_exists(obj_FtDPlayerBlackHole)) {
+		if (obj_FtDPlayerBlackHole.outOfRange == true) {
+			bulletInst.destroy = true
+		}
+	}
+	
 	if (bulletInst.destroy == true) {
 		attackOngoing = false
 		global.player_state = PLAYER_STATE.MOVING

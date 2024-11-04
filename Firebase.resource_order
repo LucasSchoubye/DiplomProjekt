@@ -1,5 +1,7 @@
 {
-  "FolderOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"Amor","order":16,"path":"folders/Assets/Fight The Dungeon/Sprites/Amor.yy",},
+  ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"YYFirebaseAuthentication_tools","order":3,"path":"extensions/YYFirebaseAuthentication_tools/YYFirebaseAuthentication_tools.yy",},
@@ -68,6 +70,7 @@
     {"name":"obj_FtDGameOverScreen","order":6,"path":"objects/obj_FtDGameOverScreen/obj_FtDGameOverScreen.yy",},
     {"name":"obj_FtDParticleDust2","order":1,"path":"objects/obj_FtDParticleDust2/obj_FtDParticleDust2.yy",},
     {"name":"obj_FtDParticleFlashing","order":2,"path":"objects/obj_FtDParticleFlashing/obj_FtDParticleFlashing.yy",},
+    {"name":"obj_FtDPlayerBlackHole","order":3,"path":"objects/obj_FtDPlayerBlackHole/obj_FtDPlayerBlackHole.yy",},
     {"name":"obj_FtDPlayerFireball","order":1,"path":"objects/obj_FtDPlayerFireball/obj_FtDPlayerFireball.yy",},
     {"name":"obj_FtDscreenPause","order":2,"path":"objects/obj_FtDscreenPause/obj_FtDscreenPause.yy",},
     {"name":"obj_FtDWinScreen","order":9,"path":"objects/obj_FtDWinScreen/obj_FtDWinScreen.yy",},
@@ -190,6 +193,7 @@
     {"name":"sou_UltManCheer","order":1,"path":"sounds/sou_UltManCheer/sou_UltManCheer.yy",},
     {"name":"sou_UltManTackle","order":2,"path":"sounds/sou_UltManTackle/sou_UltManTackle.yy",},
     {"name":"spr_basicParticle","order":1,"path":"sprites/spr_basicParticle/spr_basicParticle.yy",},
+    {"name":"spr_blackHole","order":3,"path":"sprites/spr_blackHole/spr_blackHole.yy",},
     {"name":"spr_cat","order":3,"path":"sprites/spr_cat/spr_cat.yy",},
     {"name":"spr_enemyHealth_1","order":6,"path":"sprites/spr_enemyHealth_1/spr_enemyHealth_1.yy",},
     {"name":"Spr_FirebaseAuthentication_AppleSignIn","order":1,"path":"sprites/Spr_FirebaseAuthentication_AppleSignIn/Spr_FirebaseAuthentication_AppleSignIn.yy",},
@@ -226,8 +230,10 @@
     {"name":"spr_healthAlmostFull","order":1,"path":"sprites/spr_healthAlmostFull/spr_healthAlmostFull.yy",},
     {"name":"spr_healthLastLife","order":4,"path":"sprites/spr_healthLastLife/spr_healthLastLife.yy",},
     {"name":"spr_healthMid","order":2,"path":"sprites/spr_healthMid/spr_healthMid.yy",},
+    {"name":"spr_lightArmor","order":2,"path":"sprites/spr_lightArmor/spr_lightArmor.yy",},
     {"name":"spr_managerIcon","order":1,"path":"sprites/spr_managerIcon/spr_managerIcon.yy",},
     {"name":"spr_manBluePlaceholder","order":1,"path":"sprites/spr_manBluePlaceholder/spr_manBluePlaceholder.yy",},
+    {"name":"spr_mediumArmor","order":1,"path":"sprites/spr_mediumArmor/spr_mediumArmor.yy",},
     {"name":"spr_newsGif","order":2,"path":"sprites/spr_newsGif/spr_newsGif.yy",},
     {"name":"spr_placeholder_tiles","order":1,"path":"sprites/spr_placeholder_tiles/spr_placeholder_tiles.yy",},
     {"name":"spr_pokemon_character_L","order":1,"path":"sprites/spr_pokemon_character_L/spr_pokemon_character_L.yy",},

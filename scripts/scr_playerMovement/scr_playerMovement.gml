@@ -30,15 +30,15 @@ function scr_playerMovement(walkSpeed = 6){
 		}
 		else if (keyboard_check(vk_shift) && stamina > 0) 
 		{ 
-			stamina -= 1
+			stamina += staminaDecrease
 			hSpeed *= runSpeed; 
 			vSpeed *= runSpeed; 
 			smokeTimer -= 0.5;
 		} else if (stamina <= stamina_max) {
-			stamina += 0.5
+			stamina += staminaRestoration
 		}
 	} else {
-		stamina += 0.5
+		stamina += staminaRestoration
 	}
 
 	
