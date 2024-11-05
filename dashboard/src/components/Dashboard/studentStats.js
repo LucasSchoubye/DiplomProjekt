@@ -1,4 +1,6 @@
+
 import React, { useMemo } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
 import './studentStats.css'; // Assuming you have a CSS file for styles
 
@@ -12,8 +14,19 @@ const StudentStats = ({ answerMap, contextType }) => {
     const incorrectAnswers = totalAnswers - correctAnswers;
     const percentageCorrect = totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
 
+    // Data for the stacked bar chart
+    const data = [
+        {
+            name: 'Answers',
+            Correct: correctAnswers,
+            Incorrect: incorrectAnswers,
+        }
+    ];
+
     return (
+  
         <div className="student-stats">
+
             <h3>Student Statistics</h3>
             <div className="stats-details">
                 <p><strong>Context Type:</strong> {contextType}</p>
@@ -33,6 +46,18 @@ const StudentStats = ({ answerMap, contextType }) => {
                     <span className="percentage-correct"> {percentageCorrect.toFixed(2)}%</span>
                 </p>
             </div>
+
+            {/* Stacked Bar Chart */}
+            <ResponsiveContainer width="15%" height={500}>
+                <BarChart data={data}>
+                    <XAxis type="category" dataKey="name" />
+                    <YAxis type="number" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Correct" stackId="a" fill="green" opacity={0.6} />
+                    <Bar dataKey="Incorrect" stackId="a" fill="red" opacity={0.6}/>
+                </BarChart>
+            </ResponsiveContainer>
         </div>
     );
 };
