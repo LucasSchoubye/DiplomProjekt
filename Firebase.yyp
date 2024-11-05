@@ -346,6 +346,7 @@
     {"id":{"name":"Room_FirebaseAuthentication","path":"rooms/Room_FirebaseAuthentication/Room_FirebaseAuthentication.yy",},},
     {"id":{"name":"Room_FirebaseFirestore_Query","path":"rooms/Room_FirebaseFirestore_Query/Room_FirebaseFirestore_Query.yy",},},
     {"id":{"name":"Room_FirebaseFirestore","path":"rooms/Room_FirebaseFirestore/Room_FirebaseFirestore.yy",},},
+    {"id":{"name":"AnswerOption","path":"scripts/AnswerOption/AnswerOption.yy",},},
     {"id":{"name":"array_to_ds_list","path":"scripts/array_to_ds_list/array_to_ds_list.yy",},},
     {"id":{"name":"CategoryElement","path":"scripts/CategoryElement/CategoryElement.yy",},},
     {"id":{"name":"draw_distance_shadow","path":"scripts/draw_distance_shadow/draw_distance_shadow.yy",},},
