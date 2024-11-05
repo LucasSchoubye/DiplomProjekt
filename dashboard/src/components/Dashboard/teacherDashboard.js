@@ -104,7 +104,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         const unselectedGames = selectedGames.filter(gameId => !value.includes(gameId));
 
         setSelectedGames(value);
-        console.log(classDocRef)
         // Update the database
         try {
             for (const gameId of newSelectedGames) {
@@ -178,12 +177,14 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                         <MenuItem value="" disabled>
                             Choose Available Games
                         </MenuItem>
-                        {availableGames.map((game) => (
-                            <MenuItem key={game.id} value={game.id}>
-                                <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
-                                <ListItemText primary={game.name} />
-                            </MenuItem>
-                        ))}
+                        {availableGames
+                            .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
+                            .map((game) => (
+                                <MenuItem key={game.id} value={game.id}>
+                                    <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
+                                    <ListItemText primary={game.name} />
+                                </MenuItem>
+                            ))}
                     </Select>
                     {Object.keys(answerMap).length > 0 && (
                         <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
