@@ -23,7 +23,7 @@ if (async_load[? "status"] == 200)
 				RespondGamestate(async_load[? "value"], result)
 			}
 			else{
-				show_message(async_load[? "value"])
+				show_debug_message(async_load[? "value"])
 			}
 		break;
 		case "FirebaseFirestore_Collection_Read":

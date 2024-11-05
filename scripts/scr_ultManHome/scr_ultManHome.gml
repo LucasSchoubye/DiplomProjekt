@@ -38,7 +38,7 @@ function scr_ultManHome(){
 	draw_set_halign(fa_center)
 	draw_set_valign(fa_top)
 	draw_set_font(fn_RobotoMedium14)
-	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 20, "Next Match")
+	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 20, "Next Match - Week "+string(gameweekCounter+1))
 	draw_set_color(#FFFFFF)
 	draw_set_font(fn_RobotoRegular12)
 	//draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 24, "Sunday 22nd September 2024")

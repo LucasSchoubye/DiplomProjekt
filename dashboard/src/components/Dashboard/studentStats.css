@@ -1,0 +1,19 @@
+.student-stats {
+    flex-grow: 1;
+}
+
+.stats-details {
+    margin-bottom: 10px;
+}
+
+.correct-answers {
+    color: green;
+}
+
+.incorrect-answers {
+    color: red;
+}
+
+.percentage-correct {
+    color: black;
+}

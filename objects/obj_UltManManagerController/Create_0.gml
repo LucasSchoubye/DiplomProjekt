@@ -76,7 +76,6 @@ changeClubNamePopup = false
 // Warn user about club name length
 clubNameLimit = undefined;
 
-
 // Populate menu options
 ds_list_add(menuOptions, "Home")
 ds_list_add(menuOptions, "Tactics")
@@ -98,6 +97,8 @@ squad = ds_list_create()
 lastScoreline = [0,0]
 halftimeCompleted = false
 halftimeTimerReset = true
+seasonGameweeks = undefined
+gameweekCounter = 0
 
 // Generate team from server
 obj_firestore_controller.RequestGamestate("ultimateManager")
@@ -115,64 +116,72 @@ ds_list_add(packs, new UltManPack(UltManPackTier.Legendary));
 
 function SimulateLeague(playerGoals, opponentGoals)
 {
-	GenerateMatchups()
+	//GenerateMatchups()
+	matchups = seasonGameweeks[gameweekCounter];
 	
 	// Generate results
 	for (var i = 0; i < array_length(matchups); ++i) {
 	    
 		if (array_length(matchups[i]) != 0)
 		{
-			// point system
-			var MatchXG = [0,0]
-		
-			// Simulate results
-			var possessionRatio = (matchups[i][0].ballPossesion + matchups[i][0].midfielderQuality*2)/(matchups[i][1].ballPossesion + matchups[i][0].midfielderQuality*2)
-		
-			if (possessionRatio > 1)
+			// Stop if matchup is the players match
+			if (matchups[i][0] != playerClub.clubName and matchups[i][1] != playerClub.clubName)
 			{
-				var dominantTeamIndex = 0
-				var dominantTeam = matchups[i][0]
-				var submissiveTeam = matchups[i][1]
-			}
-			else
-			{
-				var dominantTeamIndex = 1
-				var dominantTeam = matchups[i][1]
-				var submissiveTeam = matchups[i][0]
-			}
+				var homeTeam = find_struct_in_list(teamList, "clubName", matchups[i][0])
+				var awayTeam = find_struct_in_list(teamList, "clubName", matchups[i][1])
+				
+				// point system
+				var MatchXG = [0,0]
 		
-			// Dominant team
-			var chancesCreated = 8 + (possessionRatio-1)*10
-			var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
-			MatchXG[dominantTeamIndex] = chancesCreated*chanceQuality
+				// Simulate results
+				var possessionRatio = (homeTeam.ballPossesion + homeTeam.midfielderQuality*2)/(awayTeam.ballPossesion + homeTeam.midfielderQuality*2)
 		
-			// Submissive team
-			var chancesCreated = 3 + dominantTeam.counterAttacks
-			var chanceQuality = matchups[i][0].attackerQuality/(matchups[i][1].defenderQuality*2 + matchups[i][1].goalKeeperQuality)/3
-			MatchXG[!dominantTeamIndex] = chancesCreated*chanceQuality
-		
-			if (abs(MatchXG[dominantTeamIndex] - MatchXG[!dominantTeamIndex]) < 9)
-			{
-				matchups[i][0].matchesDrawn++
-				matchups[i][1].matchesDrawn++
-				matchups[i][0].matchesPlayed++
-				matchups[i][1].matchesPlayed++
-			}
-			else
-			{
-				if (MatchXG[dominantTeamIndex] > MatchXG[!dominantTeamIndex])
+				if (possessionRatio > 1)
 				{
-					dominantTeam.matchesPlayed++
-					submissiveTeam.matchesPlayed++
-					dominantTeam.matchesWon++
-					submissiveTeam.matchesLost++
+					var dominantTeamIndex = 0
+					var dominantTeam = homeTeam
+					var submissiveTeam = awayTeam
 				}
 				else
 				{
-					submissiveTeam.matchesPlayed++
-					dominantTeam.matchesPlayed++
-					submissiveTeam.matchesWon++
-					dominantTeam.matchesLost++
+					var dominantTeamIndex = 1
+					var dominantTeam = awayTeam
+					var submissiveTeam = homeTeam
+				}
+		
+				// Dominant team
+				var chancesCreated = 8 + (possessionRatio-1)*10
+				var chanceQuality = homeTeam.attackerQuality/(awayTeam.defenderQuality*2 + awayTeam.goalKeeperQuality)/3
+				MatchXG[dominantTeamIndex] = chancesCreated*chanceQuality
+		
+				// Submissive team
+				var chancesCreated = 3 + dominantTeam.counterAttacks
+				var chanceQuality = homeTeam.attackerQuality/(awayTeam.defenderQuality*2 + awayTeam.goalKeeperQuality)/3
+				MatchXG[!dominantTeamIndex] = chancesCreated*chanceQuality
+		
+				if (abs(MatchXG[dominantTeamIndex] - MatchXG[!dominantTeamIndex]) < 9)
+				{
+					homeTeam.matchesDrawn++
+					awayTeam.matchesDrawn++
+					homeTeam.matchesPlayed++
+					awayTeam.matchesPlayed++
+				}
+				else
+				{
+					if (MatchXG[dominantTeamIndex] > MatchXG[!dominantTeamIndex])
+					{
+						dominantTeam.matchesPlayed++
+						submissiveTeam.matchesPlayed++
+						dominantTeam.matchesWon++
+						submissiveTeam.matchesLost++
+					}
+					else
+					{
+						submissiveTeam.matchesPlayed++
+						dominantTeam.matchesPlayed++
+						submissiveTeam.matchesWon++
+						dominantTeam.matchesLost++
+					}
 				}
 			}
 		}
@@ -209,42 +218,136 @@ function SimulateLeague(playerGoals, opponentGoals)
 		team.totalPoints = team.matchesWon*3 + team.matchesDrawn
 	}
 
+	// Next gameweek
+	gameweekCounter++
+	
+	// Reset League
+	if (gameweekCounter = 38)
+	{
+		gameweekCounter = 0
+		
+		for (var i = 0; i < ds_list_size(teamList); ++i) {
+		    team = ds_list_find_value(teamList, i)
+			 
+			with(team)
+			{
+				matchesWon = 0
+				matchesDrawn = 0
+				matchesLost = 0
+				matchesPlayed = 0
+				winPercentage = 0
+			    totalPoints = 0
+				goalsScored = 0
+				goalsConceded = 0
+				yellowCards = 0
+				redCards = 0
+			}
+		}
+	}
+	
+	matchups = seasonGameweeks[gameweekCounter]
+
+	// Find opponent
+	var GameWeek = seasonGameweeks[gameweekCounter]
+	for (var i = 0; i < array_length(GameWeek); ++i) {
+	    // Find player
+		if (GameWeek[i][0] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", GameWeek[i][1])  
+		}
+		else if (GameWeek[i][1] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", GameWeek[i][0])
+		}
+	}
+	
 	scr_sort_struct_list(teamList, "totalPoints", false)
 	SaveGamestate()
-	ds_list_destroy(clubsAvailable)
+	//ds_list_destroy(clubsAvailable)
 }
 
 function GenerateMatchups()
 {
-	matchups = []
-	clubsAvailable = ds_list_create()
-	ds_list_copy(clubsAvailable, teamList)
-	
-	// Find opponent for player
-	playerOpponentTeam = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable)-1))
-	while(playerOpponentTeam = playerClub)
-	{
-		playerOpponentTeam = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable)-1))
+	// Script to generate a 38-gameweek schedule for 20 teams with proper handling and structure
+	var num_teams = 20;
+	var total_gameweeks = 38;
+	var half_gameweeks = total_gameweeks / 2;
+	var matches_per_week = num_teams / 2; // 10 matches per week
+
+	// Initialize the main schedule array to hold the entire season's matchups
+	var season_schedule = [];
+
+	// Create lists for initial setup
+	var teamsAvailable = ds_list_create();
+	for (var i = 0; i < num_teams; i++) {
+	    ds_list_add(teamsAvailable, ds_list_find_value(teamList, i)); // Assume each team has a unique ID from 0 to 19
 	}
-	
-	// Remove player and opponent from available matchups
-	ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, playerOpponentTeam))
-	ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, playerClub))
-	
-	// Generate rest of the matchups
-	for (var i = 0; 1 < ds_list_size(clubsAvailable); ++i) 
-	{
-		// Home Club
-		var clubId = irandom_range(0, ds_list_size(clubsAvailable)-1)
-		var homeClub = ds_list_find_value(clubsAvailable, clubId)
-		ds_list_delete(clubsAvailable, clubId)
+
+	// Generate the first half of the season (19 gameweeks)
+	for (var week = 0; week < half_gameweeks; week++) {
+	    var clubsAvailable = ds_list_create();
+	    ds_list_copy(clubsAvailable, teamsAvailable);
+    
+	    var gameweek = []; // Array to hold 10 matchups for this gameweek
+
+	    // Generate 10 matchups for this gameweek
+	    for (var match = 0; match < matches_per_week; match++) {
+	        // Home Club
+	        var homeClubId = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable) - 1));
+	        ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, homeClubId));
+        
+	        // Away Club
+	        var awayClubId = ds_list_find_value(clubsAvailable, irandom_range(0, ds_list_size(clubsAvailable) - 1));
+	        ds_list_delete(clubsAvailable, ds_list_find_index(clubsAvailable, awayClubId));
+
+	        // Store this matchup as an array of the two clubs
+	        var matchup = [homeClubId.clubName, awayClubId.clubName];
+			//show_message(homeClubId.clubName +" v "+awayClubId.clubName)
+	        array_push(gameweek, matchup);
+	    }
+    
+	    // Add this completed gameweek to the season schedule
+	    array_push(season_schedule, gameweek);
+	    ds_list_destroy(clubsAvailable); // Clean up the list to free memory
 		
-		// Away Club
-		var clubId = irandom_range(0, ds_list_size(clubsAvailable)-1)
-		var awayClub = ds_list_find_value(clubsAvailable, clubId)
-		ds_list_delete(clubsAvailable, clubId)
-		matchups[i] = [homeClub, awayClub]
+		//show_message("Gameweek ("+string(week+1)+"): "+string(gameweek))
 	}
+
+	// Generate the second half of the season by reversing home/away for each matchup
+	for (var week = 0; week < half_gameweeks; week++) {
+	    var first_half_gameweek = season_schedule[week];
+	    var gameweek = []; // New gameweek for reversed matchups
+
+	    // Reverse home and away for each matchup
+	    for (var i = 0; i < array_length(first_half_gameweek); i++) {
+	        var matchup = first_half_gameweek[i];
+	        var reversed_matchup = [matchup[1], matchup[0]]; // Reverse the order
+	        array_push(gameweek, reversed_matchup);
+	    }
+
+	    // Add this completed gameweek to the season schedule
+	    array_push(season_schedule, gameweek);
+	}
+
+	// Clean up any lists used
+	ds_list_destroy(teamsAvailable);
+	
+	// Find opponent
+	var firstWeek = season_schedule[0]
+	for (var i = 0; i < array_length(firstWeek); ++i) {
+	    // Find player
+		if (firstWeek[i][0] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", firstWeek[i][1])
+		}
+		else if (firstWeek[i][1] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", firstWeek[i][0])
+		}
+	}
+
+	// 'season_schedule' is now a 3D array holding 38 gameweeks, each with 10 matchups
+	return season_schedule;
 }
 
 #endregion
@@ -326,7 +429,7 @@ function StartNewGamestate()
 			break;
 		}
 	}
-	GenerateMatchups()
+	seasonGameweeks = GenerateMatchups()
 	SaveGamestate()
 }
 
@@ -419,8 +522,23 @@ function LoadGamestate(Json)
 		obj_UltManManagerController.newClubName = playerClub.clubName
 		obj_UltManManagerController.playerClub = find_struct_in_list(teamList, "clubName", clubName)
 	#endregion
-
-	GenerateMatchups()
+	
+	seasonGameweeks = json_parse(gamestateMap[?"fixtures"]);
+	gameweekCounter = json_parse(gamestateMap[?"gameweek"])
+	
+	// Find opponent
+	var GameWeek = seasonGameweeks[gameweekCounter]
+	for (var i = 0; i < array_length(GameWeek); ++i) {
+	    // Find player
+		if (GameWeek[i][0] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", GameWeek[i][1])  
+		}
+		else if (GameWeek[i][1] = playerClub.clubName)
+		{
+			playerOpponentTeam = find_struct_in_list(teamList, "clubName", GameWeek[i][0])
+		}
+	}
 }
 
 function SaveGamestate()
@@ -460,6 +578,8 @@ function SaveGamestate()
 	gamestateMap[?"lineup"] = json_stringify(formationArray, true)
 	gamestateMap[?"league"] = json_stringify(leagueArray, true)
 	gamestateMap[?"team"] = json_stringify(obj_UltManManagerController.playerClub, true)
+	gamestateMap[?"fixtures"] = json_stringify(seasonGameweeks, true)
+	gamestateMap[?"gameweek"] = json_stringify(gameweekCounter)
 	
 	obj_firestore_controller.SaveGamestate("ultimateManager", json_encode(gamestateMap))
 	ds_map_destroy(gamestateMap)
