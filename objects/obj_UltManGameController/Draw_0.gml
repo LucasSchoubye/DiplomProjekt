@@ -66,6 +66,7 @@ for (var i = 0; i < 2; ++i) {
 // End Match
 if (timer > 45 && obj_UltManManagerController.halftimeCompleted = false)
 {
+	audio_play_sound(sou_UltManWhistle,1,false)
 	room_goto(rm_UltManHalftime)
 	obj_UltManManagerController.lastScoreline = scoreline
 	obj_UltManManagerController.halftimeCompleted = true
@@ -73,6 +74,7 @@ if (timer > 45 && obj_UltManManagerController.halftimeCompleted = false)
 if (timer > 90)
 {
 	room_goto(rm_UltManEndMatch)
+	audio_play_sound(sou_UltManWhistle,1,false)
 	obj_UltManManagerController.lastScoreline = scoreline
 	obj_UltManManagerController.halftimeCompleted = false
 }

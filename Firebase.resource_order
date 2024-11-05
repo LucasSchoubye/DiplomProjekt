@@ -193,6 +193,7 @@
     {"name":"sou_FtDWin","order":6,"path":"sounds/sou_FtDWin/sou_FtDWin.yy",},
     {"name":"sou_UltManCheer","order":1,"path":"sounds/sou_UltManCheer/sou_UltManCheer.yy",},
     {"name":"sou_UltManTackle","order":2,"path":"sounds/sou_UltManTackle/sou_UltManTackle.yy",},
+    {"name":"sou_UltManWhistle","order":3,"path":"sounds/sou_UltManWhistle/sou_UltManWhistle.yy",},
     {"name":"spr_basicParticle","order":1,"path":"sprites/spr_basicParticle/spr_basicParticle.yy",},
     {"name":"spr_blackHole","order":3,"path":"sprites/spr_blackHole/spr_blackHole.yy",},
     {"name":"spr_cat","order":3,"path":"sprites/spr_cat/spr_cat.yy",},

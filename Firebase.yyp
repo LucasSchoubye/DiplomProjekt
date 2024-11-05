@@ -484,6 +484,7 @@
     {"id":{"name":"sou_UltManCheer","path":"sounds/sou_UltManCheer/sou_UltManCheer.yy",},},
     {"id":{"name":"sou_UltManKickLight","path":"sounds/sou_UltManKickLight/sou_UltManKickLight.yy",},},
     {"id":{"name":"sou_UltManTackle","path":"sounds/sou_UltManTackle/sou_UltManTackle.yy",},},
+    {"id":{"name":"sou_UltManWhistle","path":"sounds/sou_UltManWhistle/sou_UltManWhistle.yy",},},
     {"id":{"name":"spr_arsenalPlaceholder","path":"sprites/spr_arsenalPlaceholder/spr_arsenalPlaceholder.yy",},},
     {"id":{"name":"spr_basicParticle","path":"sprites/spr_basicParticle/spr_basicParticle.yy",},},
     {"id":{"name":"spr_blackHole","path":"sprites/spr_blackHole/spr_blackHole.yy",},},
