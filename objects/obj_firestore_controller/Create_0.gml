@@ -147,7 +147,6 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
 	var item = ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1)
@@ -171,7 +170,6 @@ function UpdateInventory(itemStruct)
 
 	ds_map_destroy(itemMap)
 }
-
 
 function StartSession(game)
 {		
