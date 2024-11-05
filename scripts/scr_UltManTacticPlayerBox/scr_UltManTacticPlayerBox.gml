@@ -100,15 +100,15 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 				
 					if (fromPlayer != undefined)
 					{
-					
 						// If player is in starting squad
 						if (i < 11 or ds_list_find_index(squad, fromPlayer) < 11)
 						{
+							// Setup variable
 							var toPlayerCoor = [undefined,undefined]
 							var fromPlayerCoor = [undefined,undefined]
+							var toPlayer = ds_list_find_value(squad, i)
 						
 							// Swapping from bench to starting 11
-							var toPlayer = ds_list_find_value(squad, i)
 							for (var column = 0; column < array_length(formationColumns); ++column) {
 							
 								if (ds_list_find_index(formationColumns[column], toPlayer) > -1)
@@ -129,10 +129,16 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 										break
 									}
 								}
-						
+
 								// Switch
 								if (toPlayerCoor[0] != undefined)
 								{
+									// From Player
+									if (ds_list_find_index(fromPlayer.playableColumns, toPlayerCoor[0]) == -1)
+									{
+										return
+									}
+									
 									ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
 									if (fromPlayerCoor[0] != undefined)
 									{
@@ -145,6 +151,12 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 								}
 								if (fromPlayerCoor[0] != undefined)
 								{
+									// to Player
+									if (ds_list_find_index(toPlayer.playableColumns, fromPlayerCoor[0]) == -1)
+									{
+										return
+									}
+									
 									ds_list_replace(formationColumns[fromPlayerCoor[0]], fromPlayerCoor[1], toPlayer)
 									if (toPlayerCoor[0] != undefined)
 									{
@@ -161,6 +173,12 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 							}
 							else
 							{
+								if (ds_list_find_index(fromPlayer.playableColumns, toPlayerCoor[0]) == -1)
+								{
+									fromPlayer = undefined
+									return
+								}
+								
 								ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
 								fromPlayer.UpdatePosition(toPlayerCoor[0], toPlayerCoor[1], ds_list_size(formationColumns[toPlayerCoor[0]]))
 								toPlayer.position = FootballPositions.SUB

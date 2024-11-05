@@ -177,6 +177,7 @@ if (changeClubNamePopup){
 		    if (mouse_x > room_width * 0.55 && mouse_x < room_width * 0.6 &&
 		        mouse_y > room_height * 0.475 && mouse_y < room_height * 0.525) {
 				// Changes clubname
+				scr_ultManChangeClubNameInFixtures(playerClub.clubName, newClubName)
 				playerClub.clubName = newClubName;
 				clubName = newClubName;
 				obj_UltManManagerController.SaveGamestate()
