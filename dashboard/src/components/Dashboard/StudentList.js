@@ -3,7 +3,7 @@ import { Box, Typography, List, ListItem, ListItemText, Divider, Button, Circula
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../../config/firebase";
 
-const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap }) => {
+const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap }) => {
     const theme = useTheme();
     const isXsScreen = useMediaQuery(theme.breakpoints.only('xs'));
     const isSmScreen = useMediaQuery(theme.breakpoints.only('sm'));
@@ -25,18 +25,15 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         return '750px'; // for lg and above
     };
 
-    const handleStudentClick = async (studentData) => {
-        setSelectedStudent(studentData);
+    const fetchSessionsAndAnswers = async (studentId) => {
         setIsLoadingSessions(true);
         try {
-            // Fetch sessions
             const sessionsRef = collection(db, 'sessions');
-            const q = query(sessionsRef, where('student', '==', "/students/" + studentData.id));
+            const q = query(sessionsRef, where('student', '==', `/students/${studentId}`));
             const querySnapshot = await getDocs(q);
             const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setSessions(sessionsData);
 
-            // Fetch answers for each session
             const answersPromises = sessionsData.map(async (session) => {
                 const answersRef = collection(db, 'answers');
                 const answersQuery = query(answersRef, where('sessionRef', '==', session.id));
@@ -55,6 +52,11 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         } finally {
             setIsLoadingSessions(false);
         }
+    };
+
+    const handleStudentClick = (studentData) => {
+        setSelectedStudent(studentData);
+        fetchSessionsAndAnswers(studentData.id);
     };
 
     const getSubjects = () => {
@@ -95,7 +97,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 
     const handleSubjectClick = (subject) => {
         setSelectedSubject(subject);
-        const subjectAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subject === subject);
+        const subjectAnswers = getSubjectAnswers(subject);
         handleReceiveAnswerMap(subjectAnswers, 'subject');
     };
 
@@ -110,7 +112,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleSubtopicClick = (subtopic) => {
         setSelectedSubtopic(subtopic);
         setSelectedSession(null);
-        const subtopicAnswers = Object.values(sessionAnswers).flat().filter(answer => answer.subtopic === subtopic);
+        const subtopicAnswers = getSubtopicAnswers(subtopic);
         handleReceiveAnswerMap(subtopicAnswers, 'subtopic');
     };
 
@@ -141,11 +143,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
     };
 
-    // const handleBackToStudents = () => {
-    //     setSelectedSubject(null);
-    //     setSelectedStudent(null);
-    //     clearAnswerMap(); // Call this function to hide the answers in StudentStats
-    // };
+    const handleBackToStudents = () => {
+        setSelectedStudent(null);
+        clearAnswerMap();
+    };
 
     const renderBackButton = () => {
         if (selectedSession) {
@@ -168,7 +169,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             );
         } else if (selectedStudent) {
             return (
-                <Button variant="outlined" onClick={() => setSelectedStudent(null)} fullWidth sx={{ mb: 2 }}>
+                <Button variant="outlined" onClick={handleBackToStudents} fullWidth sx={{ mb: 2 }}>
                     Back to Student List
                 </Button>
             );
@@ -181,17 +182,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
     };
 
-    const renderContent = () => {
-    if (isLoading || isLoadingSessions) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
-                <CircularProgress />
-            </Box>
-        );
-    }
-
-    if (selectedSession) {
-        const sessionAnswersData = sessionAnswers[selectedSession];
+    const renderSessionAnswers = (sessionAnswersData) => {
         if (!sessionAnswersData || sessionAnswersData.length === 0) {
             return (
                 <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
@@ -212,10 +203,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 ))}
             </List>
         );
-    }
+    };
 
-    if (selectedSubtopic) {
-        const sessionsForSubtopic = getSessionsForSubtopic(selectedSubtopic);
+    const renderSessionsForSubtopic = (sessionsForSubtopic) => {
         if (sessionsForSubtopic.length === 0) {
             return (
                 <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
@@ -236,10 +226,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 ))}
             </List>
         );
-    }
+    };
 
-    if (selectedSubject) {
-        const subtopicsForSubject = getSubtopicsForSubject(selectedSubject);
+    const renderSubtopicsForSubject = (subtopicsForSubject) => {
         if (subtopicsForSubject.length === 0) {
             return (
                 <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
@@ -260,10 +249,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 ))}
             </List>
         );
-    }
+    };
 
-    if (selectedStudent) {
-        const subjects = getSubjects();
+    const renderSubjectsForStudent = (subjects) => {
         if (subjects.length === 0) {
             return (
                 <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
@@ -284,41 +272,69 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 ))}
             </List>
         );
-    }
+    };
+
+    const renderStudentList = () => {
+        return (
+            <List>
+                {students.length > 0 ? (
+                    students.map((studentData, index) => (
+                        <React.Fragment key={studentData.id}>
+                            <ListItem button onClick={() => handleStudentClick(studentData)}>
+                                <ListItemText primary={studentData.fullName} />
+                            </ListItem>
+                            {index < students.length - 1 && <Divider />}
+                        </React.Fragment>
+                    ))
+                ) : (
+                    <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
+                )}
+            </List>
+        );
+    };
+
+    const renderContent = () => {
+        if (isLoading || isLoadingSessions) {
+            return (
+                <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
+                    <CircularProgress />
+                </Box>
+            );
+        }
+
+        if (selectedSession) {
+            return renderSessionAnswers(sessionAnswers[selectedSession]);
+        }
+
+        if (selectedSubtopic) {
+            return renderSessionsForSubtopic(getSessionsForSubtopic(selectedSubtopic));
+        }
+
+        if (selectedSubject) {
+            return renderSubtopicsForSubject(getSubtopicsForSubject(selectedSubject));
+        }
+
+        if (selectedStudent) {
+            return renderSubjectsForStudent(getSubjects());
+        }
+
+        return renderStudentList();
+    };
 
     return (
-        <List>
-            {students.length > 0 ? (
-                students.map((studentData, index) => (
-                    <React.Fragment key={studentData.id}>
-                        <ListItem button onClick={() => handleStudentClick(studentData)}>
-                            <ListItemText primary={studentData.fullName} />
-                        </ListItem>
-                        {index < students.length - 1 && <Divider />}
-                    </React.Fragment>
-                ))
-            ) : (
-                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
-            )}
-        </List>
+        <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
+            {renderBackButton()}
+            <Typography variant="h6" mb={2}>
+                {selectedSession ? `Session Details` :
+                selectedSubtopic ? `Sessions for ${selectedSubtopic}` :
+                selectedSubject ? `Subtopics for ${selectedSubject}` :
+                selectedStudent ? `${selectedStudent.fullName}` :
+                `Students in ${selectedClass.className}`}
+            </Typography>
+            <Divider />
+            {renderContent()}
+        </Box>
     );
-};
-
-
-return (
-    <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
-        {renderBackButton()}
-        <Typography variant="h6" mb={2}>
-            {selectedSession ? `Session Details` :
-             selectedSubtopic ? `Sessions for ${selectedSubtopic}` :
-             selectedSubject ? `Subtopics for ${selectedSubject}` :
-             selectedStudent ? `${selectedStudent.fullName}` :
-             `Students in ${selectedClass.className}`}
-        </Typography>
-        <Divider />
-        {renderContent()}
-    </Box>
-);
 };
 
 export default StudentList;
