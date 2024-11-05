@@ -27,11 +27,6 @@ function scr_UltManCreateEnemyTeam(tier){
 	if (opponentClub.defenderQuality > 85)
 		defenseTier++
 
-	show_message("Overall Tier: " + string(tier) + 
-				", Attacker Tier: "+ string(attackTier) + 
-				", Midfielder Tier: " + string(midfielderTier) + 
-				", Defender Tier: " + string(defenseTier)) 
-
 	switch(irandom(2))
 	{
 		#region 4-4-2

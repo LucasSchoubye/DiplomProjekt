@@ -20,6 +20,7 @@ itemID = undefined
 // Functions
 function RequestAllowedGames()
 {
+	ds_list_clear(obj_menuGridController.itemElements)
 	FirebaseFirestore("/schools/"+schoolId+"/classes/"+classId+"/allowedGames/").Read()
 }
 
@@ -328,7 +329,6 @@ function RepondStudent(map)
 	
 	// After student data is fetched, create question generator
 	instance_create_depth(0,0,0,obj_questionController)
-	RequestAllowedGames()
 	
 }
 
