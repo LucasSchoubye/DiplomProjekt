@@ -20,6 +20,7 @@ itemID = undefined
 // Functions
 function RequestAllowedGames()
 {
+	ds_list_clear(obj_menuGridController.itemElements)
 	FirebaseFirestore("/schools/"+schoolId+"/classes/"+classId+"/allowedGames/").Read()
 }
 
@@ -147,7 +148,6 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
 	var item = ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1)
@@ -171,7 +171,6 @@ function UpdateInventory(itemStruct)
 
 	ds_map_destroy(itemMap)
 }
-
 
 function StartSession(game)
 {		
@@ -330,7 +329,6 @@ function RepondStudent(map)
 	
 	// After student data is fetched, create question generator
 	instance_create_depth(0,0,0,obj_questionController)
-	RequestAllowedGames()
 	
 }
 

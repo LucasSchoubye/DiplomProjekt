@@ -35,8 +35,12 @@ for (var i = 0; i < 4; ++i) {
 }
 
 function GetGameData(gameData) {
-	var currentElement = new MenuGridElement()
-	currentElement.itemName = gameData[?"name"]
-	currentElement.itemSprite = spr_typeracerIcon
-	ds_list_add(itemElements, currentElement)
+	
+	if (gameData[?"allowed"] = true)
+	{
+		var currentElement = new MenuGridElement()
+		currentElement.itemName = gameData[?"name"]
+		currentElement.itemSprite = spr_typeracerIcon
+		ds_list_add(itemElements, currentElement)
+	}
 }

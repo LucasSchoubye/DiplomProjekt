@@ -29,6 +29,7 @@ function scr_ultManTactics(halftimeActive = false){
 		}
 	}
 	
+	// Drop selected player
 	if (mouse_check_button_released(mb_left))
 	{
 		var fromColumn = undefined
