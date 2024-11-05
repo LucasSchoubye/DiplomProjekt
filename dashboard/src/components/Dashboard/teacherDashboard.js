@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getDoc, doc, getDocs, collection } from "firebase/firestore";
+import { getDoc, doc, getDocs, collection, updateDoc } from "firebase/firestore"; // Import updateDoc
 import { db } from "../../config/firebase.js"; // Import Firestore
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
 import StudentStats from "./studentStats.js";
-import { CircularProgress, Box } from '@mui/material';
+import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
 
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
@@ -17,6 +17,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [answerMap, setAnswerMap] = useState({});
     const [answerContextType, setAnswerContextType] = useState('');
     const [isLoadingClasses, setIsLoadingClasses] = useState(true);
+    const [selectedGames, setSelectedGames] = useState([]);
+    const [availableGames, setAvailableGames] = useState([]);
+    const [classDocRef, setClassDocRef] = useState(null);
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -52,6 +55,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
 
     const handleClassClick = async (classData) => {
         setSelectedClass(classData);
+        setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
         setIsViewingStudents(true);
         setIsLoadingStudents(true);
         try {
@@ -67,6 +71,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
 
             const studentList = await Promise.all(studentPromises);
             setStudents(studentList);
+
+            // Fetch allowed games
+            await fetchAllowedGames(classData.classRefData.classRef);
         } catch (err) {
             console.error("Error fetching students: ", err);
         } finally {
@@ -89,6 +96,48 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const clearAnswerMap = () => {
         setAnswerMap({});
         setAnswerContextType('');
+    };
+
+    const handleGameChange = async (event) => {
+        const value = event.target.value;
+        const newSelectedGames = value.filter(gameId => !selectedGames.includes(gameId));
+        const unselectedGames = selectedGames.filter(gameId => !value.includes(gameId));
+
+        setSelectedGames(value);
+        console.log(classDocRef)
+        // Update the database
+        try {
+            for (const gameId of newSelectedGames) {
+                const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
+                console.log(`Setting allowed to true for game: ${gameId}`);
+                await updateDoc(gameDocRef, { allowed: true });
+            }
+            for (const gameId of unselectedGames) {
+                const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
+                console.log(`Setting allowed to false for game: ${gameId}`);
+                await updateDoc(gameDocRef, { allowed: false });
+            }
+        } 
+        catch (err) {
+            console.error("Error updating allowed games: ", err);
+        }
+    };
+
+    const fetchAllowedGames = async (classDocRef) => {
+        try {
+            const allowedGamesCollectionRef = collection(db, `${classDocRef.path}/allowedGames`);
+            const allowedGamesSnapshot = await getDocs(allowedGamesCollectionRef);
+
+            const games = allowedGamesSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            setAvailableGames(games);
+            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
+        } catch (err) {
+            console.error("Error fetching allowed games: ", err);
+        }
     };
 
     return (
@@ -116,9 +165,29 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                 )}
             </DrawerLayout>
             
-            {Object.keys(answerMap).length > 0 && (
-                <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto' }}>
-                    <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+            {selectedClass && (
+                <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
+                    <Select
+                        multiple
+                        value={selectedGames}
+                        onChange={handleGameChange}
+                        displayEmpty
+                        renderValue={() => "Choose Available Games"}
+                        style={{ position: 'absolute', top: '20px', right: '20px' }}
+                    >
+                        <MenuItem value="" disabled>
+                            Choose Available Games
+                        </MenuItem>
+                        {availableGames.map((game) => (
+                            <MenuItem key={game.id} value={game.id}>
+                                <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
+                                <ListItemText primary={game.name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                    {Object.keys(answerMap).length > 0 && (
+                        <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                    )}
                 </div>
             )}
         </div>
