@@ -18,7 +18,7 @@ if (room = rm_UltManOverview){
 	var buttonY = room_height * 0.035
 	var buttonWidth = room_width * 0.9925
 	var buttonHeight = room_height * 0.0965
-	var buttonText = "Play Match"
+	var buttonText = LC.translate("Play Match")
 	var titleHeight = (string_height(clubName) / 2)
 	
 	teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
@@ -37,7 +37,7 @@ if (room = rm_UltManOverview){
 	if(mouse_y > menuClubNameY && mouse_y < menuClubNameY + string_height(clubName) && 
 			mouse_x > menuClubNameX && mouse_x < menuClubNameX + string_width(clubName)){
 		draw_set_alpha(0.2)
-		draw_text(menuClubNameX + string_width(clubName) + 20, menuClubNameY, "Press club name to change")
+		draw_text(menuClubNameX + string_width(clubName) + 20, menuClubNameY, LC.translate("Press club name to change", Games.UltimateManager))
 		if(mouse_check_button_pressed(mb_left)){
 			changeClubNamePopup = true;			
 		}
@@ -54,9 +54,9 @@ if (room = rm_UltManOverview){
 		if(i = currentMenu){
 			draw_set_color(#5666F9)
 		}
-		draw_text(menuX, menuY + i*menuPaddingY, ds_list_find_value(menuOptions, i))
+		draw_text(menuX, menuY + i*menuPaddingY, LC.translate(ds_list_find_value(menuOptions, i)))
 		draw_set_color(c_white)
-		var menuOptionWidth = string_width(ds_list_find_value(menuOptions, i))
+		var menuOptionWidth = string_width(LC.translate(ds_list_find_value(menuOptions, i)))
 	
 		if( ds_list_find_value(menuOptions, i) = "Fixtures" ){
 			draw_set_alpha(0.3)
@@ -129,7 +129,7 @@ if (changeClubNamePopup){
 		draw_rectangle(room_width * 0.3, room_height * 0.3, room_width * 0.7, room_height * 0.55, false);
 		draw_set_alpha(1);
 		draw_set_color(c_white);
-		draw_text(room_width * 0.35, room_height * 0.35, "New clubname");
+		draw_text(room_width * 0.35, room_height * 0.35, LC.translate("New clubname", Games.UltimateManager));
 		
 		draw_roundrect(room_width * 0.35,room_height*0.375,room_width * 0.65,room_height*0.425, true)
 		try{
@@ -144,7 +144,7 @@ if (changeClubNamePopup){
 				if(string_length(newClubName) >= 20){
 					
 					clubNameLimit = instance_create_depth(room_width * 0.35, room_height*0.3725, -12, obj_par_text)
-					clubNameLimit.text = "Club name cannot exceed 20 characters"
+					clubNameLimit.text = LC.translate("Club name cannot exceed 20 characters")
 					clubNameLimit.colour = #c0c0c0
 					clubNameLimit.font = fn_RobotoRegular12
 					draw_set_font(fn_sideBarOptionsRoboto);
@@ -163,12 +163,12 @@ if (changeClubNamePopup){
         
 		// Draw "Change" button
 		draw_set_color(#3B95FF);
-		scr_drawButton(room_width * 0.55, room_height * 0.475, room_width * 0.6, room_height * 0.525, "Change")
+		scr_drawButton(room_width * 0.55, room_height * 0.475, room_width * 0.6, room_height * 0.525, LC.translate("Change"))
 		draw_set_color(c_white);
         
 		// Draw "Cancel" button
 		draw_set_color(c_red);
-		scr_drawButton(room_width * 0.4, room_height * 0.475, room_width * 0.45, room_height * 0.525, "Cancel")
+		scr_drawButton(room_width * 0.4, room_height * 0.475, room_width * 0.45, room_height * 0.525, LC.translate("Cancel"))
 		draw_set_color(c_white);
 		// Handle "Change" and "Cancel" button clicks
 		if (mouse_check_button_pressed(mb_left)) {

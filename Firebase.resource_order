@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[
     {"name":"Amor","order":16,"path":"folders/Assets/Fight The Dungeon/Sprites/Amor.yy",},
+    {"name":"Languages","order":10,"path":"folders/Assets/Shared Assets/Scripts/Languages.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
@@ -75,6 +76,7 @@
     {"name":"obj_FtDscreenPause","order":2,"path":"objects/obj_FtDscreenPause/obj_FtDscreenPause.yy",},
     {"name":"obj_FtDWinScreen","order":9,"path":"objects/obj_FtDWinScreen/obj_FtDWinScreen.yy",},
     {"name":"obj_inventoryController","order":7,"path":"objects/obj_inventoryController/obj_inventoryController.yy",},
+    {"name":"obj_languageController","order":10,"path":"objects/obj_languageController/obj_languageController.yy",},
     {"name":"obj_loginController","order":4,"path":"objects/obj_loginController/obj_loginController.yy",},
     {"name":"obj_mainMenuController","order":2,"path":"objects/obj_mainMenuController/obj_mainMenuController.yy",},
     {"name":"obj_menuGridController","order":6,"path":"objects/obj_menuGridController/obj_menuGridController.yy",},
