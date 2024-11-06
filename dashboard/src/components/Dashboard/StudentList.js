@@ -57,6 +57,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleStudentClick = (studentData) => {
         setSelectedStudent(studentData);
         fetchSessionsAndAnswers(studentData.id);
+        console.log("Student clicked:", studentData);
     };
 
     const getSubjects = () => {

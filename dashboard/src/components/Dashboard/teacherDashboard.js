@@ -12,6 +12,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
@@ -22,6 +23,12 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
     const [classAnswersMap, setClassAnswersMap] = useState([]);
+
+    useEffect(() => {
+        console.log("Selected Class:", selectedClass);
+        console.log("Selected Student:", selectedStudent);
+    }, [selectedClass, selectedStudent]);
+    
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -58,6 +65,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const handleClassClick = async (classData) => {
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
+        setSelectedStudent(null)
         setIsViewingStudents(true);
         setIsLoadingStudents(true);
         try {
@@ -85,6 +93,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setIsLoadingStudents(false);
         }
     };
+    
 
     const fetchClassSessionsAndAnswers = async (studentList) => {
         try {
@@ -196,11 +205,12 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                     isLoading={isLoadingStudents}
                     handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
                     clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                    setSelectedStudent={setSelectedStudent}
                     />
                 )}
             </DrawerLayout>
             
-            {selectedClass && (
+            {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
                     <Select
                         multiple
