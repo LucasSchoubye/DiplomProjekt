@@ -38,7 +38,7 @@ function scr_ultManHome(){
 	draw_set_halign(fa_center)
 	draw_set_valign(fa_top)
 	draw_set_font(fn_RobotoMedium14)
-	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 20, "Next Match - Week "+string(gameweekCounter+1))
+	draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 20, LC.translate("Next Match - Week ")+string(gameweekCounter+1))
 	draw_set_color(#FFFFFF)
 	draw_set_font(fn_RobotoRegular12)
 	//draw_text(matchDetailsBoxCenter , matchDetailsBoxTop + 24, "Sunday 22nd September 2024")
@@ -185,7 +185,7 @@ function scr_ultManHome(){
 	var teamStatsBoxCenter = (teamStatsBoxLeft + teamStatsBoxRight) / 2
 	var teamStatsStart = teamStatsBoxLeft + 75
 	var teamStatsRow = 50
-	draw_text(teamStatsBoxCenter, room_height * 0.40, "Team Stats")
+	draw_text(teamStatsBoxCenter, room_height * 0.40, LC.translate("Team Stats"))
 	draw_set_halign(fa_left)
 	try{
 		for (var i = 0; i < array_length(teamStats); ++i) {
@@ -229,7 +229,7 @@ function scr_ultManHome(){
 	var maxTouches = 0
 	var maxTouchesPlayerName = undefined	
 	draw_set_halign(fa_center)
-	draw_text(playerStatsBoxCenter, room_height * 0.40, "Player Stats")
+	draw_text(playerStatsBoxCenter, room_height * 0.40, LC.translate("Player Stats"))
 	draw_set_halign(fa_left)
 	
 	
@@ -283,12 +283,12 @@ function scr_ultManHome(){
 		
 		draw_set_font(fn_RobotoRegular12)
 		draw_set_color(c_grey)
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(1) - 5 , "Top Goalscorer")
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(2) - 5 , "Most Assists")
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(3) - 5 , "Most Tackles")
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(4) - 5 , "Attempted Passes")
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(5) - 5 , "Attempted Shots")
-		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(6) - 5 , "Most Touches")
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(1) - 5 , LC.translate("Top Goalscorer"))
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(2) - 5 , LC.translate("Most Assists"))
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(3) - 5 , LC.translate("Most Tackles"))
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(4) - 5 , LC.translate("Attempted Passes"))
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(5) - 5 , LC.translate("Attempted Shots"))
+		draw_text(playerStatsBoxStart + 56, playerStatsBoxTop + playerStatsRow*(6) - 5 , LC.translate("Most Touches"))
 	}
 	catch(error){}
 	

@@ -38,8 +38,10 @@ enum FormationColumns
 
 teamList = ds_list_create()
 
-// Variables
+// Language controller
+LC = obj_languageController
 
+// Variables
 playerClub = new UltManTeam()
 playerOpponentTeam = undefined
 
