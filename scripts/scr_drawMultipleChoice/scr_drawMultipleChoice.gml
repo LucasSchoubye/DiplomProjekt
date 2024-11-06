@@ -3,47 +3,46 @@
 function scr_drawMultipleChoice(optionsMenu, controllerId)
 {
 
-//draw_set_font(fn_konk18)
+#region Local variables
 
-var resolutionSizeRatio = 1
+	var resolutionSizeRatio = 1
 
-var screenMidX = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2
-var screenMidY = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])/2
+	var screenMidX = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2
+	var screenMidY = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])/2
 
-var answerBoxTop = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.7
-var answerBoxBot = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.95
-var answerBoxLeft = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.1
-var answerBoxRight = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.9
-var answerBoxMidY = (answerBoxTop+answerBoxBot)/2
-var answerBoxMidThirdY = (answerBoxTop-answerBoxBot)/3
-var answerBoxQuarterX = camera_get_view_x(view_camera[0]) + (answerBoxRight-answerBoxLeft)/4
+	var answerBoxTop = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.7
+	var answerBoxBot = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.95
+	var answerBoxLeft = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.1
+	var answerBoxRight = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.9
+	var answerBoxMidY = (answerBoxTop+answerBoxBot)/2
+	var answerBoxMidThirdY = (answerBoxTop-answerBoxBot)/3
+	var answerBoxQuarterX = (answerBoxRight-answerBoxLeft)/4//camera_get_view_x(view_camera[0]) + (answerBoxRight-answerBoxLeft)/4
 
-var promptBoxHeight = camera_get_view_height(view_camera[0])*0.15
-var promptBoxMid = answerBoxTop-promptBoxHeight/2
-var twoOptionsX = (answerBoxRight-answerBoxLeft)/4
-var twoOptionsY = (answerBoxTop-answerBoxBot)/4
-var fourOptionsX = (answerBoxRight-answerBoxLeft)/8
-var threeOptionsY = (answerBoxTop-answerBoxBot)/6
+	var promptBoxHeight = camera_get_view_height(view_camera[0])*0.12
+	var promptBoxMid = answerBoxTop-promptBoxHeight/2
+	var twoOptionsX = (answerBoxRight-answerBoxLeft)/4
+	var twoOptionsY = (answerBoxTop-answerBoxBot)/4
+	var fourOptionsX = (answerBoxRight-answerBoxLeft)/8
+	var threeOptionsY = (answerBoxTop-answerBoxBot)/6
 
+	var mouseWithinAnswerBox = false
+	var optionSelected = undefined
+	
+#endregion
 
-var mouseWithinAnswerBox = false
 if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 	mouse_y > answerBoxTop && mouse_y < answerBoxBot)
 {
 	mouseWithinAnswerBox = true
 }
 
-
-var optionSelected = undefined
-
 	if (question != undefined)
 	{
+		// Draw answer box outline
 		draw_set_alpha(0.7)
 		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,false)
 		draw_set_alpha(1)
-		
 		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
-		//draw_rectangle(answerBoxLeft,answerBoxTop,answerBoxRight,answerBoxBot,true)
 	
 		// Vertical middle line for options
 		draw_line(screenMidX,answerBoxTop,screenMidX,answerBoxBot)
@@ -54,6 +53,9 @@ var optionSelected = undefined
 		draw_text(screenMidX,promptBoxMid,question.prompt)
 		draw_set_color(c_white)
 		
+		// Draw Hint
+		if (global.answeredLastQuestionCorrect == false)
+			scr_drawQuestionHint(answerBoxLeft,answerBoxTop-promptBoxHeight*2,answerBoxRight,answerBoxTop-promptBoxHeight - 10)
 		
 		// Draw option boxes
 		switch(array_length(question.options))
@@ -81,10 +83,10 @@ var optionSelected = undefined
 					draw_set_color(c_black)
 					switch(i) {
 						case 0:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i].text)
 						break;
 						case 1:
-							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+2*twoOptionsY,question.options[i].text)
 						break;
 					}
 					draw_set_color(c_white)
@@ -136,17 +138,17 @@ var optionSelected = undefined
 				for(var i = 0; i < array_length(question.options); i++) {
 					switch(i) {
 						case 0:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 1:
-							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 2:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 						break;
 						case 3:
 							if(array_length(question.options) == 4) {
-								draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+								draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 							}
 						break;
 					}
@@ -208,23 +210,23 @@ var optionSelected = undefined
 					draw_set_color(c_black)
 					switch(i) {
 						case 0:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+5*threeOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+5*threeOptionsY,question.options[i].text)
 						break;
 						case 1:
-							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+5*threeOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+5*threeOptionsY,question.options[i].text)
 						break;
 						case 2:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+3*threeOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+3*threeOptionsY,question.options[i].text)
 						break;
 						case 3:
-							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+3*threeOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+3*threeOptionsY,question.options[i].text)
 						break;
 						case 4:
-							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+threeOptionsY,question.options[i])
+							draw_text(answerBoxLeft+twoOptionsX,answerBoxBot+threeOptionsY,question.options[i].text)
 						break;
 						case 5:
 							if(array_length(question.options) == 6) {
-								draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+threeOptionsY,question.options[i])
+								draw_text(answerBoxLeft+3*twoOptionsX,answerBoxBot+threeOptionsY,question.options[i].text)
 							}
 						break;
 					}
@@ -297,29 +299,29 @@ var optionSelected = undefined
 					draw_set_color(c_black)
 					switch(i) {
 						case 0:
-							draw_text(answerBoxLeft+fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 1:
-							draw_text(answerBoxLeft+3*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 2:
-							draw_text(answerBoxLeft+5*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+5*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 3:
-							draw_text(answerBoxLeft+7*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+7*fourOptionsX,answerBoxBot+3*twoOptionsY,question.options[i].text)
 						break;
 						case 4:
-							draw_text(answerBoxLeft+fourOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+fourOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 						break;
 						case 5:
-							draw_text(answerBoxLeft+3*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+3*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 						break;
 						case 6:
-							draw_text(answerBoxLeft+5*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+							draw_text(answerBoxLeft+5*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 						break;
 						case 7:
 							if(array_length(question.options) == 8) {
-								draw_text(answerBoxLeft+7*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i])
+								draw_text(answerBoxLeft+7*fourOptionsX,answerBoxBot+twoOptionsY,question.options[i].text)
 							}
 						break;
 					}
@@ -339,19 +341,22 @@ var optionSelected = undefined
 	{
 		if (optionSelected < array_length(question.options))
 		{
-			obj_firestore_controller.SendAnswer(question.prompt, question.options[optionSelected], question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
+			obj_firestore_controller.SendAnswer(question.prompt, question.options[optionSelected], question.options[question.answerIndex].text, question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
 			obj_firestore_controller.answerTimer = 0
 
+			// Check if correct
 			if(optionSelected == question.answerIndex)
 			{
-				//obj_typeracerCar.AnsweredCorrect()
 				controllerId.AnsweredCorrect()
 				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
+				global.answeredLastQuestionCorrect = true
+				global.LastMistakeType = undefined
 			}
 			else
 			{
-				//obj_typeracerCar.AnsweredIncorrect()
 				controllerId.AnsweredIncorrect()
+				global.answeredLastQuestionCorrect = false
+				global.LastMistakeType = question.options[optionSelected].errorEnum
 			}
 		}
 	}
