@@ -1296,6 +1296,7 @@
     {"lower":228,"upper":230,},
     {"lower":246,"upper":246,},
     {"lower":248,"upper":248,},
+    {"lower":8594,"upper":8594,},
     {"lower":9647,"upper":9647,},
   ],
   "regenerateBitmap":false,

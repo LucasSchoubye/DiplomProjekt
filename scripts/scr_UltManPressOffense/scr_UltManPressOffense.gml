@@ -3,7 +3,7 @@
 function scr_UltManPressOffense(){
 
 			//var strength = strength
-			var tackleDist = defence
+			var tackleDist = defence*0.7
 			var player = obj_UltManGameController.controlledPlayer
 			var spd = topSpd
 

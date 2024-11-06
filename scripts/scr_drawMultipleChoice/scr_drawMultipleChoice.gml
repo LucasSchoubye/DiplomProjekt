@@ -16,9 +16,9 @@ function scr_drawMultipleChoice(optionsMenu, controllerId)
 	var answerBoxRight = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])*0.9
 	var answerBoxMidY = (answerBoxTop+answerBoxBot)/2
 	var answerBoxMidThirdY = (answerBoxTop-answerBoxBot)/3
-	var answerBoxQuarterX = camera_get_view_x(view_camera[0]) + (answerBoxRight-answerBoxLeft)/4
+	var answerBoxQuarterX = (answerBoxRight-answerBoxLeft)/4//camera_get_view_x(view_camera[0]) + (answerBoxRight-answerBoxLeft)/4
 
-	var promptBoxHeight = camera_get_view_height(view_camera[0])*0.15
+	var promptBoxHeight = camera_get_view_height(view_camera[0])*0.12
 	var promptBoxMid = answerBoxTop-promptBoxHeight/2
 	var twoOptionsX = (answerBoxRight-answerBoxLeft)/4
 	var twoOptionsY = (answerBoxTop-answerBoxBot)/4
@@ -38,10 +38,10 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 
 	if (question != undefined)
 	{
+		// Draw answer box outline
 		draw_set_alpha(0.7)
 		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxBot,false)
 		draw_set_alpha(1)
-		
 		draw_roundrect(answerBoxLeft,answerBoxTop-promptBoxHeight,answerBoxRight,answerBoxTop,true)
 	
 		// Vertical middle line for options
@@ -52,6 +52,10 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 		draw_set_color(c_black)
 		draw_text(screenMidX,promptBoxMid,question.prompt)
 		draw_set_color(c_white)
+		
+		// Draw Hint
+		if (global.answeredLastQuestionCorrect == false)
+			scr_drawQuestionHint(answerBoxLeft,answerBoxTop-promptBoxHeight*2,answerBoxRight,answerBoxTop-promptBoxHeight - 10)
 		
 		// Draw option boxes
 		switch(array_length(question.options))
@@ -345,10 +349,14 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 			{
 				controllerId.AnsweredCorrect()
 				question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
+				global.answeredLastQuestionCorrect = true
+				global.LastMistakeType = undefined
 			}
 			else
 			{
 				controllerId.AnsweredIncorrect()
+				global.answeredLastQuestionCorrect = false
+				global.LastMistakeType = question.options[optionSelected].errorEnum
 			}
 		}
 	}
