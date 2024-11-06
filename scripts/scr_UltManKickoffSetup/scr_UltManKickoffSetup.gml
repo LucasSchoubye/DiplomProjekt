@@ -9,6 +9,7 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 		obj_UltManBall.x = room_width/2
 		obj_UltManBall.y = room_height/2
 		obj_UltManBall.owner = undefined
+		global.leftScored = leftScored
 	
 		with(obj_UltManPlayer)
 		{
