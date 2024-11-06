@@ -281,8 +281,8 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-            <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
-                <List sx={{ paddingTop: 0 }}>
+            <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
+                <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                     {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
                             <ListItem button={!!studentData.fullName} onClick={() => studentData.fullName && handleStudentClick(studentData)}>
