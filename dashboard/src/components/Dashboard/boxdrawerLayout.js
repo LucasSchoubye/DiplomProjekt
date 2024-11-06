@@ -20,7 +20,9 @@ const DrawerLayout = ({ children }) => {
         // For extra small and small screens, render content without a drawer
         return (
             <Box sx={{ width: '100%', padding: 2 }}>
-                {children}
+                {React.Children.map(children, child => 
+                    React.cloneElement(child, { drawerWidth })
+                )}
             </Box>
         );
     }
@@ -39,7 +41,9 @@ const DrawerLayout = ({ children }) => {
             }}
         >
             <Box sx={{ width: '100%', padding: 0, display: 'flex', justifyContent: 'center' }}>
-                {children}
+                {React.Children.map(children, child => 
+                    React.cloneElement(child, { drawerWidth })
+                )}
             </Box>
         </Drawer>
     );

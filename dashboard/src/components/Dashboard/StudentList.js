@@ -20,9 +20,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 
     const getWidth = () => {
         if (isXsScreen) return '100%';
-        if (isSmScreen) return '450px';
-        if (isMdScreen) return '600px';
-        return '750px'; // for lg and above
+        if (isSmScreen) return '200px';
+        if (isMdScreen) return '300px';
+        return '400px'; // for lg and above
     };
 
     const fetchSessionsAndAnswers = async (studentId) => {
@@ -322,7 +322,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     return (
-        <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
+        <Box sx={{ width: getWidth(), maxWidth: '100%' }}>
             {renderBackButton()}
             <Typography variant="h6" mb={2}>
                 {selectedSession ? `Session Details` :

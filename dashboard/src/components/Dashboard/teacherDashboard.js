@@ -4,6 +4,7 @@ import { db } from "../../config/firebase.js"; // Import Firestore
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
+import SubjectsList from './subjectsList.js'; // Import SubjectsList
 import StudentStats from "./studentStats.js";
 import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
 
@@ -11,6 +12,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
+    const [subjects, setSubjects] = useState([]); // Add subjects state
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
@@ -74,10 +76,29 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
 
             // Fetch allowed games
             await fetchAllowedGames(classData.classRefData.classRef);
+
+            // Fetch subjects
+            await fetchSubjects(classData.classRefData.classRef);
         } catch (err) {
             console.error("Error fetching students: ", err);
         } finally {
             setIsLoadingStudents(false);
+        }
+    };
+
+    const fetchSubjects = async (classDocRef) => {
+        try {
+            const subjectsCollectionRef = collection(db, `${classDocRef.path}/topics`);
+            const subjectsSnapshot = await getDocs(subjectsCollectionRef);
+
+            const subjectsData = subjectsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            setSubjects(subjectsData);
+        } catch (err) {
+            console.error("Error fetching subjects: ", err);
         }
     };
 
@@ -91,6 +112,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
+        setSubjects([]); // Clear subjects when going back
     };
 
     const clearAnswerMap = () => {
@@ -153,14 +175,20 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                         handleClassClick={handleClassClick} 
                     />
                 ) : (
-                    <StudentList 
-                    students={students} 
-                    selectedClass={selectedClass} 
-                    handleBackClick={handleBackClick} 
-                    isLoading={isLoadingStudents}
-                    handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
-                    clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
-                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '90%', paddingTop: "20px" }}>
+                        <StudentList 
+                            students={students} 
+                            selectedClass={selectedClass} 
+                            handleBackClick={handleBackClick} 
+                            isLoading={isLoadingStudents}
+                            handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                            clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                        />
+                        <SubjectsList 
+                            subjects={subjects} 
+                            selectedClass={selectedClass} 
+                        />
+                    </Box>
                 )}
             </DrawerLayout>
             
