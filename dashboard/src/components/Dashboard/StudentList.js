@@ -275,21 +275,24 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const renderStudentList = () => {
+        const filledStudents = [...students].sort((a, b) => a.fullName.localeCompare(b.fullName));
+        while (filledStudents.length < 10) {
+            filledStudents.push({ id: `empty-${filledStudents.length}`, fullName: '' });
+        }
+
         return (
-            <List>
-                {students.length > 0 ? (
-                    students.map((studentData, index) => (
+            <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
+                <List sx={{ paddingTop: 0 }}>
+                    {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
-                            <ListItem button onClick={() => handleStudentClick(studentData)}>
-                                <ListItemText primary={studentData.fullName} />
+                            <ListItem button={!!studentData.fullName} onClick={() => studentData.fullName && handleStudentClick(studentData)}>
+                                <ListItemText primary={studentData.fullName || ' '} />
                             </ListItem>
-                            {index < students.length - 1 && <Divider />}
+                            {studentData.fullName && index < filledStudents.length - 1 && <Divider />}
                         </React.Fragment>
-                    ))
-                ) : (
-                    <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
-                )}
-            </List>
+                    ))}
+                </List>
+            </Box>
         );
     };
 
@@ -331,7 +334,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 selectedStudent ? `${selectedStudent.fullName}` :
                 `Students in ${selectedClass.className}`}
             </Typography>
-            <Divider />
+            <Divider sx={{ my: 0 }} />
             {renderContent()}
         </Box>
     );

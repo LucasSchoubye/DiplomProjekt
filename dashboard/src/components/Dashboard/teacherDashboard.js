@@ -184,10 +184,12 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
                         />
-                        <SubjectsList 
-                            subjects={subjects} 
-                            selectedClass={selectedClass} 
-                        />
+                        <Box >
+                            <SubjectsList 
+                                subjects={subjects} 
+                                selectedClass={selectedClass} 
+                            />
+                        </Box>
                     </Box>
                 )}
             </DrawerLayout>
