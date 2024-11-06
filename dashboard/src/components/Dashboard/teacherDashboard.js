@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getDoc, doc, getDocs, collection, updateDoc } from "firebase/firestore"; // Import updateDoc
+import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore"; // Import updateDoc
 import { db } from "../../config/firebase.js"; // Import Firestore
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
 import StudentStats from "./studentStats.js";
+import ClassStats from "./classStats.js";
 import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
 
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
@@ -20,6 +21,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
+    const [classAnswersMap, setClassAnswersMap] = useState([]);
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -74,10 +76,44 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
 
             // Fetch allowed games
             await fetchAllowedGames(classData.classRefData.classRef);
+
+            // Aggregate answers across all students in the class
+            await fetchClassSessionsAndAnswers(studentList);
         } catch (err) {
             console.error("Error fetching students: ", err);
         } finally {
             setIsLoadingStudents(false);
+        }
+    };
+
+    const fetchClassSessionsAndAnswers = async (studentList) => {
+        try {
+            const classAnswersMap = {};
+            const studentPromises = studentList.map(async (student) => {
+                const sessionsRef = collection(db, 'sessions');
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const querySnapshot = await getDocs(q);
+                const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                const answersPromises = sessionsData.map(async (session) => {
+                    const answersRef = collection(db, 'answers');
+                    const answersQuery = query(answersRef, where('sessionRef', '==', session.id));
+                    const answersSnapshot = await getDocs(answersQuery);
+                    return answersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                });
+
+                const allAnswers = await Promise.all(answersPromises);
+                const studentAnswersMap = {};
+                sessionsData.forEach((session, index) => {
+                    studentAnswersMap[session.id] = allAnswers[index];
+                });
+                classAnswersMap[student.id] = studentAnswersMap; // Add each student's answers to the class map
+            });
+
+            await Promise.all(studentPromises);
+            setClassAnswersMap(classAnswersMap); // Set aggregated answers for the entire class
+        } catch (error) {
+            console.error("Error fetching class sessions and answers: ", error);
         }
     };
 
@@ -189,6 +225,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                     {Object.keys(answerMap).length > 0 && (
                         <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
                     )}
+                    <ClassStats classAnswersMap={classAnswersMap} /> {/* Render ClassStats with classAnswersMap */}
                 </div>
             )}
         </div>
