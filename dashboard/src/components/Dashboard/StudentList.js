@@ -20,9 +20,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 
     const getWidth = () => {
         if (isXsScreen) return '100%';
-        if (isSmScreen) return '450px';
-        if (isMdScreen) return '600px';
-        return '750px'; // for lg and above
+        if (isSmScreen) return '200px';
+        if (isMdScreen) return '300px';
+        return '400px'; // for lg and above
     };
 
     const fetchSessionsAndAnswers = async (studentId) => {
@@ -275,21 +275,24 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const renderStudentList = () => {
+        const filledStudents = [...students].sort((a, b) => a.fullName.localeCompare(b.fullName));
+        while (filledStudents.length < 10) {
+            filledStudents.push({ id: `empty-${filledStudents.length}`, fullName: '' });
+        }
+
         return (
-            <List>
-                {students.length > 0 ? (
-                    students.map((studentData, index) => (
+            <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
+                <List sx={{ paddingTop: 0, paddingBot: 0 }}>
+                    {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
-                            <ListItem button onClick={() => handleStudentClick(studentData)}>
-                                <ListItemText primary={studentData.fullName} />
+                            <ListItem button={!!studentData.fullName} onClick={() => studentData.fullName && handleStudentClick(studentData)}>
+                                <ListItemText primary={studentData.fullName || ' '} />
                             </ListItem>
-                            {index < students.length - 1 && <Divider />}
+                            {studentData.fullName && index < filledStudents.length - 1 && <Divider />}
                         </React.Fragment>
-                    ))
-                ) : (
-                    <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>No students found</Typography>
-                )}
-            </List>
+                    ))}
+                </List>
+            </Box>
         );
     };
 
@@ -322,7 +325,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     return (
-        <Box sx={{ width: getWidth(), maxWidth: '100%', padding: 2, margin: 'auto' }}>
+        <Box sx={{ width: getWidth(), maxWidth: '100%' }}>
             {renderBackButton()}
             <Typography variant="h6" mb={2}>
                 {selectedSession ? `Session Details` :
@@ -331,7 +334,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 selectedStudent ? `${selectedStudent.fullName}` :
                 `Students in ${selectedClass.className}`}
             </Typography>
-            <Divider />
+            <Divider sx={{ my: 0 }} />
             {renderContent()}
         </Box>
     );

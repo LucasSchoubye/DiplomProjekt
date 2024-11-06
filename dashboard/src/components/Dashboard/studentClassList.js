@@ -10,9 +10,9 @@ const ClassList = ({ classes, teacherName, handleClassClick }) => {
 
     const getWidth = useMemo(() => {
         if (isXsScreen) return '100%';
-        if (isSmScreen) return '450px';
-        if (isMdScreen) return '600px';
-        return '750px'; // for lg and above
+        if (isSmScreen) return '200px';
+        if (isMdScreen) return '300px';
+        return '400px'; // for lg and above
     }, [isXsScreen, isSmScreen, isMdScreen]);
 
     return (
