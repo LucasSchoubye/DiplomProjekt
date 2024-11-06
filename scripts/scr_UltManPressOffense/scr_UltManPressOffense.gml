@@ -2,14 +2,14 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManPressOffense(){
 
-			var strength = 200
-			var tackleDist = 300
+			//var strength = strength
+			var tackleDist = defence*0.7
 			var player = obj_UltManGameController.controlledPlayer
 			var spd = topSpd
 
 			if (point_distance(x,y,player.x,player.y) < topSpd)
 			{
-				spd = topSpd/2
+				//spd = topSpd/2
 			}
 			var PosX = x + lengthdir_x(spd,point_direction(x,y,player.x,player.y))
 			var PosY = y + lengthdir_y(spd,point_direction(x,y,player.x,player.y))
@@ -42,6 +42,13 @@ function scr_UltManPressOffense(){
 				obj_UltManBall.readyForPickup = false
 				obj_UltManBall.alarm[0] = 30
 				tackleCooldown = true
+				
+				repeat(5)
+				{
+					var part = instance_create_depth(obj_UltManBall.x,obj_UltManBall.y,-100, obj_FtDParticleDust2)
+					part.speed = random_range(10,20)
+					part.direction = random(360)
+				}
 			}
 			
 			MoveToPos(PosX,PosY)

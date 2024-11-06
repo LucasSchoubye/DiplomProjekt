@@ -41,6 +41,8 @@ draw_set_font(fn_titleLato)
 draw_set_color(c_white)
 draw_text(screenMidX,screenTop,"Fight The Dungeon Loadout")
 draw_set_font(fn_textLato)
+draw_text(screenMidX, screenTop+35, fillEquipmentTXT)
+obj_characterController.DrawCharacterMenu(room_width*0.73,room_height*0.5,4)
 
 // play button
 draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)
@@ -51,7 +53,11 @@ if(mouse_x > playButtonStartX && mouse_x < playButtonEndX) {
 		draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,false)
 		draw_set_alpha(1)
 		if (mouse_check_button_pressed(mb_left)){
-			room_goto(rm_FtD)
+			if (currentArmorEquip == undefined || currentWeaponEquip == undefined) {
+				fillEquipmentTXT = "Please fill out your equipment before starting!"
+			} else {
+				room_goto(rm_FtD)
+			}
 		}
 	}
 }

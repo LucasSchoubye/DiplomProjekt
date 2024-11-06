@@ -1,7 +1,4 @@
 
-// DEBUG:
-if (keyboard_check(vk_tab))
-	timer = 91
 
 scr_UltManDrawLine()
 
@@ -51,7 +48,7 @@ for (var i = 0; i < 2; ++i) {
 		if (i = 0)
 		{
 			scoreline[1]++
-			scr_UltManKickoffSetup(true)
+			scr_UltManKickoffSetup(true, true)
 		}
 		else
 		{
@@ -60,9 +57,8 @@ for (var i = 0; i < 2; ++i) {
  
 			if(playerControllerHistory[0] !=playerControllerHistory[1] && playerControllerHistory[1] != undefined){
 				playerControllerHistory[1].assists++
-				//show_message("ASSIST BY " + string(playerControllerHistory[1].name))
 			}
-			scr_UltManKickoffSetup(false)
+			scr_UltManKickoffSetup(false, true)
 		}
 	}
 }
@@ -70,6 +66,7 @@ for (var i = 0; i < 2; ++i) {
 // End Match
 if (timer > 45 && obj_UltManManagerController.halftimeCompleted = false)
 {
+	audio_play_sound(sou_UltManWhistle,1,false)
 	room_goto(rm_UltManHalftime)
 	obj_UltManManagerController.lastScoreline = scoreline
 	obj_UltManManagerController.halftimeCompleted = true
@@ -77,11 +74,13 @@ if (timer > 45 && obj_UltManManagerController.halftimeCompleted = false)
 if (timer > 90)
 {
 	room_goto(rm_UltManEndMatch)
+	audio_play_sound(sou_UltManWhistle,1,false)
 	obj_UltManManagerController.lastScoreline = scoreline
 	obj_UltManManagerController.halftimeCompleted = false
 }
 
-scr_UltManActiontypes()
+if (!celebrationActive)
+	scr_UltManActiontypes()
 
 if (questionMenuActive and questionMenuClickCooldown = false)
 {
@@ -103,3 +102,9 @@ if (questionMenuActive and questionMenuClickCooldown = false)
 
 if (keyboard_check_released(mb_left))
 	questionMenuClickCooldown = false
+	
+	
+if (celebrationActive)
+{
+	scr_UltManCelebrate()
+}

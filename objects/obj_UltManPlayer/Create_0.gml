@@ -81,15 +81,15 @@ function MoveToPos(X,Y)
 	// Tackle
 	if (instance_exists(obj_UltManBall.owner) && tackleCooldown = false)
 	{
-		if (obj_UltManBall.owner.playerTeam = false)
+		if (obj_UltManBall.owner.playerTeam = false and playerTeam = true)
 		{
 			var opponent = obj_UltManBall.owner
 			if (point_distance(targetX,targetY,obj_UltManBall.x,obj_UltManBall.y) < 250 or
 				point_distance(x,y,obj_UltManBall.x,obj_UltManBall.y) < 100)
 			{
 				var dir = point_distance(opponent.x, opponent.y, obj_UltManBall.x, obj_UltManBall.y)
-				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir)
-				obj_UltManBall.owner.targetY += lengthdir_y(strength, dir)
+				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir) + 180
+				obj_UltManBall.owner.targetY += lengthdir_y(strength, dir) + 180
 				obj_UltManBall.owner.tackleCooldown = true
 				obj_UltManBall.owner.image_angle -= (strength/10)*obj_UltManBall.owner.facing
 				obj_UltManBall.owner = id
@@ -98,6 +98,13 @@ function MoveToPos(X,Y)
 				}
 				tackleCooldown = true
 				audio_play_sound(sou_UltManKickLight, 1, false, 1, 0, 0.7)
+				
+				repeat(5)
+				{
+					var part = instance_create_depth(obj_UltManBall.x,obj_UltManBall.y,-100, obj_FtDParticleDust2)
+					part.speed = random_range(10,20)
+					part.direction = random(360)
+				}
 			}
 		}
 		else

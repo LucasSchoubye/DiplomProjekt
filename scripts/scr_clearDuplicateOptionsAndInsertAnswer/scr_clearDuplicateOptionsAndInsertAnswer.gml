@@ -7,12 +7,12 @@ function scr_clearDuplicateOptionsAndInsertAnswer(optionToList, answer, maxOptio
 		    for (var i = ds_list_size(optionToList) - 1; i >= 0; i--) {
 		        var value = ds_list_find_value(optionToList, i);  // Get the value at index i
 
-		        if (ds_map_exists(seen, string(value)) or string(value) == answer) {
+		        if (ds_map_exists(seen, string(value.text)) or string(value.text) == answer.text) {
 		            // If value has been seen before or is the same as the answer, remove it from the list
 		            ds_list_delete(optionToList, i);
 		        } else {
 		            // If value has not been seen, add it to the seen map
-		            ds_map_set(seen, string(value), true);
+		            ds_map_set(seen, string(value.text), true);
 		        }
 		    }
 			

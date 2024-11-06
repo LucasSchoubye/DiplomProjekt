@@ -23,14 +23,14 @@ if (async_load[? "status"] == 200)
 				RespondGamestate(async_load[? "value"], result)
 			}
 			else{
-				show_message(async_load[? "value"])
+				show_debug_message(async_load[? "value"])
 			}
 		break;
-		
 		case "FirebaseFirestore_Collection_Read":
 			if (async_load[? "path"] == "/users/")
 			{
 				show_debug_message("ValidateLogin()")
+				
 				ValidateLogin(async_load[? "value"])
 			}
 			else if (string_pos("subtopics",async_load[? "path"]) > 0)
@@ -53,12 +53,22 @@ if (async_load[? "status"] == 200)
 			}
 			else
 			{
-				show_message("Path was "+string(async_load[? "path"]))	
+				show_debug_message("Path was "+string(async_load[? "path"]))	
 			}
 		break;
 	
 		case "FirebaseFirestore_Collection_Add":	
 			show_debug_message(variable_instance_get(async_load[? "listener"], "url"))
+		break;
+		case "FirebaseAuthentication_SignIn_Email":
+			RequestLogin(async_load[? "value"])
+    break;
+		case "FirebaseFirestore_Collection_Query":
+			if (async_load[? "path"] == "/users/")
+			{
+				show_debug_message("ValidateLogin()")
+				ValidateLogin(async_load[? "value"])
+			}
 		break;
 	
 		default:
@@ -67,6 +77,19 @@ if (async_load[? "status"] == 200)
 }
 else
 {
+	#region Authentication and Others
+	if (async_load[?"status"] != 404)
+	{
+		switch(async_load[? "type"])
+		{
+			case "FirebaseAuthentication_SignIn_Email":
+				ValidateLogin(async_load[? "errorMessage"])
+			break;
+		}
+	}
+	#endregion Authentication and Others
+	
+	#region Not Found Errors
 	if (async_load[? "status"] == 404)
 	{
 		switch(async_load[? "type"])
@@ -86,8 +109,9 @@ else
 			break;
 		}
 	}
+	#endregion Not Found Errors
 	
-	
-	var errorMessage = async_load[? "errorMessage"]
+	show_debug_message("FAILED TYPE WAS "+string(async_load[? "type"]))
+	show_debug_message("ERROR: "+string(async_load[? "errorMessage"]))
 }
 

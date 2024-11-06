@@ -1,10 +1,9 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_playerMovement(){
+function scr_playerMovement(walkSpeed = 6){
 
 	var hSpeed = 0
 	var vSpeed = 0
-	var walkSpeed = 6
 	var runSpeed = 2
 	var diagonalSpeed = 0.707107
 	var collisionSpeed = walkSpeed + 2
@@ -25,13 +24,22 @@ function scr_playerMovement(){
 		vSpeed *= diagonalSpeed; 
 	}
 	
-	if (keyboard_check(vk_shift)) 
-	{ 
-		hSpeed *= runSpeed; 
-		vSpeed *= runSpeed; 
-		smokeTimer -= 0.5;
+	if (stamZeroHit == false) {
+		if (stamina <= 0) {
+			stamZeroHit = true
+		}
+		else if (keyboard_check(vk_shift) && stamina > 0) 
+		{ 
+			stamina += staminaDecrease
+			hSpeed *= runSpeed; 
+			vSpeed *= runSpeed; 
+			smokeTimer -= 0.5;
+		} else if (stamina <= stamina_max) {
+			stamina += staminaRestoration
+		}
+	} else {
+		stamina += staminaRestoration
 	}
-
 
 	
 	 // Horizontal movement with collision check

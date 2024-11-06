@@ -14,7 +14,6 @@ function getDamaged(dmgObj, _iframes = false) {
 				image_alpha = 1
 			}
 		}
-		
 		exit
 	}
 	
@@ -59,7 +58,7 @@ function getDamaged(dmgObj, _iframes = false) {
 
 
 
-function getDamagedCreate(_hp = 10, _iframes = false){
+function getDamagedCreate(_hp = 5, _iframes = false){
 	hp = _hp
 	hp_max = _hp
 	if (_iframes == true) {

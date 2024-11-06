@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
 typingString = ""
 optionsMenu = new OptionsMenu()
 questionMenuActive = false

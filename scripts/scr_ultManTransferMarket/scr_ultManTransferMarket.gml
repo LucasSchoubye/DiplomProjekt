@@ -33,7 +33,7 @@ function scr_ultManTransferMarket(){
 	
 	// draw balance
 	draw_set_font(fn_RobotoBlack16)
-	draw_text(room_width * 0.2125, room_height * 0.15, "Balance: " + string(obj_storeController.balance) + " CONTENT COINS")
+	draw_text(room_width * 0.2125, room_height * 0.15, LC.translate("Balance: ") + string(obj_storeController.balance) + " CONTENT COINS")
 	draw_set_font(currentFont)
 	
 	packWidth = room_width * 0.195;
@@ -94,7 +94,6 @@ function scr_ultManTransferMarket(){
 	    }
 	
 	    // Draw the packs at the current X and Y positions
-		//show_message("MaxPack " + string(maxPackTier) + " " + "CurrentPack " + string(currentPackTier))
 		depth = 3;
 		if(maxAvailablePackTier+1 < currentPackTier){
 			pack.DrawUnavailablePack(currentX, currentY, packWidth, packHeight);
@@ -214,7 +213,7 @@ function scr_ultManTransferMarket(){
 		        // Draw red "SELL" button
 		        draw_set_color(c_red);
 				//draw_set_valign(fa_middle)
-				scr_drawButton(sellBoxLeft + 210,sellListSep - 30, sellBoxRight - 10, sellListSep, "SELL")
+				scr_drawButton(sellBoxLeft + 210,sellListSep - 30, sellBoxRight - 10, sellListSep, LC.translate("SELL"))
 		        draw_set_color(c_white);
             
 				// Handle sell button click if player is in starting 11
@@ -256,16 +255,16 @@ function scr_ultManTransferMarket(){
 		draw_rectangle(room_width * 0.3, room_height * 0.3, room_width * 0.7, room_height * 0.5, false);
 		draw_set_alpha(1);
 		draw_set_color(c_white);
-		draw_text(room_width * 0.35, room_height * 0.35, "Are you sure you want to sell this player for " + string(playerSellPrice) +  "?");
+		draw_text(room_width * 0.35, room_height * 0.35, LC.translate("Are you sure you want to sell this player for ") + string(playerSellPrice) +  "?");
         
 		// Draw "YES" button
 		draw_set_color(c_green);
-		scr_drawButton(room_width * 0.4, room_height * 0.40, room_width * 0.45, room_height * 0.45, "YES")
+		scr_drawButton(room_width * 0.4, room_height * 0.40, room_width * 0.45, room_height * 0.45, LC.translate("YES"))
 		draw_set_color(c_white);
         
 		// Draw "NO" button
 		draw_set_color(c_red);
-		scr_drawButton(room_width * 0.55, room_height * 0.40, room_width * 0.6, room_height * 0.45, "NO")
+		scr_drawButton(room_width * 0.55, room_height * 0.40, room_width * 0.6, room_height * 0.45, LC.translate("NO"))
 		draw_set_color(c_white);
 		// Handle "YES" and "NO" button clicks
 		if (mouse_check_button_pressed(mb_left)) {

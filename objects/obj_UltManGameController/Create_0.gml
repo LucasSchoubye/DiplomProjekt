@@ -11,7 +11,7 @@ enum ActionType{
 }
 
 // Question specfic
-question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
 typingString = ""
 optionsMenu = new OptionsMenu()
 questionMenuActive = false
@@ -44,10 +44,12 @@ goals[1] = instance_create_depth(room_width-300, room_height/2, -100, obj_UltMan
 scoreline[0] = obj_UltManManagerController.lastScoreline[0]
 scoreline[1] = obj_UltManManagerController.lastScoreline[1]
 timer = 0
+celebrationActive = false
+global.celebratingPlayer = undefined
 instance_create_depth(room_width/2, room_height/2, 0, obj_UltManBall)
 
 // Create teams
-scr_UltManCreateEnemyTeam()
+scr_UltManCreateEnemyTeam(UltManPackTier.Bronze)
 scr_UltManCreateManagerTeam()
 
 scr_UltManKickoffSetup(false)
@@ -57,12 +59,14 @@ audio_play_sound(sou_UltManCheer, 1, true, 0.2)
 // Functions
 function AnsweredCorrect() 
 {
+	audio_play_sound(sou_FtDCorrect, 1, false, 1)
 	skillCheckAttemptsCounter++
 	skillCheckCorrectCounter++
 }
 
 function AnsweredIncorrect() 
 {
+	audio_play_sound(sou_FtDSmallDamage, 1, false, 1)
 	var punishmentLength = 200
 	skillCheckAttemptsCounter++
 	

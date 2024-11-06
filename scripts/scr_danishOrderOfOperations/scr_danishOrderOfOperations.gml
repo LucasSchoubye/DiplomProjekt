@@ -24,25 +24,25 @@ function scr_danishOrderOfOperations(questionType)
 				// (A + D) - B * C
 				case 1:
 					question.prompt = "("+string(a)+" + "+string(d)+") - "+string(b)+" * "+string(c)
-					answer = (a+d)-(b*c)
+					answer = new AnswerOption(string((a+d)-(b*c)), MathErrors.CorrectAnswer)
 					
-					ds_list_add(optionToList, (a+d-b)*c)
-					ds_list_add(optionToList, a+(d-b*c))
-					ds_list_add(optionToList, (a+d)-((b+1)*c))
-					ds_list_add(optionToList, (a+d)-((b-1)*c))
-					ds_list_add(optionToList, (a+d)-(b*(c+1)))
-					ds_list_add(optionToList, (a+d)-(b*(c-1)))
+					ds_list_add(optionToList, new AnswerOption(string((a+d-b)*c), MathErrors.OrderOfOperations))
+					ds_list_add(optionToList, new AnswerOption(string(a+(d-b*c)), MathErrors.OrderOfOperations))
+					ds_list_add(optionToList, new AnswerOption(string((a+d)-((b+1)*c)), MathErrors.CountingError))
+					ds_list_add(optionToList, new AnswerOption(string((a+d)-((b-1)*c)), MathErrors.CountingError))
+					ds_list_add(optionToList, new AnswerOption(string((a+d)-(b*(c+1))), MathErrors.CountingError))
+					ds_list_add(optionToList, new AnswerOption(string((a+d)-(b*(c+1))), MathErrors.CountingError))
 				break;
 				
 				// (A + B) / (C - D)
 				case 2:
 					question.prompt = "("+string(a)+" + "+string(b)+") / ("+string(c)+" - "+string(d)+")"
-					answer = (a+b)/(c-d)
+					answer = new AnswerOption(string((a+b)/(c-d)), MathErrors.CorrectAnswer)
 					
-					ds_list_add(optionToList, (c*d)/(a+b))
-					ds_list_add(optionToList, (a+b)/c-d)
-					ds_list_add(optionToList, a+b/(c-d))
-					ds_list_add(optionToList, (a+b)/c-d)
+					ds_list_add(optionToList, new AnswerOption(string((c*d)/(a+b)), MathErrors.OrderOfOperations))
+					ds_list_add(optionToList, new AnswerOption(string((a+b)/c-d), MathErrors.OrderOfOperations))
+					ds_list_add(optionToList, new AnswerOption(string(a+b/(c-d)), MathErrors.OrderOfOperations))
+					ds_list_add(optionToList, new AnswerOption(string((a+b)/c-d), MathErrors.OrderOfOperations))
 
 				break;
 			}
@@ -62,6 +62,7 @@ function scr_danishOrderOfOperations(questionType)
 
 		case QuestionType.Simple:
 		break;
+		
 		case QuestionType.Sequence:
 			show_debug_message("Sequence questions are not yet implemented for small multiplication")
 		break;

@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_UltManTacticPlayerBox(){
+function scr_UltManTacticPlayerBox(halftimeActive = false){
 	
 	if (tacticsPlayerScroll > ds_list_size(squad)*-30 + 22*30 && mouse_wheel_down())
 	{
@@ -9,6 +9,13 @@ function scr_UltManTacticPlayerBox(){
 	if (tacticsPlayerScroll < 0 && mouse_wheel_up())
 	{
 		tacticsPlayerScroll += 10
+	}
+	
+	if(halftimeActive == true){
+		squadToDraw = 16;
+	}
+	else{
+		squadToDraw = ds_list_size(squad);
 	}
 	
 	var playerBoxTop = room_height * 0.12;
@@ -21,10 +28,8 @@ function scr_UltManTacticPlayerBox(){
 	
 	draw_rectangle(playerBoxLeft, playerBoxTop, playerBoxRight, playerBoxBottom, true)
 	
-	for (var i = 0; i < ds_list_size(squad); ++i) {
+	for (var i = 0; i < squadToDraw; ++i) {
 	    var player = ds_list_find_value(squad, i)
-		//show_message(tacticsPlayerScroll)
-		//show_message(string(ds_list_size(squad)*-30 + 30*30))
 		if (playerBoxTop + (i)*30 + tacticsPlayerScroll + 30 > playerBoxTop)
 		{
 		
@@ -95,15 +100,15 @@ function scr_UltManTacticPlayerBox(){
 				
 					if (fromPlayer != undefined)
 					{
-					
 						// If player is in starting squad
 						if (i < 11 or ds_list_find_index(squad, fromPlayer) < 11)
 						{
+							// Setup variable
 							var toPlayerCoor = [undefined,undefined]
 							var fromPlayerCoor = [undefined,undefined]
+							var toPlayer = ds_list_find_value(squad, i)
 						
 							// Swapping from bench to starting 11
-							var toPlayer = ds_list_find_value(squad, i)
 							for (var column = 0; column < array_length(formationColumns); ++column) {
 							
 								if (ds_list_find_index(formationColumns[column], toPlayer) > -1)
@@ -124,10 +129,16 @@ function scr_UltManTacticPlayerBox(){
 										break
 									}
 								}
-						
+
 								// Switch
 								if (toPlayerCoor[0] != undefined)
 								{
+									// From Player
+									if (ds_list_find_index(fromPlayer.playableColumns, toPlayerCoor[0]) == -1)
+									{
+										return
+									}
+									
 									ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
 									if (fromPlayerCoor[0] != undefined)
 									{
@@ -140,6 +151,12 @@ function scr_UltManTacticPlayerBox(){
 								}
 								if (fromPlayerCoor[0] != undefined)
 								{
+									// to Player
+									if (ds_list_find_index(toPlayer.playableColumns, fromPlayerCoor[0]) == -1)
+									{
+										return
+									}
+									
 									ds_list_replace(formationColumns[fromPlayerCoor[0]], fromPlayerCoor[1], toPlayer)
 									if (toPlayerCoor[0] != undefined)
 									{
@@ -156,6 +173,12 @@ function scr_UltManTacticPlayerBox(){
 							}
 							else
 							{
+								if (ds_list_find_index(fromPlayer.playableColumns, toPlayerCoor[0]) == -1)
+								{
+									fromPlayer = undefined
+									return
+								}
+								
 								ds_list_replace(formationColumns[toPlayerCoor[0]], toPlayerCoor[1], fromPlayer)
 								fromPlayer.UpdatePosition(toPlayerCoor[0], toPlayerCoor[1], ds_list_size(formationColumns[toPlayerCoor[0]]))
 								toPlayer.position = FootballPositions.SUB

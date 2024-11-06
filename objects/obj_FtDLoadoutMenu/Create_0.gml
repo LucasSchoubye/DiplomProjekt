@@ -5,9 +5,15 @@ verticalWeaponScroll = 0
 ftdInventoryWeapons = ds_list_create()
 ftdInventoryArmor = ds_list_create()
 itemHeight = 0
+fillEquipmentTXT = ""
 
 
 function getFtDInventory() {
+	
+	//Reset lists
+	ds_list_clear(ftdInventoryArmor)
+	ds_list_clear(ftdInventoryWeapons)
+	
 	for (var i = 0; i < ds_list_size(obj_inventoryController.inventoryElements); ++i) {
 		var currentElement = new LoadoutElement()
 		var currentInventoryElement = ds_list_find_value(obj_inventoryController.inventoryElements,i)

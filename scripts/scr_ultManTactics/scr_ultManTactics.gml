@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function scr_ultManTactics(){
+function scr_ultManTactics(halftimeActive = false){
 	
 	var currentFont = draw_get_font()
 	var currentHAlign = draw_get_halign()
@@ -29,6 +29,7 @@ function scr_ultManTactics(){
 		}
 	}
 	
+	// Drop selected player
 	if (mouse_check_button_released(mb_left))
 	{
 		var fromColumn = undefined
@@ -65,7 +66,7 @@ function scr_ultManTactics(){
 	#endregion 
 	
 	// Draw Player Box
-	scr_UltManTacticPlayerBox()
+	scr_UltManTacticPlayerBox(halftimeActive)
 	
 	draw_set_halign(currentHAlign)
 	draw_set_valign(currentVAlign)

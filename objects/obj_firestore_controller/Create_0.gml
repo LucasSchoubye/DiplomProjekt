@@ -20,6 +20,7 @@ itemID = undefined
 // Functions
 function RequestAllowedGames()
 {
+	ds_list_clear(obj_menuGridController.itemElements)
 	FirebaseFirestore("/schools/"+schoolId+"/classes/"+classId+"/allowedGames/").Read()
 }
 
@@ -147,7 +148,6 @@ function RespondStudentInventory(inventoryList) {
 	}	
 }
 
-
 function BuyShopItem() {
 	var inventoryMap = ds_map_create()
 	var item = ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1)
@@ -171,7 +171,6 @@ function UpdateInventory(itemStruct)
 
 	ds_map_destroy(itemMap)
 }
-
 
 function StartSession(game)
 {		
@@ -206,55 +205,82 @@ function DeleteAllSession()
 	FirebaseFirestore("/sessions/").Delete()
 }
 
-function RequestLogin(loginUsername, loginPassword)
+function RequestLogin(map)
 {
-	username = loginUsername
-	password = loginPassword
-	
-	FirebaseFirestore("/users/").Read()
+	var decodedMap = json_parse(map);
+	var users = decodedMap.users
+	if (users != undefined){
+		// for each user
+		for (var i = 0; i < array_length(users); i++) 
+		{
+			// Check their username
+			var user = users[i];
+			userID = user.localId
+		}
+		FirebaseFirestore("/users/").Where("userID", "==", userID).Query()
+	}
+	else
+	{
+		ValidateLogin("ERROR: USERS == UNDEFINED")
+	}
+}
+
+function RequestAuthUser(loginUsername, loginPassword)
+{
+	// For testing purposes
+	if(loginUsername == "admin" && loginPassword == "admin")
+	{
+		loginUsername = "lucas.knudsen7@gmail.com";
+		loginPassword = "lucas123";
+	}
+	FirebaseAuthentication_SignIn_Email(loginUsername, loginPassword);
 }
 
 function ValidateLogin(map)
 {
 	try
 	{
-	decodedMap = json_decode(map)
-	idArray = []
-	ds_map_keys_to_array(decodedMap, idArray)
+		decodedMap = json_decode(map)
+		idArray = []
+		ds_map_keys_to_array(decodedMap, idArray)
 	
-	// for each user
-	for (var i = 0; i < array_length(idArray); i++) 
-	{
-		// Check their username
-	    var ID = idArray[i];
-	    var value = json_decode(decodedMap[? ID]);
-		var passwordSalt = value[?"passwordSalt"];
-		
-		if (value[?"username"] = username && value[?"password"] = scr_stringSha512(password + passwordSalt))
+		if (array_length(idArray) > 1)
 		{
-			playerId = value[?"ref"]
-			
-			// Find the position of the last dash ("/")
-		    var last_dash_pos = string_last_pos("/", playerId);
-    
-		    // Check if there is a dash in the string
-		    if (last_dash_pos != -1) {
-		        // Extract the substring after the last dash
-		        playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
-		    }
-			
-			username = value[?"username"]
-			room_goto(rm_menu)
-			
-			RequestStudent()
+			return undefined;
+			show_debug_message("More than one user in the query!")
 		}
-		else
-			show_debug_message("No Match found")
-	}
+	
+		// for each user
+		for (var i = 0; i < array_length(idArray); i++) 
+		{
+			// Check their username
+		    var ID = idArray[i];
+		    var value = decodedMap[? ID];
+		
+			if (value[?"userID"] = userID)
+			{
+				playerId = value[?"ref"]
+			
+				// Find the position of the last dash ("/")
+			    var last_dash_pos = string_last_pos("/", playerId);
+    
+			    // Check if there is a dash in the string
+			    if (last_dash_pos != -1) {
+			        // Extract the substring after the last dash
+			        playerId = string_copy(playerId, last_dash_pos + 1, string_length(playerId) - last_dash_pos);
+			    }
+			
+				username = value[?"username"]
+				room_goto(rm_menu)
+			
+				RequestStudent()
+			}
+			//else
+				//show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
+		}
 	
 		if (playerId = undefined)
 		{
-			//show_message("Wrong password or username")
 			room_goto(rm_login)
 			var part = instance_create_depth(room_width/2, 200, -1, obj_par_text) 
 			part.text = "Wrong password or username"
@@ -303,7 +329,6 @@ function RepondStudent(map)
 	
 	// After student data is fetched, create question generator
 	instance_create_depth(0,0,0,obj_questionController)
-	RequestAllowedGames()
 	
 }
 
@@ -315,7 +340,7 @@ function RequestClassSubtopics(schoolId, classId, subject)
 	}
 	else
 	{
-		show_message("SchoolId or classId are undefined")
+		//show_message("SchoolId or classId are undefined")
 	}
 }
 
@@ -344,7 +369,8 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 	answerMap[?"sessionRef"] = string(sessionId)
 	answerMap[?"answerTime"] = answerTime
 	answerMap[?"prompt"] = prompt
-	answerMap[?"optionChosen"] = optionChosen
+	answerMap[?"optionChosen"] = optionChosen.text
+	answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
 	answerMap[?"answer"] = correctAnswer
 	answerMap[?"correct"] = optionChosen == correctAnswer
 	answerMap[?"subject"] = subject

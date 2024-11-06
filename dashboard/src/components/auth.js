@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Button, TextField, Box, Snackbar, Alert, Typography, useTheme, IconButton } from "@mui/material";
-import { sha512 } from 'js-sha512';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 import SignUp from "./signUp";
 import { ArrowBack } from "@mui/icons-material";
 
 export const Auth = ({ onLoginSuccess }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("admin"); // Default email for testing
+    const [password, setPassword] = useState("admin"); // Default password for testing
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [snackbarSeverity, setSnackbarSeverity] = useState("success");
     const [isSignUp, setIsSignUp] = useState(false);
-    const usersCollectionRef = collection(db, "users");
+    const [loading, setLoading] = useState(false); // Loading state
     const theme = useTheme();
 
     const handleCloseSnackbar = () => {
@@ -21,69 +21,62 @@ export const Auth = ({ onLoginSuccess }) => {
     };
 
     const signIn = async () => {
-        try {
-            // Query the user by username
-            const q = query(usersCollectionRef, where("username", "==", username));
-            const querySnapshot = await getDocs(q);
+        const actualEmail = email === "admin" ? "michaelmicromanager@gmail.com" : email;
+        const actualPassword = password === "admin" ? "test123" : password;
 
-            if (querySnapshot.empty) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
-
-            // Retrieve the salt and hashed password from the user document
-            let userData = null;
-            querySnapshot.forEach((doc) => {
-                userData = doc.data();
-            });
-
-            if (!userData) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
-
-            const { passwordSalt, password: storedHashedPassword } = userData;
-            const hashedPassword = sha512(password + passwordSalt);
-            console.log("stored password: " + storedHashedPassword);
-            console.log("hashed password: " + hashedPassword);
-            // Check if the hashed password matches the stored hashed password
-            if (hashedPassword !== storedHashedPassword) {
-                setSnackbarMessage("Username or password is incorrect");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-                return;
-            }
-
-            // Check if the user is a teacher
-            let isTeacher = false;
-            let teacherData = null;
-
-            if (userData.ref && userData.ref.path.includes("teachers")) {
-                isTeacher = true;
-                teacherData = userData;
-            }
-
-            if (isTeacher) {
-                setSnackbarMessage("User signed in successfully");
-                setSnackbarSeverity("success");
-                setOpenSnackbar(true);
-                setTimeout(() => {
-                    onLoginSuccess(teacherData);
-                }, 1000);
-            } else {
-                setSnackbarMessage("User is not a teacher");
-                setSnackbarSeverity("error");
-                setOpenSnackbar(true);
-            }
-        } catch (err) {
-            setSnackbarMessage("Error during sign in: " + err.message);
+        if (!actualEmail || !actualPassword) {
+            setSnackbarMessage("Email and password are required");
             setSnackbarSeverity("error");
             setOpenSnackbar(true);
+            return;
         }
+
+        setLoading(true);
+        try {
+            // Firebase Authentication sign-in with email and password
+            const userCredential = await signInWithEmailAndPassword(auth, actualEmail, actualPassword);
+            const user = userCredential.user;
+            // console.log(user);
+
+            if (user) {
+                // Query Firestore for the user document based on the authenticated user's UID
+                const usersCollectionRef = collection(db, "users");
+                const q = query(usersCollectionRef, where("userID", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    const userData = querySnapshot.docs[0].data();
+                    setSnackbarMessage("User signed in successfully");
+                    setSnackbarSeverity("success");
+                    setOpenSnackbar(true);
+                    setTimeout(() => {
+                        onLoginSuccess(userData);
+                    }, 1000);
+                } else {
+                    setSnackbarMessage("User not found");
+                    setSnackbarSeverity("error");
+                    setOpenSnackbar(true);
+                }
+            }
+        } catch (err) {
+            let errorMessage = "Email or password is incorrect";
+            if (err.code === 'auth/user-not-found') {
+                errorMessage = "User not found";
+            } else if (err.code === 'auth/wrong-password') {
+                errorMessage = "Incorrect password";
+            }
+            setSnackbarMessage(errorMessage);
+            setSnackbarSeverity("error");
+            setOpenSnackbar(true);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSignUpSuccess = (newEmail, newPassword) => {
+        setEmail(newEmail);
+        setPassword(newPassword);
+        setIsSignUp(false);
     };
 
     return (
@@ -91,25 +84,25 @@ export const Auth = ({ onLoginSuccess }) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'center', // Center vertically
                 alignItems: 'center',
                 minHeight: '100vh',
             }}
         >
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, width: '300px', position: 'relative' }}>
                 {isSignUp && (
-                    <IconButton onClick={() => setIsSignUp(false)} sx={{ mr: 2 }}>
+                    <IconButton onClick={() => setIsSignUp(false)} sx={{ position: 'absolute', left: 0 }}>
                         <ArrowBack />
                     </IconButton>
                 )}
-                <Typography variant="h4" sx={{ fontFamily: 'Lato, sans-serif' }}>
+                <Typography variant="h4" sx={{ fontFamily: 'Lato, sans-serif', flexGrow: 1, textAlign: 'center' }}>
                     {isSignUp ? "Sign Up" : "Login"}
                 </Typography>
             </Box>
 
             {isSignUp ? (
                 <SignUp 
-                    onSignUpSuccess={() => setIsSignUp(false)} 
+                    onSignUpSuccess={handleSignUpSuccess} // Use the new callback
                     onGoBack={() => setIsSignUp(false)} 
                 />
             ) : (
@@ -117,21 +110,23 @@ export const Auth = ({ onLoginSuccess }) => {
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center',
+                        justifyContent: 'center', // Center vertically
                         alignItems: 'center',
                         gap: 2,
                         padding: 3,
                         borderRadius: 2,
                         boxShadow: 3,
                         width: '300px',
+                        marginTop: '20px', // Add some margin to separate from the title
                     }}
                 >
                     <TextField
-                        label="Username"
+                        label="Email"
                         variant="outlined"
-                        placeholder="Username..."
+                        placeholder="Email..."
                         fullWidth
-                        onChange={(inputEvent) => setUsername(inputEvent.target.value)}
+                        onChange={(inputEvent) => setEmail(inputEvent.target.value)}
+                        value={email}
                     />
                     <TextField
                         label="Password"
@@ -140,9 +135,15 @@ export const Auth = ({ onLoginSuccess }) => {
                         type="password"
                         fullWidth
                         onChange={(inputEvent) => setPassword(inputEvent.target.value)}
+                        value={password}
                     />
-                    <Button variant="contained" onClick={signIn} fullWidth>
-                        Sign In
+                    <Button 
+                        variant="contained" 
+                        onClick={signIn} 
+                        fullWidth 
+                        disabled={loading} // Disable button when loading
+                    >
+                        {loading ? "Signing In..." : "Sign In"}
                     </Button>
                     <Button variant="contained" onClick={() => setIsSignUp(true)} fullWidth>
                         Sign Up

@@ -10,7 +10,6 @@ image_blend = make_color_hsv(irandom(255),150,100+irandom(155))
 
 function win()
 {
-	//show_message("YOU SUCK LOSER!!!")
 	pos = 100
 }
 
