@@ -1,5 +1,7 @@
 
 // Button position and size
+var LC = obj_languageController
+
 var buttonX = room_width * 0.85
 var buttonY = room_height * 0.035
 var buttonX2 = room_width * 0.9925
@@ -10,7 +12,7 @@ var buttonText = "Play next half"
 // Title
 draw_set_font(fn_LatoBold40)
 draw_set_halign(fa_center)
-draw_text(room_width/2, room_height*0.05, "Halftime: "+string(scoreline[0])+" - "+string(scoreline[1]))
+draw_text(room_width/2, room_height*0.05, LC.translate("Halftime: ")+string(scoreline[0])+" - "+string(scoreline[1]))
 
 
 with(obj_UltManManagerController)
