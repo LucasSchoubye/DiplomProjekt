@@ -65,7 +65,14 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setIsLoadingStudents(true);
         try {
             const studentsCollectionRef = collection(db, classData.classRefData.classRef.path, "students");
-            const studentsSnapshot = await getDocs(studentsCollectionRef);
+            const subjectsCollectionRef = collection(db, `${classData.classRefData.classRef.path}/topics`);
+            const allowedGamesCollectionRef = collection(db, `${classData.classRefData.classRef.path}/allowedGames`);
+
+            const [studentsSnapshot, subjectsSnapshot, allowedGamesSnapshot] = await Promise.all([
+                getDocs(studentsCollectionRef),
+                getDocs(subjectsCollectionRef),
+                getDocs(allowedGamesCollectionRef)
+            ]);
 
             const studentPromises = studentsSnapshot.docs.map(async (studentDoc) => {
                 const { studentRef } = studentDoc.data();
@@ -77,31 +84,25 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             const studentList = await Promise.all(studentPromises);
             setStudents(studentList);
 
-            // Fetch allowed games
-            await fetchAllowedGames(classData.classRefData.classRef);
-
-            // Fetch subjects
-            await fetchSubjects(classData.classRefData.classRef);
-        } catch (err) {
-            console.error("Error fetching students: ", err);
-        } finally {
-            setIsLoadingStudents(false);
-        }
-    }, []);
-
-    const fetchSubjects = useCallback(async (classDocRef) => {
-        try {
-            const subjectsCollectionRef = collection(db, `${classDocRef.path}/topics`);
-            const subjectsSnapshot = await getDocs(subjectsCollectionRef);
-
             const subjectsData = subjectsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
             }));
-
             setSubjects(subjectsData);
+
+            const games = allowedGamesSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setAvailableGames(games);
+            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
+
+            // Log the number of reads used
+            console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
-            console.error("Error fetching subjects: ", err);
+            console.error("Error fetching data: ", err);
+        } finally {
+            setIsLoadingStudents(false);
         }
     }, []);
 
@@ -146,23 +147,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             console.error("Error updating allowed games: ", err);
         }
     };
-
-    const fetchAllowedGames = useCallback(async (classDocRef) => {
-        try {
-            const allowedGamesCollectionRef = collection(db, `${classDocRef.path}/allowedGames`);
-            const allowedGamesSnapshot = await getDocs(allowedGamesCollectionRef);
-
-            const games = allowedGamesSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-            setAvailableGames(games);
-            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
-        } catch (err) {
-            console.error("Error fetching allowed games: ", err);
-        }
-    }, []);
 
     const handleSubjectClick = useCallback(async (subject) => {
         setSelectedSubject(subject);
