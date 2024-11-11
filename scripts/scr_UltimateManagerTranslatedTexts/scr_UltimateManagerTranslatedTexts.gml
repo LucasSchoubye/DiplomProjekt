@@ -120,8 +120,92 @@ switch (obj_languageController.languageChosen)
 			case "Get a full starting 11 of your current available pack tier to get the next tier of pack":
 				var array = [text, "Få en fuld holdopstilling af dit nuværende tilgængelige pakkeniveau for at få det næste pakkeniveau"]
 			break;
+			case "This player is currently in your starting 11 and cannot be sold, please remove them from your starting 11 to be able to sell":
+				var array = [text, "Denne spiller er i din startformation og kan ikke blive solgt, venligst udskift denne spiller før du sælger dem"]
+			break;
+			case "You do you possess the sufficient funds":
+				var array = [text, "Du har ikke nok Content Coins"]
+			break;
+			case "Age: ":
+				var array = [text, "Alder: "]
+			break;
+			case "Position: ":
+				var array = [text, "Position: "]
+			break;
+			
+			// Packs
+			case "BUY":
+				var array = [text, "KØB"]
+			break;
+			case "UNAVAILABLE":
+				var array = [text, "IKKE TILGÆNGELIG"]
+			break;
+			case "Bronze Pack":
+				var array = [text, "Bronze Pakke"]
+			break;
+			case "1 45+ Rated Player":
+				var array = [text, "En 45+ Rated Spiller"]
+			break;
+			case "Silver Pack":
+				var array = [text, "Sølv Pakke"]
+			break;
+			case "1 55+ Rated Player":
+				var array = [text, "En 55+ Rated Spiller"]
+			break;
+			case "Gold Pack":
+				var array = [text, "Guld Pakke"]
+			break;
+			case "1 65+ Rated Player":
+				var array = [text, "En 65+ Rated Spiller"]
+			break;
+			case "Ruby Pack":
+				var array = [text, "Rubin Pakke"]
+			break;
+			case "1 75+ Rated Player":
+				var array = [text, "En 75+ Rated Spiller"]
+			break;
+			case "Obsidian Pack":
+				var array = [text, "Obsidian Pakke"]
+			break;
+			case "1 85+ Rated Player":
+				var array = [text, "En 85+ Rated Spiller"]
+			break;
+			case "Legendary Pack":
+				var array = [text, "Legende Pakke"]
+			break;
+			case "1 95+ Rated Player":
+				var array = [text, "En 95+ Rated Spiller"]
+			break;
+		#endregion
+		
+		#region In-Match
+			case "Halftime: ":
+				var array = [text, "Halvleg: "]
+			break;
+			case "Total Reward: ":
+				var array = [text, "Samlet Gevinst: "]
+			break;
+			case "Get Reward":
+				var array = [text, "Få Gevinst"]
+			break;
+			case "Match won: +":
+				var array = [text, "Kamp Vundet: +"]
+			break;
+			case "Match lost: +":
+				var array = [text, "Kamp Tabt: +"]
+			break;
+			case "Match drawn: +":
+				var array = [text, "Kamp Uafgjort: +"]
+			break;
+			case "Clean Sheet: +":
+				var array = [text, "Rent Bur: +"]
+			break;
+			case "Goal Bonus X":
+				var array = [text, "Mål Bonus X: "]
+			break;
 		#endregion
 	}
+
 	
 	// Return
 	try 

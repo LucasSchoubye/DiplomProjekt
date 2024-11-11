@@ -18,6 +18,8 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	var attributeArray = ["topSpd", "dribbling", "shooting", "topShootSpd", "passing", "topPassSpd", "strength", "defence"]
 	var attributeStringArray = ["Pac", "Dri", "Sho", "Sho Str", "Pas", "Pas Str", "Str", "Def"]
 	
+	var LC = obj_languageController
+	
 	// aligns correct for text
 	draw_set_halign(fa_left)
 	
@@ -59,12 +61,12 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	}
 	draw_set_color(c_white)
 	draw_set_font(fn_textLato);
-	draw_text(x1 + 10, y1 + 110, "Position: ")
-	draw_text(x2 - 100, y1 + 110, "Age: ")
+	draw_text(x1 + 10, y1 + 110, LC.translate("Position: "))
+	draw_text(x2 - 100, y1 + 110, LC.translate("Age: "))
 	draw_set_font(fn_LatoSemiBold12);
 	draw_sprite_ext(currentPlayerFlag, false, x1 + 10, y1 + 60, 0.075, 0.075, 0, c_white, 1)
-	draw_text(x1 + 10 + string_width("Position: "), y1 + 110, currentPlayerPos)
-	draw_text(x2 - 100 + string_width("Age: "), y1 + 110, currentPlayer.age)
+	draw_text(x1 + 10 + string_width(LC.translate("Position: ")), y1 + 110, currentPlayerPos)
+	draw_text(x2 - 100 + string_width(LC.translate("Age: ")), y1 + 110, currentPlayer.age)
 	
 	// Writes their attribute as a number and the string
 	for (var i = 0; i < array_length(attributeArray); ++i) {

@@ -370,7 +370,10 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 	answerMap[?"answerTime"] = answerTime
 	answerMap[?"prompt"] = prompt
 	answerMap[?"optionChosen"] = optionChosen.text
-	answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
+	
+	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer")
+		answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
+		
 	answerMap[?"answer"] = correctAnswer
 	answerMap[?"correct"] = optionChosen == correctAnswer
 	answerMap[?"subject"] = subject

@@ -314,15 +314,15 @@ function scr_ultManTransferMarket(){
         draw_set_alpha(1);
         draw_set_color(c_white);
 		if (showPopupCannotBuyPack){
-			stringToShow = "Get a full starting 11 of your current available pack tier to get the next tier of pack";
+			stringToShow = LC.translate("Get a full starting 11 of your current available pack tier to get the next tier of pack");
 		}
 		else if (showPopupCannotAffordPack){
-			stringToShow = "You do you possess the sufficient funds";
+			stringToShow = LC.translate("You do you possess the sufficient funds");
 			textXStart = rect_center_x
 			draw_set_halign(fa_center)
 		}
 		else if (showCannotSellPopup){
-			stringToShow = "This player is currently in your starting 11 and cannot be sold, please remove them from your starting 11 to be able to sell"
+			stringToShow = LC.translate("This player is currently in your starting 11 and cannot be sold, please remove them from your starting 11 to be able to sell")
 		}
 		draw_set_valign(fa_top)
 		draw_text_ext(textXStart, textYStart, 
