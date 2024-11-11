@@ -171,7 +171,7 @@ switch (obj_languageController.languageChosen)
 				var array = [text, "En 85+ Rated Spiller"]
 			break;
 			case "Legendary Pack":
-				var array = [text, "Legende Pakke"]
+				var array = [text, "Legendarisk Pakke"]
 			break;
 			case "1 95+ Rated Player":
 				var array = [text, "En 95+ Rated Spiller"]
@@ -179,6 +179,9 @@ switch (obj_languageController.languageChosen)
 		#endregion
 		
 		#region In-Match
+			case "Match Completed!":
+				var array = [text, "Kamp Færdigspillet!"]
+			break;
 			case "Halftime: ":
 				var array = [text, "Halvleg: "]
 			break;
