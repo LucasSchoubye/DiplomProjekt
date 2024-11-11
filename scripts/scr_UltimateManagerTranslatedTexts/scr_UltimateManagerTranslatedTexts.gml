@@ -204,7 +204,7 @@ switch (obj_languageController.languageChosen)
 				var array = [text, "Rent Bur: +"]
 			break;
 			case "Goal Bonus X":
-				var array = [text, "Mål Bonus X: "]
+				var array = [text, "Mål Bonus X"]
 			break;
 		#endregion
 	}

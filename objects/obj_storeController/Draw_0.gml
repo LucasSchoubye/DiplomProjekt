@@ -17,6 +17,8 @@ var backButtonStartY = room_height*0.035
 var backButtonHeight = categoryHeight/1.5
 var backButtonWidth = categoryWidth/3
 
+var LC = obj_languageController
+
 if (room = rm_store)
 {
 
@@ -60,13 +62,13 @@ draw_set_color(#191115)
 draw_rectangle(0,0,room_width,categoryStartY - 10,false)
 draw_set_font(fn_titleLato)
 draw_set_color(c_white)
-draw_text(screenMidX,screenTop,"Store")
+draw_text(screenMidX,screenTop,LC.translate("Store", Games.Menus))
 draw_set_font(fn_textLato)
 draw_text(currencyStart,screenTop, string(balance) + "$")
 
 // Back button
 draw_rectangle(categoryStartX,backButtonStartY,categoryStartX + backButtonWidth,backButtonStartY + backButtonHeight,true)
-draw_text(categoryStartX + backButtonWidth/2,backButtonStartY+backButtonHeight/2,"Back")
+draw_text(categoryStartX + backButtonWidth/2,backButtonStartY+backButtonHeight/2,LC.translate("Back", Games.Menus))
 if(mouse_x > categoryStartX && mouse_x < categoryStartX+backButtonWidth) {
 		if(mouse_y > backButtonStartY && mouse_y < backButtonStartY+backButtonHeight) {
 			draw_set_alpha(0.3)
