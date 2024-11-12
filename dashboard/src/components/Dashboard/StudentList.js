@@ -191,6 +191,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
+        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
             <List>
                 {sessionAnswersData.map((answer, index) => (
                     <ListItem key={index}>
@@ -212,6 +213,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                     </ListItem>
                 ))}
             </List>
+        </Box>
         );
     };
 
@@ -225,6 +227,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
+        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
             <List>
                 {sessionsForSubtopic.map((session, index) => (
                     <React.Fragment key={session.id}>
@@ -235,6 +238,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                     </React.Fragment>
                 ))}
             </List>
+        </Box>
         );
     };
 
@@ -247,17 +251,23 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             );
         }
 
+        const formatSubtopic = (subtopic) => {
+            return subtopic.charAt(0).toUpperCase() + subtopic.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase();
+        };
+
         return (
-            <List>
-                {subtopicsForSubject.map((subtopic, index) => (
-                    <React.Fragment key={index}>
-                        <ListItem button onClick={() => handleSubtopicClick(subtopic)}>
-                            <ListItemText primary={subtopic} />
-                        </ListItem>
-                        {index < subtopicsForSubject.length - 1 && <Divider />}
-                    </React.Fragment>
-                ))}
-            </List>
+            <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+                <List>
+                    {subtopicsForSubject.map((subtopic, index) => (
+                        <React.Fragment key={index}>
+                            <ListItem button onClick={() => handleSubtopicClick(subtopic)}>
+                                <ListItemText primary={formatSubtopic(subtopic)} />
+                            </ListItem>
+                            {index < subtopicsForSubject.length - 1 && <Divider />}
+                        </React.Fragment>
+                    ))}
+                </List>
+            </Box>
         );
     };
 
@@ -271,6 +281,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
+        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
             <List>
                 {subjects.map((subject, index) => (
                     <React.Fragment key={index}>
@@ -281,6 +292,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                     </React.Fragment>
                 ))}
             </List>
+        </Box>
         );
     };
 
@@ -291,7 +303,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-            <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
+            <Box sx={{ height: '40vh', overflowY: 'auto' }}>
                 <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                     {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
