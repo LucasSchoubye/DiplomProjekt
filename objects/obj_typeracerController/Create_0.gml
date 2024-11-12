@@ -7,7 +7,7 @@ question = undefined
 typingString = ""
 questionType = QuestionType.Typing
 optionsMenu = new OptionsMenu()
-
+audio_play_sound(sou_TyperacerBgMusic,1,true)
 question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
 
 function AnsweredCorrect()

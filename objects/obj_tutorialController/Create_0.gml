@@ -21,7 +21,7 @@ tutorialArray = []
 			tutorialArray[0] = new tutorialStruct();
 		
 			tutorialArray[0].title = "Typeracer"
-			tutorialArray[0].controlParagraf = "Numpad: Type the correct answer \nEnter: Submit your answer"
+			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer"
 			tutorialArray[0].goalParagraf = "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!"
 			tutorialArray[0].roomRef = rm_typeracer
 			tutorialArray[0].gif = spr_tutorialTyperacer
@@ -33,7 +33,7 @@ tutorialArray = []
 			
 			// Main 
 			tutorialArray[0].title = "Ultimate Manager"
-			tutorialArray[0].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nDrag Right Click: Move teammates"
+			tutorialArray[0].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nHold Right Click on teamate and Drag: Move teammates"
 			tutorialArray[0].goalParagraf = "Manage your own football club in Ultimate Manager! Buy players, chose your own position, play in-game matches and win the league!"
 			tutorialArray[0].roomRef = rm_UltManOverview
 			tutorialArray[0].gif = spr_tutorialUltManMatchGif
@@ -58,7 +58,7 @@ tutorialArray = []
 		
 			// Matches 
 			tutorialArray[4].title = "Ultimate Manager - Matches"
-			tutorialArray[4].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nDrag Right Click: Move teammates"
+			tutorialArray[4].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nHold Right Click on teamate and Drag: Move teammates"
 			tutorialArray[4].goalParagraf = "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them. "
 			tutorialArray[4].gif = spr_tutorialUltManMatchGif
 		
