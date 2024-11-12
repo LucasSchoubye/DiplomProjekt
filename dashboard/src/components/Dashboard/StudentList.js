@@ -32,7 +32,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedStudent(studentData);
         const studentAnswersMap = classAnswersMap ? classAnswersMap[studentData.id] || {} : {};
         setStudentAnswerMap(studentAnswersMap);
-        console.log(studentAnswersMap);
         handleReceiveAnswerMap(studentAnswersMap, 'student', true);
     };
 
@@ -90,7 +89,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedSubtopic(subtopic);
         setSelectedSession(null);
         const subtopicAnswers = getSubtopicAnswers(subtopic);
-        console.log(subtopicAnswers);
         handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
 
         // Group answers by sessionRef
@@ -126,7 +124,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     
         if (sessionAnswers[sessionId]) {
             const sessionAnswersData = sessionAnswers[sessionId];
-            console.log(sessionAnswersData);
             handleReceiveAnswerMap(sessionAnswersData, 'session', true);
         } else {
             console.error(`No answers found for session ID: ${sessionId}`);
