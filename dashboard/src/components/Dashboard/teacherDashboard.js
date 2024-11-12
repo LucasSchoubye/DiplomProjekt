@@ -108,6 +108,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
+            console.log(studentList)
             // Log the number of reads used
             console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
@@ -121,33 +122,24 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const fetchClassSessionsAndAnswers = async (studentList) => {
         try {
             const classAnswersMap = {};
-            const sessionsRef = collection(db, 'sessions');
-            const answersRef = collection(db, 'answers');
-
             const studentPromises = studentList.map(async (student) => {
+                const sessionsRef = collection(db, 'sessions');
                 const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
                 const querySnapshot = await getDocs(q);
                 const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                const sessionIds = sessionsData.map(session => session.id);
-                const answersQuery = query(answersRef, where('sessionRef', 'in', sessionIds));
-                const answersSnapshot = await getDocs(answersQuery);
-
-                const answersMap = answersSnapshot.docs.reduce((acc, doc) => {
-                    const data = doc.data();
-                    if (!acc[data.sessionRef]) {
-                        acc[data.sessionRef] = [];
-                    }
-                    acc[data.sessionRef].push({ id: doc.id, ...data });
-                    return acc;
-                }, {});
-
-
-                const studentAnswersMap = {};
-                sessionsData.forEach((session) => {
-                    studentAnswersMap[session.id] = answersMap[session.id] || [];
+                const answersPromises = sessionsData.map(async (session) => {
+                    const answersRef = collection(db, 'answers');
+                    const answersQuery = query(answersRef, where('sessionRef', '==', session.id));
+                    const answersSnapshot = await getDocs(answersQuery);
+                    return answersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 });
 
+                const allAnswers = await Promise.all(answersPromises);
+                const studentAnswersMap = {};
+                sessionsData.forEach((session, index) => {
+                    studentAnswersMap[session.id] = allAnswers[index];
+                });
                 classAnswersMap[student.id] = studentAnswersMap; // Add each student's answers to the class map
             });
 
