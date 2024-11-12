@@ -7,11 +7,11 @@
 }
 
 .correct-answers {
-    color: green;
+    color: "#66b366";
 }
 
 .incorrect-answers {
-    color: red;
+    color: "#ff6666";
 }
 
 .percentage-correct {

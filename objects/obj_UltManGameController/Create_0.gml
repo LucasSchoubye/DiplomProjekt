@@ -24,6 +24,7 @@ skillCheckAmount = 0
 skillCheckCorrectCounter = 0
 skillCheckAttemptsCounter = 0
 frozenShotMissed = false
+celebrationMusic = false
 
 // 
 ballcarrier = undefined

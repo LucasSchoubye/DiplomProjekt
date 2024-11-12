@@ -67,12 +67,12 @@ function DrawCharacterMenu(X,Y,size = 1)
 		head_height,head_width,0,physical[SkinPhysicalCategories.SkinColor],1)
 	
 	// Draw face
-	draw_sprite_ext(physical[SkinPhysicalCategories.Face], 0,
-		x_center - head_width / 2, 
-		y_center - torso_height - head_height + 2*size*sin(breathing),
-		head_width/sprite_get_width(physical[SkinPhysicalCategories.Face]),
-		head_height/sprite_get_height(physical[SkinPhysicalCategories.Face]),
-		0,physical[SkinPhysicalCategories.SkinColor],0.5)
+	//draw_sprite_ext(physical[SkinPhysicalCategories.Face], 0,
+		//x_center - head_width / 2, 
+		//y_center - torso_height - head_height + 2*size*sin(breathing),
+		//head_width/sprite_get_width(physical[SkinPhysicalCategories.Face]),
+		//head_height/sprite_get_height(physical[SkinPhysicalCategories.Face]),
+		//0,physical[SkinPhysicalCategories.SkinColor],0.5)
 
 	// Draw torso with breathing effect
 	draw_sprite_ext(spr_characterBox,0,

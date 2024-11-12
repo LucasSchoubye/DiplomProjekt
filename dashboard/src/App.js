@@ -23,13 +23,6 @@ function App() {
     setAnswerContextType(answerContextType);
   };
 
-  // Log the answer map when it changes
-  useEffect(() => {
-    if (Object.keys(answerMap).length > 0) {
-      console.log("New answerMap:", answerMap);
-    }
-  }, [answerMap]);
-
   return (
     <div className="App">
       {isLoading ? (

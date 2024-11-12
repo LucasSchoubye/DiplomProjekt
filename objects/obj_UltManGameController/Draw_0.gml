@@ -79,8 +79,12 @@ if (timer > 90)
 	obj_UltManManagerController.halftimeCompleted = false
 }
 
-if (!celebrationActive)
+if (!celebrationActive){
 	scr_UltManActiontypes()
+	audio_sound_gain(sou_FtDApplause,0,300)
+	audio_stop_sound(sou_UltManBoo)
+}
+	
 
 if (questionMenuActive and questionMenuClickCooldown = false)
 {
@@ -106,5 +110,15 @@ if (keyboard_check_released(mb_left))
 	
 if (celebrationActive)
 {
+	if (celebrationMusic == true && global.leftScored = false) {
+		audio_sound_gain(sou_FtDApplause,8,0)
+		audio_play_sound(sou_FtDApplause,1,false)
+		celebrationMusic = false
+	} else if (celebrationMusic == true && global.leftScored = true) {
+		show_message("where music?")
+		audio_play_sound(sou_UltManBoo,1,false)
+		celebrationMusic = false
+	}
 	scr_UltManCelebrate()
+	
 }

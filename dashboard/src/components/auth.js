@@ -36,7 +36,6 @@ export const Auth = ({ onLoginSuccess }) => {
             // Firebase Authentication sign-in with email and password
             const userCredential = await signInWithEmailAndPassword(auth, actualEmail, actualPassword);
             const user = userCredential.user;
-            // console.log(user);
 
             if (user) {
                 // Query Firestore for the user document based on the authenticated user's UID

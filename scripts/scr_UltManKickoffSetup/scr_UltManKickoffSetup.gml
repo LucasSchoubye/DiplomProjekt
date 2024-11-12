@@ -9,6 +9,7 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 		obj_UltManBall.x = room_width/2
 		obj_UltManBall.y = room_height/2
 		obj_UltManBall.owner = undefined
+		global.leftScored = leftScored
 	
 		with(obj_UltManPlayer)
 		{
@@ -32,6 +33,7 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 	else
 	{
 		celebrationActive = true
+		obj_UltManGameController.celebrationMusic = true
 		alarm[1] = 60*4
 		obj_UltManBall.x = 0//room_width/2
 		obj_UltManBall.y = 0//room_height/2
