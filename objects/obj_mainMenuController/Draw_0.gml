@@ -2,6 +2,8 @@
 
 if (room = rm_menu)
 {
+	var LC = obj_languageController
+	
 	// Setup view variables
 	var optionBuffer = 30
 	var selectionBuffer = 180
@@ -51,7 +53,7 @@ if (room = rm_menu)
 	draw_set_font(fn_longShot80)
 	scr_drawOutlineText(screenMidX,screenTop,c_black,c_white,"Main Menu")
 	draw_set_font(fn_lato16)
-	draw_text(screenLeft,screenTop + titleBuffer,"Welcome back "+obj_firestore_controller.username+"!")
+	draw_text(screenLeft,screenTop + titleBuffer,LC.translate("Welcome back ",Games.Menus)+obj_firestore_controller.username+"!")
 
 	// Draw options and logic
 	for (var i = 0; i < ds_list_size(options); ++i) {
@@ -59,13 +61,13 @@ if (room = rm_menu)
 		draw_set_valign(fa_middle)
 		var optionY = optionsTop + optionBuffer * i + titleBuffer;
 		// draw a list of all options in list
-		draw_text(screenLeft,optionsTop + optionBuffer*i + titleBuffer,ds_list_find_value(options, i))
+		draw_text(screenLeft,optionsTop + optionBuffer*i + titleBuffer, LC.translate(ds_list_find_value(options, i), Games.Menus))
 	
 		// If selected, draw pointer
 		if (selectedOption = i)
 		{
 			//draw_circle(screenLeft - 30,optionsTop + optionBuffer*i + titleBuffer,10,false)
-			draw_line(screenLeft, optionsTop + optionBuffer*(i+0.5) + titleBuffer, screenLeft + string_width(ds_list_find_value(options, i)), optionsTop + optionBuffer*(i+0.5) + titleBuffer)
+			draw_line(screenLeft, optionsTop + optionBuffer*(i+0.5) + titleBuffer, screenLeft + string_width(LC.translate(ds_list_find_value(options, i), Games.Menus)), optionsTop + optionBuffer*(i+0.5) + titleBuffer)
 		}
 		
 		#region Logic

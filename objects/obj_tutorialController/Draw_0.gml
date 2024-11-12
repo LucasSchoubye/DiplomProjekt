@@ -3,6 +3,7 @@
 
 var backgroundColor = #191115
 //#191115
+var LC = obj_languageController
 
 // Skip tutorial
 if (ds_list_find_index(obj_menuGridController.tutorialsPlayed, tutorialArray[0].title) > -1)
@@ -40,14 +41,14 @@ draw_set_halign(fa_left)
 scr_drawOutlineText(room_width*0.015, room_height*0.075, c_black, c_white, textStruct.title)
 draw_set_font(fn_lato16)
 //draw_text(pictureRight + 10, room_height*0.25, "Controls:")
-scr_drawOutlineText(pictureRight + 10, room_height*0.25, c_black, c_white,  "Controls:")
-scr_drawOutlineText(pictureLeft + 200, pictureBot + 30, c_black, c_white,  "Goal:")
+scr_drawOutlineText(pictureRight + 10, room_height*0.25, c_black, c_white,  LC.translate("Controls:", Games.Menus))
+scr_drawOutlineText(pictureLeft + 200, pictureBot + 30, c_black, c_white,  LC.translate("Goal:", Games.Menus))
 
 // Paragraf
 draw_set_font(fn_textLato)
 draw_set_valign(fa_top)
-draw_text_ext(pictureLeft + 200, pictureBot + 65, textStruct.goalParagraf, string_height("I")+2,room_width*0.4)
-draw_text_ext(pictureRight + 20, room_height*0.25 + 35, textStruct.controlParagraf, string_height("I")*2+2,room_width*0.5)
+draw_text_ext(pictureLeft + 200, pictureBot + 65, LC.translate(textStruct.goalParagraf, Games.Menus), string_height("I")+2,room_width*0.4)
+draw_text_ext(pictureRight + 20, room_height*0.25 + 35, LC.translate(textStruct.controlParagraf, Games.Menus), string_height("I")*2+2,room_width*0.5)
 
 // Character
 obj_characterController.DrawCharacterMenu(room_width*0.075, room_height, 2)
@@ -66,9 +67,9 @@ draw_roundrect(buttonMiddleX - buttonWidth/2, buttonMiddleY + buttonHeight/2,but
 draw_set_alpha(1)
 
 if (currentTutorialScreen = tutorialScreens)
-	draw_text(buttonMiddleX, buttonMiddleY, "Play")
+	draw_text(buttonMiddleX, buttonMiddleY, LC.translate("Play", Games.Menus))
 else
-	draw_text(buttonMiddleX, buttonMiddleY, "Next")
+	draw_text(buttonMiddleX, buttonMiddleY, LC.translate("Next", Games.Menus))
 
 if (mouse_x > buttonMiddleX - buttonWidth/2 &&
 	mouse_y < buttonMiddleX + buttonWidth/2 &&
@@ -106,7 +107,7 @@ draw_set_valign(fa_middle)
 draw_roundrect(buttonMiddleX - buttonWidth/2, buttonMiddleY + buttonHeight/2,buttonMiddleX + buttonWidth/2, buttonMiddleY - buttonHeight/2,true)
 draw_set_alpha(1)
 
-draw_text(buttonMiddleX, buttonMiddleY, "Back")
+draw_text(buttonMiddleX, buttonMiddleY, LC.translate("Back", Games.Menus))
 
 if (mouse_x > buttonMiddleX - buttonWidth/2 &&
 	mouse_y < buttonMiddleX + buttonWidth/2 &&

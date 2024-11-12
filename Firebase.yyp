@@ -426,6 +426,7 @@
     {"id":{"name":"scr_idleAnimation","path":"scripts/scr_idleAnimation/scr_idleAnimation.yy",},},
     {"id":{"name":"scr_inventoryCategories","path":"scripts/scr_inventoryCategories/scr_inventoryCategories.yy",},},
     {"id":{"name":"scr_loadoutInventory","path":"scripts/scr_loadoutInventory/scr_loadoutInventory.yy",},},
+    {"id":{"name":"scr_MenusTranslatedTexts","path":"scripts/scr_MenusTranslatedTexts/scr_MenusTranslatedTexts.yy",},},
     {"id":{"name":"scr_pauseFunctions","path":"scripts/scr_pauseFunctions/scr_pauseFunctions.yy",},},
     {"id":{"name":"scr_playerMovement","path":"scripts/scr_playerMovement/scr_playerMovement.yy",},},
     {"id":{"name":"scr_reverseDsList","path":"scripts/scr_reverseDsList/scr_reverseDsList.yy",},},

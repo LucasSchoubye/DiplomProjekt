@@ -154,6 +154,7 @@
     {"name":"scr_HUD","order":1,"path":"scripts/scr_HUD/scr_HUD.yy",},
     {"name":"scr_inventoryCategories","order":8,"path":"scripts/scr_inventoryCategories/scr_inventoryCategories.yy",},
     {"name":"scr_loadoutInventory","order":6,"path":"scripts/scr_loadoutInventory/scr_loadoutInventory.yy",},
+    {"name":"scr_MenusTranslatedTexts","order":1,"path":"scripts/scr_MenusTranslatedTexts/scr_MenusTranslatedTexts.yy",},
     {"name":"scr_pauseFunctions","order":5,"path":"scripts/scr_pauseFunctions/scr_pauseFunctions.yy",},
     {"name":"scr_reverseDsList","order":1,"path":"scripts/scr_reverseDsList/scr_reverseDsList.yy",},
     {"name":"scr_sort_struct_list","order":4,"path":"scripts/scr_sort_struct_list/scr_sort_struct_list.yy",},
