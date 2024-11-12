@@ -3,7 +3,7 @@ import { Box, Typography, List, ListItem, ListItemText, Divider, Button, Circula
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../../config/firebase";
 
-const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap }) => {
+const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap }) => {
     const theme = useTheme();
     const isXsScreen = useMediaQuery(theme.breakpoints.only('xs'));
     const isSmScreen = useMediaQuery(theme.breakpoints.only('sm'));
@@ -12,6 +12,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [sessions, setSessions] = useState([]);
     const [sessionAnswers, setSessionAnswers] = useState({});
+    const [studentAnswerMap, setStudentAnswerMap] = useState({});
     const [isLoadingSessions, setIsLoadingSessions] = useState(false);
 
     const [selectedSubject, setSelectedSubject] = useState(null);
@@ -25,45 +26,17 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         return '400px'; // for lg and above
     };
 
-    const fetchSessionsAndAnswers = async (studentId) => {
-        setIsLoadingSessions(true);
-        try {
-            const sessionsRef = collection(db, 'sessions');
-            const q = query(sessionsRef, where('student', '==', `/students/${studentId}`));
-            const querySnapshot = await getDocs(q);
-            const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setSessions(sessionsData);
-
-            const answersPromises = sessionsData.map(async (session) => {
-                const answersRef = collection(db, 'answers');
-                const answersQuery = query(answersRef, where('sessionRef', '==', session.id));
-                const answersSnapshot = await getDocs(answersQuery);
-                return answersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            });
-
-            const allAnswers = await Promise.all(answersPromises);
-            const answersMap = {};
-            sessionsData.forEach((session, index) => {
-                answersMap[session.id] = allAnswers[index];
-            });
-            setSessionAnswers(answersMap);
-        } catch (error) {
-            console.error("Error fetching sessions and answers: ", error);
-        } finally {
-            setIsLoadingSessions(false);
-        }
-    };
-
     const handleStudentClick = (studentData) => {
         setSelectedStudent(studentData);
-        fetchSessionsAndAnswers(studentData.id);
-        handleReceiveAnswerMap([], 'student', true);
-        console.log("Student clicked:", studentData);
+        const studentAnswersMap = classAnswersMap ? classAnswersMap[studentData.id] || {} : {};
+        setStudentAnswerMap(studentAnswersMap);
+        console.log(studentAnswersMap);
+        handleReceiveAnswerMap(studentAnswersMap, 'student', true);
     };
 
     const getSubjects = () => {
         const subjectsSet = new Set();
-        Object.values(sessionAnswers).forEach((answers) => {
+        Object.values(studentAnswerMap).forEach((answers) => {
             answers.forEach((answer) => {
                 subjectsSet.add(answer.subject);
             });
@@ -72,12 +45,12 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const getSubjectAnswers = (subject) => {
-        return Object.values(sessionAnswers).flat().filter(answer => answer.subject === subject);
+        return Object.values(studentAnswerMap).flat().filter(answer => answer.subject === subject);
     };
 
     const getSubtopicsForSubject = (subject) => {
         const subtopicsSet = new Set();
-        Object.values(sessionAnswers).forEach((answers) => {
+        Object.values(studentAnswerMap).forEach((answers) => {
             answers.forEach((answer) => {
                 if (answer.subject === subject) {
                     subtopicsSet.add(answer.subtopic);
@@ -88,12 +61,12 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const getSubtopicAnswers = (subtopic) => {
-        return Object.values(sessionAnswers).flat().filter(answer => answer.subtopic === subtopic);
+        return Object.values(studentAnswerMap).flat().filter(answer => answer.subtopic === subtopic);
     };
 
     const getSessionsForSubtopic = (subtopic) => {
         return sessions.filter(session => 
-            sessionAnswers[session.id].some(answer => answer.subtopic === subtopic)
+            studentAnswerMap[session.id].some(answer => answer.subtopic === subtopic)
         );
     };
 
@@ -115,7 +88,27 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedSubtopic(subtopic);
         setSelectedSession(null);
         const subtopicAnswers = getSubtopicAnswers(subtopic);
+        console.log(subtopicAnswers);
         handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
+
+        // Group answers by sessionRef
+        const sessionsMap = subtopicAnswers.reduce((acc, answer) => {
+            const sessionRef = answer.sessionRef;
+            if (!acc[sessionRef]) {
+                acc[sessionRef] = [];
+            }
+            acc[sessionRef].push(answer);
+            return acc;
+        }, {});
+
+        // Convert sessionsMap to an array of sessions
+        const sessionsList = Object.keys(sessionsMap).map(sessionRef => ({
+            id: sessionRef,
+            answers: sessionsMap[sessionRef]
+        }));
+
+        setSessions(sessionsList);
+        setSessionAnswers(sessionsMap);
     };
 
     const handleBackToSubtopics = () => {
@@ -129,8 +122,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleSessionClick = (sessionId) => {
         setSelectedSession(sessionId);
     
-        if (sessionAnswers && sessionAnswers[sessionId]) {
+        if (sessionAnswers[sessionId]) {
             const sessionAnswersData = sessionAnswers[sessionId];
+            console.log(sessionAnswersData);
             handleReceiveAnswerMap(sessionAnswersData, 'session', true);
         } else {
             console.error(`No answers found for session ID: ${sessionId}`);
@@ -149,7 +143,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedStudent(null);
         clearAnswerMap();
         handleReceiveAnswerMap([], 'student', false);
-        console.log(handleReceiveAnswerMap);
     };
 
     const renderBackButton = () => {

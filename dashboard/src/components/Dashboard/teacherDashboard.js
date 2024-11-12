@@ -31,8 +31,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
 
     useEffect(() => {
-        console.log("Selected Class:", selectedClass);
-        console.log("Selected Student:", selectedStudent);
     }, [selectedClass, selectedStudent]);
   
     useEffect(() => {
@@ -109,7 +107,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
             // Log the number of reads used
-            console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
@@ -188,12 +185,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         try {
             for (const gameId of newSelectedGames) {
                 const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
-                console.log(`Setting allowed to true for game: ${gameId}`);
                 await updateDoc(gameDocRef, { allowed: true });
             }
             for (const gameId of unselectedGames) {
                 const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
-                console.log(`Setting allowed to false for game: ${gameId}`);
                 await updateDoc(gameDocRef, { allowed: false });
             }
         } 
@@ -207,7 +202,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         try {
             const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
             const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
-            console.log(subTopicsSnapshot)
             const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
@@ -230,12 +224,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         try {
             for (const subTopicId of newSelectedSubTopics) {
                 const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
-                console.log(`Setting active to true for subtopic: ${subTopicId}`);
                 await updateDoc(subTopicDocRef, { active: true });
             }
             for (const subTopicId of unselectedSubTopics) {
                 const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
-                console.log(`Setting active to false for subtopic: ${subTopicId}`);
                 await updateDoc(subTopicDocRef, { active: false });
             }
         } 
@@ -267,6 +259,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
                             setSelectedStudent={setSelectedStudent}
+                            classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
                         />
                         <SubjectsList 
                             subjects={subjects} 
