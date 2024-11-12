@@ -106,7 +106,8 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             }));
             setAvailableGames(games);
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
-
+            // Aggregate answers across all students in the class
+            await fetchClassSessionsAndAnswers(studentList);
             // Log the number of reads used
             console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
@@ -114,7 +115,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         } finally {
             setIsLoadingStudents(false);
         }
-    };
+    }, []);
     
 
     const fetchClassSessionsAndAnswers = async (studentList) => {
