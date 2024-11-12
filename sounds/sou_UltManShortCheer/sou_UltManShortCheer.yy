@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sou_UltManShortCheer",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":2.951812,
+  "name":"sou_UltManShortCheer",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Assets/Ultimate Manager/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sou_UltManShortCheer.mp3",
+  "type":0,
+  "volume":1.0,
+}

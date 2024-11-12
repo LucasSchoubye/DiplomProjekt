@@ -17,15 +17,15 @@ function scr_danishSmallMultiplication(questionType)
 			// Setup variables
 			question.prompt = string(a)+" * "+string(b)
 			var optionToList = ds_list_create()
-			var answer = a*b
+			var answer = new AnswerOption(a*b, MathErrors.CorrectAnswer)
 			
 			// Populate mistakes
-			ds_list_add(optionToList, a*(b+1))
-			ds_list_add(optionToList, (a+1)*b)
-			ds_list_add(optionToList, a*(b-1))
-			ds_list_add(optionToList, (a-1)*b)
-			ds_list_add(optionToList, a*b-1)
-			ds_list_add(optionToList, a*b+1)
+			ds_list_add(optionToList, new AnswerOption(a*(b+1), MathErrors.MultiplicationError))
+			ds_list_add(optionToList, new AnswerOption((a+1)*b, MathErrors.MultiplicationError))
+			ds_list_add(optionToList, new AnswerOption(a*(b-1), MathErrors.MultiplicationError))
+			ds_list_add(optionToList, new AnswerOption((a-1)*b, MathErrors.MultiplicationError))
+			ds_list_add(optionToList, new AnswerOption(a*b-1, MathErrors.CountingError))
+			ds_list_add(optionToList, new AnswerOption(a*b+1, MathErrors.CountingError))
 			
 			var optionsArray = scr_clearDuplicateOptionsAndInsertAnswer(optionToList, answer, round(random_range(1,5)))
 			

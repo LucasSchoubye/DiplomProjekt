@@ -108,11 +108,16 @@ if (room = rm_login)
 		if(keyboard_check_pressed(vk_shift) or 
 			keyboard_check_pressed(vk_up) or
 			keyboard_check_pressed(vk_down) or
+			keyboard_check_pressed(vk_right) or
+			keyboard_check_pressed(vk_left) or
+			keyboard_check_pressed(vk_control) or
+			keyboard_check_pressed(vk_alt) or
+			keyboard_check_pressed(vk_lcontrol) or
 			keyboard_check_pressed(vk_tab))
 			return false
 
 	    // Check if the key pressed is a letter or a number
-	    if ((key_pressed >= "0" && key_pressed <= "9") || (key_pressed >= "A" && key_pressed <= "Z") || (key_pressed >= "a" && key_pressed <= "z")) {
+	    if ((key_pressed >= "0" && key_pressed <= "9") || (key_pressed >= "A" && key_pressed <= "Z") || (key_pressed >= "a" && key_pressed <= "z") || key_pressed = "@" || key_pressed = ".") {
 	        return true;
 	    } else {
 	        return false;

@@ -11,7 +11,7 @@ enum ActionType{
 }
 
 // Question specfic
-question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.Typing)
+question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, QuestionType.MultipleChoice)
 typingString = ""
 optionsMenu = new OptionsMenu()
 questionMenuActive = false
@@ -59,12 +59,14 @@ audio_play_sound(sou_UltManCheer, 1, true, 0.2)
 // Functions
 function AnsweredCorrect() 
 {
+	audio_play_sound(sou_FtDCorrect, 1, false, 1)
 	skillCheckAttemptsCounter++
 	skillCheckCorrectCounter++
 }
 
 function AnsweredIncorrect() 
 {
+	audio_play_sound(sou_FtDSmallDamage, 1, false, 1)
 	var punishmentLength = 200
 	skillCheckAttemptsCounter++
 	

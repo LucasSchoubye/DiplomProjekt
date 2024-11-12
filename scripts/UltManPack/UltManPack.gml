@@ -12,6 +12,9 @@ function UltManPack(tier) constructor {
 	packPlayerInfo = ""
 	packEnum = tier
 	
+	// Translation
+	LC = obj_languageController
+	
 	//animation
 	animCounter = 0
 	
@@ -20,44 +23,44 @@ function UltManPack(tier) constructor {
 		{
 			case UltManPackTier.Bronze:
 				packColour = #8A6225
-				packTitle = "Bronze Pack"
+				packTitle = LC.translate("Bronze Pack")
 				packCost = 10
-				packPlayerInfo = "1 45+ Rated Player"
+				packPlayerInfo = LC.translate("1 45+ Rated Player")
 				playerSellPrice = 5
 				break
 			case UltManPackTier.Silver:
 				packColour = #A9A49D
-				packTitle = "Silver Pack"
+				packTitle = LC.translate("Silver Pack")
 				packCost = 25
-				packPlayerInfo = "1 55+ Rated Player"
+				packPlayerInfo = LC.translate("1 55+ Rated Player")
 				playerSellPrice = 15
 				break
 			case UltManPackTier.Gold:
 				packColour = #FFDB20
-				packTitle = "Gold Pack"
+				packTitle = LC.translate("Gold Pack")
 				packCost = 50
-				packPlayerInfo = "1 65+ Rated Player"
+				packPlayerInfo = LC.translate("1 65+ Rated Player")
 				playerSellPrice = 25
 				break
 			case UltManPackTier.Ruby:
 				packColour = #e0115f
-				packTitle = "Ruby Pack"
+				packTitle = LC.translate("Ruby Pack")
 				packCost = 75
-				packPlayerInfo = "1 75+ Rated Player"
+				packPlayerInfo = LC.translate("1 75+ Rated Player")
 				playerSellPrice = 40
 				break
 			case UltManPackTier.Obsidian:
 				packColour = #5B4965
-				packTitle = "Obsidian Pack"
+				packTitle = LC.translate("Obsidian Pack")
 				packCost = 100
-				packPlayerInfo = "1 85+ Rated Player"
+				packPlayerInfo = LC.translate("1 85+ Rated Player")
 				playerSellPrice = 50
 				break
 			case UltManPackTier.Legendary:
 				packColour = #F100E9
-				packTitle = "Legendary Pack"
+				packTitle = LC.translate("Legendary Pack")
 				packCost = 150
-				packPlayerInfo = "1 95+ Rated Player"
+				packPlayerInfo = LC.translate("1 95+ Rated Player")
 				playerSellPrice = 75
 				break
 		}
@@ -114,7 +117,7 @@ function UltManPack(tier) constructor {
 	    // Draw the buy button within the white background
 		draw_set_color(#528aca);
 	    scr_drawPackButton(xValue + contentPadding, yValue + packPlayerInfoY + 3 * contentPadding, 
-	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, "BUY");
+	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, LC.translate("BUY"));
 
 	    // Reset color and alpha
 	    draw_set_color(c_white);
@@ -169,7 +172,7 @@ function UltManPack(tier) constructor {
 	    // Draw the unavailable button within the white background
 		draw_set_color(c_gray);
 	    scr_drawPackButton(xValue + contentPadding, yValue + packPlayerInfoY + 3 * contentPadding, 
-	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, "UNAVAILABLE");
+	                   xValue + packWidth - contentPadding, yValue + packHeight - contentPadding, LC.translate("UNAVAILABLE"));
 
 	    // Reset color and alpha
 	    draw_set_color(c_white);

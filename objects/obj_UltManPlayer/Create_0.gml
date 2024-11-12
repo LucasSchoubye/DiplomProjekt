@@ -88,8 +88,8 @@ function MoveToPos(X,Y)
 				point_distance(x,y,obj_UltManBall.x,obj_UltManBall.y) < 100)
 			{
 				var dir = point_distance(opponent.x, opponent.y, obj_UltManBall.x, obj_UltManBall.y)
-				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir) + 70
-				obj_UltManBall.owner.targetY += lengthdir_y(strength, dir) + 70
+				obj_UltManBall.owner.targetX += lengthdir_x(strength, dir) + 180
+				obj_UltManBall.owner.targetY += lengthdir_y(strength, dir) + 180
 				obj_UltManBall.owner.tackleCooldown = true
 				obj_UltManBall.owner.image_angle -= (strength/10)*obj_UltManBall.owner.facing
 				obj_UltManBall.owner = id

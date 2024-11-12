@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore"; // Import updateDoc
+import { useEffect, useState, useCallback } from "react";
+import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore"; // Import query and where
 import { db } from "../../config/firebase.js"; // Import Firestore
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
+import SubjectsList from './subjectsList.js'; // Import SubjectsList
 import StudentStats from "./studentStats.js";
 import ClassStats from "./classStats.js";
 import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
@@ -13,6 +14,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
     const [selectedStudent, setSelectedStudent] = useState(null);
+    const [subjects, setSubjects] = useState([]); // Add subjects state
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
     const [isLoadingStudents, setIsLoadingStudents] = useState(false);
@@ -24,13 +26,15 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classDocRef, setClassDocRef] = useState(null);
     const [classAnswersMap, setClassAnswersMap] = useState([]);
     const [isViewingStudent, setIsViewingStudent] = useState(false);
+    const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
+    const [subTopics, setSubTopics] = useState([]); // Add subTopics state
+    const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
 
     useEffect(() => {
         console.log("Selected Class:", selectedClass);
         console.log("Selected Student:", selectedStudent);
     }, [selectedClass, selectedStudent]);
-    
-
+  
     useEffect(() => {
         const fetchClasses = async () => {
             try {
@@ -63,7 +67,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         fetchClasses();
     }, [userData]);
 
-    const handleClassClick = async (classData) => {
+    const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
         setSelectedStudent(null)
@@ -71,7 +75,14 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setIsLoadingStudents(true);
         try {
             const studentsCollectionRef = collection(db, classData.classRefData.classRef.path, "students");
-            const studentsSnapshot = await getDocs(studentsCollectionRef);
+            const subjectsCollectionRef = collection(db, `${classData.classRefData.classRef.path}/topics`);
+            const allowedGamesCollectionRef = collection(db, `${classData.classRefData.classRef.path}/allowedGames`);
+
+            const [studentsSnapshot, subjectsSnapshot, allowedGamesSnapshot] = await Promise.all([
+                getDocs(studentsCollectionRef),
+                getDocs(subjectsCollectionRef),
+                getDocs(allowedGamesCollectionRef)
+            ]);
 
             const studentPromises = studentsSnapshot.docs.map(async (studentDoc) => {
                 const { studentRef } = studentDoc.data();
@@ -83,13 +94,23 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             const studentList = await Promise.all(studentPromises);
             setStudents(studentList);
 
-            // Fetch allowed games
-            await fetchAllowedGames(classData.classRefData.classRef);
+            const subjectsData = subjectsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setSubjects(subjectsData);
 
-            // Aggregate answers across all students in the class
-            await fetchClassSessionsAndAnswers(studentList);
+            const games = allowedGamesSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setAvailableGames(games);
+            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
+
+            // Log the number of reads used
+            console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
-            console.error("Error fetching students: ", err);
+            console.error("Error fetching data: ", err);
         } finally {
             setIsLoadingStudents(false);
         }
@@ -120,6 +141,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                     return acc;
                 }, {});
 
+
                 const studentAnswersMap = {};
                 sessionsData.forEach((session) => {
                     studentAnswersMap[session.id] = answersMap[session.id] || [];
@@ -147,6 +169,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setSelectedClass(null);
         setStudents([]);
         setIsViewingStudent(false);
+        setSubjects([]); // Clear subjects when going back
     };
 
     const clearAnswerMap = () => {
@@ -178,20 +201,45 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
-    const fetchAllowedGames = async (classDocRef) => {
+    const handleSubjectClick = useCallback(async (subject) => {
+        setSelectedSubject(subject);
         try {
-            const allowedGamesCollectionRef = collection(db, `${classDocRef.path}/allowedGames`);
-            const allowedGamesSnapshot = await getDocs(allowedGamesCollectionRef);
-
-            const games = allowedGamesSnapshot.docs.map((doc) => ({
+            const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
+            const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
+            console.log(subTopicsSnapshot)
+            const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
             }));
 
-            setAvailableGames(games);
-            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
+            setSubTopics(subTopicsData);
+            setSelectedSubTopics(subTopicsData.filter(subTopic => subTopic.active).map(subTopic => subTopic.id)); // Set initial selected subtopics
         } catch (err) {
-            console.error("Error fetching allowed games: ", err);
+            console.error("Error fetching subtopics: ", err);
+        }
+    }, [classDocRef]);
+
+    const handleSubTopicChange = async (event) => {
+        const value = event.target.value;
+        const newSelectedSubTopics = value.filter(subTopicId => !selectedSubTopics.includes(subTopicId));
+        const unselectedSubTopics = selectedSubTopics.filter(subTopicId => !value.includes(subTopicId));
+
+        setSelectedSubTopics(value);
+        // Update the database
+        try {
+            for (const subTopicId of newSelectedSubTopics) {
+                const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
+                console.log(`Setting active to true for subtopic: ${subTopicId}`);
+                await updateDoc(subTopicDocRef, { active: true });
+            }
+            for (const subTopicId of unselectedSubTopics) {
+                const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
+                console.log(`Setting active to false for subtopic: ${subTopicId}`);
+                await updateDoc(subTopicDocRef, { active: false });
+            }
+        } 
+        catch (err) {
+            console.error("Error updating subtopics: ", err);
         }
     };
 
@@ -209,20 +257,48 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                         handleClassClick={handleClassClick} 
                     />
                 ) : (
-                    <StudentList 
-                    students={students} 
-                    selectedClass={selectedClass} 
-                    handleBackClick={handleBackClick} 
-                    isLoading={isLoadingStudents}
-                    handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
-                    clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
-                    setSelectedStudent={setSelectedStudent}
-                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '90%', paddingTop: "20px", gap: '10px' }}>
+                        <StudentList 
+                            students={students} 
+                            selectedClass={selectedClass} 
+                            handleBackClick={handleBackClick} 
+                            isLoading={isLoadingStudents}
+                            handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
+                            clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                            setSelectedStudent={setSelectedStudent}
+                        />
+                        <SubjectsList 
+                            subjects={subjects} 
+                            selectedClass={selectedClass} 
+                            handleSubjectClick={handleSubjectClick} // Pass the handleSubjectClick function
+                            selectedSubject={selectedSubject} // Pass the selectedSubject state
+                        />
+                    </Box>
                 )}
             </DrawerLayout>
             
             {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
+                    <Select
+                        multiple
+                        value={selectedSubTopics}
+                        onChange={handleSubTopicChange}
+                        displayEmpty
+                        renderValue={() => "Choose Sub Topics"}
+                        style={{ position: 'absolute', top: '20px', right: '270px' }} // Adjust position to move more to the left
+                    >
+                        <MenuItem value="" disabled>
+                            Choose Sub Topics
+                        </MenuItem>
+                        {subTopics
+                            // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
+                            .map((subTopic) => (
+                                <MenuItem key={subTopic.id} value={subTopic.id}>
+                                    <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
+                                    <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                                </MenuItem>
+                            ))}
+                    </Select>
                     <Select
                         multiple
                         value={selectedGames}
