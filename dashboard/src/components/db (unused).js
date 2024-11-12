@@ -14,7 +14,6 @@ export const Database = ({ userData }) => {
         const fetchClasses = async () => {
             try {
                 // Fetch the teacher document using the teacher's ref (userData.ref)
-                console.log(userData.ref.id);
                 const teacherDocRef = doc(db, "teachers", userData.ref.id); // Use doc() to create a document reference
                 const teacherDoc = await getDoc(teacherDocRef);
 
@@ -49,7 +48,6 @@ export const Database = ({ userData }) => {
         setSelectedClass(classData); // Set the selected class when clicked
         setIsViewingStudents(true);  // Toggle to student view
         try {
-            console.log(classData.classRefData.classRef.path);
             // Use the classRef from classData to dynamically construct the students collection path
             const studentsCollectionRef = collection(db, classData.classRefData.classRef.path, "students");
 

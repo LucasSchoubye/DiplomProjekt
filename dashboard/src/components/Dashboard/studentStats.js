@@ -54,8 +54,8 @@ const StudentStats = ({ answerMap, contextType }) => {
                     <YAxis type="number" />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Correct" stackId="a" fill="green" opacity={0.6} />
-                    <Bar dataKey="Incorrect" stackId="a" fill="red" opacity={0.6}/>
+                    <Bar dataKey="Correct" stackId="a" fill="#66b366"/>
+                    <Bar dataKey="Incorrect" stackId="a" fill="#ff6666"/>
                 </BarChart>
             </ResponsiveContainer>
         </div>
