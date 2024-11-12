@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../../config/firebase";
+import EastIcon from '@mui/icons-material/East';
+import { CheckCircle, Cancel } from '@mui/icons-material';
 
 const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap }) => {
     const theme = useTheme();
@@ -193,9 +195,20 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 {sessionAnswersData.map((answer, index) => (
                     <ListItem key={index}>
                         <ListItemText
-                            primary={answer.prompt}
-                            secondary={`Answer: ${answer.answer} | Correct: ${answer.correct ? 1 : 0}`}
+                            primary={
+                                <Box display="flex" alignItems="center">
+                                    {answer.prompt}
+                                    <EastIcon sx={{ color: '#3B95FF', mx: 1 }} />
+                                    {answer.answer}
+                                </Box>
+                            }
+                            secondary={`Student answer: ${answer.optionChosen}`}
                         />
+                        {answer.correct ? (
+                            <CheckCircle sx={{ color: "#66b366"}} />
+                        ) : (
+                            <Cancel sx={{ color: "#ff6666"}} />
+                        )}
                     </ListItem>
                 ))}
             </List>
