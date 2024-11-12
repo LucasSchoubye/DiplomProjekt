@@ -191,7 +191,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+        <Box sx={{ height: '50vh', overflowY: 'auto' }}>
             <List>
                 {sessionAnswersData.map((answer, index) => (
                     <ListItem key={index}>
@@ -227,7 +227,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+        <Box sx={{ height: '50vh', overflowY: 'auto' }}>
             <List>
                 {sessionsForSubtopic.map((session, index) => (
                     <React.Fragment key={session.id}>
@@ -256,7 +256,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         };
 
         return (
-            <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+            <Box sx={{ height: '50vh', overflowY: 'auto' }}>
                 <List>
                     {subtopicsForSubject.map((subtopic, index) => (
                         <React.Fragment key={index}>
@@ -281,7 +281,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-        <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+        <Box sx={{ height: '50vh', overflowY: 'auto' }}>
             <List>
                 {subjects.map((subject, index) => (
                     <React.Fragment key={index}>
@@ -303,7 +303,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         }
 
         return (
-            <Box sx={{ height: '40vh', overflowY: 'auto' }}>
+            <Box sx={{ height: '50vh', overflowY: 'auto' }}>
                 <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                     {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>

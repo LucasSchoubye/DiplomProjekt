@@ -19,6 +19,7 @@ const SubjectsList = ({ subjects, selectedClass, handleSubjectClick, selectedSub
         <Box sx={{ width: getWidth(), maxWidth: '100%'}}>
             <Typography variant="h6" mb={2}>Subjects in {selectedClass.className}</Typography>
             <Divider />
+            <Box sx={{ height: '30vh', overflowY: 'auto' }}>
             <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                 {subjects.map((subject, index) => (
                     <React.Fragment key={subject.id}>
@@ -29,6 +30,7 @@ const SubjectsList = ({ subjects, selectedClass, handleSubjectClick, selectedSub
                     </React.Fragment>
                 ))}
             </List>
+            </Box>
         </Box>
     );
 };
