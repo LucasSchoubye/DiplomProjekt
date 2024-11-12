@@ -57,6 +57,8 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleStudentClick = (studentData) => {
         setSelectedStudent(studentData);
         fetchSessionsAndAnswers(studentData.id);
+        handleReceiveAnswerMap([], 'student', true);
+        console.log("Student clicked:", studentData);
     };
 
     const getSubjects = () => {
@@ -98,14 +100,14 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleSubjectClick = (subject) => {
         setSelectedSubject(subject);
         const subjectAnswers = getSubjectAnswers(subject);
-        handleReceiveAnswerMap(subjectAnswers, 'subject');
+        handleReceiveAnswerMap(subjectAnswers, 'subject', true);
     };
 
     const handleBackToSubjects = () => {
         setSelectedSubject(null);
         if (selectedStudent) {
             const subjectAnswers = getSubjectAnswers(selectedStudent);
-            handleReceiveAnswerMap(subjectAnswers, 'subject');
+            handleReceiveAnswerMap(subjectAnswers, 'subject', true);
         }
     };
     
@@ -113,14 +115,14 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedSubtopic(subtopic);
         setSelectedSession(null);
         const subtopicAnswers = getSubtopicAnswers(subtopic);
-        handleReceiveAnswerMap(subtopicAnswers, 'subtopic');
+        handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
     };
 
     const handleBackToSubtopics = () => {
         setSelectedSubtopic(null);
         if (selectedSubject) {
             const subjectAnswers = getSubjectAnswers(selectedSubject);
-            handleReceiveAnswerMap(subjectAnswers, 'subject');
+            handleReceiveAnswerMap(subjectAnswers, 'subject', true);
         }
     };
     
@@ -129,7 +131,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     
         if (sessionAnswers && sessionAnswers[sessionId]) {
             const sessionAnswersData = sessionAnswers[sessionId];
-            handleReceiveAnswerMap(sessionAnswersData, 'session');
+            handleReceiveAnswerMap(sessionAnswersData, 'session', true);
         } else {
             console.error(`No answers found for session ID: ${sessionId}`);
         }
@@ -139,13 +141,15 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         setSelectedSession(null);
         if (selectedSubtopic) {
             const subtopicAnswers = getSubtopicAnswers(selectedSubtopic);
-            handleReceiveAnswerMap(subtopicAnswers, 'subtopic');
+            handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
         }
     };
 
     const handleBackToStudents = () => {
         setSelectedStudent(null);
         clearAnswerMap();
+        handleReceiveAnswerMap([], 'student', false);
+        console.log(handleReceiveAnswerMap);
     };
 
     const renderBackButton = () => {

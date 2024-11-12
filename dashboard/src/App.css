@@ -53,4 +53,6 @@ h2 {
 
 button {
   margin-left: auto; /* Push this element to the right */
+  position: sticky;
+  top: 0;
 }

@@ -6,12 +6,14 @@ import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
 import SubjectsList from './subjectsList.js'; // Import SubjectsList
 import StudentStats from "./studentStats.js";
+import ClassStats from "./classStats.js";
 import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
 
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
     const [subjects, setSubjects] = useState([]); // Add subjects state
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
@@ -22,10 +24,17 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
+    const [classAnswersMap, setClassAnswersMap] = useState([]);
+    const [isViewingStudent, setIsViewingStudent] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
 
+    useEffect(() => {
+        console.log("Selected Class:", selectedClass);
+        console.log("Selected Student:", selectedStudent);
+    }, [selectedClass, selectedStudent]);
+  
     useEffect(() => {
         const fetchClasses = async () => {
             try {
@@ -61,6 +70,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
+        setSelectedStudent(null)
         setIsViewingStudents(true);
         setIsLoadingStudents(true);
         try {
@@ -96,7 +106,8 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             }));
             setAvailableGames(games);
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
-
+            // Aggregate answers across all students in the class
+            await fetchClassSessionsAndAnswers(studentList);
             // Log the number of reads used
             console.log(`Number of reads used: ${studentsSnapshot.size + studentPromises.length + subjectsSnapshot.size + allowedGamesSnapshot.size + 2}`);
         } catch (err) {
@@ -105,17 +116,60 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setIsLoadingStudents(false);
         }
     }, []);
+    
 
-    const handleReceiveAnswerMapFromStudentList = (answers, answerContextType) => {
+    const fetchClassSessionsAndAnswers = async (studentList) => {
+        try {
+            const classAnswersMap = {};
+            const sessionsRef = collection(db, 'sessions');
+            const answersRef = collection(db, 'answers');
+
+            const studentPromises = studentList.map(async (student) => {
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const querySnapshot = await getDocs(q);
+                const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                const sessionIds = sessionsData.map(session => session.id);
+                const answersQuery = query(answersRef, where('sessionRef', 'in', sessionIds));
+                const answersSnapshot = await getDocs(answersQuery);
+
+                const answersMap = answersSnapshot.docs.reduce((acc, doc) => {
+                    const data = doc.data();
+                    if (!acc[data.sessionRef]) {
+                        acc[data.sessionRef] = [];
+                    }
+                    acc[data.sessionRef].push({ id: doc.id, ...data });
+                    return acc;
+                }, {});
+
+
+                const studentAnswersMap = {};
+                sessionsData.forEach((session) => {
+                    studentAnswersMap[session.id] = answersMap[session.id] || [];
+                });
+
+                classAnswersMap[student.id] = studentAnswersMap; // Add each student's answers to the class map
+            });
+
+            await Promise.all(studentPromises);
+            setClassAnswersMap(classAnswersMap); // Set aggregated answers for the entire class
+        } catch (error) {
+            console.error("Error fetching class sessions and answers: ", error);
+        }
+    };
+
+    const handleReceiveAnswerMapFromStudentList = (answers, answerContextType, isViewingStudent) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
-        handleReceiveAnswerMap(answers, answerContextType); // Pass contextType to the parent handler
+        setIsViewingStudent(isViewingStudent);
+        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent); // Pass contextType to the parent handler
     };
 
     const handleBackClick = () => {
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
+        setIsViewingStudent(false);
         setSubjects([]); // Clear subjects when going back
     };
 
@@ -210,8 +264,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             selectedClass={selectedClass} 
                             handleBackClick={handleBackClick} 
                             isLoading={isLoadingStudents}
-                            handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                            handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                            setSelectedStudent={setSelectedStudent}
                         />
                         <SubjectsList 
                             subjects={subjects} 
@@ -223,7 +278,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                 )}
             </DrawerLayout>
             
-            {selectedClass && (
+            {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
                     <Select
                         multiple
@@ -267,6 +322,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                     </Select>
                     {Object.keys(answerMap).length > 0 && (
                         <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                    )}
+                    {!isViewingStudent && (
+                    <ClassStats classAnswersMap={classAnswersMap} />
                     )}
                 </div>
             )}
