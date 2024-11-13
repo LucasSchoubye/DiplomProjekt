@@ -71,10 +71,10 @@ var threeOptionsY = optionsMenu.threeOptionsY
 	obj_firestore_controller.answerTimer++
 	if (keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_enter))
 	{
-		if (typingString = round(real(question.options[question.answerIndex])))
+		if (typingString = round(real(question.options[question.answerIndex].text)))
 		{
 			// Correct
-			obj_firestore_controller.SendAnswer(question.prompt, typingString, question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
+			obj_firestore_controller.SendAnswer(question.prompt, new AnswerOption(typingString), question.options[question.answerIndex], question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
 			obj_firestore_controller.answerTimer = 0
 			obj_typeracerCar.AnsweredCorrect()
 		}
@@ -96,7 +96,8 @@ var threeOptionsY = optionsMenu.threeOptionsY
 			return false
 
 	    // Check if the key pressed is a letter or a number
-	    if ((key_pressed >= "0" && key_pressed <= "9")) {
+	    if ((key_pressed >= "0" && key_pressed <= "9") or key_pressed = "-"  or (key_pressed = "." and string_pos(".",typingString) = 0)) 
+		{
 	        return true;
 	    } else {
 	        return false;
