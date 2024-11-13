@@ -33,7 +33,7 @@ tutorialArray = []
 			
 			// Main 
 			tutorialArray[0].title = "Ultimate Manager"
-			tutorialArray[0].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nHold Right Click on teamate and Drag: Move teammates"
+			tutorialArray[0].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nDrag Right Click: Move teammates"
 			tutorialArray[0].goalParagraf = "Manage your own football club in Ultimate Manager! Buy players, chose your own position, play in-game matches and win the league!"
 			tutorialArray[0].roomRef = rm_UltManOverview
 			tutorialArray[0].gif = spr_tutorialUltManMatchGif

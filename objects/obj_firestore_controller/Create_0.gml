@@ -364,9 +364,7 @@ function RespondClassSubtopics(subject, value)
  }
 
 function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType, answerTime)
-{
-	show_message("SendAnswer")
-	
+{	
 	answerMap = ds_map_create()
 	answerMap[?"sessionRef"] = string(sessionId)
 	answerMap[?"answerTime"] = answerTime
@@ -378,8 +376,6 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 		
 	var isCorrect = 0
 	if (string(optionChosen.text) == string(correctAnswer)){isCorrect = 1}
-		
-	show_message(isCorrect)
 		
 	answerMap[?"answer"] = correctAnswer
 	answerMap[?"correct"] = isCorrect
