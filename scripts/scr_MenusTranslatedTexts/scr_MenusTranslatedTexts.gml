@@ -36,6 +36,12 @@ switch (obj_languageController.languageChosen)
 			var array = [text, "Velkommen tilbage "]
 		break;
 		
+		#region Shop and Items
+		case "Owned":
+			var array = [text, "Købt"]
+		break;
+		#endregion
+		
 		#region Tutorials
 		
 			// General:
