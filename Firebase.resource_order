@@ -1,10 +1,10 @@
 {
   "FolderOrderSettings":[
-    {"name":"Amor","order":16,"path":"folders/Assets/Games/Fight The Dungeon/Sprites/Amor.yy",},
     {"name":"Games","order":1,"path":"folders/Assets/Games.yy",},
-    {"name":"Languages","order":10,"path":"folders/Assets/Shared Assets/Scripts/Languages.yy",},
+    {"name":"Amor","order":16,"path":"folders/Assets/Games/Fight The Dungeon/Sprites/Amor.yy",},
     {"name":"Typeracer","order":1,"path":"folders/Assets/Games/Typeracer.yy",},
     {"name":"Ultimate Manager","order":2,"path":"folders/Assets/Games/Ultimate Manager.yy",},
+    {"name":"Languages","order":10,"path":"folders/Assets/Shared Assets/Scripts/Languages.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
