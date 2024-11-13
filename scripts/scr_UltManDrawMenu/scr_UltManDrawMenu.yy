@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_UltManDrawField",
+  "%Name":"scr_UltManDrawMenu",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_UltManDrawField",
+  "name":"scr_UltManDrawMenu",
   "parent":{
     "name":"Visuals",
     "path":"folders/Assets/Games/Ultimate Manager/Scripts/In Match/Visuals.yy",
