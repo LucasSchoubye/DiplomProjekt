@@ -26,7 +26,7 @@
   "origin":1,
   "parent":{
     "name":"Tactics Menu",
-    "path":"folders/Assets/Ultimate Manager/Sprites/Tactics Menu.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Sprites/Tactics Menu.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Damage",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Damage.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects/Damage.yy",
   },
   "parentObjectId":{
     "name":"obj_damageParent",

@@ -13,7 +13,7 @@
   "name":"sou_FtDWin",
   "parent":{
     "name":"Sounds",
-    "path":"folders/Assets/Fight The Dungeon/Sounds.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -60,8 +60,22 @@ switch (obj_languageController.languageChosen)
 				var array = [text, "Vælg Spil"]
 			break;
 			
+			// Typeracer
+			case "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer":
+				var array = [text, "Keyboard: Skriv det rigtige svar \nEnter: Indsend dit svar"]
+			break;
+			
+			case "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!":
+				var array = [text, "Ræs til målstregen! Besvar et spørgsmål rigtigt for at komme tættere på målstregen! Prøv at undgå at svare forkert, ellers går du baglæns!"]
+			break;
+		
+			/*
+			
+			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer"
+			tutorialArray[0].goalParagraf = "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!"
 			
 			
+			*/
 		
 			// Fight the dungeon
 			case "WASD: Movement \nShift: Sprint":

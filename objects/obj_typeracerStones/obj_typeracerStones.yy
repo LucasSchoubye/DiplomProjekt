@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Particle Effects",
-    "path":"folders/Assets/Typeracer/Objects/Particle Effects.yy",
+    "path":"folders/Assets/Games/Typeracer/Objects/Particle Effects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

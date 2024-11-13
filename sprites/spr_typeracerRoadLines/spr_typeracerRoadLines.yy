@@ -26,7 +26,7 @@
   "origin":5,
   "parent":{
     "name":"Sprites",
-    "path":"folders/Assets/Typeracer/Sprites.yy",
+    "path":"folders/Assets/Games/Typeracer/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

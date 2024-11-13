@@ -31,7 +31,7 @@
   "origin":4,
   "parent":{
     "name":"Attacks",
-    "path":"folders/Assets/Fight The Dungeon/Sprites/Attacks.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites/Attacks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"draw_distance_shadow",
   "parent":{
     "name":"Scripts",
-    "path":"folders/Assets/Fight The Dungeon/Scripts.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

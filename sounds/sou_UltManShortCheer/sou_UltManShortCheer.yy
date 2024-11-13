@@ -13,7 +13,7 @@
   "name":"sou_UltManShortCheer",
   "parent":{
     "name":"Sounds",
-    "path":"folders/Assets/Ultimate Manager/Sounds.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

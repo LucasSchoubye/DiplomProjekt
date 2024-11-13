@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Controllers",
-    "path":"folders/Assets/Ultimate Manager/Objects/Controllers.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":true,

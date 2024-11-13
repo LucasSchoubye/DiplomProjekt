@@ -18,7 +18,7 @@
   "name":"rm_UltManOverview",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Assets/Ultimate Manager/Rooms.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

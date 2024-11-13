@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Loadout Menu",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Loadout Menu.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects/Loadout Menu.yy",
   },
   "parentObjectId":null,
   "persistent":true,

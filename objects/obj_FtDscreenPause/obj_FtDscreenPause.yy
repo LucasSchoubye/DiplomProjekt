@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Pause",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Pause.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects/Pause.yy",
   },
   "parentObjectId":null,
   "persistent":false,
