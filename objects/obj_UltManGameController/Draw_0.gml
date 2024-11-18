@@ -111,12 +111,13 @@ if (keyboard_check_released(mb_left))
 if (celebrationActive)
 {
 	if (celebrationMusic == true && global.leftScored = false) {
-		audio_sound_gain(sou_FtDApplause,8,0)
-		audio_play_sound(sou_FtDApplause,1,false)
+		audio_sound_gain(sou_FtDApplause,0.8,0)
+		audio_play_sound(sou_FtDApplause,1,false, 1, 0.5)
 		celebrationMusic = false
 	} else if (celebrationMusic == true && global.leftScored = true) {
-		show_message("where music?")
-		audio_play_sound(sou_UltManBoo,1,false)
+		//audio_play_sound(sou_UltManBoo,1,false, 0.7)
+		audio_sound_gain(sou_FtDApplause,0.8,0)
+		audio_play_sound(sou_FtDApplause,1,false, 1, 0.5)
 		celebrationMusic = false
 	}
 	scr_UltManCelebrate()
