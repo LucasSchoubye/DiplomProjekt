@@ -2,6 +2,8 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_loadoutInventory(){
 
+var LC = obj_languageController
+
 // GENERAL VARIABLES
 var itemHeight = room_height*0.15
 var itemWidth = room_width*0.075
@@ -27,7 +29,7 @@ currentWeaponEquip = undefined
 //draw weapon collection rectancle and title
 draw_set_halign(fa_left)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(weaponStartX+5,weaponStartY-20,"Weapons")
+draw_text(weaponStartX+5,weaponStartY-20,LC.translate("Weapons"))
 draw_roundrect(weaponStartX,weaponStartY,weaponStartX+5*itemWidth,weaponStartY+2*itemHeight,true)
 //reset values
 draw_set_halign(fa_center)
@@ -106,7 +108,7 @@ currentArmorEquip = undefined
 //draw armor collection rectancle and title
 draw_set_halign(fa_left)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(armorStartX+5,armorStartY-20,"Armor")
+draw_text(armorStartX+5,armorStartY-20,LC.translate("Armor"))
 draw_roundrect(armorStartX,armorStartY,armorStartX+5*itemWidth,armorStartY+2*itemHeight,true)
 //reset values
 draw_set_halign(fa_center)
@@ -217,7 +219,7 @@ draw_set_alpha(0.3 + sin(current_time/500)*0.1)
 draw_roundrect(weaponEquipStartX,weaponEquipStartY,weaponEquipStartX+itemWidth,weaponEquipStartY+itemHeight,true)
 draw_set_alpha(1)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(weaponEquipTextStartX,weaponEquipTextStartY,"Weapon")
+draw_text(weaponEquipTextStartX,weaponEquipTextStartY,LC.translate("Weapon"))
 draw_set_font(defaultFont)
 if (currentWeaponEquip != undefined) {
 	currentWeaponEquip.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
@@ -280,7 +282,7 @@ draw_set_alpha(0.3 + sin(current_time/500)*0.1)
 draw_roundrect(armorEquipStartX,armorEquipStartY,armorEquipStartX+itemWidth,armorEquipStartY+itemHeight,true)
 draw_set_alpha(1)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(armorEquipTextStartX,armorEquipTextStartY,"Armor")
+draw_text(armorEquipTextStartX,armorEquipTextStartY,LC.translate("Armor"))
 draw_set_font(defaultFont)
 if (currentArmorEquip != undefined) {
 	currentArmorEquip.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)

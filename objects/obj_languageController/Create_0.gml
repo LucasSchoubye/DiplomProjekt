@@ -24,6 +24,9 @@ function translate(text, game = gameChosen)
 		case Games.UltimateManager:
 			return scr_UltimateManagerTranslatedTexts(text)
 			
+		case Games.FightTheDungeon:
+			return scr_FightTheDungeonTranslatedTexts(text)
+			
 		case Games.Menus:
 			return scr_MenusTranslatedTexts(text)
 	}

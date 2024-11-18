@@ -424,6 +424,7 @@
     {"id":{"name":"scr_drawTyping","path":"scripts/scr_drawTyping/scr_drawTyping.yy",},},
     {"id":{"name":"scr_enumState","path":"scripts/scr_enumState/scr_enumState.yy",},},
     {"id":{"name":"scr_equipmentFunctions","path":"scripts/scr_equipmentFunctions/scr_equipmentFunctions.yy",},},
+    {"id":{"name":"scr_FightTheDungeonTranslatedTexts","path":"scripts/scr_FightTheDungeonTranslatedTexts/scr_FightTheDungeonTranslatedTexts.yy",},},
     {"id":{"name":"scr_getCategoryEnumFromString","path":"scripts/scr_getCategoryEnumFromString/scr_getCategoryEnumFromString.yy",},},
     {"id":{"name":"scr_getDanishMathQuestion","path":"scripts/scr_getDanishMathQuestion/scr_getDanishMathQuestion.yy",},},
     {"id":{"name":"scr_HUD","path":"scripts/scr_HUD/scr_HUD.yy",},},
