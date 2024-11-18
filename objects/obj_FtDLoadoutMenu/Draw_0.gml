@@ -18,8 +18,8 @@ var backButtonWidth = categoryWidth/3
 var itemHeight = room_height*0.15
 var itemWidth = room_width*0.075
 
-var playButtonStartX = screenMidX-70
-var playButtonEndX = screenMidX+70
+var playButtonStartX = room_width*0.23-70
+var playButtonEndX = room_width*0.23+70
 var playButtonStartY = room_height*0.97
 var playButtonEndY = room_height*0.88
 
@@ -42,7 +42,6 @@ draw_set_color(c_white)
 draw_text(screenMidX,screenTop, LC.translate("Fight The Dungeon Loadout"))
 draw_set_font(fn_textLato)
 draw_text(screenMidX, screenTop+35, LC.translate(fillEquipmentTXT))
-obj_characterController.DrawCharacterMenu(room_width*0.73,room_height*0.5,4)
 
 // play button
 draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)

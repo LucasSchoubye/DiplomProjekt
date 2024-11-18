@@ -2,6 +2,7 @@
   "FolderOrderSettings":[
     {"name":"Games","order":1,"path":"folders/Assets/Games.yy",},
     {"name":"Amor","order":16,"path":"folders/Assets/Games/Fight The Dungeon/Sprites/Amor.yy",},
+    {"name":"Stats","order":17,"path":"folders/Assets/Games/Fight The Dungeon/Sprites/Stats.yy",},
     {"name":"Typeracer","order":1,"path":"folders/Assets/Games/Typeracer.yy",},
     {"name":"Ultimate Manager","order":2,"path":"folders/Assets/Games/Ultimate Manager.yy",},
     {"name":"Visuals","order":1,"path":"folders/Assets/Games/Ultimate Manager/Scripts/In Match/Visuals.yy",},
@@ -258,6 +259,7 @@
     {"name":"spr_pokemon_character_R","order":3,"path":"sprites/spr_pokemon_character_R/spr_pokemon_character_R.yy",},
     {"name":"spr_pokemon_character_U","order":2,"path":"sprites/spr_pokemon_character_U/spr_pokemon_character_U.yy",},
     {"name":"spr_scat","order":4,"path":"sprites/spr_scat/spr_scat.yy",},
+    {"name":"spr_stat3","order":3,"path":"sprites/spr_stat3/spr_stat3.yy",},
     {"name":"spr_theOneAndOnlySmall","order":1,"path":"sprites/spr_theOneAndOnlySmall/spr_theOneAndOnlySmall.yy",},
     {"name":"spr_thunderBall","order":2,"path":"sprites/spr_thunderBall/spr_thunderBall.yy",},
     {"name":"spr_tutorialTyperacer","order":6,"path":"sprites/spr_tutorialTyperacer/spr_tutorialTyperacer.yy",},
