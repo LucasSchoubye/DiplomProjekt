@@ -11,8 +11,31 @@ enum UltManNpcState {
 // Inherit the parent event
 event_inherited();
 
+switch(irandom(4))
+{
+	case 0:
+		sprite_index = spr_UltManPlayer6
+	break;
+	
+	case 1:
+		sprite_index = spr_UltManPlayer7
+	break;
+	
+	case 2:
+		sprite_index = spr_UltManPlayer8
+	break;
+	
+	case 3:
+		sprite_index = spr_UltManPlayer9
+	break;
+	
+	case 4:
+		sprite_index = spr_UltManPlayer10
+	break;
+}
+
 state = UltManNpcState.HoldPosition
-image_blend = c_ltgray
+//image_blend = c_ltgray
 playerTeam = false
 pressingDistance = 900
 
