@@ -27,6 +27,7 @@ frozenShotMissed = false
 celebrationMusic = false
 
 // 
+controlledPlayer = undefined
 ballcarrier = undefined
 playerControllerHistory = [undefined,undefined]
 commandedPlayer = undefined

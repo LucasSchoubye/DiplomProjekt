@@ -60,25 +60,25 @@ function MenuGridElement() constructor {
 		}
 		if (mouse_check_button_pressed(mb_left) and mouse_x > xValue && mouse_x < xValue+itemWidth){
 			if(mouse_y > yValue && mouse_y < yValue+itemHeight) {
-			switch(itemName){
-				case "Typeracer":
-					obj_firestore_controller.StartSession("/games/typeracer")
-					obj_firestore_controller.playedGameTitle = "Typeracer"
-					room_goto(rm_tutorial)
-					//room_goto(rm_typeracer)
-				break
-				case "Ultimate Manager":
-					obj_firestore_controller.StartSession("/games/ultimateManager")
-					obj_firestore_controller.playedGameTitle = "Ultimate Manager"
-					room_goto(rm_tutorial)
-					//room_goto(rm_UltManOverview)
-				break
-				case "Fight The Dungeon":
-					obj_firestore_controller.StartSession("/games/fightTheDungeon")
-					obj_firestore_controller.playedGameTitle = "Fight the Dungeon"
-					room_goto(rm_tutorial)
-					//room_goto(rm_FtD)
-			}
+				switch(itemName){
+					case "Typeracer":
+						obj_firestore_controller.StartSession("/games/typeracer")
+						obj_firestore_controller.playedGameTitle = "Typeracer"
+						obj_languageController.gameChosen = Games.TypeRacer
+						room_goto(rm_tutorial)
+					break
+					case "Ultimate Manager":
+						obj_firestore_controller.StartSession("/games/ultimateManager")
+						obj_firestore_controller.playedGameTitle = "Ultimate Manager"
+						obj_languageController.gameChosen = Games.UltimateManager
+						room_goto(rm_tutorial)
+					break
+					case "Fight The Dungeon":
+						obj_firestore_controller.StartSession("/games/fightTheDungeon")
+						obj_firestore_controller.playedGameTitle = "Fight the Dungeon"
+						obj_languageController.gameChosen = Games.FightTheDungeon
+						room_goto(rm_tutorial)
+				}
 			}
 		}
 	

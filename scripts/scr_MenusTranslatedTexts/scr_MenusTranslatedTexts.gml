@@ -42,6 +42,25 @@ switch (obj_languageController.languageChosen)
 		break;
 		#endregion
 		
+		#region Login
+		case "Don't have an account?   Contact your school":
+			var array = [text, "Har du ikke en konto?   Kontakt din skole"]
+		break;
+		case "Information found here!":
+			var array = [text, "Information finder du her!"]
+		break;
+		case "Username: ":
+			var array = [text, "Brugernavn: "]
+		break;
+		case "Password: ":
+			var array = [text, "Kodeord: "]
+		break;
+		case "News Title":
+			var array = [text, "Titel på Nyhed"]
+		break;
+		
+		#endregion
+		
 		#region Tutorials
 		
 			// General:

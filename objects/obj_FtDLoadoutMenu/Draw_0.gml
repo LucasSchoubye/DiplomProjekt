@@ -29,24 +29,24 @@ var weaponStartY = room_height*0.18
 var armorStartX = room_width*0.05
 var armorStartY = weaponStartY+2*itemHeight+50
 
+var LC = obj_languageController
 
 if(room == rm_FtDLoadoutMenu) {
 	
 scr_loadoutInventory()
 
-
 draw_set_color(#191115)
 draw_rectangle(0,0,room_width,categoryStartY - 10,false)
 draw_set_font(fn_titleLato)
 draw_set_color(c_white)
-draw_text(screenMidX,screenTop,"Fight The Dungeon Loadout")
+draw_text(screenMidX,screenTop, LC.translate("Fight The Dungeon Loadout"))
 draw_set_font(fn_textLato)
-draw_text(screenMidX, screenTop+35, fillEquipmentTXT)
+draw_text(screenMidX, screenTop+35, LC.translate(fillEquipmentTXT))
 obj_characterController.DrawCharacterMenu(room_width*0.73,room_height*0.5,4)
 
 // play button
 draw_roundrect(playButtonStartX,playButtonStartY,playButtonEndX,playButtonEndY,true)
-draw_text((playButtonStartX + playButtonEndX)/2,(playButtonStartY+playButtonEndY)/2,"Fight!")
+draw_text((playButtonStartX + playButtonEndX)/2,(playButtonStartY+playButtonEndY)/2,LC.translate("Fight!"))
 if(mouse_x > playButtonStartX && mouse_x < playButtonEndX) {
 	if(mouse_y < playButtonStartY && mouse_y > playButtonEndY) {
 		draw_set_alpha(0.3)
@@ -68,7 +68,7 @@ if(keyboard_check(vk_backspace)) {
 
 // Back button
 draw_rectangle(categoryStartX,backButtonStartY,categoryStartX + backButtonWidth,backButtonStartY + backButtonHeight,true)
-draw_text(categoryStartX + backButtonWidth/2,backButtonStartY+backButtonHeight/2,"Back")
+draw_text(categoryStartX + backButtonWidth/2,backButtonStartY+backButtonHeight/2,LC.translate("Back"))
 if(mouse_x > categoryStartX && mouse_x < categoryStartX+backButtonWidth) {
 	if(mouse_y > backButtonStartY && mouse_y < backButtonStartY+backButtonHeight) {
 		draw_set_alpha(0.3)
