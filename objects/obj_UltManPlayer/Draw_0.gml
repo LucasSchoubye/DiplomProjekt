@@ -22,6 +22,14 @@ if (targetSpd > topSpd){targetSpd = topSpd}
 targetShootSpd = point_distance(targetX, targetY, mouse_x, mouse_y)/1.15
 if (targetShootSpd > topPassSpd){targetShootSpd = topPassSpd}
 
+// Active player ellipse
+if (obj_UltManGameController.controlledPlayer = id)
+{
+	draw_set_alpha(1 + sin(current_time/100)*0.2)
+	var ellipseSize = 60 + sin(current_time/100)*5
+	draw_ellipse_color(x - ellipseSize,y-ellipseSize/2,x+ellipseSize,y+ellipseSize/2,c_gray,c_white,false)
+}
+
 // animation
 depth = -y
 animCycle++
