@@ -182,6 +182,14 @@ var weaponDescriptionStartX = room_width*0.49
 var weaponDescriptionWidth = weaponDescriptionStartX+room_width*0.23
 var weaponDescriptionStartY = room_height*0.18
 var weaponDescriptionHeight = weaponDescriptionStartY+room_height*0.6
+var weaponDescriptionMidX = weaponDescriptionStartX+((room_width*0.23)/2)
+var weaponDescriptionTextStartY = weaponDescriptionStartY+40
+var weaponDescriptionStatTextStartY = weaponDescriptionStartY+room_height*0.3
+var currentWeaponName = ""
+var damageStat = 0
+var projectileStat = 0
+var rangeStat = 0
+var weaponDescription = ""
 
 var armorEquipStartX = weaponEquipStartX + itemWidth + 225
 var armorEquipStartY = weaponEquipStartY
@@ -191,6 +199,14 @@ var armorDescriptionStartX = weaponDescriptionWidth+room_width*0.01
 var armorDescriptionWidth = armorDescriptionStartX+room_width*0.23
 var armorDescriptionStartY = weaponDescriptionStartY
 var armorDescriptionHeight = weaponDescriptionHeight
+var armorDescriptionMidX = armorDescriptionStartX+((room_width*0.23)/2)
+var armorDescriptionTextStartY = armorDescriptionStartY+40
+var armorDescriptionStatTextStartY = armorDescriptionStartY+room_height*0.3
+var currentArmorName = ""
+var healthStat = 0
+var speedStat = 0
+var staminaStat = 0
+var armorDescription = ""
 
 
 // weapon equip
@@ -207,8 +223,53 @@ if (currentWeaponEquip != undefined) {
 	currentWeaponEquip.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
 }
 
+
+// Switch for what weapon stats are shown
+if (currentWeaponEquip != undefined){
+	switch(currentWeaponEquip.itemName) {
+		case "Thunderbolt": 
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 6
+			projectileStat = 1
+			rangeStat = 10
+		break
+		case "Black Hole":
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 10
+			projectileStat = 1
+			rangeStat = 5
+		break
+		case "Fireball":
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 3
+			projectileStat = 3
+			rangeStat = 10
+		break
+	}
+} else {
+	currentWeaponName = "No Weapon Equipped"
+	damageStat = 0
+	projectileStat = 0
+	rangeStat = 0
+}
+
+
 // Weapon equipped description
 draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionWidth,weaponDescriptionHeight,true)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(weaponDescriptionMidX,weaponDescriptionStartY+20,string(currentWeaponName))
+draw_text(weaponDescriptionMidX,weaponDescriptionStatTextStartY+60,"Stats")
+draw_set_halign(fa_left)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+100,"Damage:")
+draw_sprite(spr_stat10,damageStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+100)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+150,"Projectiles:")
+draw_sprite(spr_stat3,projectileStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+150)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,"Range:")
+draw_sprite(spr_stat10,rangeStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+200)
+draw_set_font(defaultFont)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionTextStartY+20,string(weaponDescription))
+draw_set_halign(fa_center)
+
 
 
 // armor equip
@@ -225,8 +286,55 @@ if (currentArmorEquip != undefined) {
 	currentArmorEquip.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)
 }
 
+
+// Switch for what armor stats are shown
+if (currentArmorEquip != undefined){
+	switch(currentArmorEquip.itemName) {
+		case "Medium Armor": 
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 5
+			speedStat = 6
+			staminaStat = 5
+			armorDescription = "A good default armor option for when you want a balanced build of decent speed, health and stamina"
+		break
+		case "Heavy Armor":
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 10
+			speedStat = 3
+			staminaStat = 3
+			armorDescription = "Good for when you think you can kill the boss in time by tanking a few hits"
+		break
+		case "Light Armor":
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 3
+			speedStat = 9
+			staminaStat = 10
+			armorDescription = "If the risky dodging playstyle is your passion you can take it to its full potential with Light Armor which enhances your speed greatly but reduces the amount of hits you can take"
+		break
+	}
+} else {
+	currentArmorName = "No Armor Equipped"
+	healthStat = 0
+	speedStat = 0
+	staminaStat = 0
+}
+
 // Armor equipped description
 draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionWidth,armorDescriptionHeight,true)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(armorDescriptionMidX,armorDescriptionStartY+20,string(currentArmorName))
+draw_text(armorDescriptionMidX,armorDescriptionStatTextStartY+60,"Stats")
+draw_set_halign(fa_left)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+100,"Health:")
+draw_sprite(spr_stat10,healthStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+100)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+150,"Speed:")
+draw_sprite(spr_stat10,speedStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+150)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,"Stamina:")
+draw_sprite(spr_stat10,staminaStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+200)
+draw_set_font(defaultFont)
+draw_text(armorDescriptionStartX+15,armorDescriptionTextStartY+30,string(armorDescription))
+draw_set_halign(fa_center)
+
 
 
 
