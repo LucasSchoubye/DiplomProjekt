@@ -174,15 +174,23 @@ for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 
 // DRAW INVENTORY SLOTS
 // VARIABLES
-var weaponEquipStartX = room_width*0.65
+var weaponEquipStartX = room_width*0.565
 var weaponEquipStartY = room_height*0.8
 var weaponEquipTextStartX = weaponEquipStartX + itemWidth/2
 var weaponEquipTextStartY = weaponEquipStartY+itemHeight+20
-var armorEquipStartX = weaponEquipStartX + itemWidth + 20
+var weaponDescriptionStartX = room_width*0.49
+var weaponDescriptionWidth = weaponDescriptionStartX+room_width*0.23
+var weaponDescriptionStartY = room_height*0.18
+var weaponDescriptionHeight = weaponDescriptionStartY+room_height*0.6
+
+var armorEquipStartX = weaponEquipStartX + itemWidth + 225
 var armorEquipStartY = weaponEquipStartY
 var armorEquipTextStartX = armorEquipStartX + itemWidth/2
 var armorEquipTextStartY = armorEquipStartY+itemHeight+20
-
+var armorDescriptionStartX = weaponDescriptionWidth+room_width*0.01
+var armorDescriptionWidth = armorDescriptionStartX+room_width*0.23
+var armorDescriptionStartY = weaponDescriptionStartY
+var armorDescriptionHeight = weaponDescriptionHeight
 
 
 // weapon equip
@@ -199,6 +207,9 @@ if (currentWeaponEquip != undefined) {
 	currentWeaponEquip.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
 }
 
+// Weapon equipped description
+draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionWidth,weaponDescriptionHeight,true)
+
 
 // armor equip
 draw_set_alpha(0.1)
@@ -214,8 +225,9 @@ if (currentArmorEquip != undefined) {
 	currentArmorEquip.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)
 }
 
+// Armor equipped description
+draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionWidth,armorDescriptionHeight,true)
 
-draw_triangle_color(screenMidX+100,screenMidY-50,screenMidX+100,screenMidY-10,screenMidX+70,screenMidY-30,c_olive,c_olive,c_olive,false)
-draw_triangle_color(screenMidX+530,screenMidY-50,screenMidX+530,screenMidY-10,screenMidX+560,screenMidY-30,c_olive,c_olive,c_olive,false)
+
 
 }
