@@ -49,7 +49,7 @@
   "origin":7,
   "parent":{
     "name":"Health",
-    "path":"folders/Assets/Fight The Dungeon/Sprites/Health.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites/Health.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

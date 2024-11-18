@@ -22,6 +22,8 @@ function StoreElement() constructor {
 
 	function DrawItem(xValue,yValue) {
 		
+		var LC = obj_languageController
+		
 		draw_set_font(fn_textLato)
 		draw_set_alpha(0.1)
 		draw_set_color(c_white)
@@ -34,7 +36,12 @@ function StoreElement() constructor {
 		
 		// Price/owned text & Name
 		if(isOwned == true) {
-			draw_text(xValue+itemCenterX,yValue+itemPriceY,"Owned")
+			draw_text(xValue+itemCenterX,yValue+itemPriceY, LC.translate("Owned", Games.Menus))
+			draw_set_alpha(0.6)
+			draw_set_color(c_black)
+			draw_roundrect(xValue + 5,yValue +5,xValue+itemWidth-5,yValue+itemHeight-5,false)
+			draw_set_color(c_white)
+			draw_set_alpha(1)
 		}
 		else 
 		{

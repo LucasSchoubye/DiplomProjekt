@@ -364,7 +364,7 @@ function RespondClassSubtopics(subject, value)
  }
 
 function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answerType, answerTime)
-{
+{	
 	answerMap = ds_map_create()
 	answerMap[?"sessionRef"] = string(sessionId)
 	answerMap[?"answerTime"] = answerTime
@@ -374,8 +374,11 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer")
 		answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
 		
+	var isCorrect = 0
+	if (string(optionChosen.text) == string(correctAnswer)){isCorrect = 1}
+		
 	answerMap[?"answer"] = correctAnswer
-	answerMap[?"correct"] = optionChosen == correctAnswer
+	answerMap[?"correct"] = isCorrect
 	answerMap[?"subject"] = subject
 	answerMap[?"subtopic"] = subtopic
 	answerMap[?"answerType"] = answerType

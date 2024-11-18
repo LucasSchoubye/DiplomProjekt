@@ -26,7 +26,7 @@
   "origin":9,
   "parent":{
     "name":"Player Sprites",
-    "path":"folders/Assets/Ultimate Manager/Sprites/Player Sprites.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Sprites/Player Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

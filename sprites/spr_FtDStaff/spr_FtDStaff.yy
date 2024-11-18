@@ -26,7 +26,7 @@
   "origin":9,
   "parent":{
     "name":"Weapons",
-    "path":"folders/Assets/Fight The Dungeon/Sprites/Player/Weapons.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites/Player/Weapons.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

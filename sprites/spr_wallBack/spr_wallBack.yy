@@ -26,7 +26,7 @@
   "origin":7,
   "parent":{
     "name":"Room",
-    "path":"folders/Assets/Fight The Dungeon/Sprites/Room.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites/Room.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

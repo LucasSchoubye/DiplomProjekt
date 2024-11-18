@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Assets/Fight The Dungeon/Objects.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -26,7 +26,7 @@
   "origin":1,
   "parent":{
     "name":"teamLogos",
-    "path":"folders/Assets/Ultimate Manager/Sprites/teamLogos.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Sprites/teamLogos.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

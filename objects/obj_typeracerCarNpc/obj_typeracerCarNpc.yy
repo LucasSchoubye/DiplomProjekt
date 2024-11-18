@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Game Objects",
-    "path":"folders/Assets/Typeracer/Objects/Game Objects.yy",
+    "path":"folders/Assets/Games/Typeracer/Objects/Game Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_typeracerCar",

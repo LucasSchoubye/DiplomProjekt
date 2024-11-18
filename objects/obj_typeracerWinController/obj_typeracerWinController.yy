@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Assets/Typeracer/Objects.yy",
+    "path":"folders/Assets/Games/Typeracer/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

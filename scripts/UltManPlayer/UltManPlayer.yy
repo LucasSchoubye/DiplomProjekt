@@ -6,7 +6,7 @@
   "name":"UltManPlayer",
   "parent":{
     "name":"Structs",
-    "path":"folders/Assets/Ultimate Manager/Structs.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
