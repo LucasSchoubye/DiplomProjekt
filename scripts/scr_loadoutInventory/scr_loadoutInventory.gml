@@ -273,8 +273,10 @@ draw_sprite(spr_stat3,projectileStat,weaponDescriptionStartX+120,weaponDescripti
 draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,LC.translate("Range:"))
 draw_sprite(spr_stat10,rangeStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
-draw_text(weaponDescriptionStartX+10,weaponDescriptionTextStartY+20,string(weaponDescription))
+draw_set_valign(fa_top)
+draw_text_ext(weaponDescriptionStartX+(weaponDescriptionWidth-weaponDescriptionStartX)*0.05,weaponDescriptionTextStartY+20,string(weaponDescription),string_height(weaponDescription)+5,(weaponDescriptionWidth-weaponDescriptionStartX)*0.9)
 draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
 
 
 
@@ -339,9 +341,10 @@ draw_sprite(spr_stat10,speedStat,armorDescriptionStartX+120,armorDescriptionStat
 draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,LC.translate("Stamina:"))
 draw_sprite(spr_stat10,staminaStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
-draw_text(armorDescriptionStartX+15,armorDescriptionTextStartY+30,string(armorDescription))
+draw_set_valign(fa_top)
+draw_text_ext(armorDescriptionStartX+(weaponDescriptionWidth-weaponDescriptionStartX)*0.05,armorDescriptionTextStartY+20,string(armorDescription),string_height(armorDescription)+5,(armorDescriptionWidth-armorDescriptionStartX)*0.9)
 draw_set_halign(fa_center)
-
+draw_set_valign(fa_middle)
 
 
 
