@@ -181,7 +181,8 @@ var weaponEquipStartY = room_height*0.8
 var weaponEquipTextStartX = weaponEquipStartX + itemWidth/2
 var weaponEquipTextStartY = weaponEquipStartY+itemHeight+20
 var weaponDescriptionStartX = room_width*0.49
-var weaponDescriptionWidth = weaponDescriptionStartX+room_width*0.23
+var weaponDescriptionEndX = weaponDescriptionStartX+room_width*0.23
+var weaponDescriptionWidth = weaponDescriptionEndX-weaponDescriptionStartX
 var weaponDescriptionStartY = room_height*0.18
 var weaponDescriptionHeight = weaponDescriptionStartY+room_height*0.6
 var weaponDescriptionMidX = weaponDescriptionStartX+((room_width*0.23)/2)
@@ -197,8 +198,9 @@ var armorEquipStartX = weaponEquipStartX + itemWidth + 225
 var armorEquipStartY = weaponEquipStartY
 var armorEquipTextStartX = armorEquipStartX + itemWidth/2
 var armorEquipTextStartY = armorEquipStartY+itemHeight+20
-var armorDescriptionStartX = weaponDescriptionWidth+room_width*0.01
-var armorDescriptionWidth = armorDescriptionStartX+room_width*0.23
+var armorDescriptionStartX = weaponDescriptionEndX+room_width*0.01
+var armorDescriptionEndX = armorDescriptionStartX+room_width*0.23
+var armorDescriptionWidth = armorDescriptionEndX-armorDescriptionStartX
 var armorDescriptionStartY = weaponDescriptionStartY
 var armorDescriptionHeight = weaponDescriptionHeight
 var armorDescriptionMidX = armorDescriptionStartX+((room_width*0.23)/2)
@@ -261,7 +263,7 @@ if (currentWeaponEquip != undefined){
 
 
 // Weapon equipped description
-draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionWidth,weaponDescriptionHeight,true)
+draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionEndX,weaponDescriptionHeight,true)
 draw_set_font(fn_TwCenMTCondensed)
 draw_text(weaponDescriptionMidX,weaponDescriptionStartY+20,string(currentWeaponName))
 draw_text(weaponDescriptionMidX,weaponDescriptionStatTextStartY+60,LC.translate("Stats"))
@@ -274,7 +276,7 @@ draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,LC.tran
 draw_sprite(spr_stat10,rangeStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
 draw_set_valign(fa_top)
-draw_text_ext(weaponDescriptionStartX+(weaponDescriptionWidth-weaponDescriptionStartX)*0.05,weaponDescriptionTextStartY+20,string(weaponDescription),string_height(weaponDescription)+5,(weaponDescriptionWidth-weaponDescriptionStartX)*0.9)
+draw_text_ext(weaponDescriptionStartX+weaponDescriptionWidth*0.05,weaponDescriptionTextStartY+20,string(weaponDescription),string_height(weaponDescription)+5,weaponDescriptionWidth*0.9)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 
@@ -329,7 +331,7 @@ if (currentArmorEquip != undefined){
 }
 
 // Armor equipped description
-draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionWidth,armorDescriptionHeight,true)
+draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionEndX,armorDescriptionHeight,true)
 draw_set_font(fn_TwCenMTCondensed)
 draw_text(armorDescriptionMidX,armorDescriptionStartY+20,string(currentArmorName))
 draw_text(armorDescriptionMidX,armorDescriptionStatTextStartY+60,LC.translate("Stats"))
@@ -342,7 +344,7 @@ draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,LC.transl
 draw_sprite(spr_stat10,staminaStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
 draw_set_valign(fa_top)
-draw_text_ext(armorDescriptionStartX+(weaponDescriptionWidth-weaponDescriptionStartX)*0.05,armorDescriptionTextStartY+20,string(armorDescription),string_height(armorDescription)+5,(armorDescriptionWidth-armorDescriptionStartX)*0.9)
+draw_text_ext(armorDescriptionStartX+armorDescriptionWidth*0.05,armorDescriptionTextStartY+20,string(armorDescription),string_height(armorDescription)+5,armorDescriptionWidth*0.9)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 
