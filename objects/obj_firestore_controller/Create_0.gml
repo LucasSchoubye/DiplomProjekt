@@ -75,7 +75,7 @@ function RespondGamestate(gameStateJson, gamename)
 }
 
 function RequestCategories() {
-	FirebaseFirestore("shop items/categories/")
+	FirebaseFirestore("shopItems/categories/")
 }
 
 function RespondCategories(categoryList) {
@@ -95,7 +95,7 @@ function RespondCategories(categoryList) {
 
 
 function RequestStoreItems(categoryString) {
-	FirebaseFirestore("/shop items/categories/"+categoryString).Read()
+	FirebaseFirestore("/shopItems/categories/"+categoryString).Read()
 }
 
 function RespondStoreItems(storeList,path) {
@@ -152,7 +152,7 @@ function BuyShopItem() {
 	var inventoryMap = ds_map_create()
 	var item = ds_list_find_value(obj_inventoryController.inventoryElements,ds_list_size(obj_inventoryController.inventoryElements)-1)
 	
-	inventoryMap[?"shopItemRef"] = "/shop items/categories/"+item.itemID
+	inventoryMap[?"shopItemRef"] = "/shopItems/categories/"+item.itemID
 	inventoryMap[?"equipped"] = false
 	var json = json_encode(inventoryMap)
 	
@@ -163,7 +163,7 @@ function BuyShopItem() {
 function UpdateInventory(itemStruct)
 {
 	var itemMap = ds_map_create()
-	itemMap[?"shopItemRef"] = "/shop items/categories/"+itemStruct.itemID
+	itemMap[?"shopItemRef"] = "/shopItems/categories/"+itemStruct.itemID
 	itemMap[?"equipped"] = itemStruct.isEquipped
 	
 	var json = json_encode(itemMap)

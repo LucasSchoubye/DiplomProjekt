@@ -234,18 +234,21 @@ if (currentWeaponEquip != undefined){
 			damageStat = 6
 			projectileStat = 1
 			rangeStat = 10
+			weaponDescription = LC.translate("A basic but good choice with a single projectile of decent damage and great range")
 		break
 		case "Black Hole":
 			currentWeaponName = currentWeaponEquip.itemName
 			damageStat = 10
 			projectileStat = 1
 			rangeStat = 5
+			weaponDescription = LC.translate("A very strong single projectile with very high damage but shorter range. So get close!")
 		break
 		case "Fireball":
 			currentWeaponName = currentWeaponEquip.itemName
 			damageStat = 3
 			projectileStat = 3
 			rangeStat = 10
+			weaponDescription = LC.translate("A great choice against multiple foes, as the damage is split out between its multiple projectiles")
 		break
 	}
 } else {
@@ -253,6 +256,7 @@ if (currentWeaponEquip != undefined){
 	damageStat = 0
 	projectileStat = 0
 	rangeStat = 0
+	weaponDescription = ""
 }
 
 
@@ -260,13 +264,13 @@ if (currentWeaponEquip != undefined){
 draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionWidth,weaponDescriptionHeight,true)
 draw_set_font(fn_TwCenMTCondensed)
 draw_text(weaponDescriptionMidX,weaponDescriptionStartY+20,string(currentWeaponName))
-draw_text(weaponDescriptionMidX,weaponDescriptionStatTextStartY+60,"Stats")
+draw_text(weaponDescriptionMidX,weaponDescriptionStatTextStartY+60,LC.translate("Stats"))
 draw_set_halign(fa_left)
-draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+100,"Damage:")
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+100,LC.translate("Damage:"))
 draw_sprite(spr_stat10,damageStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+100)
-draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+150,"Projectiles:")
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+150,LC.translate("Projectiles:"))
 draw_sprite(spr_stat3,projectileStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+150)
-draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,"Range:")
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,LC.translate("Range:"))
 draw_sprite(spr_stat10,rangeStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
 draw_text(weaponDescriptionStartX+10,weaponDescriptionTextStartY+20,string(weaponDescription))
@@ -297,21 +301,21 @@ if (currentArmorEquip != undefined){
 			healthStat = 5
 			speedStat = 6
 			staminaStat = 5
-			armorDescription = "A good default armor option for when you want a balanced build of decent speed, health and stamina"
+			armorDescription = LC.translate("A good default armor option for when you want a balanced build of decent speed, health and stamina")
 		break
 		case "Heavy Armor":
 			currentArmorName = currentArmorEquip.itemName
 			healthStat = 10
 			speedStat = 3
 			staminaStat = 3
-			armorDescription = "Good for when you think you can kill the boss in time by tanking a few hits"
+			armorDescription = LC.translate("Good for when you think you will have to tank a few hits to defeat the boss")
 		break
 		case "Light Armor":
 			currentArmorName = currentArmorEquip.itemName
 			healthStat = 3
 			speedStat = 9
 			staminaStat = 10
-			armorDescription = "If the risky dodging playstyle is your passion you can take it to its full potential with Light Armor which enhances your speed greatly but reduces the amount of hits you can take"
+			armorDescription = LC.translate("If the risky dodging playstyle is your passion you can take it to its full potential with Light Armor which enhances your speed greatly but reduces the amount of hits you can take")
 		break
 	}
 } else {
@@ -319,19 +323,20 @@ if (currentArmorEquip != undefined){
 	healthStat = 0
 	speedStat = 0
 	staminaStat = 0
+	armorDescription = ""
 }
 
 // Armor equipped description
 draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionWidth,armorDescriptionHeight,true)
 draw_set_font(fn_TwCenMTCondensed)
 draw_text(armorDescriptionMidX,armorDescriptionStartY+20,string(currentArmorName))
-draw_text(armorDescriptionMidX,armorDescriptionStatTextStartY+60,"Stats")
+draw_text(armorDescriptionMidX,armorDescriptionStatTextStartY+60,LC.translate("Stats"))
 draw_set_halign(fa_left)
-draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+100,"Health:")
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+100,LC.translate("Health:"))
 draw_sprite(spr_stat10,healthStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+100)
-draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+150,"Speed:")
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+150,LC.translate("Speed:"))
 draw_sprite(spr_stat10,speedStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+150)
-draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,"Stamina:")
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,LC.translate("Stamina:"))
 draw_sprite(spr_stat10,staminaStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+200)
 draw_set_font(defaultFont)
 draw_text(armorDescriptionStartX+15,armorDescriptionTextStartY+30,string(armorDescription))
