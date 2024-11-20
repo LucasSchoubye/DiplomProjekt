@@ -2,6 +2,8 @@
 
 global.typeracerPlacement = 1
 
+cursor_sprite = spr_typeracerCursor
+window_set_cursor(cr_none)
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
 typingString = ""
