@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../../config/firebase";
 import EastIcon from '@mui/icons-material/East';
 import { CheckCircle, Cancel } from '@mui/icons-material';
+import { formatSubtopic } from '../utils/textUtils';
 
 const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap }) => {
     const theme = useTheme();
@@ -247,10 +248,6 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 </Typography>
             );
         }
-
-        const formatSubtopic = (subtopic) => {
-            return subtopic.charAt(0).toUpperCase() + subtopic.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase();
-        };
 
         return (
             <Box sx={{ height: '50vh', overflowY: 'auto' }}>

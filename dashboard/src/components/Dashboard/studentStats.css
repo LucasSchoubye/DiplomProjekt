@@ -17,3 +17,22 @@
 .percentage-correct {
     color: black;
 }
+
+.charts-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.chart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-title {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.1em;
+    text-align: center;
+}
