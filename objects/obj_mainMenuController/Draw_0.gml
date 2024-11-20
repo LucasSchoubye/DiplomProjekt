@@ -86,9 +86,6 @@ if (room = rm_menu)
 						room_goto(rm_minigameMenu)
 						obj_firestore_controller.RequestAllowedGames()
 					break 
-					case "Inventory":
-						room_goto(rm_inventory)
-					break 
 					case "Store":
 						room_goto(rm_store)
 					break
@@ -123,9 +120,6 @@ if (room = rm_menu)
 			case "Mini Games":
 				room_goto(rm_minigameMenu)
 			break 
-			case "Inventory":
-				room_goto(rm_inventory)
-			break
 			case "Store":
 				room_goto(rm_store)
 			break
