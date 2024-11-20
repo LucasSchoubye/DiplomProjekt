@@ -58,6 +58,8 @@ if (mouse_x > buttonMiddleX - buttonWidth/2 &&
 
 	if (mouse_check_button_pressed(mb_left))
 	{
+		window_set_cursor(cr_default)
+		cursor_sprite = -1
 		audio_stop_all()
 		room_goto(rm_minigameMenu)
 	}

@@ -17,4 +17,5 @@ if (quitKey && alpha >= 1) {
 	audio_stop_sound(sou_FtDFightMusicLoop);
 	audio_stop_sound(sou_FtDApplause);
 	audio_stop_sound(sou_FtDWin);
+	window_set_cursor(cr_default);
 }
