@@ -1,5 +1,8 @@
 /// Setup
 
+window_set_cursor(cr_none)
+
+
 enum ActionType{
 
 	Run,
