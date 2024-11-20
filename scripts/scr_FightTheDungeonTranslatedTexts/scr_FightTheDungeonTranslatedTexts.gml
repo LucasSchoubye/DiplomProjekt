@@ -85,13 +85,13 @@ switch (obj_languageController.languageChosen)
 			var array = [text, "SPIL PAUSE"]
 		break;
 		case "- Press 'R' to restart, 'Q' to quit or 'ESC' again to continue -":
-			var array = [text, "- Tryk 'R' for at genstart, 'Q' for at afslut eller 'ESC' igen for at fortsætte -"]
+			var array = [text, "- Tryk 'R' for at genstarte, 'Q' for at afslutte eller 'ESC' igen for at fortsætte -"]
 		break;
 		case "GAME OVER":
 			var array = [text, "SPIL OVRE"]
 		break;
 		case "- Press 'R' to restart or 'Q' to quit -":
-			var array = [text, "- Tryk 'R' for at genstart eller 'Q' for at afslut -"]
+			var array = [text, "- Tryk 'R' for at genstarte eller 'Q' for at afslutte -"]
 		break;
 		case "YOU WIN!!!":
 			var array = [text, "DU VANDT!!!"]
