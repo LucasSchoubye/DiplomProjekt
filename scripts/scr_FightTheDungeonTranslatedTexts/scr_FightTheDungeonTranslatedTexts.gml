@@ -81,6 +81,27 @@ switch (obj_languageController.languageChosen)
 		case "Stamina:":
 			var array = [text, "Udholdenhed:"]
 		break;
+		case "GAME PAUSE":
+			var array = [text, "SPIL PAUSE"]
+		break;
+		case "- Press 'R' to restart, 'Q' to quit or 'ESC' again to continue -":
+			var array = [text, "- Tryk 'R' for at genstart, 'Q' for at afslut eller 'ESC' igen for at fortsætte -"]
+		break;
+		case "GAME OVER":
+			var array = [text, "SPIL OVRE"]
+		break;
+		case "- Press 'R' to restart or 'Q' to quit -":
+			var array = [text, "- Tryk 'R' for at genstart eller 'Q' for at afslut -"]
+		break;
+		case "YOU WIN!!!":
+			var array = [text, "DU VANDT!!!"]
+		break;
+		case "- You win ":
+			var array = [text, "- Du vandt "]
+		break;
+		case "- Press 'R' to play again or 'Q' to quit -":
+			var array = [text, "- Tryk 'R' for at spille igen eller 'Q' for at afslutte -"]
+		break;
 		default:
 			return ""
 	}
