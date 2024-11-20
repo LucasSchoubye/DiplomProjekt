@@ -14,7 +14,7 @@ draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 draw_set_alpha(alpha)
 var _gameOverOffset = -32
-// "game over"
+// "You Win"
 draw_text_transformed(_camX + _camW/2, _camY + _camH/2 + _gameOverOffset , "YOU WIN!!!", 4, 4, 0)
 
 // "press R to restart or Q to Quit

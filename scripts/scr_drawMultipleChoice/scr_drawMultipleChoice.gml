@@ -34,8 +34,10 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 	mouse_y > answerBoxTop && mouse_y < answerBoxBot)
 {
 	mouseWithinAnswerBox = true
+	window_set_cursor(cr_handpoint)
+} else {
+	window_set_cursor(cr_default)
 }
-
 	if (question != undefined)
 	{
 		// Draw answer box outline
