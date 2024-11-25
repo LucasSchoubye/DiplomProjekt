@@ -597,6 +597,7 @@
     {"id":{"name":"spr_UltManCancel","path":"sprites/spr_UltManCancel/spr_UltManCancel.yy",},},
     {"id":{"name":"spr_UltManCheckmark","path":"sprites/spr_UltManCheckmark/spr_UltManCheckmark.yy",},},
     {"id":{"name":"spr_UltManCone","path":"sprites/spr_UltManCone/spr_UltManCone.yy",},},
+    {"id":{"name":"spr_UltManCursor","path":"sprites/spr_UltManCursor/spr_UltManCursor.yy",},},
     {"id":{"name":"spr_UltManField","path":"sprites/spr_UltManField/spr_UltManField.yy",},},
     {"id":{"name":"spr_UltManFootball","path":"sprites/spr_UltManFootball/spr_UltManFootball.yy",},},
     {"id":{"name":"spr_UltManGoalscorer","path":"sprites/spr_UltManGoalscorer/spr_UltManGoalscorer.yy",},},

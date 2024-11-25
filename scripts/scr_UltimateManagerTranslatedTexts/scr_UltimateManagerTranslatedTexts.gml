@@ -206,6 +206,21 @@ switch (obj_languageController.languageChosen)
 			case "Goal Bonus X":
 				var array = [text, "Mål Bonus X"]
 			break;
+			case "Play next half":
+				var array = [text, "Spil næste Halvleg"]
+			break;
+			case "Drag Right Click: Make teammate move":
+				var array = [text, "Træk med Højre-klik: Flyt dine medspillere"]
+			break;
+			case "Left Click: Move Player":
+				var array = [text, "Venstre Klik: Flyt din spiller"]
+			break;
+			case "Hold Shift: Shoot/Pass":
+				var array = [text, "Hold Shift: for at skyde eller spille"]
+			break;
+			case "Drag with right mouse button":
+				var array = [text, "Træk med højre-klik på musen"]
+			break;
 		#endregion
 	}
 

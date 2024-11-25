@@ -1,5 +1,5 @@
 
-
+var LC = obj_languageController
 scr_UltManDrawLine()
 
 // Player control
@@ -29,7 +29,7 @@ if (instance_exists(controlledPlayer))
 		{
 			draw_set_halign(fa_left)
 			draw_set_alpha(0.8 + sin(current_time/80)*0.2)
-			draw_text_ext(mouse_x + 150, mouse_y, "Drag with right mouse button", string_height("I"),400)
+			draw_text_ext(mouse_x + 150, mouse_y, LC.translate("Drag with right mouse button"), string_height("I"),400)
 			draw_set_alpha(1)
 		}
 	}

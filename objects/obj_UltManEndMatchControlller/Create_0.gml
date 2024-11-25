@@ -1,5 +1,7 @@
 /// @description Set Variables
 
+window_set_cursor(cr_none)
+cursor_sprite = spr_UltManCursor
 var LC = obj_languageController
 
 // End looping sound

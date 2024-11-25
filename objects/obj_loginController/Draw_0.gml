@@ -1,5 +1,6 @@
 /// @description Draw event
-
+window_set_cursor(cr_none)
+cursor_sprite = spr_UltManCursor
 image_speed = 1
 
 if (room = rm_login)

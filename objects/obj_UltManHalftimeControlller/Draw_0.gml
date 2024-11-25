@@ -7,7 +7,7 @@ var buttonY = room_height * 0.035
 var buttonX2 = room_width * 0.9925
 var buttonY2 = room_height * 0.0965
 var titleHeight = (string_height(obj_UltManManagerController.clubName) / 2)
-var buttonText = "Play next half"
+var buttonText = LC.translate("Play next half")
 
 // Title
 draw_set_font(fn_LatoBold40)

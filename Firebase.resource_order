@@ -281,6 +281,7 @@
     {"name":"spr_UltManCancel","order":9,"path":"sprites/spr_UltManCancel/spr_UltManCancel.yy",},
     {"name":"spr_UltManCheckmark","order":8,"path":"sprites/spr_UltManCheckmark/spr_UltManCheckmark.yy",},
     {"name":"spr_UltManCone","order":2,"path":"sprites/spr_UltManCone/spr_UltManCone.yy",},
+    {"name":"spr_UltManCursor","order":4,"path":"sprites/spr_UltManCursor/spr_UltManCursor.yy",},
     {"name":"spr_UltManFootball","order":7,"path":"sprites/spr_UltManFootball/spr_UltManFootball.yy",},
     {"name":"spr_UltManGoalscorer","order":20,"path":"sprites/spr_UltManGoalscorer/spr_UltManGoalscorer.yy",},
     {"name":"spr_UltManPasses","order":13,"path":"sprites/spr_UltManPasses/spr_UltManPasses.yy",},
