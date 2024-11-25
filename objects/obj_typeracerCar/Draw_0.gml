@@ -16,7 +16,7 @@ image_angle = sin(animCycle)*4
 
 draw_arrow(obj_typeracerCar.x+room_width*0.1,obj_typeracerCar.y,obj_typeracerCar.x+room_width*0.05,obj_typeracerCar.y,50)
 draw_set_halign(fa_left)
-draw_text(obj_typeracerCar.x+room_width*0.11,obj_typeracerCar.y,"YOU!")
+draw_text(obj_typeracerCar.x+room_width*0.11,obj_typeracerCar.y,obj_firestore_controller.username+"!")
 draw_set_halign(fa_center)
 
 	
