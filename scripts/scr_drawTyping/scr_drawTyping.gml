@@ -4,7 +4,7 @@ function scr_drawTyping(optionsMenu, controllerId)
 {
 
 draw_set_font(fn_konk12)
-
+var typingDefaultFont = draw_get_font()
 var top = optionsMenu.top
 var screenMidX = optionsMenu.screenMidX
 var screenMidY = optionsMenu.screenMidY
@@ -22,6 +22,11 @@ var twoOptionsX = optionsMenu.twoOptionsX
 var twoOptionsY = optionsMenu.twoOptionsY
 var fourOptionsX = optionsMenu.fourOptionsX
 var threeOptionsY = optionsMenu.threeOptionsY
+var LC = obj_languageController
+
+var controlTextL = LC.translate("Press 'enter'",Games.Menus)
+var controlTextM = LC.translate(" or 'space'",Games.Menus)
+var controlTextR = LC.translate(" to submit your answer",Games.Menus)
 
 	var optionSelected = undefined
 
@@ -50,12 +55,23 @@ var threeOptionsY = optionsMenu.threeOptionsY
 		draw_set_halign(fa_center)
 		draw_text(screenMidX,promptBoxMid,question.prompt)
 		
+		// Control text
+		draw_set_font(fn_konk10)
+		draw_set_halign(fa_left)
+		draw_text(answerBoxLeft+room_width*0.01,answerBoxBot-room_height*0.02, controlTextL)
+		draw_sprite(spr_enter,0,answerBoxLeft+room_width*0.01+string_width(controlTextL),answerBoxBot-room_height*0.02)
+		draw_text(answerBoxLeft+room_width*0.01+string_width(controlTextL)+20,answerBoxBot-room_height*0.02,controlTextM)
+		draw_sprite(spr_space,0,answerBoxLeft+room_width*0.01+string_width(controlTextL)+20+string_width(controlTextM),answerBoxBot-room_height*0.02)
+		draw_text(answerBoxLeft+room_width*0.01+string_width(controlTextL)+20+string_width(controlTextM)+60,answerBoxBot-room_height*0.02,controlTextR)
+		draw_set_font(typingDefaultFont)
+		draw_set_halign(fa_center)
+		
 	}
 	
 	// Draw typing string
 	draw_set_halign(fa_center)
 	
-	draw_text(screenMidX,answerBoxMidY,"Answer: "+typingString)
+	draw_text(screenMidX,answerBoxMidY,LC.translate("Answer: ",Games.Menus)+typingString)
 	if (keyboard_check_pressed(vk_anykey))
 	{
 		if (charIsValid() and !keyboard_check_pressed(vk_shift))
@@ -65,7 +81,7 @@ var threeOptionsY = optionsMenu.threeOptionsY
 	}
 	controllerId.typingString = typingString
 	draw_set_alpha(sin(current_time/100))
-	draw_text(screenMidX + string_width("Answer: " + typingString)/2 + 3, answerBoxMidY, "|");
+	draw_text(screenMidX + string_width(LC.translate("Answer: ",Games.Menus) + typingString)/2 + 3, answerBoxMidY, "|");
 	draw_set_alpha(1)
 	
 	draw_set_color(c_white)
