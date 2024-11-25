@@ -22,6 +22,7 @@ function scr_UltManDrawIngameMenu(){
 		camera_get_view_y(view_camera[0]) + 30 * scale > mouse_y &&
 		mouse_check_button_pressed(mb_left))
 	{
+		cursor_sprite = spr_UltManCursor
 		room_goto(rm_UltManOverview)
 	}
 	
