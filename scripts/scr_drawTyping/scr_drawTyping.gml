@@ -64,7 +64,10 @@ var threeOptionsY = optionsMenu.threeOptionsY
 			typingString = string_delete(typingString, string_length(typingString), 1)
 	}
 	controllerId.typingString = typingString
-
+	draw_set_alpha(sin(current_time/100))
+	draw_text(screenMidX + string_width("Answer: " + typingString)/2 + 3, answerBoxMidY, "|");
+	draw_set_alpha(1)
+	
 	draw_set_color(c_white)
 
 	// Answer and send to firebase

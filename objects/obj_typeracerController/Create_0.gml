@@ -4,6 +4,9 @@ global.typeracerPlacement = 1
 
 cursor_sprite = spr_typeracerCursor
 window_set_cursor(cr_none)
+blink_time = 0;
+blink_length = 30;
+blink_alpha = 0.25;
 questionGenerator = new QuestionGenerator(Curriculum.Danish)
 question = undefined
 typingString = ""
