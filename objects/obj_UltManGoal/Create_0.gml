@@ -62,7 +62,6 @@ function CheckMouseCollision()
 			!scr_doLinesCross(mouse_x + 400, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y + goalHeight/2, room_width, y + goalHeight/2))
 			{
 				obj_UltManGameController.goalHitboxIncrease = true
-				//obj_UltManBall.owner.targetY += 400
 				return true
 			}
 		}

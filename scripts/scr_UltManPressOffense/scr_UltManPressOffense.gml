@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_UltManPressOffense(){
 
-			//var strength = strength
+			var strength = strength
 			var tackleDist = defence*0.7
 			var player = obj_UltManGameController.controlledPlayer
 			var spd = topSpd
