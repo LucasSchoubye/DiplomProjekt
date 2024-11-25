@@ -28,10 +28,8 @@ else if (readyForPickup = true)
 	}
 }
 
-x -= clamp((x - targetX)/10,-100,100)
-y -= clamp((y - targetY)/9,-100,100)
-
-
+x -= clamp((x - targetX)/10, -100, 100)
+y -= clamp((y - targetY)/9, -100, 100)
 
 // ball carrier history
 if(instance_exists(owner)){
@@ -40,7 +38,7 @@ if(instance_exists(owner)){
 		obj_UltManGameController.playerControllerHistory[0] = owner.playerStruct
 		global.celebratingPlayer = owner
 	}
-	else if (owner.playerTeam = false)
+	else //if (owner.playerTeam = false)
 	{
 		global.celebratingPlayer = owner
 	}
