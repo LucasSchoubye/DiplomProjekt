@@ -30,6 +30,7 @@ frozenShotMissed = false
 celebrationMusic = false
 
 // 
+goalHitboxIncrease = false
 controlledPlayer = undefined
 ballcarrier = undefined
 playerControllerHistory = [undefined,undefined]

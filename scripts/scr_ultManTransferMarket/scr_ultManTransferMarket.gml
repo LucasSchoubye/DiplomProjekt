@@ -26,11 +26,6 @@ function scr_ultManTransferMarket(){
 	var sellBoxLeft = room_width * 0.8;
 	var sellBoxRight = room_width * 1;
 	
-	// draw boxes
-	//draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
-	
-	//draw_rectangle(sellBoxLeft, sellBoxTop, sellBoxRight, sellBoxBottom, true)
-	
 	// draw balance
 	draw_set_font(fn_RobotoBlack16)
 	draw_text(room_width * 0.2125, room_height * 0.15, LC.translate("Balance: ") + string(obj_storeController.balance) + " CONTENT COINS")

@@ -62,7 +62,6 @@ function UltManPlayer(playerTier = UltManPackTier.Bronze) constructor {
 		draw_set_halign(fa_center)
 		draw_set_valign(fa_middle)
 		scr_drawOutlineText(curX,curY+height*1.5,c_black,c_white,name[1])
-		//draw_text(curX,curY+height*1.5,name[1])
 		draw_text(curX,curY+height*0.5,PosToString())
 		draw_set_color(c_white)
 		

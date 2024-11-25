@@ -110,8 +110,7 @@ if (!celebrationActive){
 // Multiple choice active
 if (questionMenuActive and questionMenuClickCooldown = false)
 {
-	// TODO: Change to better cursor
-	window_set_cursor(cr_handpoint)
+	cursor_sprite = spr_UltManCursor
 	
 	// Draw multiple choice
 	draw_set_font(fn_ArialBlack48)
@@ -130,6 +129,7 @@ if (questionMenuActive and questionMenuClickCooldown = false)
 }
 else
 {
+	cursor_sprite = noone
 	window_set_cursor(cr_none)
 }
 
