@@ -1,5 +1,5 @@
 
-
+var LC = obj_languageController
 scr_UltManDrawLine()
 
 // Player control
@@ -14,6 +14,29 @@ targetX = controlledPlayer.x+lenX//+controlledPlayer.accX
 targetY = controlledPlayer.y+lenY//+controlledPlayer.accY
 playAllowed = true
 	
+// Draw Curser
+if (instance_exists(controlledPlayer))
+{
+	draw_set_alpha(1 - point_distance(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)/6500)
+	draw_circle(mouse_x,mouse_y,20 + point_distance(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)/70,true)
+	draw_set_alpha(1)
+	
+	// Tooltip for dragging
+	var collidingPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, false,true)
+	if (collidingPlayer != controlledPlayer && collidingPlayer != noone)
+	{
+		if (collidingPlayer.playerTeam = true)
+		{
+			draw_set_halign(fa_left)
+			draw_set_alpha(0.8 + sin(current_time/80)*0.2)
+			draw_text_ext(mouse_x + 150, mouse_y, LC.translate("Drag with right mouse button"), string_height("I"),400)
+			draw_set_alpha(1)
+		}
+	}
+}
+else
+	draw_circle(mouse_x,mouse_y,20,true)
+	
 // Action type selected
 if (keyboard_check(vk_shift))
 {
@@ -24,7 +47,6 @@ else
 	selectedAction = ActionType.Run
 }
 	
-
 // Command other player
 var commandClickedPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, true, true)
 if (mouse_check_button_pressed(mb_right))
@@ -85,9 +107,12 @@ if (!celebrationActive){
 	audio_stop_sound(sou_UltManBoo)
 }
 	
-
+// Multiple choice active
 if (questionMenuActive and questionMenuClickCooldown = false)
 {
+	// TODO: Change to better cursor
+	window_set_cursor(cr_handpoint)
+	
 	// Draw multiple choice
 	draw_set_font(fn_ArialBlack48)
 	scr_drawMultipleChoice(optionsMenu, id)
@@ -102,6 +127,10 @@ if (questionMenuActive and questionMenuClickCooldown = false)
 		questionMenuActive = false
 		scr_UltManDoActionType(frozenActionType, frozenTargetX, frozenTargetY, frozenGoalAttempt)
 	}
+}
+else
+{
+	window_set_cursor(cr_none)
 }
 
 if (keyboard_check_released(mb_left))
@@ -121,5 +150,4 @@ if (celebrationActive)
 		celebrationMusic = false
 	}
 	scr_UltManCelebrate()
-	
 }

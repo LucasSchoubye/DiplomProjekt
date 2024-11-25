@@ -1,5 +1,7 @@
 /// @description Set Variables
 
+cursor_sprite = spr_UltManCursor
+
 // End looping sound
 audio_stop_sound(sou_UltManCheer)
 

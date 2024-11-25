@@ -36,6 +36,9 @@ enum FormationColumns
 	Goalkeeper
 }
 
+cursor_sprite = spr_UltManCursor
+window_set_cursor(cr_none)
+
 teamList = ds_list_create()
 
 // Language controller
