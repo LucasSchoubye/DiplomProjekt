@@ -61,6 +61,21 @@ switch (obj_languageController.languageChosen)
 		
 		#endregion
 		
+		#region Control Hints
+		case "Press 'enter'":
+			var array = [text, "Tryk enter"]
+		break
+		case " or 'space'":
+			var array = [text, " eller 'space'"]
+		break
+		case " to submit your answer":
+			var array = [text, " for at indsende dit svar"]
+		break
+		case "Answer: ":
+			var array = [text, "Svar: "]
+		break
+		#endregion
+		
 		#region Tutorials
 		
 			// General:
