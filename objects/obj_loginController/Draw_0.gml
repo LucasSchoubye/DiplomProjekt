@@ -4,6 +4,8 @@ image_speed = 1
 
 if (room = rm_login)
 {
+	var LC = obj_languageController
+	
 	// Variables
 	var roomMidWidth = (room_width/4)*3
 	var roomQuarterWidth = (room_width/4)
@@ -22,21 +24,21 @@ if (room = rm_login)
 	draw_set_alpha(1)
 	
 	// Left box text
-	draw_text(roomQuarterWidth, room_height*0.1, "News Title")
+	draw_text(roomQuarterWidth, room_height*0.1, LC.translate("News Title", Games.Menus))
 	draw_set_font(fn_textLato)
-	draw_text(roomQuarterWidth, room_height*0.9, "Don't have an account?   Contact your school")
+	draw_text(roomQuarterWidth, room_height*0.9, LC.translate("Don't have an account?   Contact your school", Games.Menus))
 	draw_set_alpha(0.8)
-	draw_text(roomQuarterWidth, room_height*0.9 + 25, "Information found here!")
+	draw_text(roomQuarterWidth, room_height*0.9 + 25, LC.translate("Information found here!",Games.Menus))
 	draw_set_alpha(1)
-	draw_sprite_stretched(spr_newsGif,image_index,room_width*0.05,room_height*0.15,room_width*0.45-room_width*0.05,room_height*0.85-room_height*0.15)
+	//draw_sprite_stretched(spr_newsGif,image_index,room_width*0.05,room_height*0.15,room_width*0.45-room_width*0.05,room_height*0.85-room_height*0.15)
 	draw_roundrect(room_width*0.05,room_height*0.15,room_width*0.45,room_height*0.85,true)
 	
 	draw_set_font(fn_textLato)
 	draw_set_valign(fa_middle)
 	draw_set_halign(fa_center)
 	
-	draw_text(roomMidWidth - textBuffer, room_height*0.45, "Username: ")
-	draw_text(roomMidWidth - textBuffer, room_height*0.45 + 30, "Password: ")
+	draw_text(roomMidWidth - textBuffer, room_height*0.45, LC.translate("Username: ",Games.Menus))
+	draw_text(roomMidWidth - textBuffer, room_height*0.45 + 30, LC.translate("Password: ",Games.Menus))
 	draw_text(roomMidWidth, room_height*0.45, string(username))
 	draw_text(roomMidWidth, room_height*0.45 + 30, string(password))
 

@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Tiles",
-    "path":"folders/Assets/Ultimate Manager/Sprites/Tiles.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Sprites/Tiles.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

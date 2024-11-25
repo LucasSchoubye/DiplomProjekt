@@ -18,7 +18,7 @@
   "name":"rm_FtDLoadoutMenu",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Assets/Fight The Dungeon/Rooms.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

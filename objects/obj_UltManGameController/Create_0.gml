@@ -24,8 +24,10 @@ skillCheckAmount = 0
 skillCheckCorrectCounter = 0
 skillCheckAttemptsCounter = 0
 frozenShotMissed = false
+celebrationMusic = false
 
 // 
+controlledPlayer = undefined
 ballcarrier = undefined
 playerControllerHistory = [undefined,undefined]
 commandedPlayer = undefined

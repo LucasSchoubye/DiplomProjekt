@@ -18,7 +18,7 @@ function LoadoutElement() constructor {
 	itemStartY = room_height*0.125
 	defaultFont = draw_get_font()
 	itemType = ""
-	
+	LC = obj_languageController
 	
 
 	function DrawFtDItem(xValue,yValue) {
@@ -39,7 +39,7 @@ function LoadoutElement() constructor {
 				txtEquip = ""
 			}
 			draw_set_font(fn_RobotoBlack8)
-			draw_text(xValue+itemCenterX,yValue+itemEquipY,txtEquip)
+			draw_text(xValue+itemCenterX,yValue+itemEquipY,LC.translate(txtEquip))
 			draw_text(xValue+itemCenterX,yValue+itemTitleY,itemName)
 			draw_set_font(defaultFont)
 			

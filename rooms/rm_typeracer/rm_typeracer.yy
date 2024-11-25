@@ -83,7 +83,7 @@
   "name":"rm_typeracer",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Assets/Typeracer/Rooms.yy",
+    "path":"folders/Assets/Games/Typeracer/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Attacks",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Attacks.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects/Attacks.yy",
   },
   "parentObjectId":{
     "name":"obj_damageEnemy",

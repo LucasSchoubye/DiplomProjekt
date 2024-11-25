@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Sprites",
-    "path":"folders/Assets/Fight The Dungeon/Sprites.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"LoadoutElement",
   "parent":{
     "name":"Structs",
-    "path":"folders/Assets/Fight The Dungeon/Structs.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Structs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

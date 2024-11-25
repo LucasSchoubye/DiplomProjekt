@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Assets/Ultimate Manager/Objects.yy",
+    "path":"folders/Assets/Games/Ultimate Manager/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

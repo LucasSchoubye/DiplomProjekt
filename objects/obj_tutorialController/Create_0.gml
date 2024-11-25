@@ -21,7 +21,7 @@ tutorialArray = []
 			tutorialArray[0] = new tutorialStruct();
 		
 			tutorialArray[0].title = "Typeracer"
-			tutorialArray[0].controlParagraf = "Numpad: Type the correct answer \nEnter: Submit your answer"
+			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer"
 			tutorialArray[0].goalParagraf = "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!"
 			tutorialArray[0].roomRef = rm_typeracer
 			tutorialArray[0].gif = spr_tutorialTyperacer
@@ -59,7 +59,7 @@ tutorialArray = []
 			// Matches 
 			tutorialArray[4].title = "Ultimate Manager - Matches"
 			tutorialArray[4].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nDrag Right Click: Move teammates"
-			tutorialArray[4].goalParagraf = "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them. "
+			tutorialArray[4].goalParagraf = "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them."
 			tutorialArray[4].gif = spr_tutorialUltManMatchGif
 		
 			tutorialArray[4].roomRef = rm_UltManOverview
@@ -67,7 +67,6 @@ tutorialArray = []
 		
 		case "Fight the Dungeon":
 			tutorialArray[0] = new tutorialStruct();
-		
 			tutorialArray[0].title = "Fight the Dungeon"
 			tutorialArray[0].controlParagraf = "WASD: Movement \nShift: Sprint"
 			tutorialArray[0].goalParagraf = "Avoid projectiles and wait for your attack to charge up! Answering questions correct makes your attacks deal more damage! Try getting more correct in a row for even MORE DAMAGE!"

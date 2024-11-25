@@ -36,36 +36,41 @@ export const Auth = ({ onLoginSuccess }) => {
             // Firebase Authentication sign-in with email and password
             const userCredential = await signInWithEmailAndPassword(auth, actualEmail, actualPassword);
             const user = userCredential.user;
-            // console.log(user);
 
             if (user) {
-                // Query Firestore for the user document based on the authenticated user's UID
-                const usersCollectionRef = collection(db, "users");
-                const q = query(usersCollectionRef, where("userID", "==", user.uid));
-                const querySnapshot = await getDocs(q);
+                try {
+                    // Query Firestore for the user document based on the authenticated user's UID
+                    const usersCollectionRef = collection(db, "users");
+                    const q = query(usersCollectionRef, where("userID", "==", user.uid));
+                    const querySnapshot = await getDocs(q);
 
-                if (!querySnapshot.empty) {
-                    const userData = querySnapshot.docs[0].data();
-                    setSnackbarMessage("User signed in successfully");
-                    setSnackbarSeverity("success");
-                    setOpenSnackbar(true);
-                    setTimeout(() => {
-                        onLoginSuccess(userData);
-                    }, 1000);
-                } else {
-                    setSnackbarMessage("User not found");
+                    if (!querySnapshot.empty) {
+                        const userData = querySnapshot.docs[0].data();
+                        if (userData.role === "Teacher") {
+                            setSnackbarMessage("User signed in successfully");
+                            setSnackbarSeverity("success");
+                            setOpenSnackbar(true);
+                            setTimeout(() => {
+                                onLoginSuccess(userData);
+                            }, 1000);
+                        } else {
+                            setSnackbarMessage("User is not a teacher");
+                            setSnackbarSeverity("error");
+                            setOpenSnackbar(true);
+                        }
+                    } else {
+                        setSnackbarMessage("User document not found in Firestore");
+                        setSnackbarSeverity("error");
+                        setOpenSnackbar(true);
+                    }
+                } catch (err) {
+                    setSnackbarMessage(`Firestore error: ${err.message}`);
                     setSnackbarSeverity("error");
                     setOpenSnackbar(true);
                 }
             }
         } catch (err) {
-            let errorMessage = "Email or password is incorrect";
-            if (err.code === 'auth/user-not-found') {
-                errorMessage = "User not found";
-            } else if (err.code === 'auth/wrong-password') {
-                errorMessage = "Incorrect password";
-            }
-            setSnackbarMessage(errorMessage);
+            setSnackbarMessage(`Authentication error: ${err.message}`);
             setSnackbarSeverity("error");
             setOpenSnackbar(true);
         } finally {

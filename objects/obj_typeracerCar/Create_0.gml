@@ -25,6 +25,9 @@ function win()
 		if (x > obj_typeracerCar.x)
 			global.typeracerPlacement++
 	}
+	audio_stop_sound(sou_TyperacerBgMusic)
+	audio_play_sound(sou_TyperacerFinish,1,false)
+	audio_play_sound(sou_FtDApplause,1,false)
 	room_goto(rm_typeracerWin)
 }
 

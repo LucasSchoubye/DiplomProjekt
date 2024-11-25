@@ -13,7 +13,7 @@
   "name":"sou_breakCar",
   "parent":{
     "name":"Sounds",
-    "path":"folders/Assets/Typeracer/Sounds.yy",
+    "path":"folders/Assets/Games/Typeracer/Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

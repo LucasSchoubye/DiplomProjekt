@@ -6,12 +6,14 @@ import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
 import SubjectsList from './subjectsList.js'; // Import SubjectsList
 import StudentStats from "./studentStats.js";
+import ClassStats from "./classStats.js";
 import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
 
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
     const [subjects, setSubjects] = useState([]); // Add subjects state
     const [teacherName, setTeacherName] = useState('');
     const [isViewingStudents, setIsViewingStudents] = useState(false);
@@ -22,10 +24,15 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
+    const [classAnswersMap, setClassAnswersMap] = useState([]);
+    const [isViewingStudent, setIsViewingStudent] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
 
+    useEffect(() => {
+    }, [selectedClass, selectedStudent]);
+  
     useEffect(() => {
         const fetchClasses = async () => {
             try {
@@ -61,11 +68,19 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
+        setSelectedStudent(null)
         setIsViewingStudents(true);
         setIsLoadingStudents(true);
         try {
             const studentsCollectionRef = collection(db, classData.classRefData.classRef.path, "students");
-            const studentsSnapshot = await getDocs(studentsCollectionRef);
+            const subjectsCollectionRef = collection(db, `${classData.classRefData.classRef.path}/topics`);
+            const allowedGamesCollectionRef = collection(db, `${classData.classRefData.classRef.path}/allowedGames`);
+
+            const [studentsSnapshot, subjectsSnapshot, allowedGamesSnapshot] = await Promise.all([
+                getDocs(studentsCollectionRef),
+                getDocs(subjectsCollectionRef),
+                getDocs(allowedGamesCollectionRef)
+            ]);
 
             const studentPromises = studentsSnapshot.docs.map(async (studentDoc) => {
                 const { studentRef } = studentDoc.data();
@@ -77,44 +92,73 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             const studentList = await Promise.all(studentPromises);
             setStudents(studentList);
 
-            // Fetch allowed games
-            await fetchAllowedGames(classData.classRefData.classRef);
-
-            // Fetch subjects
-            await fetchSubjects(classData.classRefData.classRef);
-        } catch (err) {
-            console.error("Error fetching students: ", err);
-        } finally {
-            setIsLoadingStudents(false);
-        }
-    }, []);
-
-    const fetchSubjects = useCallback(async (classDocRef) => {
-        try {
-            const subjectsCollectionRef = collection(db, `${classDocRef.path}/topics`);
-            const subjectsSnapshot = await getDocs(subjectsCollectionRef);
-
             const subjectsData = subjectsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
             }));
-
             setSubjects(subjectsData);
+
+            const games = allowedGamesSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setAvailableGames(games);
+            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
+            // Aggregate answers across all students in the class
+            await fetchClassSessionsAndAnswers(studentList);
+            console.log(studentList)
+            // Log the number of reads used
         } catch (err) {
-            console.error("Error fetching subjects: ", err);
+            console.error("Error fetching data: ", err);
+        } finally {
+            setIsLoadingStudents(false);
         }
     }, []);
+    
 
-    const handleReceiveAnswerMapFromStudentList = (answers, answerContextType) => {
+    const fetchClassSessionsAndAnswers = async (studentList) => {
+        try {
+            const classAnswersMap = {};
+            const studentPromises = studentList.map(async (student) => {
+                const sessionsRef = collection(db, 'sessions');
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const querySnapshot = await getDocs(q);
+                const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                const answersPromises = sessionsData.map(async (session) => {
+                    const answersRef = collection(db, 'answers');
+                    const answersQuery = query(answersRef, where('sessionRef', '==', session.id));
+                    const answersSnapshot = await getDocs(answersQuery);
+                    return answersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                });
+
+                const allAnswers = await Promise.all(answersPromises);
+                const studentAnswersMap = {};
+                sessionsData.forEach((session, index) => {
+                    studentAnswersMap[session.id] = allAnswers[index];
+                });
+                classAnswersMap[student.id] = studentAnswersMap; // Add each student's answers to the class map
+            });
+
+            await Promise.all(studentPromises);
+            setClassAnswersMap(classAnswersMap); // Set aggregated answers for the entire class
+        } catch (error) {
+            console.error("Error fetching class sessions and answers: ", error);
+        }
+    };
+
+    const handleReceiveAnswerMapFromStudentList = (answers, answerContextType, isViewingStudent) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
-        handleReceiveAnswerMap(answers, answerContextType); // Pass contextType to the parent handler
+        setIsViewingStudent(isViewingStudent);
+        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent); // Pass contextType to the parent handler
     };
 
     const handleBackClick = () => {
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
+        setIsViewingStudent(false);
         setSubjects([]); // Clear subjects when going back
     };
 
@@ -133,12 +177,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         try {
             for (const gameId of newSelectedGames) {
                 const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
-                console.log(`Setting allowed to true for game: ${gameId}`);
                 await updateDoc(gameDocRef, { allowed: true });
             }
             for (const gameId of unselectedGames) {
                 const gameDocRef = doc(db, `${classDocRef.path}/allowedGames`, gameId);
-                console.log(`Setting allowed to false for game: ${gameId}`);
                 await updateDoc(gameDocRef, { allowed: false });
             }
         } 
@@ -147,29 +189,11 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
-    const fetchAllowedGames = useCallback(async (classDocRef) => {
-        try {
-            const allowedGamesCollectionRef = collection(db, `${classDocRef.path}/allowedGames`);
-            const allowedGamesSnapshot = await getDocs(allowedGamesCollectionRef);
-
-            const games = allowedGamesSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-            setAvailableGames(games);
-            setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
-        } catch (err) {
-            console.error("Error fetching allowed games: ", err);
-        }
-    }, []);
-
     const handleSubjectClick = useCallback(async (subject) => {
         setSelectedSubject(subject);
         try {
             const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
             const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
-            console.log(subTopicsSnapshot)
             const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
@@ -192,12 +216,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         try {
             for (const subTopicId of newSelectedSubTopics) {
                 const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
-                console.log(`Setting active to true for subtopic: ${subTopicId}`);
                 await updateDoc(subTopicDocRef, { active: true });
             }
             for (const subTopicId of unselectedSubTopics) {
                 const subTopicDocRef = doc(db, `${classDocRef.path}/topics/${selectedSubject.id}/subtopics`, subTopicId);
-                console.log(`Setting active to false for subtopic: ${subTopicId}`);
                 await updateDoc(subTopicDocRef, { active: false });
             }
         } 
@@ -226,8 +248,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             selectedClass={selectedClass} 
                             handleBackClick={handleBackClick} 
                             isLoading={isLoadingStudents}
-                            handleReceiveAnswerMap={handleReceiveAnswerMapFromStudentList}
+                            handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                            setSelectedStudent={setSelectedStudent}
+                            classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
                         />
                         <SubjectsList 
                             subjects={subjects} 
@@ -239,7 +263,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                 )}
             </DrawerLayout>
             
-            {selectedClass && (
+            {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
                     <Select
                         multiple
@@ -283,6 +307,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                     </Select>
                     {Object.keys(answerMap).length > 0 && (
                         <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                    )}
+                    {!isViewingStudent && (
+                    <ClassStats classAnswersMap={classAnswersMap} />
                     )}
                 </div>
             )}

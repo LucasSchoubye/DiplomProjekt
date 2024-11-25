@@ -25,7 +25,7 @@ function scr_drawMultipleChoice(optionsMenu, controllerId)
 	var fourOptionsX = (answerBoxRight-answerBoxLeft)/8
 	var threeOptionsY = (answerBoxTop-answerBoxBot)/6
 
-	var mouseWithinAnswerBox = false
+	mouseWithinAnswerBox = false
 	var optionSelected = undefined
 	
 #endregion
@@ -34,8 +34,7 @@ if (mouse_x > answerBoxLeft && mouse_x < answerBoxRight &&
 	mouse_y > answerBoxTop && mouse_y < answerBoxBot)
 {
 	mouseWithinAnswerBox = true
-}
-
+} 
 	if (question != undefined)
 	{
 		// Draw answer box outline

@@ -10,7 +10,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Particles",
-    "path":"folders/Assets/Fight The Dungeon/Objects/Particles.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Objects/Particles.yy",
   },
   "parentObjectId":null,
   "persistent":false,

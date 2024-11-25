@@ -12,4 +12,5 @@ if (restartKey) {
 if (quitKey) {
 	room_goto(rm_minigameMenu)
 	audio_stop_sound(sou_FtDFightMusicLoop);
+	window_set_cursor(cr_default)
 }

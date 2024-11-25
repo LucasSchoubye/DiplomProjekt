@@ -4,6 +4,7 @@ questionTimer = 10
 showTime = questionTimer
 animTargetHp = 0
 animTargetStamina = 0
+draw_set_font(fn_lato16)
 
 alarm[0] = 60
 

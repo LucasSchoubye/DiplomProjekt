@@ -2,6 +2,8 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_loadoutInventory(){
 
+var LC = obj_languageController
+
 // GENERAL VARIABLES
 var itemHeight = room_height*0.15
 var itemWidth = room_width*0.075
@@ -27,7 +29,7 @@ currentWeaponEquip = undefined
 //draw weapon collection rectancle and title
 draw_set_halign(fa_left)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(weaponStartX+5,weaponStartY-20,"Weapons")
+draw_text(weaponStartX+5,weaponStartY-20,LC.translate("Weapons"))
 draw_roundrect(weaponStartX,weaponStartY,weaponStartX+5*itemWidth,weaponStartY+2*itemHeight,true)
 //reset values
 draw_set_halign(fa_center)
@@ -106,7 +108,7 @@ currentArmorEquip = undefined
 //draw armor collection rectancle and title
 draw_set_halign(fa_left)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(armorStartX+5,armorStartY-20,"Armor")
+draw_text(armorStartX+5,armorStartY-20,LC.translate("Armor"))
 draw_roundrect(armorStartX,armorStartY,armorStartX+5*itemWidth,armorStartY+2*itemHeight,true)
 //reset values
 draw_set_halign(fa_center)
@@ -174,15 +176,41 @@ for (var i = 0; i < ds_list_size(currentArmorList); ++i) {
 
 // DRAW INVENTORY SLOTS
 // VARIABLES
-var weaponEquipStartX = room_width*0.65
+var weaponEquipStartX = room_width*0.565
 var weaponEquipStartY = room_height*0.8
 var weaponEquipTextStartX = weaponEquipStartX + itemWidth/2
 var weaponEquipTextStartY = weaponEquipStartY+itemHeight+20
-var armorEquipStartX = weaponEquipStartX + itemWidth + 20
+var weaponDescriptionStartX = room_width*0.49
+var weaponDescriptionEndX = weaponDescriptionStartX+room_width*0.23
+var weaponDescriptionWidth = weaponDescriptionEndX-weaponDescriptionStartX
+var weaponDescriptionStartY = room_height*0.18
+var weaponDescriptionHeight = weaponDescriptionStartY+room_height*0.6
+var weaponDescriptionMidX = weaponDescriptionStartX+((room_width*0.23)/2)
+var weaponDescriptionTextStartY = weaponDescriptionStartY+40
+var weaponDescriptionStatTextStartY = weaponDescriptionStartY+room_height*0.3
+var currentWeaponName = ""
+var damageStat = 0
+var projectileStat = 0
+var rangeStat = 0
+var weaponDescription = ""
+
+var armorEquipStartX = weaponEquipStartX + itemWidth + 225
 var armorEquipStartY = weaponEquipStartY
 var armorEquipTextStartX = armorEquipStartX + itemWidth/2
 var armorEquipTextStartY = armorEquipStartY+itemHeight+20
-
+var armorDescriptionStartX = weaponDescriptionEndX+room_width*0.01
+var armorDescriptionEndX = armorDescriptionStartX+room_width*0.23
+var armorDescriptionWidth = armorDescriptionEndX-armorDescriptionStartX
+var armorDescriptionStartY = weaponDescriptionStartY
+var armorDescriptionHeight = weaponDescriptionHeight
+var armorDescriptionMidX = armorDescriptionStartX+((room_width*0.23)/2)
+var armorDescriptionTextStartY = armorDescriptionStartY+40
+var armorDescriptionStatTextStartY = armorDescriptionStartY+room_height*0.3
+var currentArmorName = ""
+var healthStat = 0
+var speedStat = 0
+var staminaStat = 0
+var armorDescription = ""
 
 
 // weapon equip
@@ -193,11 +221,65 @@ draw_set_alpha(0.3 + sin(current_time/500)*0.1)
 draw_roundrect(weaponEquipStartX,weaponEquipStartY,weaponEquipStartX+itemWidth,weaponEquipStartY+itemHeight,true)
 draw_set_alpha(1)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(weaponEquipTextStartX,weaponEquipTextStartY,"Weapon")
+draw_text(weaponEquipTextStartX,weaponEquipTextStartY,LC.translate("Weapon"))
 draw_set_font(defaultFont)
 if (currentWeaponEquip != undefined) {
 	currentWeaponEquip.DrawFtDEquipped(weaponEquipStartX,weaponEquipStartY)
 }
+
+
+// Switch for what weapon stats are shown
+if (currentWeaponEquip != undefined){
+	switch(currentWeaponEquip.itemName) {
+		case "Thunderbolt": 
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 6
+			projectileStat = 1
+			rangeStat = 10
+			weaponDescription = LC.translate("A basic but good choice with a single projectile of decent damage and great range")
+		break
+		case "Black Hole":
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 10
+			projectileStat = 1
+			rangeStat = 5
+			weaponDescription = LC.translate("A very strong single projectile with very high damage but shorter range. So get close!")
+		break
+		case "Fireball":
+			currentWeaponName = currentWeaponEquip.itemName
+			damageStat = 3
+			projectileStat = 3
+			rangeStat = 10
+			weaponDescription = LC.translate("A great choice against multiple foes, as the damage is split out between its multiple projectiles")
+		break
+	}
+} else {
+	currentWeaponName = "No Weapon Equipped"
+	damageStat = 0
+	projectileStat = 0
+	rangeStat = 0
+	weaponDescription = ""
+}
+
+
+// Weapon equipped description
+draw_roundrect(weaponDescriptionStartX,weaponDescriptionStartY,weaponDescriptionEndX,weaponDescriptionHeight,true)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(weaponDescriptionMidX,weaponDescriptionStartY+20,string(currentWeaponName))
+draw_text(weaponDescriptionMidX,weaponDescriptionStatTextStartY+60,LC.translate("Stats"))
+draw_set_halign(fa_left)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+100,LC.translate("Damage:"))
+draw_sprite(spr_stat10,damageStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+100)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+150,LC.translate("Projectiles:"))
+draw_sprite(spr_stat3,projectileStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+150)
+draw_text(weaponDescriptionStartX+10,weaponDescriptionStatTextStartY+200,LC.translate("Range:"))
+draw_sprite(spr_stat10,rangeStat,weaponDescriptionStartX+120,weaponDescriptionStatTextStartY+200)
+draw_set_font(defaultFont)
+draw_set_valign(fa_top)
+draw_text_ext(weaponDescriptionStartX+weaponDescriptionWidth*0.05,weaponDescriptionTextStartY+20,string(weaponDescription),string_height(weaponDescription)+5,weaponDescriptionWidth*0.9)
+draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
+
 
 
 // armor equip
@@ -208,14 +290,64 @@ draw_set_alpha(0.3 + sin(current_time/500)*0.1)
 draw_roundrect(armorEquipStartX,armorEquipStartY,armorEquipStartX+itemWidth,armorEquipStartY+itemHeight,true)
 draw_set_alpha(1)
 draw_set_font(fn_TwCenMTCondensed)
-draw_text(armorEquipTextStartX,armorEquipTextStartY,"Armor")
+draw_text(armorEquipTextStartX,armorEquipTextStartY,LC.translate("Armor"))
 draw_set_font(defaultFont)
 if (currentArmorEquip != undefined) {
 	currentArmorEquip.DrawFtDEquipped(armorEquipStartX,armorEquipStartY)
 }
 
 
-draw_triangle_color(screenMidX+100,screenMidY-50,screenMidX+100,screenMidY-10,screenMidX+70,screenMidY-30,c_olive,c_olive,c_olive,false)
-draw_triangle_color(screenMidX+530,screenMidY-50,screenMidX+530,screenMidY-10,screenMidX+560,screenMidY-30,c_olive,c_olive,c_olive,false)
+// Switch for what armor stats are shown
+if (currentArmorEquip != undefined){
+	switch(currentArmorEquip.itemName) {
+		case "Medium Armor": 
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 5
+			speedStat = 6
+			staminaStat = 5
+			armorDescription = LC.translate("A good default armor option for when you want a balanced build of decent speed, health and stamina")
+		break
+		case "Heavy Armor":
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 10
+			speedStat = 3
+			staminaStat = 3
+			armorDescription = LC.translate("Good for when you think you will have to tank a few hits to defeat the boss")
+		break
+		case "Light Armor":
+			currentArmorName = currentArmorEquip.itemName
+			healthStat = 3
+			speedStat = 9
+			staminaStat = 10
+			armorDescription = LC.translate("If the risky dodging playstyle is your passion you can take it to its full potential with Light Armor which enhances your speed greatly but reduces the amount of hits you can take")
+		break
+	}
+} else {
+	currentArmorName = "No Armor Equipped"
+	healthStat = 0
+	speedStat = 0
+	staminaStat = 0
+	armorDescription = ""
+}
+
+// Armor equipped description
+draw_roundrect(armorDescriptionStartX,armorDescriptionStartY,armorDescriptionEndX,armorDescriptionHeight,true)
+draw_set_font(fn_TwCenMTCondensed)
+draw_text(armorDescriptionMidX,armorDescriptionStartY+20,string(currentArmorName))
+draw_text(armorDescriptionMidX,armorDescriptionStatTextStartY+60,LC.translate("Stats"))
+draw_set_halign(fa_left)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+100,LC.translate("Health:"))
+draw_sprite(spr_stat10,healthStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+100)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+150,LC.translate("Speed:"))
+draw_sprite(spr_stat10,speedStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+150)
+draw_text(armorDescriptionStartX+10,armorDescriptionStatTextStartY+200,LC.translate("Stamina:"))
+draw_sprite(spr_stat10,staminaStat,armorDescriptionStartX+120,armorDescriptionStatTextStartY+200)
+draw_set_font(defaultFont)
+draw_set_valign(fa_top)
+draw_text_ext(armorDescriptionStartX+armorDescriptionWidth*0.05,armorDescriptionTextStartY+20,string(armorDescription),string_height(armorDescription)+5,armorDescriptionWidth*0.9)
+draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
+
+
 
 }

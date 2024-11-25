@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Amor",
-    "path":"folders/Assets/Fight The Dungeon/Sprites/Amor.yy",
+    "path":"folders/Assets/Games/Fight The Dungeon/Sprites/Amor.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
