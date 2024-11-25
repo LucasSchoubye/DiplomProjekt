@@ -13,12 +13,21 @@ x = animPos
 animCycle += 0.1
 image_angle = sin(animCycle)*4 
 
+
+draw_arrow(obj_typeracerCar.x+room_width*0.1,obj_typeracerCar.y,obj_typeracerCar.x+room_width*0.05,obj_typeracerCar.y,50)
+draw_set_halign(fa_left)
+draw_text(obj_typeracerCar.x+room_width*0.11,obj_typeracerCar.y,obj_firestore_controller.username+"!")
+draw_set_halign(fa_center)
+
+	
+
 if (pos = endPos)
 {
 	win()
 }
 
-if (keyboard_check_pressed(vk_space))
+// FOR DEV DEBUGGING
+if (keyboard_check_pressed(vk_lcontrol))
 {
 	AnsweredCorrect()
 }

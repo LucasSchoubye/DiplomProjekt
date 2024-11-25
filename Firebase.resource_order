@@ -13,6 +13,7 @@
     {"name":"FirebaseSetup","order":4,"path":"extensions/FirebaseSetup/FirebaseSetup.yy",},
     {"name":"YYFirebaseAuthentication_tools","order":3,"path":"extensions/YYFirebaseAuthentication_tools/YYFirebaseAuthentication_tools.yy",},
     {"name":"YYFirebaseAuthentication","order":2,"path":"extensions/YYFirebaseAuthentication/YYFirebaseAuthentication.yy",},
+    {"name":"fn_ArialBlack12","order":23,"path":"fonts/fn_ArialBlack12/fn_ArialBlack12.yy",},
     {"name":"fn_ArialBlack48","order":9,"path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},
     {"name":"fn_buttonOpenSans","order":3,"path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},
     {"name":"fn_konk12","order":19,"path":"fonts/fn_konk12/fn_konk12.yy",},

@@ -1,6 +1,6 @@
 /// Draw Event
 
-
+currentFont = draw_get_font()
 if (keyboard_check_pressed(vk_tab))
 {
 	if (questionType = QuestionType.MultipleChoice)
@@ -12,7 +12,7 @@ if (keyboard_check_pressed(vk_tab))
 		questionType = QuestionType.MultipleChoice
 	}
 }
-
+draw_set_font(fn_ArialBlack12)
 switch(question.questionType)
 {
 	case "MultipleChoice":
@@ -23,3 +23,4 @@ switch(question.questionType)
 		scr_drawTyping(optionsMenu, id)
 	break;
 }
+draw_set_font(currentFont)

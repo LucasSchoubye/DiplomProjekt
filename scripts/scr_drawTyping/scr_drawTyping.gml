@@ -64,7 +64,10 @@ var threeOptionsY = optionsMenu.threeOptionsY
 			typingString = string_delete(typingString, string_length(typingString), 1)
 	}
 	controllerId.typingString = typingString
-
+	draw_set_alpha(sin(current_time/100))
+	draw_text(screenMidX + string_width("Answer: " + typingString)/2 + 3, answerBoxMidY, "|");
+	draw_set_alpha(1)
+	
 	draw_set_color(c_white)
 
 	// Answer and send to firebase
@@ -74,7 +77,6 @@ var threeOptionsY = optionsMenu.threeOptionsY
 		if (typingString = round(real(question.options[question.answerIndex].text)))
 		{
 			// Correct
-			show_message("Answer: "+typingString+"; Correct Answer: "+question.options[question.answerIndex].text)
 			obj_firestore_controller.SendAnswer(question.prompt, new AnswerOption(typingString), question.options[question.answerIndex].text, question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
 			obj_firestore_controller.answerTimer = 0
 			obj_typeracerCar.AnsweredCorrect()

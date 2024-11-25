@@ -4,7 +4,7 @@ function scr_drawQuestionHint(X1,Y1,X2,Y2){
 
 	var prevFont = draw_get_font()
 	var prevValign = draw_get_valign()
-
+	
 	draw_set_alpha(0.85)
 	draw_roundrect(X1,Y1,X2,Y2,false)
 	draw_set_alpha(1)

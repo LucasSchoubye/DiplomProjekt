@@ -53,12 +53,7 @@ for (var i = 0; i < ds_list_size(currentList); ++i) {
 				obj_firestore_controller.UpdateBalance()
 				
 			}
-			else if (currentElement.isOwned == true) {
-				//show_message("You already own this item")
-			}
-			else {
-				//show_message("You need more $$$")
-			}
+			
 		}
 	}
 	itemCounter++

@@ -137,7 +137,6 @@ if (changeClubNamePopup){
 		draw_set_alpha(sin(current_time/75))
 		draw_text(room_width * 0.3625 + string_width(newClubName) - 2, room_height * 0.4175, "|");
 		draw_set_alpha(1)
-		//show_message(string(font_get_name(draw_get_font())))
 		if (keyboard_check_pressed(vk_anykey))
 		{
 			if ( charValidClub() and !keyboard_check_pressed(vk_shift))
