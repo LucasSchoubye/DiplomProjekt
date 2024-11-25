@@ -48,11 +48,30 @@ function CheckMouseCollision()
 		if (mouse_x > x && mouse_x < room_width &&
 			mouse_y > y - goalHeight/2 && mouse_y < y + goalHeight/2)
 		{
+			obj_UltManGameController.goalHitboxIncrease = false
 			if (!scr_doLinesCross(mouse_x, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y - goalHeight/2, room_width, y - goalHeight/2) &&
 			!scr_doLinesCross(mouse_x, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y + goalHeight/2, room_width, y + goalHeight/2))
 			return true
 		}
+		
+		// Extended hitbox
+		if (mouse_x > x-400 && mouse_x < x &&
+			mouse_y > y - goalHeight/2 && mouse_y < y + goalHeight/2)
+		{
+			if (!scr_doLinesCross(mouse_x + 400, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y - goalHeight/2, room_width, y - goalHeight/2) &&
+			!scr_doLinesCross(mouse_x + 400, mouse_y, obj_UltManBall.x, obj_UltManBall.y, x, y + goalHeight/2, room_width, y + goalHeight/2))
+			{
+				obj_UltManGameController.goalHitboxIncrease = true
+				//obj_UltManBall.owner.targetY += 400
+				return true
+			}
+		}
+		else
+		{
+			obj_UltManGameController.goalHitboxIncrease = false
+		}
 	}
+	
 	
 	// No goal
 	return false

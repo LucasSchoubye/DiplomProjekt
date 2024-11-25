@@ -474,7 +474,6 @@
     {"id":{"name":"scr_UltManRunning","path":"scripts/scr_UltManRunning/scr_UltManRunning.yy",},},
     {"id":{"name":"scr_UltManRunToBall","path":"scripts/scr_UltManRunToBall/scr_UltManRunToBall.yy",},},
     {"id":{"name":"scr_UltManSetPositionCoordinates","path":"scripts/scr_UltManSetPositionCoordinates/scr_UltManSetPositionCoordinates.yy",},},
-    {"id":{"name":"scr_UltManShooting","path":"scripts/scr_UltManShooting/scr_UltManShooting.yy",},},
     {"id":{"name":"scr_UltManTacticPlayerBox","path":"scripts/scr_UltManTacticPlayerBox/scr_UltManTacticPlayerBox.yy",},},
     {"id":{"name":"scr_ultManTactics","path":"scripts/scr_ultManTactics/scr_ultManTactics.yy",},},
     {"id":{"name":"scr_UltManTestTeamArsenal","path":"scripts/scr_UltManTestTeamArsenal/scr_UltManTestTeamArsenal.yy",},},
