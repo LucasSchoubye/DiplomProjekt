@@ -77,7 +77,6 @@ var threeOptionsY = optionsMenu.threeOptionsY
 		if (typingString = round(real(question.options[question.answerIndex].text)))
 		{
 			// Correct
-			show_message("Answer: "+typingString+"; Correct Answer: "+question.options[question.answerIndex].text)
 			obj_firestore_controller.SendAnswer(question.prompt, new AnswerOption(typingString), question.options[question.answerIndex].text, question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
 			obj_firestore_controller.answerTimer = 0
 			obj_typeracerCar.AnsweredCorrect()

@@ -196,7 +196,6 @@ function scr_ultManHome(){
 			var statSprite = teamStats[i][1]
 			var statNumber = teamStats[i][2]
 			var statNumberSize = string_width(string(statNumber))
-			//show_message(statName + ": " + string(statNumber))
 			var statPlacement = teamStatsBoxTop + teamStatsRow*(i+1)
 			draw_sprite_stretched(statSprite,false,teamStatsStart, teamStatsSpace, 47, 47)
 			draw_text(teamStatsStart + 56, teamStatsSpace , string(statNumber))

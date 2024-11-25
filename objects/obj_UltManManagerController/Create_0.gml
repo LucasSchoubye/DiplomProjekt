@@ -304,15 +304,12 @@ function GenerateMatchups()
 
 	        // Store this matchup as an array of the two clubs
 	        var matchup = [homeClubId.clubName, awayClubId.clubName];
-			//show_message(homeClubId.clubName +" v "+awayClubId.clubName)
 	        array_push(gameweek, matchup);
 	    }
     
 	    // Add this completed gameweek to the season schedule
 	    array_push(season_schedule, gameweek);
 	    ds_list_destroy(clubsAvailable); // Clean up the list to free memory
-		
-		//show_message("Gameweek ("+string(week+1)+"): "+string(gameweek))
 	}
 
 	// Generate the second half of the season by reversing home/away for each matchup

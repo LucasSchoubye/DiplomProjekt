@@ -338,10 +338,6 @@ function RequestClassSubtopics(schoolId, classId, subject)
 	{
 		FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
 	}
-	else
-	{
-		//show_message("SchoolId or classId are undefined")
-	}
 }
 
 function RespondClassSubtopics(subject, value)
