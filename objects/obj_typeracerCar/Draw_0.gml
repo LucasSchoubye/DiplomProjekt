@@ -26,6 +26,7 @@ if (pos = endPos)
 	win()
 }
 
+// FOR DEV DEBUGGING
 if (keyboard_check_pressed(vk_lcontrol))
 {
 	AnsweredCorrect()
