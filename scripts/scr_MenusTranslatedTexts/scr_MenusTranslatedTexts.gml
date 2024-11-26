@@ -58,6 +58,9 @@ switch (obj_languageController.languageChosen)
 		case "News Title":
 			var array = [text, "Titel på Nyhed"]
 		break;
+		case "Logging In...":
+			var array = [text, "Logger på"]
+		break;
 		
 		#endregion
 		

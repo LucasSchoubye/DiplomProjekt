@@ -1,13 +1,13 @@
 /// @description Draw event
 window_set_cursor(cr_none)
-
+var LC = obj_languageController
 image_speed = 1
 
 if (room = rm_login)
 {
-	var LC = obj_languageController
 	
 	// Variables
+	var roomMidWidth = (room_width/4)*3
 	var roomMidWidth = (room_width/4)*3
 	var roomQuarterWidth = (room_width/4)
 	var roomMidHeight = room_width/2
@@ -36,18 +36,26 @@ if (room = rm_login)
 	
 	draw_set_font(fn_textLato)
 	draw_set_valign(fa_middle)
-	draw_set_halign(fa_center)
+	draw_set_halign(fa_left)
 	
-	draw_text(roomMidWidth - textBuffer, room_height*0.45, LC.translate("Username: ",Games.Menus))
-	draw_text(roomMidWidth - textBuffer, room_height*0.45 + 30, LC.translate("Password: ",Games.Menus))
+	draw_text(roomQuarterWidth*2 + textBuffer, room_height*0.45, LC.translate("Username: ",Games.Menus))
+	draw_text(roomQuarterWidth*2 + textBuffer, room_height*0.45 + 30, LC.translate("Password: ",Games.Menus))
+	
+	// Convert password into * characters
+	var passwordToAsterisks = ""
+	for (var i = 0; i < string_length(string(password)); ++i) {
+	    passwordToAsterisks = passwordToAsterisks + "*"
+	}
+	
+	draw_set_halign(fa_center)
 	draw_text(roomMidWidth, room_height*0.45, string(username))
-	draw_text(roomMidWidth, room_height*0.45 + 30, string(password))
+	draw_text(roomMidWidth, room_height*0.45 + 30, passwordToAsterisks)
 
 	// Draw selection
 	var targetString = username
 	if (selectedUsername)
 	{
-		draw_circle(roomMidWidth - selectionBuffer, room_height*0.45, 5, true)
+		draw_circle(roomQuarterWidth*2 + textBuffer - 20, room_height*0.45, 5, true)
 		if (keyboard_check_pressed(vk_anykey))
 		{
 			if (charIsValid() and !keyboard_check_pressed(vk_shift))
@@ -58,7 +66,7 @@ if (room = rm_login)
 	}
 	else
 	{
-		draw_circle(roomMidWidth - selectionBuffer, room_height*0.45 + 30, 5, true)
+		draw_circle(roomQuarterWidth*2 + textBuffer - 20, room_height*0.45 + 30, 5, true)
 		if (keyboard_check_pressed(vk_anykey))
 		{
 			if (charIsValid() and !keyboard_check_pressed(vk_shift))
@@ -131,5 +139,5 @@ if (room = rm_login)
 // Waiting
 if (room = rm_loginWaiting)
 {
-	draw_text(room_width/2, 300, "Logging In...")
+	draw_text(room_width/2, 300, LC.translate("Logging In...", Games.Menus))
 }

@@ -259,6 +259,13 @@ function ValidateLogin(map)
 		
 			if (value[?"userID"] = userID)
 			{
+				// If the ref is not a student, then don't log in
+				if (string_pos("students",value[?"ref"]) = 0)
+				{
+					show_debug_message("Attempting log-in with a non-student account. Stopping this")
+					throw ("User is not a student");
+				}
+				
 				playerId = value[?"ref"]
 			
 				// Find the position of the last dash ("/")
@@ -275,8 +282,6 @@ function ValidateLogin(map)
 			
 				RequestStudent()
 			}
-			//else
-				//show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
 		}
 	
 		if (playerId = undefined)
