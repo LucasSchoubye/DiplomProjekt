@@ -117,7 +117,10 @@ if (questionMenuActive and questionMenuClickCooldown = false)
 	scr_drawMultipleChoice(optionsMenu, id)
 	
 	// Draw chances
-	draw_text(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.69, string(skillCheckCorrectCounter)+"/"+string(skillCheckAttemptsCounter))
+	draw_set_color(c_black)
+	draw_set_font(fn_LatoBold40)
+	draw_text(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.68,LC.translate("Shot difficulty: ")+string(skillCheckAmount)+LC.translate(" questions!") + " ("+string(skillCheckAmount-skillCheckAttemptsCounter)+LC.translate(" left)"))
+	draw_set_color(c_white)
 	draw_set_font(fn_RobotoBlack16)
 	
 	// Perform action

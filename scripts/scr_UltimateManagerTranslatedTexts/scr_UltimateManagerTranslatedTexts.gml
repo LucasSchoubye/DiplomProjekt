@@ -221,6 +221,15 @@ switch (obj_languageController.languageChosen)
 			case "Drag with right mouse button":
 				var array = [text, "Træk med højre-klik på musen"]
 			break;
+			case "Shot difficulty: ":
+				var array = [text, "Sværhedsgrad på skud: "]
+			break;
+			case " questions!":
+				var array = [text, " spørgsmål!"]
+			break;
+			case " left)":
+				var array = [text, " tilbage)"]
+			break;
 		#endregion
 	}
 
