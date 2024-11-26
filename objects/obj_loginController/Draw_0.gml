@@ -49,7 +49,7 @@ if (room = rm_login)
 			url_open("https://www.google.com/search?q=link+til+vores+hjemmeside&oq=link+til+vores+hjemmeside&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOTIHCAEQIRifBTIHCAIQIRifBTIHCAMQIRifBTIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBdIBCDQ3MzVqMWoxqAIAsAIA&sourceid=chrome&ie=UTF-8")
 	}
 	
-	draw_set_font(fn_textLato)
+	draw_set_font(fn_lato16)
 	draw_set_valign(fa_middle)
 	draw_set_halign(fa_left)
 	
@@ -69,7 +69,7 @@ if (room = rm_login)
 	draw_set_valign(fa_middle)
 	
 	// Draw typing cursor
-	draw_set_alpha(0.7 + sin(current_time/50)*0.15)
+	draw_set_alpha(1 + sin(current_time/100))
 	if (selectedUsername)
 		draw_text(roomMidWidth + string_width(username)/2 +2, room_height*0.45, "I")
 	else
@@ -80,8 +80,8 @@ if (room = rm_login)
 	if (mouse_check_button_pressed(mb_left) 
 		&& mouse_x > roomMidWidth - 200
 		&& mouse_x < roomMidWidth + 200
-		&& mouse_y > room_height*0.45 - 30
-		&& mouse_y < room_height*0.45 + 30)
+		&& mouse_y > room_height*0.45 - 50
+		&& mouse_y < room_height*0.45 + 50)
 	{
 		if (mouse_y > room_height*0.45 + 5)
 			selectedUsername = false
