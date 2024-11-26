@@ -61,6 +61,11 @@ const StudentStats = ({ answerMap, contextType }) => {
                 subtopicStats[subtopic].Incorrect++;
             }
         });
+        Object.keys(subtopicStats).forEach(subtopic => {
+            const total = subtopicStats[subtopic].Correct + subtopicStats[subtopic].Incorrect;
+            subtopicStats[subtopic].CorrectPercentage = total > 0 ? (subtopicStats[subtopic].Correct / total) * 100 : 0;
+            subtopicStats[subtopic].IncorrectPercentage = total > 0 ? (subtopicStats[subtopic].Incorrect / total) * 100 : 0;
+        });
         return Object.values(subtopicStats);
     }, [answers]);
 

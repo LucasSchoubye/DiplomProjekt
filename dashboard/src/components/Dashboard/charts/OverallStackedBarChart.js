@@ -2,10 +2,11 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
 
-const CustomLabel = (props) => {
-    const { x, y, width, height, value, type } = props;
-    const total = value + props.otherValue;
-    const percentage = ((value / total) * 100).toFixed(1);
+const CustomLabel = ({ x, y, width, height, index, data, type }) => {
+    const total = data[index].Incorrect + data[index].Correct;
+    const percentage = type === 'Correct'
+        ? ((data[index].Correct / total) * 100).toFixed(1)
+        : ((data[index].Incorrect / total) * 100).toFixed(1);
     
     return (
         <text
@@ -34,13 +35,13 @@ const OverallStackedBarChart = ({ data, title }) => {
                         dataKey="Correct" 
                         stackId="a" 
                         fill="#66b366"
-                        label={<CustomLabel otherValue={data[0]?.Incorrect} />}
+                        label={(props) => <CustomLabel {...props} data={data} type="Correct" />}
                     />
                     <Bar 
                         dataKey="Incorrect" 
                         stackId="a" 
                         fill="#ff6666"
-                        label={<CustomLabel otherValue={data[0]?.Correct} />}
+                        label={(props) => <CustomLabel {...props} data={data}  type="Incorrect" />}
                     />
                 </BarChart>
             </ResponsiveContainer>

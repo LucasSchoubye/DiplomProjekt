@@ -106,8 +106,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
-            console.log(studentList)
-            // Log the number of reads used
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
