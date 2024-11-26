@@ -6,9 +6,11 @@ import { formatSubtopic } from '../../utils/textUtils';
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff6666', '#66b366'];
 
-const MedianAnswerTimeChart = ({ data }) => {
+const MedianAnswerTimeChart = ({ data, title }) => {
     return (
-        <ResponsiveContainer width="30%" height={500}>
+    <div style={{ width: '30%', textAlign: 'center' }}>
+        <h3>{title}</h3>
+        <ResponsiveContainer width="100%" height={500}>
             <BarChart data={data}>
                 <XAxis 
                     xAxisId="0" 
@@ -25,6 +27,7 @@ const MedianAnswerTimeChart = ({ data }) => {
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
+    </div>
     );
 };
 
@@ -33,6 +36,10 @@ MedianAnswerTimeChart.propTypes = {
         subtopic: PropTypes.string.isRequired,
         medianTime: PropTypes.string.isRequired,
     })).isRequired,
+};
+
+MedianAnswerTimeChart.defaultProps = {
+    title: 'Median Answer Time',
 };
 
 export default MedianAnswerTimeChart;

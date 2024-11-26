@@ -1,20 +1,50 @@
-
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
 
-const OverallStackedBarChart = ({ data }) => {
+const CustomLabel = (props) => {
+    const { x, y, width, height, value, type } = props;
+    const total = value + props.otherValue;
+    const percentage = ((value / total) * 100).toFixed(1);
+    
     return (
-        <ResponsiveContainer width="15%" height={500}>
-            <BarChart data={data}>
-                <XAxis type="category" dataKey="name" />
-                <YAxis type="number" label={{ value: 'Total Answers', angle: -90, position: 'insideLeft' }} />
-                <Tooltip />
-                {/* <Legend /> */}
-                <Bar dataKey="Correct" stackId="a" fill="#66b366"/>
-                <Bar dataKey="Incorrect" stackId="a" fill="#ff6666"/>
-            </BarChart>
-        </ResponsiveContainer>
+        <text
+            x={x + width / 2}
+            y={y + height / 2}
+            fill="#ffffff"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize={16}
+        >
+            {`${percentage}%`}
+        </text>
+    );
+};
+
+const OverallStackedBarChart = ({ data, title }) => {
+    return (
+        <div style={{ width: '15%', textAlign: 'center' }}>
+            <h3>{title}</h3>
+            <ResponsiveContainer width="100%" height={500}>
+                <BarChart data={data}>
+                    <XAxis type="category" dataKey="name" />
+                    <YAxis type="number" label={{ value: 'Total Answers', angle: -90, position: 'insideLeft' }} />
+                    <Tooltip />
+                    <Bar 
+                        dataKey="Correct" 
+                        stackId="a" 
+                        fill="#66b366"
+                        label={<CustomLabel otherValue={data[0]?.Incorrect} />}
+                    />
+                    <Bar 
+                        dataKey="Incorrect" 
+                        stackId="a" 
+                        fill="#ff6666"
+                        label={<CustomLabel otherValue={data[0]?.Correct} />}
+                    />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
     );
 };
 
@@ -24,6 +54,11 @@ OverallStackedBarChart.propTypes = {
         Correct: PropTypes.number.isRequired,
         Incorrect: PropTypes.number.isRequired,
     })).isRequired,
+    title: PropTypes.string,
+};
+
+OverallStackedBarChart.defaultProps = {
+    title: 'Total Answers',
 };
 
 export default OverallStackedBarChart;

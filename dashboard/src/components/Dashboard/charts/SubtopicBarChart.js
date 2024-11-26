@@ -4,9 +4,12 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import PropTypes from 'prop-types';
 import { formatSubtopic } from '../../utils/textUtils';
 
-const SubtopicBarChart = ({ data }) => {
+const SubtopicBarChart = ({ data, title }) => {
+    console.log(data);
     return (
-        <ResponsiveContainer width="30%" height={500}>
+    <div style={{ width: '30%', textAlign: 'center' }}>
+        <h3>{title}</h3>
+        <ResponsiveContainer width="100%" height={500}>
             <BarChart data={data}>
                 <XAxis dataKey="name" tickFormatter={formatSubtopic} />
                 <YAxis label={{ value: 'Total Answers', angle: -90, position: 'insideLeft' }}  />
@@ -16,6 +19,7 @@ const SubtopicBarChart = ({ data }) => {
                 <Bar dataKey="Incorrect" stackId="a" fill="#ff6666" />
             </BarChart>
         </ResponsiveContainer>
+    </div>
     );
 };
 
@@ -26,5 +30,10 @@ SubtopicBarChart.propTypes = {
         Incorrect: PropTypes.number.isRequired,
     })).isRequired,
 };
+
+SubtopicBarChart.defaultProps = {
+    title: 'Total Answers Per Subtopic',
+};
+
 
 export default SubtopicBarChart;
