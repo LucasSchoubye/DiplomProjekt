@@ -153,7 +153,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
     "PackageType":"Asset",
     "PackageName":"Firebase Firestore Ext",
     "PackageID":"com.yoyogames.firebasefirestoreext",
@@ -168,6 +168,7 @@
     {"id":{"name":"YYFirebaseFirestore","path":"extensions/YYFirebaseFirestore/YYFirebaseFirestore.yy",},},
     {"id":{"name":"fn_ArialBlack12","path":"fonts/fn_ArialBlack12/fn_ArialBlack12.yy",},},
     {"id":{"name":"fn_ArialBlack160","path":"fonts/fn_ArialBlack160/fn_ArialBlack160.yy",},},
+    {"id":{"name":"fn_ArialBlack18","path":"fonts/fn_ArialBlack18/fn_ArialBlack18.yy",},},
     {"id":{"name":"fn_ArialBlack38","path":"fonts/fn_ArialBlack38/fn_ArialBlack38.yy",},},
     {"id":{"name":"fn_ArialBlack48","path":"fonts/fn_ArialBlack48/fn_ArialBlack48.yy",},},
     {"id":{"name":"fn_buttonOpenSans","path":"fonts/fn_buttonOpenSans/fn_buttonOpenSans.yy",},},
