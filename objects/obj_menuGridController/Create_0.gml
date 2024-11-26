@@ -13,7 +13,7 @@ for (var i = 0; i < 20; ++i) {
     //ds_list_add(itemElements, new MenuGridElement())
 }
 
-for (var i = 0; i < 4; ++i) {
+for (var i = 0; i < 1; ++i) {
 	var category = new MenuGridElement()
 	
 	switch(i)

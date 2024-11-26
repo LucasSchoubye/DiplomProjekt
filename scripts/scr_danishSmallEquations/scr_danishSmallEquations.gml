@@ -11,8 +11,8 @@ function scr_danishSmallEquations(questionType){
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
-			var a = round(random_range(0,9))
-			var b = round(random_range(0,9))
+			var a = round(random_range(1,9))
+			var b = round(random_range(1,9))
 			
 			// Setup list
 			var optionToList = ds_list_create()

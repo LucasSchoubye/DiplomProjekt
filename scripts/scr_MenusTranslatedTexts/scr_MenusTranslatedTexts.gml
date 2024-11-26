@@ -17,6 +17,10 @@ switch (obj_languageController.languageChosen)
 	// Find translated text
 	switch(text)
 	{
+		case "All Games":
+			var array = [text, "Alle Spil"]
+		break;
+		
 		case "Mini Games":
 			var array = [text, "Spil"]
 		break;
@@ -150,6 +154,14 @@ switch (obj_languageController.languageChosen)
 			case "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them.":
 				var array = [text, "Når du spiller en kamp, kontrollerer du altid den spiller, der er tættest på bolden. Du flytter ved at klikke med musen. Du kan også flytte holdspillere ved at højreklikke på dem og trække dem."]
 			break;
+		#endregion
+		
+		#region Settings
+		case "Language: ":
+			var array = [text, "Sprog: "]
+		break;
+		
+		
 		#endregion
 	}
 

@@ -34,6 +34,21 @@ if (room = rm_login)
 	//draw_sprite_stretched(spr_newsGif,image_index,room_width*0.05,room_height*0.15,room_width*0.45-room_width*0.05,room_height*0.85-room_height*0.15)
 	draw_roundrect(room_width*0.05,room_height*0.15,room_width*0.45,room_height*0.85,true)
 	
+	// Open Url when clicked on read more
+	if (mouse_x > roomQuarterWidth - 100
+		&& mouse_x < roomQuarterWidth + 100
+		&& mouse_y > room_height*0.9 + 25 - 20
+		&& mouse_y < room_height*0.9 + 25 + 20)
+	{
+		draw_line(roomQuarterWidth - string_width(LC.translate("Information found here!",Games.Menus))/2,
+					room_height*0.9 + 35,
+					roomQuarterWidth + string_width(LC.translate("Information found here!",Games.Menus))/2,
+					room_height*0.9 + 35)
+		
+		if mouse_check_button_pressed(mb_left)
+			url_open("https://www.google.com/search?q=link+til+vores+hjemmeside&oq=link+til+vores+hjemmeside&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOTIHCAEQIRifBTIHCAIQIRifBTIHCAMQIRifBTIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBdIBCDQ3MzVqMWoxqAIAsAIA&sourceid=chrome&ie=UTF-8")
+	}
+	
 	draw_set_font(fn_textLato)
 	draw_set_valign(fa_middle)
 	draw_set_halign(fa_left)
@@ -49,12 +64,36 @@ if (room = rm_login)
 	
 	draw_set_halign(fa_center)
 	draw_text(roomMidWidth, room_height*0.45, string(username))
+	draw_set_valign(fa_middle)
 	draw_text(roomMidWidth, room_height*0.45 + 30, passwordToAsterisks)
+	draw_set_valign(fa_middle)
+	
+	// Draw typing cursor
+	draw_set_alpha(0.7 + sin(current_time/50)*0.15)
+	if (selectedUsername)
+		draw_text(roomMidWidth + string_width(username)/2 +2, room_height*0.45, "I")
+	else
+		draw_text(roomMidWidth + string_width(passwordToAsterisks)/2 + 2, room_height*0.45+30, "I")
+	draw_set_alpha(1)
+	
+	// Change selectedUsername on mouseclick
+	if (mouse_check_button_pressed(mb_left) 
+		&& mouse_x > roomMidWidth - 200
+		&& mouse_x < roomMidWidth + 200
+		&& mouse_y > room_height*0.45 - 30
+		&& mouse_y < room_height*0.45 + 30)
+	{
+		if (mouse_y > room_height*0.45 + 5)
+			selectedUsername = false
+		else
+			selectedUsername = true
+	}
 
 	// Draw selection
 	var targetString = username
 	if (selectedUsername)
 	{
+		// username
 		draw_circle(roomQuarterWidth*2 + textBuffer - 20, room_height*0.45, 5, true)
 		if (keyboard_check_pressed(vk_anykey))
 		{
@@ -66,6 +105,7 @@ if (room = rm_login)
 	}
 	else
 	{
+		// Password
 		draw_circle(roomQuarterWidth*2 + textBuffer - 20, room_height*0.45 + 30, 5, true)
 		if (keyboard_check_pressed(vk_anykey))
 		{
@@ -74,7 +114,9 @@ if (room = rm_login)
 			if (keyboard_check_pressed(vk_backspace))
 				password = string_delete(password, string_length(password), 1)
 		}
+		
 	}
+	
 	if (keyboard_check_pressed(vk_enter) or keyboard_check_pressed(vk_tab) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_down))
 	{
 		selectedUsername = !selectedUsername

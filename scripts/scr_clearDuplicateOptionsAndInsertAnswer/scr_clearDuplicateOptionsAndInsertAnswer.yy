@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_clearDuplicateOptionsAndInsertAnswer",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Assets/Shared Assets/Scripts.yy",
+    "name":"Logic",
+    "path":"folders/Assets/Shared Assets/Scripts/Logic.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

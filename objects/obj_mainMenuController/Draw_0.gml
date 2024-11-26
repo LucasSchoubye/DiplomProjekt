@@ -89,6 +89,9 @@ if (room = rm_menu)
 					case "Store":
 						room_goto(rm_store)
 					break
+					case "Settings":
+						room_goto(rm_settings)
+					break
 					case "Quit":
 						game_end()
 					break
