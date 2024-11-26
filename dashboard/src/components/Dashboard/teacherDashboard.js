@@ -65,6 +65,23 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         fetchClasses();
     }, [userData]);
 
+    const handleSubjectClick = useCallback(async (subject) => {
+        setSelectedSubject(subject);
+        try {
+            const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
+            const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
+            const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            setSubTopics(subTopicsData);
+            setSelectedSubTopics(subTopicsData.filter(subTopic => subTopic.active).map(subTopic => subTopic.id)); // Set initial selected subtopics
+        } catch (err) {
+            console.error("Error fetching subtopics: ", err);
+        }
+    }, [classDocRef]);
+
     const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
@@ -106,12 +123,17 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
+            if (subjectsData.length > 0) {
+                const firstSubject = subjectsData[0];
+                setSelectedSubject(firstSubject);
+                await handleSubjectClick(firstSubject);
+            }
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
             setIsLoadingStudents(false);
         }
-    }, []);
+    }, [handleSubjectClick]);
     
 
     const fetchClassSessionsAndAnswers = async (studentList) => {
@@ -186,23 +208,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             console.error("Error updating allowed games: ", err);
         }
     };
-
-    const handleSubjectClick = useCallback(async (subject) => {
-        setSelectedSubject(subject);
-        try {
-            const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
-            const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
-            const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-            setSubTopics(subTopicsData);
-            setSelectedSubTopics(subTopicsData.filter(subTopic => subTopic.active).map(subTopic => subTopic.id)); // Set initial selected subtopics
-        } catch (err) {
-            console.error("Error fetching subtopics: ", err);
-        }
-    }, [classDocRef]);
 
     const handleSubTopicChange = async (event) => {
         const value = event.target.value;
