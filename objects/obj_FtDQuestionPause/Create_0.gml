@@ -11,6 +11,7 @@ correctAnswers = 0
 answeredQuestions = 0
 dodgeTime = 10
 depth = -7000
+currentFont = draw_get_font()
 
 layerID = layer_get_id("Backgrounds_2")
 back = layer_background_get_id(layerID);	
