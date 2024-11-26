@@ -31,3 +31,15 @@ function translate(text, game = gameChosen)
 			return scr_MenusTranslatedTexts(text)
 	}
 }
+
+function getLanguageString()
+{
+	switch(languageChosen)
+	{
+		case Languages.English:
+			return "English";
+		
+		case Languages.Danish:
+			return "Dansk";
+	}
+}

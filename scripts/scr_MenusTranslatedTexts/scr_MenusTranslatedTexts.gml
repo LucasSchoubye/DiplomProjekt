@@ -155,6 +155,14 @@ switch (obj_languageController.languageChosen)
 				var array = [text, "Når du spiller en kamp, kontrollerer du altid den spiller, der er tættest på bolden. Du flytter ved at klikke med musen. Du kan også flytte holdspillere ved at højreklikke på dem og trække dem."]
 			break;
 		#endregion
+		
+		#region Settings
+		case "Language: ":
+			var array = [text, "Sprog: "]
+		break;
+		
+		
+		#endregion
 	}
 
 	// Return
