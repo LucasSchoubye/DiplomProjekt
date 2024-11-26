@@ -146,7 +146,7 @@
     {"name":"scr_anim_player_look","order":1,"path":"scripts/scr_anim_player_look/scr_anim_player_look.yy",},
     {"name":"scr_assignClosestControlledPlayer","order":3,"path":"scripts/scr_assignClosestControlledPlayer/scr_assignClosestControlledPlayer.yy",},
     {"name":"scr_categories","order":3,"path":"scripts/scr_categories/scr_categories.yy",},
-    {"name":"scr_clearDuplicateOptionsAndInsertAnswer","order":4,"path":"scripts/scr_clearDuplicateOptionsAndInsertAnswer/scr_clearDuplicateOptionsAndInsertAnswer.yy",},
+    {"name":"scr_clearDuplicateOptionsAndInsertAnswer","order":6,"path":"scripts/scr_clearDuplicateOptionsAndInsertAnswer/scr_clearDuplicateOptionsAndInsertAnswer.yy",},
     {"name":"scr_danishLargeEquations","order":1,"path":"scripts/scr_danishLargeEquations/scr_danishLargeEquations.yy",},
     {"name":"scr_danishMediumMultiplication","order":1,"path":"scripts/scr_danishMediumMultiplication/scr_danishMediumMultiplication.yy",},
     {"name":"scr_danishSmallMultiplication","order":2,"path":"scripts/scr_danishSmallMultiplication/scr_danishSmallMultiplication.yy",},

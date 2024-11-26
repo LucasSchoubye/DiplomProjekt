@@ -10,8 +10,8 @@ dir = point_direction(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)
 len = controlledPlayer.targetSpd + lengthdir_x(controlledPlayer.accX, dir) + lengthdir_y(controlledPlayer.accY, dir)
 lenX = lengthdir_x(len, dir)
 lenY = lengthdir_y(len, dir)
-targetX = controlledPlayer.x+lenX//+controlledPlayer.accX
-targetY = controlledPlayer.y+lenY//+controlledPlayer.accY
+targetX = controlledPlayer.x+lenX
+targetY = controlledPlayer.y+lenY
 playAllowed = true
 	
 // Draw Curser
