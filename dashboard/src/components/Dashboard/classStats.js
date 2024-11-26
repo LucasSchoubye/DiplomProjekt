@@ -1,8 +1,10 @@
 // ClassStats.js
 import React, { useMemo } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell, ComposedChart, Customized } from 'recharts';
 import PropTypes from 'prop-types';
 import { formatSubtopic } from '../utils/textUtils';
+import MedianAnswerTimeChart from './charts/MedianAnswerTimeChart';
+import SubtopicBarChart from './charts/SubtopicBarChart';
+import OverallStackedBarChart from './charts/OverallStackedBarChart';
 import './studentStats.css';
 
 const ClassStats = ({ classAnswersMap }) => {
@@ -99,42 +101,13 @@ const ClassStats = ({ classAnswersMap }) => {
 
             <div className="charts-container">
                 {/* Stacked Bar Chart */}
-                <ResponsiveContainer width="15%" height={500}>
-                    <BarChart data={data}>
-                        <XAxis type="category" dataKey="name" />
-                        <YAxis type="number" />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Correct" stackId="a" fill="#66b366" />
-                        <Bar dataKey="Incorrect" stackId="a" fill="#ff6666" />
-                    </BarChart>
-                </ResponsiveContainer>
+                <OverallStackedBarChart data={data} />
 
                 {/* Stacked Bar Chart by Subtopic */}
-                <ResponsiveContainer width="30%" height={500}>
-                    <BarChart data={subtopicData}>
-                        <XAxis dataKey="name" tickFormatter={formatSubtopic} />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Correct" stackId="a" fill="#66b366" />
-                        <Bar dataKey="Incorrect" stackId="a" fill="#ff6666" />
-                    </BarChart>
-                </ResponsiveContainer>
+                <SubtopicBarChart data={subtopicData} />
 
                 {/* Bar Chart for Median Answer Time */}
-                <ResponsiveContainer width="30%" height={500}>
-                    <BarChart data={answerTimeData}>
-                        <XAxis xAxisId="0" dataKey="subtopic" tickFormatter={formatSubtopic} label={{ value: 'Question Type', position: 'insideBottom', offset: -2 }} />
-                        <YAxis label={{ value: 'Median Time (s)', angle: -90, position: 'insideLeft' }} />
-                        <Tooltip />
-                        <Bar dataKey="medianTime">
-                            {answerTimeData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
+                <MedianAnswerTimeChart data={answerTimeData} />
             </div>
         </div>
     );
