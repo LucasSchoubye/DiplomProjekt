@@ -34,6 +34,21 @@ if (room = rm_login)
 	//draw_sprite_stretched(spr_newsGif,image_index,room_width*0.05,room_height*0.15,room_width*0.45-room_width*0.05,room_height*0.85-room_height*0.15)
 	draw_roundrect(room_width*0.05,room_height*0.15,room_width*0.45,room_height*0.85,true)
 	
+	// Open Url when clicked on read more
+	if (mouse_x > roomQuarterWidth - 100
+		&& mouse_x < roomQuarterWidth + 100
+		&& mouse_y > room_height*0.9 + 25 - 20
+		&& mouse_y < room_height*0.9 + 25 + 20)
+	{
+		draw_line(roomQuarterWidth - string_width(LC.translate("Information found here!",Games.Menus))/2,
+					room_height*0.9 + 35,
+					roomQuarterWidth + string_width(LC.translate("Information found here!",Games.Menus))/2,
+					room_height*0.9 + 35)
+		
+		if mouse_check_button_pressed(mb_left)
+			url_open("https://www.google.com/search?q=link+til+vores+hjemmeside&oq=link+til+vores+hjemmeside&gs_lcrp=EgRlZGdlKgYIABBFGDkyBggAEEUYOTIHCAEQIRifBTIHCAIQIRifBTIHCAMQIRifBTIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBdIBCDQ3MzVqMWoxqAIAsAIA&sourceid=chrome&ie=UTF-8")
+	}
+	
 	draw_set_font(fn_textLato)
 	draw_set_valign(fa_middle)
 	draw_set_halign(fa_left)
