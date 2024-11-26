@@ -275,7 +275,6 @@
     {"name":"spr_thunderBall","order":2,"path":"sprites/spr_thunderBall/spr_thunderBall.yy",},
     {"name":"spr_tutorialTyperacer","order":6,"path":"sprites/spr_tutorialTyperacer/spr_tutorialTyperacer.yy",},
     {"name":"spr_tutorialUltManHome","order":1,"path":"sprites/spr_tutorialUltManHome/spr_tutorialUltManHome.yy",},
-    {"name":"spr_tutorialUltManMatch","order":3,"path":"sprites/spr_tutorialUltManMatch/spr_tutorialUltManMatch.yy",},
     {"name":"spr_tutorialUltManMatchGif","order":4,"path":"sprites/spr_tutorialUltManMatchGif/spr_tutorialUltManMatchGif.yy",},
     {"name":"spr_tutorialUltManTacticsGif","order":2,"path":"sprites/spr_tutorialUltManTacticsGif/spr_tutorialUltManTacticsGif.yy",},
     {"name":"spr_tutorialUltManTransfermarket","order":5,"path":"sprites/spr_tutorialUltManTransfermarket/spr_tutorialUltManTransfermarket.yy",},
