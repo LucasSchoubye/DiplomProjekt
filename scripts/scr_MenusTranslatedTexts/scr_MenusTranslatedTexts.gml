@@ -17,6 +17,10 @@ switch (obj_languageController.languageChosen)
 	// Find translated text
 	switch(text)
 	{
+		case "All Games":
+			var array = [text, "Alle Spil"]
+		break;
+		
 		case "Mini Games":
 			var array = [text, "Spil"]
 		break;
