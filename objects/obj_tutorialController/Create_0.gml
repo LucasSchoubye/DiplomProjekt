@@ -21,7 +21,7 @@ tutorialArray = []
 			tutorialArray[0] = new tutorialStruct();
 		
 			tutorialArray[0].title = "Typeracer"
-			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer"
+			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter or Space: Submit your answer\n\nMultiple Choice:\nMouse: Left click on your answer"
 			tutorialArray[0].goalParagraf = "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!"
 			tutorialArray[0].roomRef = rm_typeracer
 			tutorialArray[0].gif = spr_tutorialTyperacer

@@ -101,8 +101,8 @@ switch (obj_languageController.languageChosen)
 			break;
 			
 			// Typeracer
-			case "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer":
-				var array = [text, "Keyboard: Skriv det rigtige svar \nEnter: Indsend dit svar"]
+			case "Typing:\nNumpad: Type the correct answer \nEnter or Space: Submit your answer\n\nMultiple Choice:\nMouse: Left click on your answer":
+				var array = [text, "Ved indskrivning:\nKeyboard: Skriv det rigtige svar \nEnter eller Space: Indsend dit svar\n\nVed svar muligheder:\nMus: Venstre klik på dit svar"]
 			break;
 			
 			case "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!":
