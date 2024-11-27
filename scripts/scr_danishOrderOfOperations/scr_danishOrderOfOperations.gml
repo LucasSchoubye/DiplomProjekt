@@ -11,10 +11,10 @@ function scr_danishOrderOfOperations(questionType)
 		case QuestionType.MultipleChoice:
 			
 			// Random variables
-			var a = round(random_range(0,15))
-			var b = round(random_range(0,15))
-			var c = round(random_range(0,5))
-			var d = round(random_range(0,5))
+			var a = round(random_range(1,15))
+			var b = round(random_range(1,15))
+			var c = round(random_range(10,20))
+			var d = round(random_range(0,9))
 			question.prompt = string(a)+" * "+string(b)
 			var optionToList = ds_list_create()
 			var answer = undefined

@@ -16,14 +16,5 @@ with(obj_UltManPlayer)
 	targetX = x
 	targetY = y
 }
-	
-if (!global.leftScored)
-{
-	instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManOpponent).targetX = obj_UltManBall.x
-	instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManOpponent).targetY = obj_UltManBall.y
-}
-else
-{
-	instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer).targetX = obj_UltManBall.x
-	instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer).targetY = obj_UltManBall.y
-}
+
+scr_UltManKickoffSetup(global.leftScored, false)
