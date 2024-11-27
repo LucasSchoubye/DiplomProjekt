@@ -133,7 +133,7 @@ if (room = rm_login)
 	draw_set_alpha(0.8)
 	draw_roundrect_ext(boxLeft, boxTop, boxRight, boxBot, 50, 100, true)
 	draw_set_alpha(1)
-	
+	draw_set_font(fn_textLato)
 	draw_text(roomMidWidth, room_height*0.55 + 25, "Login")
 	
 	if (mouse_x > boxRight && mouse_x < boxLeft && mouse_y > boxTop && mouse_y < boxBot)
@@ -180,5 +180,6 @@ if (room = rm_login)
 // Waiting
 if (room = rm_loginWaiting)
 {
+	draw_set_font(fn_textLato)
 	draw_text(room_width/2, 300, LC.translate("Logging In...", Games.Menus))
 }
