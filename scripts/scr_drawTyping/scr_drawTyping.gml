@@ -95,11 +95,11 @@ var controlTextR = LC.translate(" to submit your answer",Games.Menus)
 			// Correct
 			obj_firestore_controller.SendAnswer(question.prompt, new AnswerOption(typingString), question.options[question.answerIndex].text, question.subject, question.subtopic, question.questionType, obj_firestore_controller.answerTimer/60)
 			obj_firestore_controller.answerTimer = 0
-			obj_typeracerCar.AnsweredCorrect()
+			controllerId.AnsweredCorrect()
 		}
 		else
 		{
-			obj_typeracerCar.AnsweredIncorrect()
+			controllerId.AnsweredIncorrect()
 		}
 		question = obj_questionController.questionGenerator.GetQuestion(Subject.Maths, controllerId.questionType)
 		typingString = ""

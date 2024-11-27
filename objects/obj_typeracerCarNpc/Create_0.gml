@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-difficulty = random_range(0.3,1.1)
+difficulty = random_range(0.8,1.1)
 depth=1
 
 // Inherit the parent event
