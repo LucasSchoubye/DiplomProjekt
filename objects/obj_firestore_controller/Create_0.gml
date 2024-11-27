@@ -93,7 +93,6 @@ function RespondCategories(categoryList) {
 	}
 }
 
-
 function RequestStoreItems(categoryString) {
 	FirebaseFirestore("/shopItems/categories/"+categoryString).Read()
 }
@@ -174,8 +173,14 @@ function UpdateInventory(itemStruct)
 
 function StartSession(game)
 {		
+	// Format
+	var formatted_date = string(current_year) + "-" +
+                     string_format(current_month, 2, 0) + "-" +
+                     string_format(current_day, 2, 0);
+	
+	// Create Map for JSON conversion
 	sessionMap = ds_map_create()
-	sessionMap[?"starttime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
+	sessionMap[?"starttime"] = formatted_date + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 	sessionMap[?"endtime"] = ""
 	sessionMap[?"gameref"] = string(game)
 	sessionMap[?"student"] = "/students/"+string(playerId)
