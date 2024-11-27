@@ -40,8 +40,11 @@ const SubtopicBarChart = ({ data, title }) => {
                     tick={{ fontSize: 12 }} 
                     interval={0} 
                 />
-                <YAxis label={{ value: 'Percentage', angle: -90, position: 'insideLeft', offset: 20 }} />
-                <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
+                <YAxis label={{ value: 'Percentage', angle: -90, position: 'insideLeft', offset: 15 }} />
+                <Tooltip 
+                    formatter={(value, name) => [`${value.toFixed(2)}%`, formatSubtopic(name)]}
+                    labelFormatter={label => formatSubtopic(label)}
+                />
                 {/* <Legend /> */}
                 <Bar 
                     dataKey="CorrectPercentage" 

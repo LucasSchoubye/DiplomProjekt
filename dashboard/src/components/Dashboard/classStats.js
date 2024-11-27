@@ -23,7 +23,7 @@ const ClassStats = ({ classAnswersMap }) => {
 
     // Calculate the average answerTime
     const totalAnswerTime = classAnswers.reduce((sum, { answerTime }) => sum + answerTime, 0);
-    const averageAnswerTime = totalAnswers > 0 ? (totalAnswerTime / totalAnswers).toFixed(2) : '0.00';
+    const averageAnswerTime = totalAnswers > 0 ? (totalAnswerTime / totalAnswers) : 0;
 
     // Data for the stacked bar chart
     const data = [
@@ -73,7 +73,7 @@ const ClassStats = ({ classAnswersMap }) => {
                     : (times[mid - 1] + times[mid]) / 2;
             return {
                 subtopic,
-                medianTime: medianTime.toFixed(2),
+                medianTime: medianTime,
             };
         });
     }, [classAnswers]);
@@ -107,8 +107,8 @@ const ClassStats = ({ classAnswersMap }) => {
                     : (incorrectTimes[incorrectMid - 1] + incorrectTimes[incorrectMid]) / 2;
             return {
                 name: subtopic,
-                'Correct Time': medianCorrectTime.toFixed(2),
-                'Incorrect Time': medianIncorrectTime.toFixed(2),
+                'Correct Time': isNaN(medianCorrectTime) ? 0 : medianCorrectTime,
+                'Incorrect Time': isNaN(medianIncorrectTime) ? 0 : medianIncorrectTime,
             };
         });
     }, [classAnswers]);
@@ -136,7 +136,7 @@ const ClassStats = ({ classAnswersMap }) => {
                 </p>
                 <p>
                     <strong>Average Answer Time:</strong> 
-                    <span className="average-answer-time"> {averageAnswerTime} seconds</span>
+                    <span className="average-answer-time"> {averageAnswerTime.toFixed(2)} seconds</span>
                 </p>
             </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
+import { formatSubtopic } from '../../utils/textUtils';
 
 const CustomLabel = ({ x, y, width, height, index, data, type }) => {
     const total = data[index].Incorrect + data[index].Correct;
@@ -34,8 +35,11 @@ const OverallStackedBarChart = ({ data, title }) => {
                     <YAxis type="number" label={{   value: 'Total Answers', 
                                                     angle: -90, 
                                                     position: 'insideLeft', 
-                                                    offset: 20 }} />
-                    <Tooltip />
+                                                    offset: 15 }} />
+                    <Tooltip 
+                        formatter={(value, name) => [value, formatSubtopic(name)]}
+                        labelFormatter={label => formatSubtopic(label)}
+                    />
                     <Bar 
                         dataKey="Correct" 
                         stackId="a" 

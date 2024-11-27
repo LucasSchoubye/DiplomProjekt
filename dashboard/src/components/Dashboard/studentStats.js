@@ -44,7 +44,7 @@ const StudentStats = ({ answerMap, contextType }) => {
                     : (times[mid - 1] + times[mid]) / 2;
             return {
                 subtopic,
-                medianTime: medianTime.toFixed(2),
+                medianTime: medianTime,
             };
         });
     }, [answers]);
@@ -99,8 +99,8 @@ const StudentStats = ({ answerMap, contextType }) => {
                     : (incorrectTimes[incorrectMid - 1] + incorrectTimes[incorrectMid]) / 2;
             return {
                 name: subtopic,
-                'Correct Time': medianCorrectTime.toFixed(2),
-                'Incorrect Time': medianIncorrectTime.toFixed(2),
+                'Correct Time': isNaN(medianCorrectTime) ? 0 : medianCorrectTime,
+                'Incorrect Time': isNaN(medianIncorrectTime) ? 0 : medianIncorrectTime,
             };
         });
     }, [answers]);
