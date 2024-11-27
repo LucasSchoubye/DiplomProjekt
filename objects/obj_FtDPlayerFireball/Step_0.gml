@@ -1,6 +1,6 @@
 // check if paused
 if (screenPause()) {exit}
-
+if (!instance_exists(obj_FtDPlayer)) {instance_destroy()}
 // State Machine
 if (attack_state == ATTACK_STATE.CHARGING)
 {

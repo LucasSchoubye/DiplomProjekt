@@ -10,6 +10,7 @@ if (pauseKey && global.game_state == GAME_STATE.RUNNING) {
 	}
 }
 
+
 // check if paused
 if (screenPause()) {exit}
 
@@ -38,9 +39,11 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 	if (shootTimer <= windupTimer && instance_exists(bulletInst)) {
 		bulletInst.x = x
 		bulletInst.y = y
-		if (ekstraFireBall1 != undefined && ekstraFireBall2 != undefined) {
+		if (instance_exists(ekstraFireBall1)) {
 			ekstraFireBall1.x = x
 			ekstraFireBall1.y = y
+		} 
+		if (instance_exists(ekstraFireBall2)) {
 			ekstraFireBall2.x = x
 			ekstraFireBall2.y = y
 		}
@@ -49,10 +52,12 @@ if (global.player_state == PLAYER_STATE.MOVING) {
 	if (shootTimer = windupTimer && instance_exists(bulletInst)) {
 		bulletInst.dir = point_direction(x,y, obj_FtDBoss.x, obj_FtDBoss.y)
 		bulletInst.attack_state = ATTACK_STATE.SHOOT
-		if (ekstraFireBall1 != undefined && ekstraFireBall2 != undefined) {
+		if (instance_exists(ekstraFireBall1)) {
 			ekstraFireBall1.dir = point_direction(x,y, obj_FtDBoss.x-250, obj_FtDBoss.y-250)
-			ekstraFireBall2.dir = point_direction(x,y, obj_FtDBoss.x+250, obj_FtDBoss.y+250)
 			ekstraFireBall1.attack_state = ATTACK_STATE.SHOOT
+		} 
+		if (instance_exists(ekstraFireBall2)) {
+			ekstraFireBall2.dir = point_direction(x,y, obj_FtDBoss.x+250, obj_FtDBoss.y+250)
 			ekstraFireBall2.attack_state = ATTACK_STATE.SHOOT
 		}
 	}
