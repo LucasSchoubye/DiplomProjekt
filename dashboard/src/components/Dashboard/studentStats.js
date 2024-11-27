@@ -4,6 +4,7 @@ import { formatSubtopic } from '../utils/textUtils';
 import SubtopicBarChart from './charts/SubtopicBarChart';
 import MedianAnswerTimeChart from './charts/MedianAnswerTimeChart';
 import OverallStackedBarChart from './charts/OverallStackedBarChart';
+import MedianCorrectIncorrectTimeChart from './charts/MedianCorrectIncorrectTimeChart';
 import './studentStats.css'; // Assuming you have a CSS file for styles
 
 const StudentStats = ({ answerMap, contextType }) => {
@@ -69,6 +70,41 @@ const StudentStats = ({ answerMap, contextType }) => {
         return Object.values(subtopicStats);
     }, [answers]);
 
+    // Calculate statistics per subtopic for median correct and incorrect answer times
+    const medianAnswerTimeData = useMemo(() => {
+        const subtopicTimeMap = {};
+        answers.forEach(({ subtopic, answerTime, correct }) => {
+            if (!subtopicTimeMap[subtopic]) {
+                subtopicTimeMap[subtopic] = { correctTimes: [], incorrectTimes: [] };
+            }
+            if (correct === 1) {
+                subtopicTimeMap[subtopic].correctTimes.push(answerTime);
+            } else {
+                subtopicTimeMap[subtopic].incorrectTimes.push(answerTime);
+            }
+        });
+
+        return Object.keys(subtopicTimeMap).map(subtopic => {
+            const correctTimes = subtopicTimeMap[subtopic].correctTimes.sort((a, b) => a - b);
+            const incorrectTimes = subtopicTimeMap[subtopic].incorrectTimes.sort((a, b) => a - b);
+            const correctMid = Math.floor(correctTimes.length / 2);
+            const incorrectMid = Math.floor(incorrectTimes.length / 2);
+            const medianCorrectTime =
+                correctTimes.length % 2 !== 0
+                    ? correctTimes[correctMid]
+                    : (correctTimes[correctMid - 1] + correctTimes[correctMid]) / 2;
+            const medianIncorrectTime =
+                incorrectTimes.length % 2 !== 0
+                    ? incorrectTimes[incorrectMid]
+                    : (incorrectTimes[incorrectMid - 1] + incorrectTimes[incorrectMid]) / 2;
+            return {
+                name: subtopic,
+                'Correct Time': medianCorrectTime.toFixed(2),
+                'Incorrect Time': medianIncorrectTime.toFixed(2),
+            };
+        });
+    }, [answers]);
+
     const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff6666', '#66b366'];
 
     return (
@@ -94,9 +130,14 @@ const StudentStats = ({ answerMap, contextType }) => {
             </div>
 
             <div className="charts-container">
+                {/* Stacked Bar Chart */}
                 <OverallStackedBarChart data={data} />
+                {/* Stacked Bar Chart by Subtopic */}
                 <SubtopicBarChart data={subtopicData} />
+                {/* Bar Chart for Median Answer Time */}
                 <MedianAnswerTimeChart data={answerTimeData} />
+                {/* Bar Chart for Median Correct and Incorrect Answer Time */}
+                <MedianCorrectIncorrectTimeChart data={medianAnswerTimeData} />
             </div>
         </div>
     );

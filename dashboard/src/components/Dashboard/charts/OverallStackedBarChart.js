@@ -8,6 +8,8 @@ const CustomLabel = ({ x, y, width, height, index, data, type }) => {
         ? ((data[index].Correct / total) * 100).toFixed(1)
         : ((data[index].Incorrect / total) * 100).toFixed(1);
     
+    if (percentage === '0.0') return null;
+    
     return (
         <text
             x={x + width / 2}
@@ -24,12 +26,15 @@ const CustomLabel = ({ x, y, width, height, index, data, type }) => {
 
 const OverallStackedBarChart = ({ data, title }) => {
     return (
-        <div style={{ width: '15%', textAlign: 'center' }}>
+        <div style={{ width: '10%', textAlign: 'center' }}>
             <h3>{title}</h3>
             <ResponsiveContainer width="100%" height={500}>
                 <BarChart data={data}>
                     <XAxis type="category" dataKey="name" />
-                    <YAxis type="number" label={{ value: 'Total Answers', angle: -90, position: 'insideLeft' }} />
+                    <YAxis type="number" label={{   value: 'Total Answers', 
+                                                    angle: -90, 
+                                                    position: 'insideLeft', 
+                                                    offset: 20 }} />
                     <Tooltip />
                     <Bar 
                         dataKey="Correct" 

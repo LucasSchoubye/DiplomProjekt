@@ -10,15 +10,19 @@ const MedianAnswerTimeChart = ({ data, title }) => {
     return (
     <div style={{ width: '30%', textAlign: 'center' }}>
         <h3>{title}</h3>
-        <ResponsiveContainer width="100%" height={500}>
-            <BarChart data={data}>
+        <ResponsiveContainer width="100%" height={575}>
+            <BarChart data={data} margin={{ bottom: 50}}>
                 <XAxis 
                     xAxisId="0" 
                     dataKey="subtopic" 
-                    tickFormatter={formatSubtopic} 
-                    label={{ value: 'Question Type', position: 'insideBottom', offset: -2 }} 
+                    tickFormatter={formatSubtopic}
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={60} 
+                    tick={{ fontSize: 12 }} 
+                    interval={0}
                 />
-                <YAxis label={{ value: 'Median Time (s)', angle: -90, position: 'insideLeft' }} />
+                <YAxis label={{ value: 'Median Time (s)', angle: -90, position: 'insideLeft', offset: 20 }} />
                 <Tooltip />
                 <Bar dataKey="medianTime">
                     {data.map((entry, index) => (
