@@ -5,6 +5,7 @@ import { formatSubtopic } from '../utils/textUtils';
 import MedianAnswerTimeChart from './charts/MedianAnswerTimeChart';
 import SubtopicBarChart from './charts/SubtopicBarChart';
 import OverallStackedBarChart from './charts/OverallStackedBarChart';
+import MedianCorrectIncorrectTimeChart from './charts/MedianCorrectIncorrectTimeChart';
 import './studentStats.css';
 
 const ClassStats = ({ classAnswersMap }) => {
@@ -22,7 +23,7 @@ const ClassStats = ({ classAnswersMap }) => {
 
     // Calculate the average answerTime
     const totalAnswerTime = classAnswers.reduce((sum, { answerTime }) => sum + answerTime, 0);
-    const averageAnswerTime = totalAnswers > 0 ? (totalAnswerTime / totalAnswers).toFixed(2) : '0.00';
+    const averageAnswerTime = totalAnswers > 0 ? (totalAnswerTime / totalAnswers) : 0;
 
     // Data for the stacked bar chart
     const data = [
@@ -72,7 +73,42 @@ const ClassStats = ({ classAnswersMap }) => {
                     : (times[mid - 1] + times[mid]) / 2;
             return {
                 subtopic,
-                medianTime: medianTime.toFixed(2),
+                medianTime: medianTime,
+            };
+        });
+    }, [classAnswers]);
+
+    // Calculate statistics per subtopic for median correct and incorrect answer times
+    const medianAnswerTimeData = useMemo(() => {
+        const subtopicTimeMap = {};
+        classAnswers.forEach(({ subtopic, answerTime, correct }) => {
+            if (!subtopicTimeMap[subtopic]) {
+                subtopicTimeMap[subtopic] = { correctTimes: [], incorrectTimes: [] };
+            }
+            if (correct === 1) {
+                subtopicTimeMap[subtopic].correctTimes.push(answerTime);
+            } else {
+                subtopicTimeMap[subtopic].incorrectTimes.push(answerTime);
+            }
+        });
+
+        return Object.keys(subtopicTimeMap).map(subtopic => {
+            const correctTimes = subtopicTimeMap[subtopic].correctTimes.sort((a, b) => a - b);
+            const incorrectTimes = subtopicTimeMap[subtopic].incorrectTimes.sort((a, b) => a - b);
+            const correctMid = Math.floor(correctTimes.length / 2);
+            const incorrectMid = Math.floor(incorrectTimes.length / 2);
+            const medianCorrectTime =
+                correctTimes.length % 2 !== 0
+                    ? correctTimes[correctMid]
+                    : (correctTimes[correctMid - 1] + correctTimes[correctMid]) / 2;
+            const medianIncorrectTime =
+                incorrectTimes.length % 2 !== 0
+                    ? incorrectTimes[incorrectMid]
+                    : (incorrectTimes[incorrectMid - 1] + incorrectTimes[incorrectMid]) / 2;
+            return {
+                name: subtopic,
+                'Correct Time': isNaN(medianCorrectTime) ? 0 : medianCorrectTime,
+                'Incorrect Time': isNaN(medianIncorrectTime) ? 0 : medianIncorrectTime,
             };
         });
     }, [classAnswers]);
@@ -100,7 +136,7 @@ const ClassStats = ({ classAnswersMap }) => {
                 </p>
                 <p>
                     <strong>Average Answer Time:</strong> 
-                    <span className="average-answer-time"> {averageAnswerTime} seconds</span>
+                    <span className="average-answer-time"> {averageAnswerTime.toFixed(2)} seconds</span>
                 </p>
             </div>
 
@@ -113,6 +149,9 @@ const ClassStats = ({ classAnswersMap }) => {
 
                 {/* Bar Chart for Median Answer Time */}
                 <MedianAnswerTimeChart data={answerTimeData} />
+
+                {/* Bar Chart for Median Correct and Incorrect Answer Time */}
+                <MedianCorrectIncorrectTimeChart data={medianAnswerTimeData} />
             </div>
         </div>
     );

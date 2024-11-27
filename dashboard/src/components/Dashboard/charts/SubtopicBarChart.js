@@ -9,6 +9,8 @@ const CustomLabel = ({ x, y, width, height, index, data, type }) => {
         ? ((data[index].Correct / total) * 100).toFixed(1)
         : ((data[index].Incorrect / total) * 100).toFixed(1);
     
+    if (percentage === '0.0') return null;
+
     return (
         <text
             x={x + width / 2}
@@ -27,11 +29,22 @@ const SubtopicBarChart = ({ data, title }) => {
     return (
     <div style={{ width: '30%', textAlign: 'center' }}>
         <h3>{title}</h3>
-        <ResponsiveContainer width="100%" height={500}>
-            <BarChart data={data}>
-                <XAxis dataKey="name" tickFormatter={formatSubtopic} />
-                <YAxis label={{ value: 'Percentage', angle: -90, position: 'insideLeft' }} />
-                <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
+        <ResponsiveContainer width="100%" height={575}>
+            <BarChart data={data} margin={{ bottom: 50}}>
+                <XAxis 
+                    dataKey="name" 
+                    tickFormatter={formatSubtopic} 
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={60} 
+                    tick={{ fontSize: 12 }} 
+                    interval={0} 
+                />
+                <YAxis label={{ value: 'Percentage', angle: -90, position: 'insideLeft', offset: 15 }} />
+                <Tooltip 
+                    formatter={(value, name) => [`${value.toFixed(2)}%`, formatSubtopic(name)]}
+                    labelFormatter={label => formatSubtopic(label)}
+                />
                 {/* <Legend /> */}
                 <Bar 
                     dataKey="CorrectPercentage" 
