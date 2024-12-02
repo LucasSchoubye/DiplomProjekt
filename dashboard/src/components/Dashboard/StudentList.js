@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from "../../config/firebase";
+import { Box, Typography, List, ListItem, ListItemText, ListItemButton, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import EastIcon from '@mui/icons-material/East';
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { formatSubtopic } from '../utils/textUtils';
@@ -81,8 +79,9 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleBackToSubjects = () => {
         setSelectedSubject(null);
         if (selectedStudent) {
-            const subjectAnswers = getSubjectAnswers(selectedStudent);
-            handleReceiveAnswerMap(subjectAnswers, 'subject', true);
+            // Get all answers for the student instead of filtering by subject
+            const studentAnswers = Object.values(studentAnswerMap).flat();
+            handleReceiveAnswerMap(studentAnswers, 'student', true);
         }
     };
     
@@ -229,8 +228,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             <List>
                 {sessionsForSubtopic.map((session, index) => (
                     <React.Fragment key={session.id}>
-                        <ListItem button onClick={() => handleSessionClick(session.id)}>
-                            <ListItemText primary={`Session ${index + 1}`} secondary={session.student} />
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleSessionClick(session.id)}>
+                                <ListItemText primary={`Session ${index + 1}`} secondary={session.student} />
+                            </ListItemButton>
                         </ListItem>
                         {index < sessionsForSubtopic.length - 1 && <Divider />}
                     </React.Fragment>
@@ -254,8 +255,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 <List>
                     {subtopicsForSubject.map((subtopic, index) => (
                         <React.Fragment key={index}>
-                            <ListItem button onClick={() => handleSubtopicClick(subtopic)}>
-                                <ListItemText primary={formatSubtopic(subtopic)} />
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => handleSubtopicClick(subtopic)}>
+                                    <ListItemText primary={formatSubtopic(subtopic)} />
+                                </ListItemButton>
                             </ListItem>
                             {index < subtopicsForSubject.length - 1 && <Divider />}
                         </React.Fragment>
@@ -268,9 +271,11 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const renderSubjectsForStudent = (subjects) => {
         if (subjects.length === 0) {
             return (
-                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
-                    No subjects found for this student.
-                </Typography>
+                <Box sx={{ height: '50vh', overflowY: 'auto' }}>
+                    <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                        No subjects found for this student.
+                    </Typography>
+                </Box>
             );
         }
 
@@ -279,8 +284,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             <List>
                 {subjects.map((subject, index) => (
                     <React.Fragment key={index}>
-                        <ListItem button onClick={() => handleSubjectClick(subject)}>
-                            <ListItemText primary={subject} />
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleSubjectClick(subject)}>
+                                <ListItemText primary={subject} />
+                            </ListItemButton>
                         </ListItem>
                         {index < subjects.length - 1 && <Divider />}
                     </React.Fragment>
@@ -301,8 +308,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                     {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
-                            <ListItem button={!!studentData.fullName} onClick={() => studentData.fullName && handleStudentClick(studentData)}>
-                                <ListItemText primary={studentData.fullName || ' '} />
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => studentData.fullName && handleStudentClick(studentData)} disabled={!studentData.fullName}>
+                                    <ListItemText primary={studentData.fullName || ' '} />
+                                </ListItemButton>
                             </ListItem>
                             {studentData.fullName && index < filledStudents.length - 1 && <Divider />}
                         </React.Fragment>

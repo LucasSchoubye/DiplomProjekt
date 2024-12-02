@@ -24,12 +24,19 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
-    const [classAnswersMap, setClassAnswersMap] = useState([]);
+    const [classAnswersMap, setClassAnswersMap] = useState({});
     const [isViewingStudent, setIsViewingStudent] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
-    const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
+    const [selectedTimespan, setSelectedTimespan] = useState('today'); // Set default value to twoWeeks
+
+    const timespanOptions = {
+        today: "Today",
+        twoWeeks: "Last Two Weeks",
+        twoMonths: "Last Two Months",
+        schoolYear: "This School Year"
+    };
 
     useEffect(() => {
     }, [selectedClass, selectedStudent]);
@@ -67,6 +74,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     }, [userData]);
 
     const handleSubjectClick = useCallback(async (subject) => {
+        if (!classDocRef) return; // Add guard clause
         setSelectedSubject(subject);
         try {
             const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
@@ -81,7 +89,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         } catch (err) {
             console.error("Error fetching subtopics: ", err);
         }
-    }, [classDocRef]);
+    }, [classDocRef]); // Only depend on classDocRef
 
     const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
@@ -125,17 +133,23 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
             if (subjectsData.length > 0) {
-                const firstSubject = subjectsData[0];
-                setSelectedSubject(firstSubject);
-                await handleSubjectClick(firstSubject);
+                setSelectedSubject(subjectsData[0]);
+                // Remove the immediate handleSubjectClick call
+                // It will be triggered by the useEffect below
             }
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
             setIsLoadingStudents(false);
         }
-    }, [handleSubjectClick]);
-    
+    }, []);
+
+    // Add new useEffect to handle subject selection
+    useEffect(() => {
+        if (selectedSubject && classDocRef) {
+            handleSubjectClick(selectedSubject);
+        }
+    }, [selectedSubject, classDocRef, handleSubjectClick]);
 
     const fetchClassSessionsAndAnswers = async (studentList, timespan = selectedTimespan) => {
         try {
@@ -159,9 +173,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                 default:
                     startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
             }
-            // console.log(startDate);
             const startDateString = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}-${String(startDate.getHours()).padStart(2, '0')}/${String(startDate.getMinutes()).padStart(2, '0')}/${String(startDate.getSeconds()).padStart(2, '0')}`;
-            console.log(startDateString);
 
             const studentPromises = studentList.map(async (student) => {
                 const sessionsRef = collection(db, 'sessions');
@@ -307,15 +319,16 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             value={selectedTimespan}
                             onChange={handleTimespanChange}
                             displayEmpty
-                            renderValue={() => "Choose Timespan"}
+                            renderValue={() => timespanOptions[selectedTimespan] || "Choose Timespan"}
                         >
                             <MenuItem value="" disabled>
                                 Choose Timespan
                             </MenuItem>
-                            <MenuItem value="today">Today</MenuItem>
-                            <MenuItem value="twoWeeks">Last Two Weeks</MenuItem>
-                            <MenuItem value="twoMonths">Last Two Months</MenuItem>
-                            <MenuItem value="schoolYear">This School Year</MenuItem>
+                            {Object.entries(timespanOptions).map(([value, label]) => (
+                                <MenuItem key={value} value={value}>
+                                    {label}
+                                </MenuItem>
+                            ))}
                         </Select>
                         <Select
                             multiple
@@ -357,7 +370,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                         </Select>
                     </Box>
                     {Object.keys(answerMap).length > 0 && (
-                        <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                        <StudentStats 
+                            answerMap={answerMap} 
+                            answerContextType={answerContextType} 
+                        />
                     )}
                     {!isViewingStudent && (
                     <ClassStats classAnswersMap={classAnswersMap} />

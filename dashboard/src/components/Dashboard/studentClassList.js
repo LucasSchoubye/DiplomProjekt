@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Typography, List, ListItem, ListItemText, Divider, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, ListItemButton, Divider, useTheme, useMediaQuery } from '@mui/material';
 
 const ClassList = ({ classes, teacherName, handleClassClick }) => {
     const theme = useTheme();
@@ -23,8 +23,10 @@ const ClassList = ({ classes, teacherName, handleClassClick }) => {
             <List>
                 {classes.map((classData, index) => (
                     <React.Fragment key={classData.id}>
-                        <ListItem button onClick={() => handleClassClick(classData)}>
-                            <ListItemText primary={classData.className} />
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleClassClick(classData)}>
+                                <ListItemText primary={classData.className} />
+                            </ListItemButton>
                         </ListItem>
                         {index < classes.length - 1 && <Divider />}
                     </React.Fragment>
