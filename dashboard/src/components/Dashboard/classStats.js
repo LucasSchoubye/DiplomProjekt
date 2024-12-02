@@ -119,21 +119,6 @@ const ClassStats = ({ classAnswersMap }) => {
         <div className="student-stats">
             <h3>Class Statistics</h3>
             <div className="stats-details">
-                <p><strong>Total Answers:</strong> {totalAnswers}</p>
-                <p>
-                    <span className="correct-answers">
-                        Correct Answers: {correctAnswers}
-                    </span>
-                </p>
-                <p>
-                    <span className="incorrect-answers">
-                        Incorrect Answers: {incorrectAnswers}
-                    </span>
-                </p>
-                <p>
-                    <strong>Percentage of Correct Answers:</strong> 
-                    <span className="percentage-correct"> {percentageCorrect.toFixed(2)}%</span>
-                </p>
                 <p>
                     <strong>Average Answer Time:</strong> 
                     <span className="average-answer-time"> {averageAnswerTime.toFixed(2)} seconds</span>

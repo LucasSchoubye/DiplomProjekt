@@ -29,6 +29,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
+    const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
 
     useEffect(() => {
     }, [selectedClass, selectedStudent]);
@@ -231,6 +232,10 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    const handleTimespanChange = (event) => {
+        setSelectedTimespan(event.target.value);
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
             <DrawerLayout>
@@ -268,46 +273,60 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             
             {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
-                    <Select
-                        multiple
-                        value={selectedSubTopics}
-                        onChange={handleSubTopicChange}
-                        displayEmpty
-                        renderValue={() => "Choose Sub Topics"}
-                        style={{ position: 'absolute', top: '20px', right: '270px' }} // Adjust position to move more to the left
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Sub Topics
-                        </MenuItem>
-                        {subTopics
-                            // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
-                            .map((subTopic) => (
-                                <MenuItem key={subTopic.id} value={subTopic.id}>
-                                    <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
-                                    <ListItemText primary={subTopic.name} /> {/* Show active status */}
-                                </MenuItem>
-                            ))}
-                    </Select>
-                    <Select
-                        multiple
-                        value={selectedGames}
-                        onChange={handleGameChange}
-                        displayEmpty
-                        renderValue={() => "Choose Available Games"}
-                        style={{ position: 'absolute', top: '20px', right: '20px' }}
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Available Games
-                        </MenuItem>
-                        {availableGames
-                            .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
-                            .map((game) => (
-                                <MenuItem key={game.id} value={game.id}>
-                                    <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
-                                    <ListItemText primary={game.name} />
-                                </MenuItem>
-                            ))}
-                    </Select>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '20px', paddingBottom: '20px' }}>
+                        <Select
+                            value={selectedTimespan}
+                            onChange={handleTimespanChange}
+                            displayEmpty
+                            renderValue={() => "Choose Timespan"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Timespan
+                            </MenuItem>
+                            <MenuItem value="today">Today</MenuItem>
+                            <MenuItem value="twoWeeks">Last Two Weeks</MenuItem>
+                            <MenuItem value="twoMonths">Last Two Months</MenuItem>
+                            <MenuItem value="schoolYear">This School Year</MenuItem>
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedSubTopics}
+                            onChange={handleSubTopicChange}
+                            displayEmpty
+                            renderValue={() => "Choose Sub Topics"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Sub Topics
+                            </MenuItem>
+                            {subTopics
+                                // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
+                                .map((subTopic) => (
+                                    <MenuItem key={subTopic.id} value={subTopic.id}>
+                                        <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
+                                        <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedGames}
+                            onChange={handleGameChange}
+                            displayEmpty
+                            renderValue={() => "Choose Available Games"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Available Games
+                            </MenuItem>
+                            {availableGames
+                                .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
+                                .map((game) => (
+                                    <MenuItem key={game.id} value={game.id}>
+                                        <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
+                                        <ListItemText primary={game.name} />
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                    </Box>
                     {Object.keys(answerMap).length > 0 && (
                         <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
                     )}

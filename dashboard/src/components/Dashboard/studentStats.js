@@ -17,6 +17,10 @@ const StudentStats = ({ answerMap, contextType }) => {
     const incorrectAnswers = totalAnswers - correctAnswers;
     const percentageCorrect = totalAnswers > 0 ? (correctAnswers / totalAnswers) * 100 : 0;
 
+    // Calculate the average answerTime
+    const totalAnswerTime = answers.reduce((sum, { answerTime }) => sum + answerTime, 0);
+    const averageAnswerTime = totalAnswers > 0 ? (totalAnswerTime / totalAnswers) : 0;
+
     // Data for the stacked bar chart
     const data = [
         {
@@ -111,21 +115,9 @@ const StudentStats = ({ answerMap, contextType }) => {
         <div className="student-stats">
             <h3>Student Statistics</h3>
             <div className="stats-details">
-                <p><strong>Context Type:</strong> {contextType}</p>
-                <p><strong>Total Answers:</strong> {totalAnswers}</p>
                 <p>
-                    <span className="correct-answers">
-                        Correct Answers: {correctAnswers}
-                    </span>
-                </p>
-                <p>
-                    <span className="incorrect-answers">
-                        Incorrect Answers: {incorrectAnswers}
-                    </span>
-                </p>
-                <p>
-                    <strong>Percentage of Correct Answers:</strong> 
-                    <span className="percentage-correct"> {percentageCorrect.toFixed(2)}%</span>
+                    <strong>Average Answer Time:</strong> 
+                    <span className="average-answer-time"> {averageAnswerTime.toFixed(2)} seconds</span>
                 </p>
             </div>
 
