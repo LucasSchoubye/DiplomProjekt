@@ -177,6 +177,8 @@ function StartSession(game)
 	var formatted_date = string(current_year) + "-" +
                      string_format(current_month, 2, 0) + "-" +
                      string_format(current_day, 2, 0);
+					 
+	formatted_date = string_replace(formatted_date," ","0")
 	
 	// Create Map for JSON conversion
 	sessionMap = ds_map_create()
@@ -200,6 +202,8 @@ function EndSession()
 		var formatted_date = string(current_year) + "-" +
 	                     string_format(current_month, 2, 0) + "-" +
 	                     string_format(current_day, 2, 0);
+						 
+		formatted_date = string_replace(formatted_date," ","0")
 		
 		sessionMap[?"endtime"] = formatted_date + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 		var json = json_encode(sessionMap)
