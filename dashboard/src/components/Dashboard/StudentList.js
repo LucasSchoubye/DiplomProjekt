@@ -348,14 +348,40 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
         return renderStudentList();
     };
 
-    // Add this useEffect to handle timespan changes
     useEffect(() => {
         if (selectedStudent) {
             const studentAnswersMap = classAnswersMap ? classAnswersMap[selectedStudent.id] || {} : {};
             setStudentAnswerMap(studentAnswersMap);
             handleReceiveAnswerMap(studentAnswersMap, 'student', true);
         }
-    }, [selectedTimespan, classAnswersMap, selectedStudent]);
+    }, [classAnswersMap, selectedStudent]);
+
+    useEffect(() => {
+        if (selectedSubtopic && studentAnswerMap) {
+            // Re-run the subtopic click logic when timespan changes
+            const subtopicAnswers = getSubtopicAnswers(selectedSubtopic);
+            handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
+    
+            // Re-group answers by sessionRef
+            const sessionsMap = subtopicAnswers.reduce((acc, answer) => {
+                const sessionRef = answer.sessionRef;
+                if (!acc[sessionRef]) {
+                    acc[sessionRef] = [];
+                }
+                acc[sessionRef].push(answer);
+                return acc;
+            }, {});
+    
+            // Convert sessionsMap to an array of sessions
+            const sessionsList = Object.keys(sessionsMap).map(sessionRef => ({
+                id: sessionRef,
+                answers: sessionsMap[sessionRef]
+            }));
+    
+            setSessions(sessionsList);
+            setSessionAnswers(sessionsMap);
+        }
+    }, [selectedTimespan, selectedSubtopic, studentAnswerMap]);
 
     return (
         <Box sx={{ width: getWidth(), maxWidth: '100%' }}>

@@ -29,7 +29,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
-    const [selectedTimespan, setSelectedTimespan] = useState('today'); // Set default value to twoWeeks
+    const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
 
     const timespanOptions = {
         today: "Today",
@@ -301,6 +301,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
                             setSelectedStudent={setSelectedStudent}
                             classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
+                            setSelectedTimespan={selectedTimespan}
                         />
                         <SubjectsList 
                             subjects={subjects} 
