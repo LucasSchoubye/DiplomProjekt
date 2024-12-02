@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-difficulty = random_range(0.8,1.1)
+difficulty = random_range(0.7,1.3)
 depth=1
 
 // Inherit the parent event
@@ -23,4 +23,4 @@ function AnsweredIncorrect()
 	
 }
 
-alarm[1] = random_range(60*4,60*11)
+alarm[1] = random_range(60*2,60*8)
