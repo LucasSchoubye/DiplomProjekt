@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, ListItemButton, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import EastIcon from '@mui/icons-material/East';
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { formatSubtopic } from '../utils/textUtils';
 
-const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap }) => {
+const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap, selectedTimespan }) => {
     const theme = useTheme();
     const isXsScreen = useMediaQuery(theme.breakpoints.only('xs'));
     const isSmScreen = useMediaQuery(theme.breakpoints.only('sm'));
@@ -65,9 +65,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const getSessionsForSubtopic = (subtopic) => {
-        return sessions.filter(session => 
-            studentAnswerMap[session.id].some(answer => answer.subtopic === subtopic)
-        );
+        return sessions.filter(session => {
+            const sessionAnswers = studentAnswerMap[session.id];
+            return sessionAnswers && sessionAnswers.some(answer => answer.subtopic === subtopic);
+        });
     };
 
     const handleSubjectClick = (subject) => {
@@ -346,6 +347,15 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 
         return renderStudentList();
     };
+
+    // Add this useEffect to handle timespan changes
+    useEffect(() => {
+        if (selectedStudent) {
+            const studentAnswersMap = classAnswersMap ? classAnswersMap[selectedStudent.id] || {} : {};
+            setStudentAnswerMap(studentAnswersMap);
+            handleReceiveAnswerMap(studentAnswersMap, 'student', true);
+        }
+    }, [selectedTimespan, classAnswersMap, selectedStudent]);
 
     return (
         <Box sx={{ width: getWidth(), maxWidth: '100%' }}>

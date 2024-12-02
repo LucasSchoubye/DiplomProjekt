@@ -5,10 +5,8 @@ import SubtopicBarChart from './charts/SubtopicBarChart';
 import MedianAnswerTimeChart from './charts/MedianAnswerTimeChart';
 import OverallStackedBarChart from './charts/OverallStackedBarChart';
 import MedianCorrectIncorrectTimeChart from './charts/MedianCorrectIncorrectTimeChart';
-import './studentStats.css'; // Assuming you have a CSS file for styles
 
 const StudentStats = ({ answerMap, contextType }) => {
-    // Flatten the answerMap into a single array of answers
     const answers = useMemo(() => Object.values(answerMap).flat(), [answerMap]);
 
     // Calculate the number of correct and incorrect answers

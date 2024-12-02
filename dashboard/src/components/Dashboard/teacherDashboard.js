@@ -207,7 +207,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
         setIsViewingStudent(isViewingStudent);
-        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent); // Pass contextType to the parent handler
+        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent);
     };
 
     const handleBackClick = () => {
