@@ -137,12 +137,35 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     }, [handleSubjectClick]);
     
 
-    const fetchClassSessionsAndAnswers = async (studentList) => {
+    const fetchClassSessionsAndAnswers = async (studentList, timespan = selectedTimespan) => {
         try {
             const classAnswersMap = {};
+            const now = new Date();
+            let startDate;
+
+            switch (timespan) {
+                case 'today':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    break;
+                case 'twoWeeks':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+                    break;
+                case 'twoMonths':
+                    startDate = new Date(now.getFullYear(), now.getMonth() - 2, now.getDate());
+                    break;
+                case 'schoolYear':
+                    startDate = new Date(now.getFullYear(), 0, 1);
+                    break;
+                default:
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+            }
+            // console.log(startDate);
+            const startDateString = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}-${String(startDate.getHours()).padStart(2, '0')}/${String(startDate.getMinutes()).padStart(2, '0')}/${String(startDate.getSeconds()).padStart(2, '0')}`;
+            console.log(startDateString);
+
             const studentPromises = studentList.map(async (student) => {
                 const sessionsRef = collection(db, 'sessions');
-                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`), where('starttime', '>=', startDateString));
                 const querySnapshot = await getDocs(q);
                 const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -232,8 +255,14 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
-    const handleTimespanChange = (event) => {
-        setSelectedTimespan(event.target.value);
+    const handleTimespanChange = async (event) => {
+        const newTimespan = event.target.value;
+        setSelectedTimespan(newTimespan);
+        if (selectedClass) {
+            setIsLoadingStudents(true);
+            await fetchClassSessionsAndAnswers(students, newTimespan);
+            setIsLoadingStudents(false);
+        }
     };
 
     return (
