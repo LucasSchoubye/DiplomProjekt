@@ -9,8 +9,7 @@ for (var i = 0; i < ds_list_size(answerTimeList); i++) {
 }
 averageAnswerTime = totalAnswerTime/ds_list_size(answerTimeList)
 totalAnswerTime = 0
-draw_text(mouse_x,mouse_y-100,averageAnswerTime)
-draw_text(mouse_x+100,mouse_y,ds_list_size(answerTimeList))
+
 
 
 if (keyboard_check_pressed(vk_tab))
