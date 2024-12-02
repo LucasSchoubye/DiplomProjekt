@@ -196,7 +196,12 @@ function EndSession()
 {		
 	if (sessionId != undefined)
 	{
-		sessionMap[?"endtime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
+		// Format
+		var formatted_date = string(current_year) + "-" +
+	                     string_format(current_month, 2, 0) + "-" +
+	                     string_format(current_day, 2, 0);
+		
+		sessionMap[?"endtime"] = formatted_date + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 		var json = json_encode(sessionMap)
 		ds_map_destroy(sessionMap)
 
