@@ -79,9 +79,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleBackToSubjects = () => {
         setSelectedSubject(null);
         if (selectedStudent) {
-            // Get all answers for the student instead of filtering by subject
-            const studentAnswers = Object.values(studentAnswerMap).flat();
-            handleReceiveAnswerMap(studentAnswers, 'student', true);
+            handleReceiveAnswerMap(studentAnswerMap, 'student', true);
         }
     };
     
