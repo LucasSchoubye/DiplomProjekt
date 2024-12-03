@@ -94,3 +94,18 @@ export function calculateMedianAnswerTimeData(answers) {
         };
     });
 }
+
+export function calculateMistakeTypeData(answers) {
+    const mistakeCount = {};
+    
+    answers
+        .filter(answer => answer.correct === 0 && answer.mistakeType)
+        .forEach(({ mistakeType }) => {
+            mistakeCount[mistakeType] = (mistakeCount[mistakeType] || 0) + 1;
+        });
+    
+    return Object.entries(mistakeCount).map(([type, count]) => ({
+        name: type,
+        value: count,
+    }));
+}
