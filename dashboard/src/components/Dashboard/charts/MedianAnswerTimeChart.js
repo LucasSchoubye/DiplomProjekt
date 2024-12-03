@@ -5,7 +5,7 @@ import { formatSubtopic } from '../../utils/textUtils';
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff6666', '#66b366'];
 
-const MedianAnswerTimeChart = ({ data, title }) => {
+const MedianAnswerTimeChart = ({ data, title = 'Median Answer Time' }) => {
     return (
     <div style={{ width: '30%', textAlign: 'center' }}>
         <h3>{title}</h3>
@@ -40,12 +40,8 @@ const MedianAnswerTimeChart = ({ data, title }) => {
 MedianAnswerTimeChart.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         subtopic: PropTypes.string.isRequired,
-        medianTime: PropTypes.string.isRequired,
+        medianTime: PropTypes.number.isRequired,
     })).isRequired,
-};
-
-MedianAnswerTimeChart.defaultProps = {
-    title: 'Median Answer Time',
 };
 
 export default MedianAnswerTimeChart;

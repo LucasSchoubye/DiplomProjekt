@@ -5,7 +5,7 @@ import { formatSubtopic } from '../../utils/textUtils';
 
 const COLORS = ['#66b366', '#ff6666'];
 
-const MedianCorrectIncorrectTimeChart = ({ data, title }) => {
+const MedianCorrectIncorrectTimeChart = ({ data, title = 'Median Correct and Incorrect Answer Time' }) => {
     return (
         <div style={{ width: '30%', textAlign: 'center' }}>
             <h3>{title}</h3>
@@ -45,13 +45,9 @@ const MedianCorrectIncorrectTimeChart = ({ data, title }) => {
 MedianCorrectIncorrectTimeChart.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
-        'Correct Time': PropTypes.string.isRequired,
-        'Incorrect Time': PropTypes.string.isRequired,
+        'Correct Time': PropTypes.number.isRequired,
+        'Incorrect Time': PropTypes.number.isRequired,
     })).isRequired,
-};
-
-MedianCorrectIncorrectTimeChart.defaultProps = {
-    title: 'Median Correct and Incorrect Answer Time',
 };
 
 export default MedianCorrectIncorrectTimeChart;

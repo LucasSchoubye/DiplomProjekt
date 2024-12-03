@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from "../../config/firebase";
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, List, ListItem, ListItemText, ListItemButton, Divider, Button, CircularProgress, useTheme, useMediaQuery } from '@mui/material';
 import EastIcon from '@mui/icons-material/East';
 import { CheckCircle, Cancel } from '@mui/icons-material';
 import { formatSubtopic } from '../utils/textUtils';
 
-const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap }) => {
+const StudentList = ({ students, selectedClass, handleBackClick, isLoading, handleReceiveAnswerMap, clearAnswerMap, classAnswersMap, selectedTimespan }) => {
     const theme = useTheme();
     const isXsScreen = useMediaQuery(theme.breakpoints.only('xs'));
     const isSmScreen = useMediaQuery(theme.breakpoints.only('sm'));
@@ -67,9 +65,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     };
 
     const getSessionsForSubtopic = (subtopic) => {
-        return sessions.filter(session => 
-            studentAnswerMap[session.id].some(answer => answer.subtopic === subtopic)
-        );
+        return sessions.filter(session => {
+            const sessionAnswers = studentAnswerMap[session.id];
+            return sessionAnswers && sessionAnswers.some(answer => answer.subtopic === subtopic);
+        });
     };
 
     const handleSubjectClick = (subject) => {
@@ -81,8 +80,7 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const handleBackToSubjects = () => {
         setSelectedSubject(null);
         if (selectedStudent) {
-            const subjectAnswers = getSubjectAnswers(selectedStudent);
-            handleReceiveAnswerMap(subjectAnswers, 'subject', true);
+            handleReceiveAnswerMap(studentAnswerMap, 'student', true);
         }
     };
     
@@ -229,8 +227,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             <List>
                 {sessionsForSubtopic.map((session, index) => (
                     <React.Fragment key={session.id}>
-                        <ListItem button onClick={() => handleSessionClick(session.id)}>
-                            <ListItemText primary={`Session ${index + 1}`} secondary={session.student} />
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleSessionClick(session.id)}>
+                                <ListItemText primary={`Session ${index + 1}`} secondary={session.student} />
+                            </ListItemButton>
                         </ListItem>
                         {index < sessionsForSubtopic.length - 1 && <Divider />}
                     </React.Fragment>
@@ -254,8 +254,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 <List>
                     {subtopicsForSubject.map((subtopic, index) => (
                         <React.Fragment key={index}>
-                            <ListItem button onClick={() => handleSubtopicClick(subtopic)}>
-                                <ListItemText primary={formatSubtopic(subtopic)} />
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => handleSubtopicClick(subtopic)}>
+                                    <ListItemText primary={formatSubtopic(subtopic)} />
+                                </ListItemButton>
                             </ListItem>
                             {index < subtopicsForSubject.length - 1 && <Divider />}
                         </React.Fragment>
@@ -268,9 +270,11 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
     const renderSubjectsForStudent = (subjects) => {
         if (subjects.length === 0) {
             return (
-                <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
-                    No subjects found for this student.
-                </Typography>
+                <Box sx={{ height: '50vh', overflowY: 'auto' }}>
+                    <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
+                        No subjects found for this student.
+                    </Typography>
+                </Box>
             );
         }
 
@@ -279,8 +283,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
             <List>
                 {subjects.map((subject, index) => (
                     <React.Fragment key={index}>
-                        <ListItem button onClick={() => handleSubjectClick(subject)}>
-                            <ListItemText primary={subject} />
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleSubjectClick(subject)}>
+                                <ListItemText primary={subject} />
+                            </ListItemButton>
                         </ListItem>
                         {index < subjects.length - 1 && <Divider />}
                     </React.Fragment>
@@ -301,8 +307,10 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
                 <List sx={{ paddingTop: 0, paddingBot: 0 }}>
                     {filledStudents.map((studentData, index) => (
                         <React.Fragment key={studentData.id}>
-                            <ListItem button={!!studentData.fullName} onClick={() => studentData.fullName && handleStudentClick(studentData)}>
-                                <ListItemText primary={studentData.fullName || ' '} />
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => studentData.fullName && handleStudentClick(studentData)} disabled={!studentData.fullName}>
+                                    <ListItemText primary={studentData.fullName || ' '} />
+                                </ListItemButton>
                             </ListItem>
                             {studentData.fullName && index < filledStudents.length - 1 && <Divider />}
                         </React.Fragment>
@@ -339,6 +347,41 @@ const StudentList = ({ students, selectedClass, handleBackClick, isLoading, hand
 
         return renderStudentList();
     };
+
+    useEffect(() => {
+        if (selectedStudent) {
+            const studentAnswersMap = classAnswersMap ? classAnswersMap[selectedStudent.id] || {} : {};
+            setStudentAnswerMap(studentAnswersMap);
+            handleReceiveAnswerMap(studentAnswersMap, 'student', true);
+        }
+    }, [classAnswersMap, selectedStudent]);
+
+    useEffect(() => {
+        if (selectedSubtopic && studentAnswerMap) {
+            // Re-run the subtopic click logic when timespan changes
+            const subtopicAnswers = getSubtopicAnswers(selectedSubtopic);
+            handleReceiveAnswerMap(subtopicAnswers, 'subtopic', true);
+    
+            // Re-group answers by sessionRef
+            const sessionsMap = subtopicAnswers.reduce((acc, answer) => {
+                const sessionRef = answer.sessionRef;
+                if (!acc[sessionRef]) {
+                    acc[sessionRef] = [];
+                }
+                acc[sessionRef].push(answer);
+                return acc;
+            }, {});
+    
+            // Convert sessionsMap to an array of sessions
+            const sessionsList = Object.keys(sessionsMap).map(sessionRef => ({
+                id: sessionRef,
+                answers: sessionsMap[sessionRef]
+            }));
+    
+            setSessions(sessionsList);
+            setSessionAnswers(sessionsMap);
+        }
+    }, [selectedTimespan, selectedSubtopic, studentAnswerMap]);
 
     return (
         <Box sx={{ width: getWidth(), maxWidth: '100%' }}>

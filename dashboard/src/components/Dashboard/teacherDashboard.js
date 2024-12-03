@@ -24,11 +24,19 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
-    const [classAnswersMap, setClassAnswersMap] = useState([]);
+    const [classAnswersMap, setClassAnswersMap] = useState({});
     const [isViewingStudent, setIsViewingStudent] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
+    const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
+
+    const timespanOptions = {
+        today: "Today",
+        twoWeeks: "Last Two Weeks",
+        twoMonths: "Last Two Months",
+        schoolYear: "This School Year"
+    };
 
     useEffect(() => {
     }, [selectedClass, selectedStudent]);
@@ -66,6 +74,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     }, [userData]);
 
     const handleSubjectClick = useCallback(async (subject) => {
+        if (!classDocRef) return; // Add guard clause
         setSelectedSubject(subject);
         try {
             const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
@@ -80,7 +89,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         } catch (err) {
             console.error("Error fetching subtopics: ", err);
         }
-    }, [classDocRef]);
+    }, [classDocRef]); // Only depend on classDocRef
 
     const handleClassClick = useCallback(async (classData) => {
         setSelectedClass(classData);
@@ -124,24 +133,51 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
             if (subjectsData.length > 0) {
-                const firstSubject = subjectsData[0];
-                setSelectedSubject(firstSubject);
-                await handleSubjectClick(firstSubject);
+                setSelectedSubject(subjectsData[0]);
+                // Remove the immediate handleSubjectClick call
+                // It will be triggered by the useEffect below
             }
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
             setIsLoadingStudents(false);
         }
-    }, [handleSubjectClick]);
-    
+    }, []);
 
-    const fetchClassSessionsAndAnswers = async (studentList) => {
+    // Add new useEffect to handle subject selection
+    useEffect(() => {
+        if (selectedSubject && classDocRef) {
+            handleSubjectClick(selectedSubject);
+        }
+    }, [selectedSubject, classDocRef, handleSubjectClick]);
+
+    const fetchClassSessionsAndAnswers = async (studentList, timespan = selectedTimespan) => {
         try {
             const classAnswersMap = {};
+            const now = new Date();
+            let startDate;
+
+            switch (timespan) {
+                case 'today':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    break;
+                case 'twoWeeks':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+                    break;
+                case 'twoMonths':
+                    startDate = new Date(now.getFullYear(), now.getMonth() - 2, now.getDate());
+                    break;
+                case 'schoolYear':
+                    startDate = new Date(now.getFullYear(), 0, 1);
+                    break;
+                default:
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+            }
+            const startDateString = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}-${String(startDate.getHours()).padStart(2, '0')}/${String(startDate.getMinutes()).padStart(2, '0')}/${String(startDate.getSeconds()).padStart(2, '0')}`;
+
             const studentPromises = studentList.map(async (student) => {
                 const sessionsRef = collection(db, 'sessions');
-                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`), where('starttime', '>=', startDateString));
                 const querySnapshot = await getDocs(q);
                 const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -171,7 +207,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
         setIsViewingStudent(isViewingStudent);
-        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent); // Pass contextType to the parent handler
+        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent);
     };
 
     const handleBackClick = () => {
@@ -231,6 +267,16 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    const handleTimespanChange = async (event) => {
+        const newTimespan = event.target.value;
+        setSelectedTimespan(newTimespan);
+        if (selectedClass) {
+            setIsLoadingStudents(true);
+            await fetchClassSessionsAndAnswers(students, newTimespan);
+            setIsLoadingStudents(false);
+        }
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
             <DrawerLayout>
@@ -255,6 +301,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
                             setSelectedStudent={setSelectedStudent}
                             classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
+                            setSelectedTimespan={selectedTimespan}
                         />
                         <SubjectsList 
                             subjects={subjects} 
@@ -268,48 +315,66 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             
             {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
-                    <Select
-                        multiple
-                        value={selectedSubTopics}
-                        onChange={handleSubTopicChange}
-                        displayEmpty
-                        renderValue={() => "Choose Sub Topics"}
-                        style={{ position: 'absolute', top: '20px', right: '270px' }} // Adjust position to move more to the left
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Sub Topics
-                        </MenuItem>
-                        {subTopics
-                            // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
-                            .map((subTopic) => (
-                                <MenuItem key={subTopic.id} value={subTopic.id}>
-                                    <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
-                                    <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '20px', paddingBottom: '20px' }}>
+                        <Select
+                            value={selectedTimespan}
+                            onChange={handleTimespanChange}
+                            displayEmpty
+                            renderValue={() => timespanOptions[selectedTimespan] || "Choose Timespan"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Timespan
+                            </MenuItem>
+                            {Object.entries(timespanOptions).map(([value, label]) => (
+                                <MenuItem key={value} value={value}>
+                                    {label}
                                 </MenuItem>
                             ))}
-                    </Select>
-                    <Select
-                        multiple
-                        value={selectedGames}
-                        onChange={handleGameChange}
-                        displayEmpty
-                        renderValue={() => "Choose Available Games"}
-                        style={{ position: 'absolute', top: '20px', right: '20px' }}
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Available Games
-                        </MenuItem>
-                        {availableGames
-                            .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
-                            .map((game) => (
-                                <MenuItem key={game.id} value={game.id}>
-                                    <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
-                                    <ListItemText primary={game.name} />
-                                </MenuItem>
-                            ))}
-                    </Select>
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedSubTopics}
+                            onChange={handleSubTopicChange}
+                            displayEmpty
+                            renderValue={() => "Choose Sub Topics"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Sub Topics
+                            </MenuItem>
+                            {subTopics
+                                // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
+                                .map((subTopic) => (
+                                    <MenuItem key={subTopic.id} value={subTopic.id}>
+                                        <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
+                                        <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedGames}
+                            onChange={handleGameChange}
+                            displayEmpty
+                            renderValue={() => "Choose Available Games"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Available Games
+                            </MenuItem>
+                            {availableGames
+                                .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
+                                .map((game) => (
+                                    <MenuItem key={game.id} value={game.id}>
+                                        <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
+                                        <ListItemText primary={game.name} />
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                    </Box>
                     {Object.keys(answerMap).length > 0 && (
-                        <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                        <StudentStats 
+                            answerMap={answerMap} 
+                            answerContextType={answerContextType} 
+                        />
                     )}
                     {!isViewingStudent && (
                     <ClassStats classAnswersMap={classAnswersMap} />

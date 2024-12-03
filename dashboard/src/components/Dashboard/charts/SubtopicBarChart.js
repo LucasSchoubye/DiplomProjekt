@@ -25,7 +25,7 @@ const CustomLabel = ({ x, y, width, height, index, data, type }) => {
     );
 };
 
-const SubtopicBarChart = ({ data, title }) => {
+const SubtopicBarChart = ({ data, title = 'Answer % per subtopic' }) => {
     return (
     <div style={{ width: '30%', textAlign: 'center' }}>
         <h3>{title}</h3>
@@ -72,10 +72,6 @@ SubtopicBarChart.propTypes = {
         CorrectPercentage: PropTypes.number.isRequired,
         IncorrectPercentage: PropTypes.number.isRequired,
     })).isRequired,
-};
-
-SubtopicBarChart.defaultProps = {
-    title: 'Answer % per subtopic',
 };
 
 export default SubtopicBarChart;

@@ -11,18 +11,15 @@ const DrawerLayout = ({ children }) => {
         if (isXsScreen) return '100%';
         if (isSmScreen) return '200px';
         if (isMdScreen) return '300px';
-        return '400px'; // for lg and above
+        return '400px';
     };
 
     const drawerWidth = getWidth();
 
     if (isXsScreen || isSmScreen) {
-        // For extra small and small screens, render content without a drawer
         return (
             <Box sx={{ width: '100%', padding: 2 }}>
-                {React.Children.map(children, child => 
-                    React.cloneElement(child, { drawerWidth })
-                )}
+                {children} {}
             </Box>
         );
     }
@@ -41,9 +38,7 @@ const DrawerLayout = ({ children }) => {
             }}
         >
             <Box sx={{ width: '100%', padding: 0, display: 'flex', justifyContent: 'center' }}>
-                {React.Children.map(children, child => 
-                    React.cloneElement(child, { drawerWidth })
-                )}
+                {children} {}
             </Box>
         </Drawer>
     );
