@@ -386,7 +386,7 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 	answerMap[?"prompt"] = prompt
 	answerMap[?"optionChosen"] = optionChosen.text
 	
-	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer")
+	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer" and scr_mathErrorEnumToString(optionChosen.errorEnum) != "Undescribed")
 		answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
 		
 	var isCorrect = 0
