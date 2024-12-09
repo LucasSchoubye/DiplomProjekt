@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { formatSubtopic } from '../utils/textUtils';
 import SubtopicBarChart from './charts/SubtopicBarChart';
-import MedianAnswerTimeChart from './charts/MedianAnswerTimeChart';
 import OverallStackedBarChart from './charts/OverallStackedBarChart';
+import MistakeTypePieChart from './charts/MistakeTypePieChart';
 import MedianCorrectIncorrectTimeChart from './charts/MedianCorrectIncorrectTimeChart';
 import {
     calculateBasicStats,
     calculateSubtopicData,
-    calculateAnswerTimeData,
+    calculateMistakeTypeData,
     calculateMedianAnswerTimeData
 } from './stats/statsCalculations';
 
@@ -16,7 +16,7 @@ const StudentStats = ({ answerMap, contextType }) => {
     const answers = useMemo(() => Object.values(answerMap).flat(), [answerMap]);
     const { averageAnswerTime, data } = useMemo(() => calculateBasicStats(answers), [answers]);
     const subtopicData = useMemo(() => calculateSubtopicData(answers), [answers]);
-    const answerTimeData = useMemo(() => calculateAnswerTimeData(answers), [answers]);
+    const mistakeTypeData = useMemo(() => calculateMistakeTypeData(answers), [answers]);
     const medianAnswerTimeData = useMemo(() => calculateMedianAnswerTimeData(answers), [answers]);
 
     return (
@@ -32,7 +32,7 @@ const StudentStats = ({ answerMap, contextType }) => {
             <div className="charts-container">
                 <OverallStackedBarChart data={data} />
                 <SubtopicBarChart data={subtopicData} />
-                <MedianAnswerTimeChart data={answerTimeData} />
+                <MistakeTypePieChart data={mistakeTypeData} />
                 <MedianCorrectIncorrectTimeChart data={medianAnswerTimeData} />
             </div>
         </div>
