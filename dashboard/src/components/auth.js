@@ -6,7 +6,9 @@ import { db, auth } from "../config/firebase";
 import SignUp from "./signUp";
 import { ArrowBack } from "@mui/icons-material";
 
+// Authentication component handling both login and signup flows
 export const Auth = ({ onLoginSuccess }) => {
+    // State management for form inputs and UI feedback
     const [email, setEmail] = useState("admin"); // Default email for testing
     const [password, setPassword] = useState("admin"); // Default password for testing
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -16,14 +18,18 @@ export const Auth = ({ onLoginSuccess }) => {
     const [loading, setLoading] = useState(false); // Loading state
     const theme = useTheme();
 
+    // UI feedback handlers
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
     };
 
+    // Main authentication logic
     const signIn = async () => {
+        // Handle development shortcuts
         const actualEmail = email === "admin" ? "michaelmicromanager@gmail.com" : email;
         const actualPassword = password === "admin" ? "test123" : password;
 
+        // Input validation
         if (!actualEmail || !actualPassword) {
             setSnackbarMessage("Email and password are required");
             setSnackbarSeverity("error");
@@ -33,11 +39,12 @@ export const Auth = ({ onLoginSuccess }) => {
 
         setLoading(true);
         try {
-            // Firebase Authentication sign-in with email and password
+            // Authentication process
             const userCredential = await signInWithEmailAndPassword(auth, actualEmail, actualPassword);
             const user = userCredential.user;
 
             if (user) {
+                // User role verification
                 try {
                     // Query Firestore for the user document based on the authenticated user's UID
                     const usersCollectionRef = collection(db, "users");
@@ -78,12 +85,14 @@ export const Auth = ({ onLoginSuccess }) => {
         }
     };
 
+    // Form switch handlers
     const handleSignUpSuccess = (newEmail, newPassword) => {
         setEmail(newEmail);
         setPassword(newPassword);
         setIsSignUp(false);
     };
 
+    // Component render structure
     return (
         <Box
             sx={{
@@ -94,6 +103,7 @@ export const Auth = ({ onLoginSuccess }) => {
                 minHeight: '100vh',
             }}
         >
+            {/* Header section */}
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, width: '300px', position: 'relative' }}>
                 {isSignUp && (
                     <IconButton onClick={() => setIsSignUp(false)} sx={{ position: 'absolute', left: 0 }}>
@@ -105,6 +115,7 @@ export const Auth = ({ onLoginSuccess }) => {
                 </Typography>
             </Box>
 
+            {/* Main form section */}
             {isSignUp ? (
                 <SignUp 
                     onSignUpSuccess={handleSignUpSuccess} // Use the new callback
@@ -156,6 +167,7 @@ export const Auth = ({ onLoginSuccess }) => {
                 </Box>
             )}
 
+            {/* Feedback notification */}
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}

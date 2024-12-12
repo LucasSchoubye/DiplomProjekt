@@ -1,15 +1,20 @@
+// Import React hooks and Firebase services
 import { useEffect, useState, useCallback } from "react";
-import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore"; // Import query and where
-import { db } from "../../config/firebase.js"; // Import Firestore
+import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase.js";
+
+// Import layout and component dependencies
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
-import SubjectsList from './subjectsList.js'; // Import SubjectsList
+import SubjectsList from './subjectsList.js';
 import StudentStats from "./studentStats.js";
 import ClassStats from "./classStats.js";
-import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
+import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material';
 
+// Main teacher dashboard component
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
+    // State management for class, student, and subject data
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
@@ -31,6 +36,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
     const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
 
+    // Define timespan options for filtering data
     const timespanOptions = {
         today: "Today",
         twoWeeks: "Last Two Weeks",
@@ -38,11 +44,13 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         schoolYear: "This School Year"
     };
 
+    // Initialize state and fetch classes when component mounts
     useEffect(() => {
     }, [selectedClass, selectedStudent]);
   
     useEffect(() => {
         const fetchClasses = async () => {
+            // Fetch and process teacher's classes from Firestore
             try {
                 const teacherDocRef = doc(db, "teachers", userData.ref.id);
                 const teacherDoc = await getDoc(teacherDocRef);
@@ -73,6 +81,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         fetchClasses();
     }, [userData]);
 
+    // Handle subject selection and fetch related subtopics
     const handleSubjectClick = useCallback(async (subject) => {
         if (!classDocRef) return; // Add guard clause
         setSelectedSubject(subject);
@@ -91,7 +100,9 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     }, [classDocRef]); // Only depend on classDocRef
 
+    // Handle class selection and fetch related data
     const handleClassClick = useCallback(async (classData) => {
+        // Initialize class data and fetch students, subjects, and games
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
         setSelectedStudent(null)
@@ -134,8 +145,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             await fetchClassSessionsAndAnswers(studentList);
             if (subjectsData.length > 0) {
                 setSelectedSubject(subjectsData[0]);
-                // Remove the immediate handleSubjectClick call
-                // It will be triggered by the useEffect below
             }
         } catch (err) {
             console.error("Error fetching data: ", err);
@@ -144,14 +153,16 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     }, []);
 
-    // Add new useEffect to handle subject selection
+    // Update subject data when selection changes
     useEffect(() => {
         if (selectedSubject && classDocRef) {
             handleSubjectClick(selectedSubject);
         }
     }, [selectedSubject, classDocRef, handleSubjectClick]);
 
+    // Fetch and process session data for class statistics
     const fetchClassSessionsAndAnswers = async (studentList, timespan = selectedTimespan) => {
+        // Fetch and aggregate answer data based on selected timespan
         try {
             const classAnswersMap = {};
             const now = new Date();
@@ -203,6 +214,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Event handlers for UI interactions
     const handleReceiveAnswerMapFromStudentList = (answers, answerContextType, isViewingStudent) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
@@ -211,11 +223,12 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     };
 
     const handleBackClick = () => {
+        // Reset view states when navigating back
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
         setIsViewingStudent(false);
-        setSubjects([]); // Clear subjects when going back
+        setSubjects([]);
     };
 
     const clearAnswerMap = () => {
@@ -223,6 +236,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setAnswerContextType('');
     };
 
+    // Handle game selection changes
     const handleGameChange = async (event) => {
         const value = event.target.value;
         const newSelectedGames = value.filter(gameId => !selectedGames.includes(gameId));
@@ -245,6 +259,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Handle subtopic selection changes
     const handleSubTopicChange = async (event) => {
         const value = event.target.value;
         const newSelectedSubTopics = value.filter(subTopicId => !selectedSubTopics.includes(subTopicId));
@@ -267,6 +282,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Handle timespan selection changes
     const handleTimespanChange = async (event) => {
         const newTimespan = event.target.value;
         setSelectedTimespan(newTimespan);
@@ -277,6 +293,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Render dashboard layout with conditional components
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
             <DrawerLayout>
@@ -298,16 +315,16 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             handleBackClick={handleBackClick} 
                             isLoading={isLoadingStudents}
                             handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
-                            clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                            clearAnswerMap={clearAnswerMap}
                             setSelectedStudent={setSelectedStudent}
-                            classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
+                            classAnswersMap={classAnswersMap}
                             setSelectedTimespan={selectedTimespan}
                         />
                         <SubjectsList 
                             subjects={subjects} 
                             selectedClass={selectedClass} 
-                            handleSubjectClick={handleSubjectClick} // Pass the handleSubjectClick function
-                            selectedSubject={selectedSubject} // Pass the selectedSubject state
+                            handleSubjectClick={handleSubjectClick}
+                            selectedSubject={selectedSubject}
                         />
                     </Box>
                 )}
@@ -342,7 +359,6 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                                 Choose Sub Topics
                             </MenuItem>
                             {subTopics
-                                // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
                                 .map((subTopic) => (
                                     <MenuItem key={subTopic.id} value={subTopic.id}>
                                         <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />

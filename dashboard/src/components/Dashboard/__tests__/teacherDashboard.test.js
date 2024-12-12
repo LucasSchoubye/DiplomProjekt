@@ -1,9 +1,10 @@
+// Import necessary testing and component dependencies
 import { render, screen, waitFor, fireEvent, act } from '@testing-library/react';
 import { TeacherDashboard } from '../teacherDashboard';
 import { db } from '../../../config/firebase';
 import { getDoc, getDocs, collection, doc, query, where } from 'firebase/firestore';
 
-// Mock Firebase
+// Setup test environment with Firebase mocks
 jest.mock('../../../config/firebase', () => ({
   db: {
     collection: jest.fn(),
@@ -11,17 +12,17 @@ jest.mock('../../../config/firebase', () => ({
   }
 }));
 
-// Mock Firestore functions
+// Setup Firestore function mocks with default implementations
 jest.mock('firebase/firestore', () => ({
   getDoc: jest.fn(),
   getDocs: jest.fn(),
   collection: jest.fn(),
   doc: jest.fn(),
-  query: jest.fn(() => 'mockQuery'), // Add default implementation
+  query: jest.fn(() => 'mockQuery'),
   where: jest.fn(() => 'mockWhere'),
 }));
 
-// Mock Recharts components
+// Setup chart component mocks to prevent render issues
 jest.mock('recharts', () => ({
   ResponsiveContainer: ({ children }) => children,
   BarChart: () => null,
@@ -35,6 +36,7 @@ jest.mock('recharts', () => ({
   Pie: () => null
 }));
 
+// Test suite for TeacherDashboard component
 describe('TeacherDashboard', () => {
   const mockUserData = {
     ref: { id: 'teacher123' }
@@ -59,6 +61,7 @@ describe('TeacherDashboard', () => {
     });
   });
 
+  // Test loading state visibility
   it('renders loading state initially', () => {
     render(
       <TeacherDashboard 
@@ -70,6 +73,7 @@ describe('TeacherDashboard', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
+  // Test teacher name display after data load
   it('displays teacher name after loading', async () => {
     const mockTeacherName = 'Test Teacher';
     
@@ -108,6 +112,7 @@ describe('TeacherDashboard', () => {
     expect(heading).toBeInTheDocument();
   });
 
+  // Test class list rendering with mock data
   it('displays class list after loading', async () => {
     const mockClasses = [
       { id: 'class1', className: 'Math Class' },
@@ -158,6 +163,7 @@ describe('TeacherDashboard', () => {
     });
   });
 
+  // Test class selection and related data fetching
   it('handles class selection', async () => {
     const mockClass = {
       id: 'class1',

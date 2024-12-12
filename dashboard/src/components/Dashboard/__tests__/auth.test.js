@@ -3,7 +3,7 @@ import { Auth } from '../../auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, query, getDocs } from 'firebase/firestore';
 
-// Mock Firebase modules
+// Setup mock environment
 jest.mock('firebase/auth');
 jest.mock('firebase/firestore');
 jest.mock('../../../config/firebase', () => ({
@@ -14,11 +14,12 @@ jest.mock('../../../config/firebase', () => ({
 describe('Auth Component', () => {
   const mockOnLoginSuccess = jest.fn();
 
+  // Reset test environment before each test
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
   });
 
+  // Validate initial render state
   it('renders login form by default', () => {
     render(<Auth onLoginSuccess={mockOnLoginSuccess} />);
     
@@ -27,6 +28,7 @@ describe('Auth Component', () => {
     expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
   });
 
+  // Validate form validation
   it('handles empty email/password submission', async () => {
     render(<Auth onLoginSuccess={mockOnLoginSuccess} />);
     
@@ -45,6 +47,7 @@ describe('Auth Component', () => {
     });
   });
 
+  // Test successful teacher authentication flow
   it('handles successful teacher login', async () => {
     const mockUserData = {
       role: 'Teacher',
@@ -80,6 +83,7 @@ describe('Auth Component', () => {
     }, { timeout: 2000 }); // Increase timeout to account for the 1000ms setTimeout
   });
 
+  // Test role-based access control
   it('handles non-teacher user login attempt', async () => {
     // Mock Firebase auth success but non-teacher role
     signInWithEmailAndPassword.mockResolvedValueOnce({
@@ -106,6 +110,7 @@ describe('Auth Component', () => {
     });
   });
 
+  // Test error handling for authentication failures
   it('handles Firebase authentication error', async () => {
     // Mock Firebase auth failure
     signInWithEmailAndPassword.mockRejectedValueOnce(new Error('Invalid credentials'));
@@ -119,6 +124,7 @@ describe('Auth Component', () => {
     });
   });
 
+  // Test UI state management
   it('toggles between login and signup forms', () => {
     render(<Auth onLoginSuccess={mockOnLoginSuccess} />);
 
