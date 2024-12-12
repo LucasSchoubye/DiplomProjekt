@@ -100,7 +100,7 @@ function GetColorFromPos(pos)
 				return #1ED001
 				
 			default:
-				return c_ltgray
+				return c_dkgray
 		}
 }
 

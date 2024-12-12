@@ -27,6 +27,8 @@ function scr_ultManHome(){
 	var matchDetailsDividerLeft = room_width * 0.3375;
 	var matchDetailsDividerRight = room_width * 0.5625;
 	
+	var LC = obj_languageController
+	
 	// draw boxes
 	//draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
 	//draw_sprite(spr_manaquaPlaceholder, 0, logoHomeBoxLeft, logoHomeBoxTop)
@@ -129,10 +131,10 @@ function scr_ultManHome(){
 	// Draw first row
 	draw_text(leagueTableLeft,leagueTableTop, "PL");
 	draw_set_halign(fa_center)
-	draw_text(leagueTableRight - numberPadding*4,leagueTableTop, "P");
-	draw_text(leagueTableRight - numberPadding*3,leagueTableTop, "W");
-	draw_text(leagueTableRight - numberPadding*2,leagueTableTop, "D");
-	draw_text(leagueTableRight - numberPadding,leagueTableTop, "L");
+	draw_text(leagueTableRight - numberPadding*4,leagueTableTop, LC.translate("P"));
+	draw_text(leagueTableRight - numberPadding*3,leagueTableTop, LC.translate("W"));
+	draw_text(leagueTableRight - numberPadding*2,leagueTableTop, LC.translate("D"));
+	draw_text(leagueTableRight - numberPadding,leagueTableTop, LC.translate("L"));
 	draw_text(leagueTableRight, leagueTableTop, "Pts.");
 	
 	for (var i = 0; i < ds_list_size(teamList); ++i) {

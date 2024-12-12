@@ -160,7 +160,7 @@ function scr_ultManTransferMarket(){
 		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
 		playerRating = currentPlayer.overallRating
-		playerPosition = currentPlayer.PosToString()
+		playerPosition = obj_languageController.translate(currentPlayer.PosToString())
 		playerPositionHeight = string_height(playerPosition)
 		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
 		

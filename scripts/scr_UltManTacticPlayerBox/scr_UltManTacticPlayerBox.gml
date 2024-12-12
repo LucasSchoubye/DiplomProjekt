@@ -18,6 +18,8 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 		squadToDraw = ds_list_size(squad);
 	}
 	
+	var LC = obj_languageController
+	
 	var playerBoxTop = room_height * 0.12;
 	var playerBoxBottom = room_height * 1;
 	var playerBoxLeft = room_width * 0.7;
@@ -42,7 +44,7 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 			}
 			else if (i > 11 + 5)
 			{
-				draw_set_color(c_ltgray)
+				draw_set_color(c_gray)
 				draw_set_alpha(0.25)
 				draw_rectangle(playerBoxLeft, playerBoxTop + (i)*30 + tacticsPlayerScroll, playerBoxRight, playerBoxTop + (i+1)*30 + tacticsPlayerScroll, false)
 			}
@@ -57,7 +59,7 @@ function scr_UltManTacticPlayerBox(halftimeActive = false){
 			draw_set_halign(fa_left)
 			draw_set_valign(fa_top)
 			draw_set_font(fn_RobotoBlack8)
-			draw_text(playerBoxLeft + 20,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,player.PosToString())
+			draw_text(playerBoxLeft + 20,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,LC.translate(player.PosToString()))
 			draw_sprite_ext(spr_UltManPerson, 0, playerBoxLeft + 63,playerBoxTop + (i+0.4)*30 - 2 + tacticsPlayerScroll, 0.15, string_height(player.name[1])*0.01, 0, c_white, 0.3)
 			draw_text(playerBoxLeft + 70,playerBoxTop + (i+0.4)*30 + tacticsPlayerScroll,player.name[0] + " " + player.name[1])
 		

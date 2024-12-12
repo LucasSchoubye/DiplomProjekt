@@ -12,6 +12,7 @@ if (room = rm_UltManOverview){
 	var menuDividerRight = room_width * 0.1875
 	var menuWidthMax = 50
 	var clickAbleMenuPaddingY = 50
+	var LC = obj_languageController
 
 	// Button position and size
 	var buttonX = room_width * 0.85
@@ -21,12 +22,13 @@ if (room = rm_UltManOverview){
 	var buttonText = LC.translate("Play Match")
 	var titleHeight = (string_height(clubName) / 2)
 	
-	teamStats = [["Matches Played",spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
-	["Win Percentage",spr_UltManPercentage, obj_UltManManagerController.playerClub.winPercentage],
-	["Goals Scored", spr_UltManCheckmark, obj_UltManManagerController.playerClub.goalsScored],
-	["Goals Conceded",spr_UltManCancel, obj_UltManManagerController.playerClub.goalsConceded],
-	["Yellow Cards", spr_UltManWarning, obj_UltManManagerController.playerClub.yellowCards],
-	["Red Cards",spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
+	
+	teamStats = [[LC.translate("Matches Played"),spr_UltManFootball, obj_UltManManagerController.playerClub.matchesPlayed],
+	[LC.translate("Win Percentage"),spr_UltManPercentage, obj_UltManManagerController.playerClub.winPercentage],
+	[LC.translate("Goals Scored"), spr_UltManCheckmark, obj_UltManManagerController.playerClub.goalsScored],
+	[LC.translate("Goals Conceded"),spr_UltManCancel, obj_UltManManagerController.playerClub.goalsConceded],
+	[LC.translate("Yellow Cards"), spr_UltManWarning, obj_UltManManagerController.playerClub.yellowCards],
+	[LC.translate("Red Cards"),spr_UltManRedCard, obj_UltManManagerController.playerClub.redCards]]
 
 	draw_set_font(fn_titleLato);
 
@@ -110,9 +112,9 @@ switch(currentMenu){
 	case ultManMenus.Tactics:
 		scr_ultManTactics()
 		break;
-	case ultManMenus.Fixtures:
-		scr_ultManFixtures()
-		break;
+//	case ultManMenus.Fixtures:
+//		scr_ultManFixtures()
+//		break;
 	case ultManMenus.Transfermarket:
 		scr_ultManTransferMarket()
 		break;

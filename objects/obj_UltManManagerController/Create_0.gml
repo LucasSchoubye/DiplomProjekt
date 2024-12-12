@@ -2,7 +2,7 @@
 enum ultManMenus{
 	Home,
 	Tactics,
-	Fixtures,
+	//Fixtures,
 	Transfermarket,
 	Quit
 }
@@ -84,7 +84,7 @@ clubNameLimit = undefined;
 // Populate menu options
 ds_list_add(menuOptions, "Home")
 ds_list_add(menuOptions, "Tactics")
-ds_list_add(menuOptions, "Fixtures")
+//ds_list_add(menuOptions, "Fixtures")
 ds_list_add(menuOptions, "Transfermarket")
 ds_list_add(menuOptions, "Quit")
 
