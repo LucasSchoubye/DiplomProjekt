@@ -153,7 +153,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.8.0.169",
     "PackageType":"Asset",
     "PackageName":"Firebase Firestore Ext",
     "PackageID":"com.yoyogames.firebasefirestoreext",
@@ -467,7 +467,6 @@
     {"id":{"name":"scr_UltManOffensiveStateControl","path":"scripts/scr_UltManOffensiveStateControl/scr_UltManOffensiveStateControl.yy",},},
     {"id":{"name":"scr_UltManOnScreenControlReminder","path":"scripts/scr_UltManOnScreenControlReminder/scr_UltManOnScreenControlReminder.yy",},},
     {"id":{"name":"scr_UltManPassing","path":"scripts/scr_UltManPassing/scr_UltManPassing.yy",},},
-    {"id":{"name":"scr_ultManPlayers","path":"scripts/scr_ultManPlayers/scr_ultManPlayers.yy",},},
     {"id":{"name":"scr_UltManPressDefence","path":"scripts/scr_UltManPressDefence/scr_UltManPressDefence.yy",},},
     {"id":{"name":"scr_UltManPressOffense","path":"scripts/scr_UltManPressOffense/scr_UltManPressOffense.yy",},},
     {"id":{"name":"scr_UltManRandomGermanNames","path":"scripts/scr_UltManRandomGermanNames/scr_UltManRandomGermanNames.yy",},},

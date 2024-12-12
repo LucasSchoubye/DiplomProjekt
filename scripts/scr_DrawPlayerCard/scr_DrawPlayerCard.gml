@@ -2,6 +2,8 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	
+	var LC = obj_languageController
+	
 	var currentFont = draw_get_font()
 	var currentHAlign = draw_get_halign()
 	var currentVAlign = draw_get_valign()
@@ -9,16 +11,16 @@ function scr_DrawPlayerCard(x1,y1,x2,y2,currentPlayer){
 	var centerY = (y1 + y2)/2
 	var currentPlayerLastName = currentPlayer.name[1]
 	var currentPlayerNationality = currentPlayer.NatToString()
-	var currentPlayerPos = currentPlayer.PosToString()
+	var currentPlayerPos = obj_languageController.translate(currentPlayer.PosToString())
 	var currentPlayerFlag = currentPlayer.NatToSprite()
 	var newRow = 0
 	var rowCounter = 0
 	var cardWidth = abs(x2 - x1)
 	var playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
 	var attributeArray = ["topSpd", "dribbling", "shooting", "topShootSpd", "passing", "topPassSpd", "strength", "defence"]
-	var attributeStringArray = ["Pac", "Dri", "Sho", "Sho Str", "Pas", "Pas Str", "Str", "Def"]
+	var attributeStringArray = [LC.translate("Pac"), LC.translate("Dri"), LC.translate("Sho"), LC.translate("Sho Str"), LC.translate("Pas"), LC.translate("Pas Str"), LC.translate("Str"), LC.translate("Def")]
 	
-	var LC = obj_languageController
+	
 	
 	// aligns correct for text
 	draw_set_halign(fa_left)

@@ -20,7 +20,9 @@ switch (obj_languageController.languageChosen)
 		case "All Games":
 			var array = [text, "Alle Spil"]
 		break;
-		
+		case "Main Menu":
+			var array = [text, "Hovedmenu"]
+		break;
 		case "Mini Games":
 			var array = [text, "Spil"]
 		break;

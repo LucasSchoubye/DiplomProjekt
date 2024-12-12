@@ -99,6 +99,40 @@ switch (obj_languageController.languageChosen)
 			case "Most Touches":
 				var array = [text, "Flest Berøringer"]
 			break;
+			
+			// 
+			case "Matches Played":
+				var array = [text, "Kampe Spillet"]
+			break;
+			case "Win Percentage":
+				var array = [text, "Sejrsprocent"]
+			break;
+			case "Goals Scored":
+				var array = [text, "Mål Scored"]
+			break;
+			case "Goals Conceded":
+				var array = [text, "Mål indkasseret"]
+			break;
+			case "Yellow Cards":
+				var array = [text, "Gule Kort"]
+			break;
+			case "Red Cards":
+				var array = [text, "Røde Kort"]
+			break;
+			
+			// League table
+			case "P":
+				var array = [text, "S"]
+			break;
+			case "W":
+				var array = [text, "V"]
+			break;
+			case "D":
+				var array = [text, "U"]
+			break;
+			case "L":
+				var array = [text, "T"]
+			break;
 		#endregion
 		
 		#region	Transfermarket
@@ -126,14 +160,42 @@ switch (obj_languageController.languageChosen)
 			case "You do you possess the sufficient funds":
 				var array = [text, "Du har ikke nok Content Coins"]
 			break;
+		#endregion
+			
+			#region Player card
 			case "Age: ":
 				var array = [text, "Alder: "]
 			break;
 			case "Position: ":
 				var array = [text, "Position: "]
 			break;
+			case "Pac":
+				var array = [text, "Hast"]
+			break;
+			case "Dri":
+				var array = [text, "Drib"]
+			break;
+			case "Sho":
+				var array = [text, "Skud"]
+			break;
+			case "Sho Str":
+				var array = [text, "Sku Sty"]
+			break;
+			case "Pas":
+				var array = [text, "Afl"]
+			break;
+			case "Pas Str":
+				var array = [text, "Afl Sty"]
+			break;
+			case "Str":
+				var array = [text, "Fys"]
+			break;
+			case "Def":
+				var array = [text, "For"]
+			break;
+			#endregion
 			
-			// Packs
+			#region Packs
 			case "BUY":
 				var array = [text, "KØB"]
 			break;
@@ -177,6 +239,91 @@ switch (obj_languageController.languageChosen)
 				var array = [text, "En 95+ Rated Spiller"]
 			break;
 		#endregion
+		
+		#region Tactics
+			case "ST":
+				var array = [text, "ANG"]
+			break;
+			case "RW":
+				var array = [text, "HF"]
+			break;
+			case "LW":
+				var array = [text, "LF"]
+			break;
+			case "RM":
+				var array = [text, "HM"]
+			break;
+			case "LM":
+				var array = [text, "VM"]
+			break;
+			case "CM":
+				var array = [text, "CM"]
+			break;
+			case "CAM":
+				var array = [text, "COM"]
+			break;
+			case "CDM":
+				var array = [text, "CDM"]
+			break;
+			case "CB":
+				var array = [text, "CB"]
+			break;
+			case "LB":
+				var array = [text, "VB"]
+			break;
+			case "RB":
+				var array = [text, "HB"]
+			break;
+			case "LWB":
+				var array = [text, "VFB"]
+			break;
+			case "RWB":
+				var array = [text, "HFB"]
+			break;
+			case "GK":
+				var array = [text, "MM"]
+			break;
+			case "SUB":
+				var array = [text, "UDS"]
+			break;
+		#endregion
+		
+		/*
+		switch(drawnPosition)
+		{
+			case FootballPositions.ST:
+				return "ST"
+			case FootballPositions.RW:
+				return "RW"
+			case FootballPositions.LW:
+				return "LW"
+			case FootballPositions.RM:
+				return "RM"
+			case FootballPositions.LM:
+				return "LM"
+			case FootballPositions.CM:
+				return "CM"
+			case FootballPositions.CAM:
+				return "CAM"
+			case FootballPositions.CDM:
+				return "CDM"
+			case FootballPositions.CB:
+				return "CB"
+			case FootballPositions.LB:
+				return "LB"
+			case FootballPositions.RB:
+				return "RB"
+			case FootballPositions.RWB:
+				return "RWB"
+			case FootballPositions.LWB:
+				return "LWB"
+			case FootballPositions.GK:
+				return "GK"
+			case FootballPositions.SUB:
+				return "SUB"
+				
+		}
+		*/
 		
 		#region In-Match
 			case "Match Completed!":
@@ -231,6 +378,8 @@ switch (obj_languageController.languageChosen)
 				var array = [text, " tilbage)"]
 			break;
 		#endregion
+		
+		
 	}
 
 	
