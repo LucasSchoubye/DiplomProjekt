@@ -282,7 +282,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             <DrawerLayout>
                 {isLoadingClasses ? (
                     <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
-                        <CircularProgress />
+                        <CircularProgress data-testid="loading-indicator" />
                     </Box>
                 ) : !isViewingStudents ? (
                     <ClassList 
