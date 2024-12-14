@@ -51,7 +51,7 @@ if (room = rm_menu)
 	// Draw Text
 	draw_set_alpha(1)
 	draw_set_font(fn_longShot80)
-	scr_drawOutlineText(screenMidX,screenTop,c_black,c_white,"Main Menu")
+	scr_drawOutlineText(screenMidX,screenTop,c_black,c_white,LC.translate("Main Menu", Games.Menus))
 	draw_set_font(fn_lato16)
 	draw_text(screenLeft,screenTop + titleBuffer,LC.translate("Welcome back ",Games.Menus)+obj_firestore_controller.username+"!")
 
@@ -88,6 +88,9 @@ if (room = rm_menu)
 					break 
 					case "Store":
 						room_goto(rm_store)
+					break
+					case "Settings":
+						room_goto(rm_settings)
 					break
 					case "Quit":
 						game_end()

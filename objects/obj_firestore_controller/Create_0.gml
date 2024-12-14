@@ -93,7 +93,6 @@ function RespondCategories(categoryList) {
 	}
 }
 
-
 function RequestStoreItems(categoryString) {
 	FirebaseFirestore("/shopItems/categories/"+categoryString).Read()
 }
@@ -174,8 +173,16 @@ function UpdateInventory(itemStruct)
 
 function StartSession(game)
 {		
+	// Format
+	var formatted_date = string(current_year) + "-" +
+                     string_format(current_month, 2, 0) + "-" +
+                     string_format(current_day, 2, 0);
+					 
+	formatted_date = string_replace(formatted_date," ","0")
+	
+	// Create Map for JSON conversion
 	sessionMap = ds_map_create()
-	sessionMap[?"starttime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
+	sessionMap[?"starttime"] = formatted_date + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 	sessionMap[?"endtime"] = ""
 	sessionMap[?"gameref"] = string(game)
 	sessionMap[?"student"] = "/students/"+string(playerId)
@@ -191,7 +198,14 @@ function EndSession()
 {		
 	if (sessionId != undefined)
 	{
-		sessionMap[?"endtime"] = date_date_string(date_current_datetime()) + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
+		// Format
+		var formatted_date = string(current_year) + "-" +
+	                     string_format(current_month, 2, 0) + "-" +
+	                     string_format(current_day, 2, 0);
+						 
+		formatted_date = string_replace(formatted_date," ","0")
+		
+		sessionMap[?"endtime"] = formatted_date + "-" + string(current_hour) + "/" + string(current_minute) + "/" + string(current_second)
 		var json = json_encode(sessionMap)
 		ds_map_destroy(sessionMap)
 
@@ -259,6 +273,13 @@ function ValidateLogin(map)
 		
 			if (value[?"userID"] = userID)
 			{
+				// If the ref is not a student, then don't log in
+				if (string_pos("students",value[?"ref"]) = 0)
+				{
+					show_debug_message("Attempting log-in with a non-student account. Stopping this")
+					throw ("User is not a student");
+				}
+				
 				playerId = value[?"ref"]
 			
 				// Find the position of the last dash ("/")
@@ -275,8 +296,6 @@ function ValidateLogin(map)
 			
 				RequestStudent()
 			}
-			//else
-				//show_debug_message("No Match found: (Username: " + username + "; != "+string(value[?"username"])+")")
 		}
 	
 		if (playerId = undefined)
@@ -338,10 +357,6 @@ function RequestClassSubtopics(schoolId, classId, subject)
 	{
 		FirebaseFirestore("schools/"+schoolId+"/classes/"+classId+"/topics/"+subject+"/subtopics").Read()
 	}
-	else
-	{
-		//show_message("SchoolId or classId are undefined")
-	}
 }
 
 function RespondClassSubtopics(subject, value)
@@ -371,7 +386,7 @@ function SendAnswer(prompt, optionChosen, correctAnswer, subject, subtopic, answ
 	answerMap[?"prompt"] = prompt
 	answerMap[?"optionChosen"] = optionChosen.text
 	
-	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer")
+	if (scr_mathErrorEnumToString(optionChosen.errorEnum) != "CorrectAnswer" and scr_mathErrorEnumToString(optionChosen.errorEnum) != "Undescribed")
 		answerMap[?"mistakeType"] = scr_mathErrorEnumToString(optionChosen.errorEnum)
 		
 	var isCorrect = 0

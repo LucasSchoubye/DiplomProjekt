@@ -21,7 +21,7 @@ tutorialArray = []
 			tutorialArray[0] = new tutorialStruct();
 		
 			tutorialArray[0].title = "Typeracer"
-			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer"
+			tutorialArray[0].controlParagraf = "Typing:\nNumpad: Type the correct answer \nEnter or Space: Submit your answer\n\nMultiple Choice:\nMouse: Left click on your answer"
 			tutorialArray[0].goalParagraf = "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!"
 			tutorialArray[0].roomRef = rm_typeracer
 			tutorialArray[0].gif = spr_tutorialTyperacer
@@ -39,25 +39,25 @@ tutorialArray = []
 			tutorialArray[0].gif = spr_tutorialUltManMatchGif
 			
 			// Home 
-			tutorialArray[1].title = "Ultimate Manager - Home"
+			tutorialArray[1].title = "Ultimate Manager"
 			tutorialArray[1].controlParagraf = "Mouse: Select menus"
 			tutorialArray[1].goalParagraf = "In the home menu you can see how your team is doing in the league"
 			tutorialArray[1].gif = spr_tutorialUltManHome
 		
 			// Tactics
-			tutorialArray[2].title = "Ultimate Manager - Tactics"
+			tutorialArray[2].title = "Ultimate Manager"
 			tutorialArray[2].controlParagraf = "Mouse: Select menus"
 			tutorialArray[2].goalParagraf = "In the Tactics menu you can set-up your squad and formation! Players can only play certain positions. You can drag-and-drop on the field to change position!"
 			tutorialArray[2].gif = spr_tutorialUltManTacticsGif
 		
 			// Transfermarket
-			tutorialArray[3].title = "Ultimate Manager - Transfermarket"
+			tutorialArray[3].title = "Ultimate Manager"
 			tutorialArray[3].controlParagraf = "Mouse: Select menus"
 			tutorialArray[3].goalParagraf = "In the Transfermarket menu you can buy and sell players for Content Coins. Players rating are based on their tier. You can earn coins by doing well in matches!"
 			tutorialArray[3].gif = spr_tutorialUltManTransfermarket
 		
 			// Matches 
-			tutorialArray[4].title = "Ultimate Manager - Matches"
+			tutorialArray[4].title = "Ultimate Manager"
 			tutorialArray[4].controlParagraf = "Left Click: Move player towards mouse. \nHold Shift: Pass/Shoot the ball. \nDrag Right Click: Move teammates"
 			tutorialArray[4].goalParagraf = "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them."
 			tutorialArray[4].gif = spr_tutorialUltManMatchGif

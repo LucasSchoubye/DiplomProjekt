@@ -1,5 +1,8 @@
 /// Setup
 
+window_set_cursor(cr_none)
+cursor_sprite = noone
+
 enum ActionType{
 
 	Run,
@@ -27,6 +30,7 @@ frozenShotMissed = false
 celebrationMusic = false
 
 // 
+goalHitboxIncrease = false
 controlledPlayer = undefined
 ballcarrier = undefined
 playerControllerHistory = [undefined,undefined]

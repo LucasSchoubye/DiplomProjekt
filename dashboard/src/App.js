@@ -2,7 +2,6 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Auth } from "./components/auth";
 import { TeacherDashboard } from "./components/Dashboard/teacherDashboard";
-// import { Database } from "./components/db (unused)";
 
 function App() {
   const [teacherData, setTeacherData] = useState(null);

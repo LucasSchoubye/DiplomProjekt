@@ -26,11 +26,6 @@ function scr_ultManTransferMarket(){
 	var sellBoxLeft = room_width * 0.8;
 	var sellBoxRight = room_width * 1;
 	
-	// draw boxes
-	//draw_rectangle(matchBoxLeft, matchBoxTop, matchBoxRight, matchBoxBottom, true)
-	
-	//draw_rectangle(sellBoxLeft, sellBoxTop, sellBoxRight, sellBoxBottom, true)
-	
 	// draw balance
 	draw_set_font(fn_RobotoBlack16)
 	draw_text(room_width * 0.2125, room_height * 0.15, LC.translate("Balance: ") + string(obj_storeController.balance) + " CONTENT COINS")
@@ -165,7 +160,7 @@ function scr_ultManTransferMarket(){
 		playerTier = ds_list_find_value(packs, currentPlayer.tier).packEnum
 		playerName = currentPlayer.name[0] + " " + currentPlayer.name[1]
 		playerRating = currentPlayer.overallRating
-		playerPosition = currentPlayer.PosToString()
+		playerPosition = obj_languageController.translate(currentPlayer.PosToString())
 		playerPositionHeight = string_height(playerPosition)
 		playerColour = ds_list_find_value(packs, currentPlayer.tier).packColour
 		

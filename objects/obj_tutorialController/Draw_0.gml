@@ -21,7 +21,7 @@ var pictureLeft = room_width*0.025
 var pictureRight = room_width*0.65
 
 draw_set_alpha(1)
-image_speed = 0.5
+image_speed = 0.25
 
 // Draw picture
 draw_sprite_stretched(textStruct.gif, image_index, pictureLeft, pictureTop, pictureRight -pictureLeft, pictureBot - pictureTop)

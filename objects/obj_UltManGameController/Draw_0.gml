@@ -1,5 +1,5 @@
 
-
+var LC = obj_languageController
 scr_UltManDrawLine()
 
 // Player control
@@ -10,9 +10,32 @@ dir = point_direction(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)
 len = controlledPlayer.targetSpd + lengthdir_x(controlledPlayer.accX, dir) + lengthdir_y(controlledPlayer.accY, dir)
 lenX = lengthdir_x(len, dir)
 lenY = lengthdir_y(len, dir)
-targetX = controlledPlayer.x+lenX//+controlledPlayer.accX
-targetY = controlledPlayer.y+lenY//+controlledPlayer.accY
+targetX = controlledPlayer.x+lenX
+targetY = controlledPlayer.y+lenY
 playAllowed = true
+	
+// Draw Curser
+if (instance_exists(controlledPlayer))
+{
+	draw_set_alpha(1 - point_distance(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)/6500)
+	draw_circle(mouse_x,mouse_y,20 + point_distance(controlledPlayer.x,controlledPlayer.y,mouse_x,mouse_y)/70,true)
+	draw_set_alpha(1)
+	
+	// Tooltip for dragging
+	var collidingPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, false,true)
+	if (collidingPlayer != controlledPlayer && collidingPlayer != noone)
+	{
+		if (collidingPlayer.playerTeam = true)
+		{
+			draw_set_halign(fa_left)
+			draw_set_alpha(0.8 + sin(current_time/80)*0.2)
+			draw_text_ext(mouse_x + 150, mouse_y, LC.translate("Drag with right mouse button"), string_height("I"),400)
+			draw_set_alpha(1)
+		}
+	}
+}
+else
+	draw_circle(mouse_x,mouse_y,20,true)
 	
 // Action type selected
 if (keyboard_check(vk_shift))
@@ -24,7 +47,6 @@ else
 	selectedAction = ActionType.Run
 }
 	
-
 // Command other player
 var commandClickedPlayer = collision_point(mouse_x, mouse_y, obj_UltManPlayer, true, true)
 if (mouse_check_button_pressed(mb_right))
@@ -85,15 +107,20 @@ if (!celebrationActive){
 	audio_stop_sound(sou_UltManBoo)
 }
 	
-
+// Multiple choice active
 if (questionMenuActive and questionMenuClickCooldown = false)
 {
+	cursor_sprite = spr_UltManCursor
+	
 	// Draw multiple choice
 	draw_set_font(fn_ArialBlack48)
 	scr_drawMultipleChoice(optionsMenu, id)
 	
 	// Draw chances
-	draw_text(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.69, string(skillCheckCorrectCounter)+"/"+string(skillCheckAttemptsCounter))
+	draw_set_color(c_black)
+	draw_set_font(fn_LatoBold40)
+	draw_text(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0])/2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])*0.68,LC.translate("Shot difficulty: ")+string(skillCheckAmount)+LC.translate(" questions!") + " ("+string(skillCheckAmount-skillCheckAttemptsCounter)+LC.translate(" left)"))
+	draw_set_color(c_white)
 	draw_set_font(fn_RobotoBlack16)
 	
 	// Perform action
@@ -102,6 +129,11 @@ if (questionMenuActive and questionMenuClickCooldown = false)
 		questionMenuActive = false
 		scr_UltManDoActionType(frozenActionType, frozenTargetX, frozenTargetY, frozenGoalAttempt)
 	}
+}
+else
+{
+	cursor_sprite = noone
+	window_set_cursor(cr_none)
 }
 
 if (keyboard_check_released(mb_left))
@@ -121,5 +153,4 @@ if (celebrationActive)
 		celebrationMusic = false
 	}
 	scr_UltManCelebrate()
-	
 }

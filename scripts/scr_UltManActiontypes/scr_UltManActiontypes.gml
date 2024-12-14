@@ -27,9 +27,14 @@ function scr_UltManActiontypes(){
 								var dist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
 								var dire = point_direction(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)	
 								var alphaDist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
+								var goalHitboxIncrease = 400
+			
+								// If they already placed shot inside goal, then bigger hitbox is redundant
+								if (!obj_UltManGameController.goalHitboxIncrease)
+									goalHitboxIncrease = 0
 			
 								//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
-								draw_sprite_ext(spr_FtDParticleBasic, 0 , obj_UltManBall.x + lengthdir_x((dist/20)*(i+1), dire), obj_UltManBall.y + lengthdir_y((dist/20)*(i+1), dire), 1+i*0.15, 1+i*0.15, dire, c_white, 1-i*0.05 + sin(current_time/50)*0.1)
+								draw_sprite_ext(spr_FtDParticleBasic, 0 , obj_UltManBall.x + lengthdir_x((dist/20)*(i+1), dire) + (goalHitboxIncrease/20)*i, obj_UltManBall.y + lengthdir_y((dist/20)*(i+1), dire), 1+i*0.15, 1+i*0.15, dire, c_white, 1-i*0.05 + sin(current_time/50)*0.1)
 
 							}
 						}
@@ -42,9 +47,7 @@ function scr_UltManActiontypes(){
 								var dire = point_direction(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)	
 								var alphaDist = point_distance(obj_UltManBall.x,obj_UltManBall.y,mouse_x, mouse_y)
 			
-								//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
 								draw_sprite_ext(spr_FtDParticleBasic, 0 , obj_UltManBall.x + lengthdir_x((dist/20)*(i+1), dire), obj_UltManBall.y + lengthdir_y((dist/20)*(i+1), dire), 1+i*0.15, 1+i*0.15, dire, c_red, 1-i*0.05 + sin(current_time/50)*0.1)
-
 							}
 						}
 						goalAttempt = true
@@ -54,6 +57,7 @@ function scr_UltManActiontypes(){
 						//Pass
 						targetX = controlledPlayer.x + lengthdir_x(controlledPlayer.targetShootSpd, dir)
 						targetY = controlledPlayer.y + lengthdir_y(controlledPlayer.targetShootSpd, dir)
+						
 						scr_UltManPassing()
 					}
 				}
@@ -74,9 +78,7 @@ function scr_UltManActiontypes(){
 					var dire = point_direction(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)	
 					var alphaDist = point_distance(drawLineObject.x,drawLineObject.y,frozenTargetX,frozenTargetY)
 			
-					//draw_sprite_ext(spr_FtDParticleBasic, 0 , targetX/i + controlledPlayer.accX/i, targetY/i + controlledPlayer.accY/i, dist/200, dist/200, 0, c_white, 1)
 					draw_sprite_ext(spr_FtDParticleBasic, 0 , drawLineObject.x + lengthdir_x((dist/10)*(i+1), dire), drawLineObject.y + lengthdir_y((dist/10)*(i+1), dire), 1+i*0.3, 1+i*0.3, dire, c_white, 1-i*0.1)
-
 				}
 	}
 	
@@ -95,6 +97,9 @@ function scr_UltManActiontypes(){
 		{
 			frozenTargetX = mouse_x
 			frozenTargetY = mouse_y
+			
+			if (goalHitboxIncrease)
+				frozenTargetX += 400
 		}
 		
 		frozenActionType = selectedAction

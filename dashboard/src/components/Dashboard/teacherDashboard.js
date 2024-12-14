@@ -1,15 +1,20 @@
+// Import React hooks and Firebase services
 import { useEffect, useState, useCallback } from "react";
-import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore"; // Import query and where
-import { db } from "../../config/firebase.js"; // Import Firestore
+import { getDoc, doc, getDocs, collection, updateDoc, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase.js";
+
+// Import layout and component dependencies
 import DrawerLayout from './boxdrawerLayout.js';
 import ClassList from './studentClassList.js';
 import StudentList from './StudentList.js';
-import SubjectsList from './subjectsList.js'; // Import SubjectsList
+import SubjectsList from './subjectsList.js';
 import StudentStats from "./studentStats.js";
 import ClassStats from "./classStats.js";
-import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material'; // Import Checkbox and ListItemText
+import { CircularProgress, Box, Select, MenuItem, Checkbox, ListItemText } from '@mui/material';
 
+// Main teacher dashboard component
 export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
+    // State management for class, student, and subject data
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [students, setStudents] = useState([]);
@@ -24,17 +29,28 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [availableGames, setAvailableGames] = useState([]);
     const [classDocRef, setClassDocRef] = useState(null);
-    const [classAnswersMap, setClassAnswersMap] = useState([]);
+    const [classAnswersMap, setClassAnswersMap] = useState({});
     const [isViewingStudent, setIsViewingStudent] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
     const [subTopics, setSubTopics] = useState([]); // Add subTopics state
     const [selectedSubTopics, setSelectedSubTopics] = useState([]); // Add selectedSubTopics state
+    const [selectedTimespan, setSelectedTimespan] = useState('twoWeeks'); // Set default value to twoWeeks
 
+    // Define timespan options for filtering data
+    const timespanOptions = {
+        today: "Today",
+        twoWeeks: "Last Two Weeks",
+        twoMonths: "Last Two Months",
+        schoolYear: "This School Year"
+    };
+
+    // Initialize state and fetch classes when component mounts
     useEffect(() => {
     }, [selectedClass, selectedStudent]);
   
     useEffect(() => {
         const fetchClasses = async () => {
+            // Fetch and process teacher's classes from Firestore
             try {
                 const teacherDocRef = doc(db, "teachers", userData.ref.id);
                 const teacherDoc = await getDoc(teacherDocRef);
@@ -65,7 +81,28 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         fetchClasses();
     }, [userData]);
 
+    // Handle subject selection and fetch related subtopics
+    const handleSubjectClick = useCallback(async (subject) => {
+        if (!classDocRef) return; // Add guard clause
+        setSelectedSubject(subject);
+        try {
+            const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
+            const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
+            const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            setSubTopics(subTopicsData);
+            setSelectedSubTopics(subTopicsData.filter(subTopic => subTopic.active).map(subTopic => subTopic.id)); // Set initial selected subtopics
+        } catch (err) {
+            console.error("Error fetching subtopics: ", err);
+        }
+    }, [classDocRef]); // Only depend on classDocRef
+
+    // Handle class selection and fetch related data
     const handleClassClick = useCallback(async (classData) => {
+        // Initialize class data and fetch students, subjects, and games
         setSelectedClass(classData);
         setClassDocRef(classData.classRefData.classRef); // Set classDocRef state
         setSelectedStudent(null)
@@ -106,22 +143,52 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             setSelectedGames(games.filter(game => game.allowed).map(game => game.id));
             // Aggregate answers across all students in the class
             await fetchClassSessionsAndAnswers(studentList);
-            console.log(studentList)
-            // Log the number of reads used
+            if (subjectsData.length > 0) {
+                setSelectedSubject(subjectsData[0]);
+            }
         } catch (err) {
             console.error("Error fetching data: ", err);
         } finally {
             setIsLoadingStudents(false);
         }
     }, []);
-    
 
-    const fetchClassSessionsAndAnswers = async (studentList) => {
+    // Update subject data when selection changes
+    useEffect(() => {
+        if (selectedSubject && classDocRef) {
+            handleSubjectClick(selectedSubject);
+        }
+    }, [selectedSubject, classDocRef, handleSubjectClick]);
+
+    // Fetch and process session data for class statistics
+    const fetchClassSessionsAndAnswers = async (studentList, timespan = selectedTimespan) => {
+        // Fetch and aggregate answer data based on selected timespan
         try {
             const classAnswersMap = {};
+            const now = new Date();
+            let startDate;
+
+            switch (timespan) {
+                case 'today':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    break;
+                case 'twoWeeks':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+                    break;
+                case 'twoMonths':
+                    startDate = new Date(now.getFullYear(), now.getMonth() - 2, now.getDate());
+                    break;
+                case 'schoolYear':
+                    startDate = new Date(now.getFullYear(), 0, 1);
+                    break;
+                default:
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+            }
+            const startDateString = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}-${String(startDate.getHours()).padStart(2, '0')}/${String(startDate.getMinutes()).padStart(2, '0')}/${String(startDate.getSeconds()).padStart(2, '0')}`;
+
             const studentPromises = studentList.map(async (student) => {
                 const sessionsRef = collection(db, 'sessions');
-                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`));
+                const q = query(sessionsRef, where('student', '==', `/students/${student.id}`), where('starttime', '>=', startDateString));
                 const querySnapshot = await getDocs(q);
                 const sessionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -147,19 +214,21 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Event handlers for UI interactions
     const handleReceiveAnswerMapFromStudentList = (answers, answerContextType, isViewingStudent) => {
         setAnswerMap(answers);
         setAnswerContextType(answerContextType);
         setIsViewingStudent(isViewingStudent);
-        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent); // Pass contextType to the parent handler
+        handleReceiveAnswerMap(answers, answerContextType, isViewingStudent);
     };
 
     const handleBackClick = () => {
+        // Reset view states when navigating back
         setIsViewingStudents(false);
         setSelectedClass(null);
         setStudents([]);
         setIsViewingStudent(false);
-        setSubjects([]); // Clear subjects when going back
+        setSubjects([]);
     };
 
     const clearAnswerMap = () => {
@@ -167,6 +236,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         setAnswerContextType('');
     };
 
+    // Handle game selection changes
     const handleGameChange = async (event) => {
         const value = event.target.value;
         const newSelectedGames = value.filter(gameId => !selectedGames.includes(gameId));
@@ -189,23 +259,7 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
-    const handleSubjectClick = useCallback(async (subject) => {
-        setSelectedSubject(subject);
-        try {
-            const subTopicsCollectionRef = collection(db, `${classDocRef.path}/topics/${subject.id}/subtopics`);
-            const subTopicsSnapshot = await getDocs(subTopicsCollectionRef);
-            const subTopicsData = subTopicsSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-
-            setSubTopics(subTopicsData);
-            setSelectedSubTopics(subTopicsData.filter(subTopic => subTopic.active).map(subTopic => subTopic.id)); // Set initial selected subtopics
-        } catch (err) {
-            console.error("Error fetching subtopics: ", err);
-        }
-    }, [classDocRef]);
-
+    // Handle subtopic selection changes
     const handleSubTopicChange = async (event) => {
         const value = event.target.value;
         const newSelectedSubTopics = value.filter(subTopicId => !selectedSubTopics.includes(subTopicId));
@@ -228,12 +282,24 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
         }
     };
 
+    // Handle timespan selection changes
+    const handleTimespanChange = async (event) => {
+        const newTimespan = event.target.value;
+        setSelectedTimespan(newTimespan);
+        if (selectedClass) {
+            setIsLoadingStudents(true);
+            await fetchClassSessionsAndAnswers(students, newTimespan);
+            setIsLoadingStudents(false);
+        }
+    };
+
+    // Render dashboard layout with conditional components
     return (
         <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
             <DrawerLayout>
                 {isLoadingClasses ? (
                     <Box display="flex" justifyContent="center" alignItems="center" minHeight={100}>
-                        <CircularProgress />
+                        <CircularProgress data-testid="loading-indicator" />
                     </Box>
                 ) : !isViewingStudents ? (
                     <ClassList 
@@ -249,15 +315,16 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
                             handleBackClick={handleBackClick} 
                             isLoading={isLoadingStudents}
                             handleReceiveAnswerMap={(answers, answerContextType, isViewingStudent) => handleReceiveAnswerMapFromStudentList(answers, answerContextType, isViewingStudent)}
-                            clearAnswerMap={clearAnswerMap} // Pass the clearAnswerMap function
+                            clearAnswerMap={clearAnswerMap}
                             setSelectedStudent={setSelectedStudent}
-                            classAnswersMap={classAnswersMap} // Pass classAnswersMap to StudentList
+                            classAnswersMap={classAnswersMap}
+                            setSelectedTimespan={selectedTimespan}
                         />
                         <SubjectsList 
                             subjects={subjects} 
                             selectedClass={selectedClass} 
-                            handleSubjectClick={handleSubjectClick} // Pass the handleSubjectClick function
-                            selectedSubject={selectedSubject} // Pass the selectedSubject state
+                            handleSubjectClick={handleSubjectClick}
+                            selectedSubject={selectedSubject}
                         />
                     </Box>
                 )}
@@ -265,48 +332,65 @@ export const TeacherDashboard = ({ userData, handleReceiveAnswerMap }) => {
             
             {selectedClass && selectedStudent === null && (
                 <div style={{ flexGrow: 1, flexBasis: 0, padding: '20px', overflowY: 'auto', position: 'relative' }}>
-                    <Select
-                        multiple
-                        value={selectedSubTopics}
-                        onChange={handleSubTopicChange}
-                        displayEmpty
-                        renderValue={() => "Choose Sub Topics"}
-                        style={{ position: 'absolute', top: '20px', right: '270px' }} // Adjust position to move more to the left
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Sub Topics
-                        </MenuItem>
-                        {subTopics
-                            // .sort((a, b) => a.name.localeCompare(b.name)) // Sort subtopics alphabetically
-                            .map((subTopic) => (
-                                <MenuItem key={subTopic.id} value={subTopic.id}>
-                                    <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
-                                    <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '20px', paddingBottom: '20px' }}>
+                        <Select
+                            value={selectedTimespan}
+                            onChange={handleTimespanChange}
+                            displayEmpty
+                            renderValue={() => timespanOptions[selectedTimespan] || "Choose Timespan"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Timespan
+                            </MenuItem>
+                            {Object.entries(timespanOptions).map(([value, label]) => (
+                                <MenuItem key={value} value={value}>
+                                    {label}
                                 </MenuItem>
                             ))}
-                    </Select>
-                    <Select
-                        multiple
-                        value={selectedGames}
-                        onChange={handleGameChange}
-                        displayEmpty
-                        renderValue={() => "Choose Available Games"}
-                        style={{ position: 'absolute', top: '20px', right: '20px' }}
-                    >
-                        <MenuItem value="" disabled>
-                            Choose Available Games
-                        </MenuItem>
-                        {availableGames
-                            .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
-                            .map((game) => (
-                                <MenuItem key={game.id} value={game.id}>
-                                    <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
-                                    <ListItemText primary={game.name} />
-                                </MenuItem>
-                            ))}
-                    </Select>
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedSubTopics}
+                            onChange={handleSubTopicChange}
+                            displayEmpty
+                            renderValue={() => "Choose Sub Topics"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Sub Topics
+                            </MenuItem>
+                            {subTopics
+                                .map((subTopic) => (
+                                    <MenuItem key={subTopic.id} value={subTopic.id}>
+                                        <Checkbox checked={selectedSubTopics.indexOf(subTopic.id) > -1} />
+                                        <ListItemText primary={subTopic.name} /> {/* Show active status */}
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                        <Select
+                            multiple
+                            value={selectedGames}
+                            onChange={handleGameChange}
+                            displayEmpty
+                            renderValue={() => "Choose Available Games"}
+                        >
+                            <MenuItem value="" disabled>
+                                Choose Available Games
+                            </MenuItem>
+                            {availableGames
+                                .sort((a, b) => a.name.localeCompare(b.name)) // Sort games alphabetically
+                                .map((game) => (
+                                    <MenuItem key={game.id} value={game.id}>
+                                        <Checkbox checked={selectedGames.indexOf(game.id) > -1} />
+                                        <ListItemText primary={game.name} />
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                    </Box>
                     {Object.keys(answerMap).length > 0 && (
-                        <StudentStats answerMap={answerMap} answerContextType={answerContextType} />
+                        <StudentStats 
+                            answerMap={answerMap} 
+                            answerContextType={answerContextType} 
+                        />
                     )}
                     {!isViewingStudent && (
                     <ClassStats classAnswersMap={classAnswersMap} />

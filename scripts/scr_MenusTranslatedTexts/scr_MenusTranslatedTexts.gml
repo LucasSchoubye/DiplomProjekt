@@ -17,6 +17,12 @@ switch (obj_languageController.languageChosen)
 	// Find translated text
 	switch(text)
 	{
+		case "All Games":
+			var array = [text, "Alle Spil"]
+		break;
+		case "Main Menu":
+			var array = [text, "Hovedmenu"]
+		break;
 		case "Mini Games":
 			var array = [text, "Spil"]
 		break;
@@ -58,7 +64,25 @@ switch (obj_languageController.languageChosen)
 		case "News Title":
 			var array = [text, "Titel på Nyhed"]
 		break;
+		case "Logging In...":
+			var array = [text, "Logger på..."]
+		break;
 		
+		#endregion
+		
+		#region Control Hints
+		case "Press 'enter'":
+			var array = [text, "Tryk enter"]
+		break
+		case " or 'space'":
+			var array = [text, " eller 'space'"]
+		break
+		case " to submit your answer":
+			var array = [text, " for at indsende dit svar"]
+		break
+		case "Answer: ":
+			var array = [text, "Svar: "]
+		break
 		#endregion
 		
 		#region Tutorials
@@ -86,8 +110,8 @@ switch (obj_languageController.languageChosen)
 			break;
 			
 			// Typeracer
-			case "Typing:\nNumpad: Type the correct answer \nEnter: Submit your answer\n\nMultiple Choice:\nLeft click on your answer":
-				var array = [text, "Keyboard: Skriv det rigtige svar \nEnter: Indsend dit svar"]
+			case "Typing:\nNumpad: Type the correct answer \nEnter or Space: Submit your answer\n\nMultiple Choice:\nMouse: Left click on your answer":
+				var array = [text, "Ved indskrivning:\nKeyboard: Skriv det rigtige svar \nEnter eller Space: Indsend dit svar\n\nVed svar muligheder:\nMus: Venstre klik på dit svar"]
 			break;
 			
 			case "Race to the finish line! Answer a question correct to get closer to the finish line! Try to avoid answering incorrect, otherwise you will move backwards!":
@@ -132,6 +156,14 @@ switch (obj_languageController.languageChosen)
 			case "When you play a match you always control the player closest to the ball. You move by clicking the mouse. You can also move team players by right-clicking them and dragging them.":
 				var array = [text, "Når du spiller en kamp, kontrollerer du altid den spiller, der er tættest på bolden. Du flytter ved at klikke med musen. Du kan også flytte holdspillere ved at højreklikke på dem og trække dem."]
 			break;
+		#endregion
+		
+		#region Settings
+		case "Language: ":
+			var array = [text, "Sprog: "]
+		break;
+		
+		
 		#endregion
 	}
 

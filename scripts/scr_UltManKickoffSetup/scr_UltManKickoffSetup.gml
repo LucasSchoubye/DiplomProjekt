@@ -26,8 +26,9 @@ function scr_UltManKickoffSetup(leftScored, celebration = false){
 		}
 		else
 		{
-			instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer).targetX = obj_UltManBall.x
-			instance_nearest(obj_UltManBall.x, obj_UltManBall.y, obj_UltManPlayer).targetY = obj_UltManBall.y
+			var closestPlayer = scr_assignClosestControlledPlayer(obj_UltManBall.x, obj_UltManBall.y)
+			closestPlayer.targetX = obj_UltManBall.x
+			closestPlayer.targetY = obj_UltManBall.y
 		}
 	}
 	else

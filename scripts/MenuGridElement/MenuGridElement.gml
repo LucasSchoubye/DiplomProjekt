@@ -85,7 +85,7 @@ function MenuGridElement() constructor {
 	}
 	
 	function DrawCategory(xValue,yValue) {
-		
+		var LC = obj_languageController
 		draw_set_alpha(0.1)
 		draw_set_color(c_white)
 		draw_roundrect(xValue,yValue,xValue+categoryWidth,yValue+categoryHeight,false)
@@ -94,7 +94,7 @@ function MenuGridElement() constructor {
 		draw_set_alpha(1)
 		
 		draw_set_halign(fa_center)
-		draw_text(xValue+categoryWidth/2,yValue+categoryCenterY,itemName)
+		draw_text(xValue+categoryWidth/2,yValue+categoryCenterY,LC.translate(itemName, Games.Menus))
 		draw_set_halign(fa_center)
 		if(mouse_x > xValue && mouse_x < xValue+categoryWidth) {
 			if(mouse_y > yValue && mouse_y < yValue+categoryHeight) {
